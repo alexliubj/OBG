@@ -35,5 +35,13 @@ namespace OBGModel
             get { return status; }
             set { status = value; }
         }
+
+        private string po;
+
+        public string PO
+        {
+            get { return po; }
+            set { po = value; }
+        }
     }
 }

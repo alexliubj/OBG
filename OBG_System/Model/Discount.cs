@@ -21,5 +21,13 @@ namespace OBGModel
             get { return discountRate; }
             set { discountRate = value; }
         }
+
+        private int roleName;
+
+        public int RoleName
+        {
+            get { return roleName; }
+            set { roleName = value; }
+        }
     }
 }

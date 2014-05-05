@@ -40,7 +40,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="CategoryBLO.cs" />
+    <Compile Include="DiscountBLO.cs" />
+    <Compile Include="OrderBLO.cs" />
+    <Compile Include="PermissionBLO.cs" />
+    <Compile Include="ProductBLO.cs" />
+    <Compile Include="RegionBLO.cs" />
+    <Compile Include="RoleBLO.cs" />
+    <Compile Include="UserBLO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
