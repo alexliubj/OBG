@@ -8,8 +8,11 @@ using System.Web.UI.WebControls;
 using OBGModel;
 using BusinessLogic;
 
+
+
 public partial class Account_Register : System.Web.UI.Page
 {
+
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -46,10 +49,12 @@ public partial class Account_Register : System.Web.UI.Page
         newUser.Phone = PhoneTextBox.Text;
         newUser.ShippingAddress = ShippingAddressTextBox.Text;
         newUser.ShippingPostCode = ShippingPostCodeTextBox.Text;
-//first last name and email missing
-//不能引用business logic 里的method
-     //   UserBLO.Registration(newUser);
-        
+        newUser.FirstName = FirstNameTextBox.Text;
+        newUser.LastName = LastNameTextBox.Text;
+        newUser.Email = EmailTextBox.Text;
+
+       UserBLO.Registration(newUser);
+       
         Response.Redirect("~/Account/RegisterSuccess.aspx");
     }
     //这个BUTTON可以跳转
