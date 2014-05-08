@@ -31,11 +31,15 @@
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
-                        <asp:MenuItem NavigateUrl="ProductHome.aspx" Text="Home"/>
-                        <asp:MenuItem NavigateUrl="Wheels.aspx" Text="Wheels"/>
-                        <asp:MenuItem NavigateUrl="Tires.aspx" Text="Tires"/>
-                        <asp:MenuItem NavigateUrl="Accessories.aspx" Text="Accessories"/>
-
+                        <asp:MenuItem NavigateUrl="ProductHome.aspx" Text="Home">
+                        
+                        </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="Wheels.aspx" Text="Wheels">
+                        <asp:MenuItem NavigateUrl="wheelall.aspx" Text="View All"></asp:MenuItem>
+                        </asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="Tires.aspx" Text="Tires"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="Accessories.aspx" Text="Accessories">
+                        </asp:MenuItem>
                     </Items>
                 </asp:Menu>
             </div>

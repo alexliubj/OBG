@@ -5,3 +5,10 @@ C:\Users\Neo\Documents\GitHub\OBG\OBG_System\DataAccess\bin\Debug\Model.pdb
 C:\Users\Neo\Documents\GitHub\OBG\OBG_System\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
 C:\Users\Neo\Documents\GitHub\OBG\OBG_System\DataAccess\obj\Debug\DataAccess.dll
 C:\Users\Neo\Documents\GitHub\OBG\OBG_System\DataAccess\obj\Debug\DataAccess.pdb
+C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\DataAccess\bin\Debug\DataAccess.dll
+C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\DataAccess\bin\Debug\DataAccess.pdb
+C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\DataAccess\bin\Debug\Model.dll
+C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\DataAccess\bin\Debug\Model.pdb
+C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
+C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\DataAccess\obj\Debug\DataAccess.dll
+C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\DataAccess\obj\Debug\DataAccess.pdb
