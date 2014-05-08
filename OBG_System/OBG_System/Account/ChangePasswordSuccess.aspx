@@ -10,4 +10,7 @@
     <p>
         Your password has been changed successfully.
     </p>
+    <p>
+        <asp:Button ID="btnBack" runat="server" OnClick="btnBack_Click" Text="Go Back" />
+    </p>
 </asp:Content>

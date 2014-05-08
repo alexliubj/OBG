@@ -16,7 +16,8 @@ public partial class Account_Register : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        RegisterUser.ContinueDestinationPageUrl = Request.QueryString["~/Account/RegisterSuccess.aspx"];
+        
+        RegisterUser.ContinueDestinationPageUrl = Request.QueryString["ReturnUrl"];
     }
 
     protected void RegisterUser_CreatedUser(object sender, EventArgs e)
@@ -26,11 +27,11 @@ public partial class Account_Register : System.Web.UI.Page
         string continueUrl = RegisterUser.ContinueDestinationPageUrl;
         if (String.IsNullOrEmpty(continueUrl))
         {
-            continueUrl = "~/";
+            continueUrl = "~/Account/RegisterSuccess.aspx";
         }
         Response.Redirect(continueUrl);
     }
-    //跳转有问题
+
     protected void CreateUserButton_Click(object sender, EventArgs e)
     {
         User newUser = new User();
@@ -55,11 +56,11 @@ public partial class Account_Register : System.Web.UI.Page
 
        UserBLO.Registration(newUser);
        
-        Response.Redirect("~/Account/RegisterSuccess.aspx");
+       // Response.Redirect("~/Account/RegisterSuccess.aspx");
     }
-    //这个BUTTON可以跳转
-    protected void Button1_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("~/Account/RegisterSuccess.aspx");
-    }
+   
+    //protected void Button1_Click(object sender, EventArgs e)
+    //{
+    //    Response.Redirect("~/Account/RegisterSuccess.aspx");
+    //}
 }

@@ -11,4 +11,15 @@ public partial class Account_Login : System.Web.UI.Page
     {
         RegisterHyperLink.NavigateUrl = "Register.aspx?ReturnUrl=" + HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
     }
+    protected void LoginButton_Click(object sender, EventArgs e)
+    {
+
+    }
+    protected void LoginUser_LoggedIn(object sender, EventArgs e) 
+    {
+
+        Session["UserID"] = LoginUser.UserName;
+
+        Session["Login"] = "Y";
+    }
 }
