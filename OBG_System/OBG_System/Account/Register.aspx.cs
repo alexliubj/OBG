@@ -8,8 +8,11 @@ using System.Web.UI.WebControls;
 using OBGModel;
 using BusinessLogic;
 
+
+
 public partial class Account_Register : System.Web.UI.Page
 {
+
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -30,7 +33,7 @@ public partial class Account_Register : System.Web.UI.Page
     //跳转有问题
     protected void CreateUserButton_Click(object sender, EventArgs e)
     {
-        /*User newUser = new User();
+        User newUser = new User();
         TextBox UserNameTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("UserName");
         TextBox EmailTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("Email");
         TextBox PasswordTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("Password");
@@ -45,12 +48,14 @@ public partial class Account_Register : System.Web.UI.Page
         newUser.CompanyName = CompanyTextBox.Text;
         newUser.Phone = PhoneTextBox.Text;
         newUser.ShippingAddress = ShippingAddressTextBox.Text;
-        newUser.ShippingPostCode = ShippingPostCodeTextBox.Text;*/
-//first last name and email missing
-//不能引用business logic 里的method
-     //   UserBLO.Registration(newUser);
-        
-        //Response.Redirect("~/Account/RegisterSuccess.aspx");
+        newUser.ShippingPostCode = ShippingPostCodeTextBox.Text;
+        newUser.FirstName = FirstNameTextBox.Text;
+        newUser.LastName = LastNameTextBox.Text;
+        newUser.Email = EmailTextBox.Text;
+
+       UserBLO.Registration(newUser);
+       
+        Response.Redirect("~/Account/RegisterSuccess.aspx");
     }
     //这个BUTTON可以跳转
     protected void Button1_Click(object sender, EventArgs e)

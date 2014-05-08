@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OBGModel", "Model\OBGModel.csproj", "{C1C10D31-EFB5-4E51-9E25-16DE6B9F84C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{423D4844-0D7C-4B53-9950-6410C58205ED}"
@@ -10,6 +10,7 @@ EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "OBG_System", "OBG_System\", "{26E45A20-B5CA-48BE-A3C9-38B6A843BCF7}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		ProjectReferences = "{C1C10D31-EFB5-4E51-9E25-16DE6B9F84C5}|Model.dll;{423d4844-0d7c-4b53-9950-6410c58205ed}|DataAccess.dll;{6f9ff7ab-7c48-494a-b955-e17f2e839614}|BusinessLogic.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/OBG_System"
 		Debug.AspNetCompiler.PhysicalPath = "OBG_System\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\OBG_System\"
