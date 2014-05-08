@@ -1,10 +1,12 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ShoppingCart.aspx.cs" Inherits="Default2" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="shoppingcart.aspx.cs" Inherits="Order_shoppingcart" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
+
+
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 
-<title>shoppingcart 
+    <title>shoppingcart 
 </title> 
 <meta http-equiv="Content-Type" content="text/html; 
 charset=gb2312"> <LINK href="mycss.css" type="text/css" rel="stylesheet"> 
@@ -33,6 +35,8 @@ return false;
 <asp:Label id="label" runat="server" Width="100px" Visible="True" ForeColor="#FF8080" Height="18px"></asp:Label></td> </tr> </table> 
 </form> </center> 
 </body>
+
+
 
 </asp:Content>
 
