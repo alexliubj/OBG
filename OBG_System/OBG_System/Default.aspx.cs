@@ -17,11 +17,7 @@ public partial class _Default : System.Web.UI.Page
 
     private void TestSQLQueries()
     {
-        //cateogry
-        DataTable cateogrydt = CategoryBLO.GetAllCategory();
-        int ret = CategoryBLO.AddNewCategory("newcategoty");
-        ret = CategoryBLO.ModifyCategoryNameById(2, "oldcategory");
-        ret = CategoryBLO.RemoveCategoryById(2);
+        int ret = -1;
        
         //user
         //common user login
@@ -32,12 +28,9 @@ public partial class _Default : System.Web.UI.Page
         User aUser =new User();
         //active a user
         ret = UserBLO.AdminActiveUser(2);
-        //registration
-        ret = UserBLO.Registration(aUser);
         //forget password
         ret = UserBLO.ForgetPasswordRequest(@"alexliubo@gmail.com");
-        //update user info
-        ret = UserBLO.UpdateUserInfo(aUser);
+        
         //delete user
         ret = UserBLO.RemoveUserById(2);
         //get all user
@@ -45,7 +38,15 @@ public partial class _Default : System.Web.UI.Page
         //reset password
         ret = UserBLO.ResetPassword(2, @"newpassowrd");
         //validate user information
-
         ret = UserBLO.ValideCheckRequest(@"emai", @"key");
+        //registration
+        ret = UserBLO.Registration(aUser);
+        //update user info
+        ret = UserBLO.UpdateUserInfo(aUser);
+        //cateogry
+        DataTable cateogrydt = CategoryBLO.GetAllCategory();
+        ret = CategoryBLO.AddNewCategory("newcategoty");
+        ret = CategoryBLO.ModifyCategoryNameById(2, "oldcategory");
+        ret = CategoryBLO.RemoveCategoryById(2);
     }
 }

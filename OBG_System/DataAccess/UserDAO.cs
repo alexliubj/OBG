@@ -179,7 +179,7 @@ namespace DataAccess
         public static int CheckReset(string email, string key)
         {
             DbCommand command = db.GetSqlStringCommond(@"
-                            update users set email = @email where sectKey = @sectKey");
+                            select * from resetpwds where email = @email and sectKey = @sectKey");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@email", email),new SqlParameter(
                 "@sectKey",key)};
             command.Parameters.AddRange(paras);
