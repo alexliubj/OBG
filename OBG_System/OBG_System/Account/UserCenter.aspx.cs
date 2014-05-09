@@ -77,10 +77,10 @@ public partial class Default2 : System.Web.UI.Page
         userSaved.BillAddress = BillingAddress.Text;
         userSaved.BillPostCode = BillingPostCode.Text;
 
-        bool update = false;
+        int update = 0;
         update = UserBLO.UpdateUserInfo(userSaved);
 
-        if (update == true)
+        if (update>0)
         {
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                          "err_msg",

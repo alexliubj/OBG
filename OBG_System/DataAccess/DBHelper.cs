@@ -12,8 +12,9 @@ namespace DataAccess
 
     public class DbHelper
     {
-        private static string dbProviderName = ConfigurationManager.AppSettings["DbHelperProvider"];
-        private static string dbConnectionString = ConfigurationManager.AppSettings["DbHelperConnectionString"];
+        private static string dbProviderName = @"System.Data.SqlClient";
+        private static string dbConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["OBG_Local"].ToString();
+
 
         private DbConnection connection;
         public DbHelper()

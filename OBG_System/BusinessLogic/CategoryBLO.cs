@@ -4,27 +4,28 @@ using System.Linq;
 using System.Text;
 using OBGModel;
 using DataAccess;
+using System.Data;
 
 namespace BusinessLogic
 {
     public static class CategoryBLO
     {
-        public static List<Category> GetAllCategory()
+        public static DataTable GetAllCategory()
         {
             return CategoryDAO.GetAllCategory();
         }
 
-        public static bool ModifyCategoryNameById(int categoryId)
+        public static int ModifyCategoryNameById(int categoryId, string newName)
         {
-            return CategoryDAO.ModifyCategoryNameById(categoryId);
+            return CategoryDAO.ModifyCategoryNameById(categoryId, newName);
         }
 
-        public static bool AddNewCategory(string categoryName)
+        public static int AddNewCategory(string categoryName)
         {
             return CategoryDAO.AddNewCategory(categoryName);
         }
 
-        public static bool RemoveCategoryById(int categoryId)
+        public static int RemoveCategoryById(int categoryId)
         {
             return CategoryDAO.RemoveCategoryById(categoryId);
         }

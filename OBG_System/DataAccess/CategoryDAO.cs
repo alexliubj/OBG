@@ -3,34 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using OBGModel;
+using System.Data;
+using System.Data.Common;
 
 namespace DataAccess
 {
     public static class CategoryDAO
     {
-        public static List<Category> GetAllCategory()
+        private static DbHelper db = new DbHelper();
+        public static DataTable GetAllCategory()
         {
-            List<Category> listCategory = new List<Category>();
-            return listCategory;
+            DbCommand command = db.GetSqlStringCommond("select * from category");
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
         }
 
-        public static bool ModifyCategoryNameById(int categoryId)
+        public static int ModifyCategoryNameById(int categoryId, string newName)
         {
-            bool ret = false;
-            return ret;
+            DbCommand command = db.GetSqlStringCommond("update category set categoryName = '" + newName + "' where categoryId=" + categoryId);
+            return db.ExecuteNonQuery(command);
         }
 
-        public static bool AddNewCategory(string categoryName)
+        public static int AddNewCategory(string categoryName)
         {
-
-            bool ret = false;
-            return ret;
+            DbCommand command = db.GetSqlStringCommond("insert into category(categoryName) values ('" + categoryName + "')");
+            return db.ExecuteNonQuery(command);
         }
 
-        public static bool RemoveCategoryById(int categoryId)
+        public static int RemoveCategoryById(int categoryId)
         {
-            bool ret = false;
-            return ret;
+            DbCommand command = db.GetSqlStringCommond("delete from category where categoryId = " + categoryId);
+            return db.ExecuteNonQuery(command);
         }
     }
 }
