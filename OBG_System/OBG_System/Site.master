@@ -40,15 +40,15 @@
                     <Items>
                         <asp:MenuItem NavigateUrl="Products/ProductHome.aspx" Text="Home"></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="Products/Wheels.aspx" Text="Wheels">
-                        <asp:MenuItem NavigateUrl="wheelall.aspx" Text="View All"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="viewByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="WheelAll.aspx" Text="View All"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="ViewByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="Tires.aspx" Text="Tires">
-                        <asp:MenuItem NavigateUrl="tireall.aspx" Text="View All"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="tireByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="TireAll.aspx" Text="View All"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="TireByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="Accessories.aspx" Text="Accessories">
-                        <asp:MenuItem NavigateUrl="accAll.aspx" Text="View All"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="AccAll.aspx" Text="View All"></asp:MenuItem>
                         </asp:MenuItem>
 
                     </Items>

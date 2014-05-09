@@ -25,11 +25,10 @@ charset=gb2312"> <LINK href="mycss.css" type="text/css" rel="stylesheet">
 <asp:TextBox id="CountTb" runat="server" Text='<%#DataBinder.Eval( Container.DataItem,"ProdCount" )%>'> </asp:TextBox> 
 </ItemTemplate> </asp:TemplateColumn> 
 <asp:BoundColumn DataField="TotalPrice" HeaderText="Price" /> </Columns> </asp:DataGrid></td> </tr> </table> <br> <table width="500" border="0" cellspacing="0" cellpadding="0"> <tr> <td> 
-<asp:Button id="update" runat="server" Text="Update My Shopping Cart" CssClass="button2" /></td> <td> 
-<asp:Button id="CheckOut" runat="server" Text="Check Out" CssClass="button5" /> 
-<input type="button" name="close2" value="Continue My Shopping" onClick="window.close( ); 
-return false; 
-" class="button2"></td> <td align="right"><br> 
+<asp:Button id="update" runat="server" Text="Update" CssClass="button2" /></td> <td> 
+<input type="button" name="close2" value="Continue Shopping" onClick="window.close( ); return false; " class="button2"></td><td>
+<asp:Button id="CheckOut" runat="server" Text="Checkout" CssClass="button5" /> 
+    </td> <td align="right"><br> 
 <asp:Label id="label" runat="server" Width="100px" Visible="True" ForeColor="#FF8080" Height="18px"></asp:Label></td> </tr> </table> 
 </form> </center> 
 </body>
