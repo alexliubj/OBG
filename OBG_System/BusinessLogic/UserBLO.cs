@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using OBGModel;
 using DataAccess;
-
+using System.Data;
 namespace BusinessLogic
 {
     public class UserBLO
@@ -14,7 +14,7 @@ namespace BusinessLogic
         /// </summary>
         /// <param name="user">user obj</param>
         /// <returns></returns>
-        public static bool Registration(User user)
+        public static int Registration(User user)
         {
             return UserDAO.Registration(user);
         }
@@ -24,7 +24,7 @@ namespace BusinessLogic
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public static bool AdminRegistration(User user)
+        public static int AdminRegistration(User user)
         {
             user.Status = 1; // set as active
             return UserDAO.Registration(user);
@@ -67,7 +67,7 @@ namespace BusinessLogic
         /// </summary>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public static bool AdminActiveUser(int userid)
+        public static int AdminActiveUser(int userid)
         {
             return UserDAO.AdminActiveUser(userid);
         }
@@ -77,7 +77,7 @@ namespace BusinessLogic
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        public static bool ForgetPasswordRequest(string email)
+        public static int ForgetPasswordRequest(string email)
         {
             return UserDAO.ForgetPasswordRequest(email);
             
@@ -88,7 +88,7 @@ namespace BusinessLogic
         /// <param name="userid"></param>
         /// <param name="newPassword"></param>
         /// <returns></returns>
-        public static bool ResetPassword(int userid, string newPassword)
+        public static int ResetPassword(int userid, string newPassword)
         {
             return UserDAO.ResetPassword(userid, newPassword);
         }
@@ -101,7 +101,7 @@ namespace BusinessLogic
         /// <returns></returns>
         public static int ValideCheckRequest(string email, string key)
         {
-            if (UserDAO.CheckReset(email, key)) // 
+            if (UserDAO.CheckReset(email, key) > 0) // 
             {
                 return UserDAO.RemoveResetRecord(email);
             }
@@ -117,7 +117,7 @@ namespace BusinessLogic
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public static bool UpdateUserInfo(User user)
+        public static int UpdateUserInfo(User user)
         {
             return UserDAO.UpdateUserInfo(user);
         }
@@ -127,7 +127,7 @@ namespace BusinessLogic
         /// </summary>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public static bool RemoveUserById(int userid)
+        public static int RemoveUserById(int userid)
         {
             return UserDAO.RemoveUserById(userid);
         }
@@ -137,9 +137,10 @@ namespace BusinessLogic
         /// Get All users
         /// </summary>
         /// <returns></returns>
-        public static List<User> GetAllUsers()
+        public static DataTable GetAllUsers()
         {
             return UserDAO.GetAllUsers();
         }
+
     }
 }

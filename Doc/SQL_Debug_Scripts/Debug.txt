@@ -1,0 +1,78 @@
+??,
+??
+??????
+??????
+??????
+??????
+??????
+??????
+
+//cateogry
+select * from category;
+
+insert into category(categoryName) values ('tire');
+insert into category (categoryName) values ('wheels');
+insert into category (categoryName) values ('acc');
+
+delete from category where categoryId = 4;
+
+update category set categoryName = 'access' where categoryId=5;
+
+//users
+
+select * from users;
+
+//update 
+
+delete users where userid =1;
+
+insert into users(userpwd,username,status,email,companyname,phone,shippingAddress,shippingPostcode,firstname,lastName)
+values ('123','123',0,'adf@email.com','neo','416-833-4368','lee center','m1h 3j2','bo','liu')
+SELECT DISTINCT username
+FROM users 
+WHERE
+   NOT EXISTS username = '123'
+
+
+update users set 
+
+update users set userpwd = '1234' where userid = 1;
+
+select * from users where userid = 1;
+
+select userid from users where username = '123' and userpwd = '1234';
+
+
+
+
+//Roles+login
+
+//Shipping
+
+select * from shipping;
+
+insert into shipping(regionName, regionprice,devMethods) 
+values ('North York',3.5,'ups');
+
+insert into shipping(regionName, regionprice,devMethods) 
+values ('Scarborough',2.5,'ups');
+
+insert into shipping(regionName, regionprice,devMethods) 
+values ('Ottawa',12.5,'ups');
+
+update shipping set regionName = 'otawaas',
+regionprice = 22,
+devmethods = 'dhl' where regionId = 4;
+
+delete shipping where regionid=4;
+
+truncate table shipping;
+
+//Product + //Inventory
+
+//Order + OrderLine
+
+//Permission
+
+//Discount
+

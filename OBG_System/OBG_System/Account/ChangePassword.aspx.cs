@@ -29,9 +29,9 @@ public partial class Account_ChangePassword : System.Web.UI.Page
     protected void ChangePasswordPushButton_Click(object sender, EventArgs e)
     {
         String newPassword = ChangeUserPassword.NewPassword;
-        bool resetPassword = UserBLO.ResetPassword(userId,newPassword);
+        int resetPassword = UserBLO.ResetPassword(userId,newPassword);
 
-        if (resetPassword == true)
+        if (resetPassword>0)
         {
             Response.Redirect("~/Account/ChangePasswordSuccess.aspx");
         }
