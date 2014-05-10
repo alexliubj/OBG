@@ -36,7 +36,7 @@ namespace BusinessLogic
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static int ClientLogin(string username, string password)
+        public static LoginRet ClientLogin(string username, string password)
         {
             return UserDAO.ClientLogin(username, password);
         }
@@ -47,7 +47,7 @@ namespace BusinessLogic
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static int AdminLogin(string username, string password)
+        public static LoginRet AdminLogin(string username, string password)
         {
             return UserDAO.AdminLogin(username, password);
         }

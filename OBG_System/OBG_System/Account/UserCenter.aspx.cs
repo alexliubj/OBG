@@ -36,8 +36,8 @@ public partial class Default2 : System.Web.UI.Page
         user.BillAddress = "dd";
         user.BillPostCode = "x1d3d2";
         //
-
-       // user = UserBLO.GetUserInfoWithUserId(userID);
+        userID = 1;
+       user = UserBLO.GetUserInfoWithUserId(userID);
         UserName.Text = user.UserName;
         Email.Text = user.Email;
         FirstName.Text = user.FirstName;

@@ -29,7 +29,7 @@ namespace BusinessLogic
             return RoleDAO.DeleteOneRoleById(roleId);
         }
 
-        public static bool AddUserToRole(int userid, int roleId)
+        public static int AddUserToRole(int userid, int roleId)
         {
             return RoleDAO.AddUserToRole(userid, roleId);
         }

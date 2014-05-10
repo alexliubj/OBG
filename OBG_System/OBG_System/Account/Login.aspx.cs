@@ -18,11 +18,19 @@ public partial class Account_Login : System.Web.UI.Page
     {
         newUser.UserName = LoginUser.UserName;
         newUser.Userpwd = LoginUser.Password;
-        int userID = UserBLO.ClientLogin(newUser.UserName, newUser.Userpwd);
+        LoginRet userlogin = UserBLO.ClientLogin(newUser.UserName, newUser.Userpwd);
 
-        if (userID >0)
+        if (userlogin.UserId > 0)
         {
-            Session["userID"] = userID;
+            //check status 
+            if (userlogin.Us == LoginRet.UserStatus.active) //active
+            {
+            }
+            else //inactive
+            {
+ 
+            }
+            Session["userID"] = userlogin.UserId;
             Session["login"] = true;
 
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),

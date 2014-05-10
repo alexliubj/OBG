@@ -4,27 +4,28 @@ using System.Linq;
 using System.Text;
 using DataAccess;
 using OBGModel;
-
+using DataAccess;
+using System.Data;
 namespace BusinessLogic
 {
     public static class ProductBLO
     {
-        public static List<Product> GetAllProducts()
+        public static DataTable GetAllProducts()
         {
             return ProductDAO.GetAllProducts();
         }
 
-        public static bool DeleteProductById(int prodId)
+        public static int DeleteProductById(int prodId)
         {
             return ProductDAO.DeleteProductById(prodId);
         }
 
-        public static bool UpdateProduct(Product prod)
+        public static int UpdateProduct(Product prod)
         {
             return ProductDAO.UpdateProduct(prod);
         }
 
-        public static bool AddNewProduct(Product prod)
+        public static int AddNewProduct(Product prod)
         {
             return ProductDAO.AddNewProduct(prod);
         }

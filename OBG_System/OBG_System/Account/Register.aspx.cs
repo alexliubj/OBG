@@ -92,14 +92,16 @@ public partial class Account_Register : System.Web.UI.Page
         newUser.LastName = LastNameTextBox.Text;
         newUser.Email = EmailTextBox.Text;
 
-        int effectedRow = UserBLO.Registration(newUser);
+        int newId = UserBLO.Registration(newUser);
 
-        if (effectedRow == 1)
+        if (newId > 0 && RoleBLO.AddUserToRole(newId, 1) > 0)
         {
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                             "err_msg",
                             "alert('success.');", true);
             Response.Redirect("~/Account/RegisterSuccess.aspx");
+            
+            //add To role
             
         }
     }

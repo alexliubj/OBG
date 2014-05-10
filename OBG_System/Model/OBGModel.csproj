@@ -45,6 +45,7 @@
     <Compile Include="Category.cs" />
     <Compile Include="Discount.cs" />
     <Compile Include="Inventory.cs" />
+    <Compile Include="LoginRet.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderLine.cs" />
     <Compile Include="Product.cs" />

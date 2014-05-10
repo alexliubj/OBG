@@ -21,9 +21,9 @@ public partial class _Default : System.Web.UI.Page
        
         //user
         //common user login
-        int cLogin = UserBLO.ClientLogin(@"username", @"password");
+        LoginRet cLogin = UserBLO.ClientLogin(@"username", @"password");
         //admin user login
-        int login = UserBLO.AdminLogin(@"username", @"password");
+        LoginRet login = UserBLO.AdminLogin(@"username", @"password");
         
         User aUser =new User();
         //active a user
