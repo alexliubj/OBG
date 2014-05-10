@@ -41,6 +41,7 @@
                     </p>
                 </fieldset>
                 <p class="submitButton">
+                    <a href ="ForgetPassword.aspx">Forget Password?</a>
                     <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In" ValidationGroup="LoginUserValidationGroup" OnClick="LoginButton_Click"/>
                 </p>
             </div>

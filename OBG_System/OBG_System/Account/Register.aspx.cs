@@ -22,17 +22,55 @@ public partial class Account_Register : System.Web.UI.Page
 
     protected void RegisterUser_CreatedUser(object sender, EventArgs e)
     {
-        FormsAuthentication.SetAuthCookie(RegisterUser.UserName, false /* createPersistentCookie */);
+        //FormsAuthentication.SetAuthCookie(RegisterUser.UserName, false /* createPersistentCookie */);
 
-        string continueUrl = RegisterUser.ContinueDestinationPageUrl;
-        if (String.IsNullOrEmpty(continueUrl))
-        {
-            continueUrl = "~/Account/RegisterSuccess.aspx";
-        }
-        Response.Redirect(continueUrl);
+        //string continueUrl = RegisterUser.ContinueDestinationPageUrl;
+        //if (String.IsNullOrEmpty(continueUrl))
+        //{
+        //    continueUrl = "~/Account/RegisterSuccess.aspx";
+        //}
+        //Response.Redirect(continueUrl);
     }
 
     protected void CreateUserButton_Click(object sender, EventArgs e)
+    {
+       // User newUser = new User();
+       // TextBox UserNameTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("UserName");
+       // TextBox EmailTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("Email");
+       // TextBox PasswordTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("Password");
+       // TextBox FirstNameTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("FirstName");
+       // TextBox LastNameTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("LastName");
+       // TextBox CompanyTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("Company");
+       // TextBox PhoneTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("Phone");
+       // TextBox ShippingAddressTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("ShippingAddress");
+       // TextBox ShippingPostCodeTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("ShippingPostCode");
+       // newUser.UserName = UserNameTextBox.Text;
+       // newUser.Userpwd = PasswordTextBox.Text;
+       // newUser.CompanyName = CompanyTextBox.Text;
+       // newUser.Phone = PhoneTextBox.Text;
+       // newUser.ShippingAddress = ShippingAddressTextBox.Text;
+       // newUser.ShippingPostCode = ShippingPostCodeTextBox.Text;
+       // newUser.FirstName = FirstNameTextBox.Text;
+       // newUser.LastName = LastNameTextBox.Text;
+       // newUser.Email = EmailTextBox.Text;
+
+       //int effectedRow = UserBLO.Registration(newUser);
+
+       //if (effectedRow == 1)
+       //{
+       //    Response.Redirect("~/Account/RegisterSuccess.aspx");
+       //    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+       //                 "err_msg",
+       //                 "alert('success.');", true);
+       //}
+        
+    }
+   
+    //protected void Button1_Click(object sender, EventArgs e)
+    //{
+    //    Response.Redirect("~/Account/RegisterSuccess.aspx");
+    //}
+    protected void btnCreate_Click(object sender, EventArgs e)
     {
         User newUser = new User();
         TextBox UserNameTextBox = (TextBox)RegisterUserWizardStep.ContentTemplateContainer.FindControl("UserName");
@@ -54,13 +92,15 @@ public partial class Account_Register : System.Web.UI.Page
         newUser.LastName = LastNameTextBox.Text;
         newUser.Email = EmailTextBox.Text;
 
-       UserBLO.Registration(newUser);
-       
-       // Response.Redirect("~/Account/RegisterSuccess.aspx");
+        int effectedRow = UserBLO.Registration(newUser);
+
+        if (effectedRow == 1)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                            "err_msg",
+                            "alert('success.');", true);
+            Response.Redirect("~/Account/RegisterSuccess.aspx");
+            
+        }
     }
-   
-    //protected void Button1_Click(object sender, EventArgs e)
-    //{
-    //    Response.Redirect("~/Account/RegisterSuccess.aspx");
-    //}
 }

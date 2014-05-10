@@ -9,23 +9,23 @@ using BusinessLogic;
 
 public partial class Default2 : System.Web.UI.Page
 {
-    int userId;
+    int userID;
     User user = new User();
     protected void Page_Load(object sender, EventArgs e)
     {
         //for test purpose
-        Session["userId"] = 1;
+        Session["userID"] = 1;
 
-        if (Session["userId"] != null)
+        if (Session["userID"] != null)
         {
-             userId = (int)Session["userId"];
+             userID = (int)Session["userID"];
         }
         else
         {
             Response.Redirect("~/Default.aspx");
         }
         //test purpose
-        user.UserName = "neobility";
+        user.UserName = "neobility3";
         user.FirstName = "neo";
         user.LastName = "wu";
         user.Phone = "206478990689";
@@ -35,8 +35,9 @@ public partial class Default2 : System.Web.UI.Page
         user.Email = "neo.wu2@gmail.com";
         user.BillAddress = "dd";
         user.BillPostCode = "x1d3d2";
+        //
 
-       // user = UserBLO.GetUserInfoWithUserId(userId);
+       // user = UserBLO.GetUserInfoWithUserId(userID);
         UserName.Text = user.UserName;
         Email.Text = user.Email;
         FirstName.Text = user.FirstName;
@@ -66,6 +67,10 @@ public partial class Default2 : System.Web.UI.Page
     protected void BtnSave_Click(object sender, EventArgs e)
     {
         User userSaved = new User();
+
+        //test purpose
+        userSaved.Userid = 2;
+        //
         userSaved.UserName = UserName.Text;
         userSaved.Email = Email.Text;
         userSaved.FirstName = FirstName.Text;
@@ -80,7 +85,7 @@ public partial class Default2 : System.Web.UI.Page
         int update = 0;
         update = UserBLO.UpdateUserInfo(userSaved);
 
-        if (update>0)
+        if (update == 1)
         {
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                          "err_msg",
@@ -109,5 +114,9 @@ public partial class Default2 : System.Web.UI.Page
         BillingPostCode.ReadOnly = true;
         BtnSave.Visible = false;
         BtnCancle.Visible = false;
+    }
+    protected void btnChangePassword_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Account/ChangePassword.aspx");
     }
 }

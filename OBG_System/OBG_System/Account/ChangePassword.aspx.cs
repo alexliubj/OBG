@@ -9,16 +9,16 @@ using BusinessLogic;
 
 public partial class Account_ChangePassword : System.Web.UI.Page
 {
-    int userId;
+    int userID;
     User user = new User();
     protected void Page_Load(object sender, EventArgs e)
     {
         //for test purpose
-        Session["userId"] = 1;
+        Session["userID"] = 1;
 
-        if (Session["userId"] != null)
+        if (Session["userID"] != null)
         {
-            userId = (int)Session["userId"];
+            userID = (int)Session["userID"];
         }
         else
         {
@@ -29,9 +29,9 @@ public partial class Account_ChangePassword : System.Web.UI.Page
     protected void ChangePasswordPushButton_Click(object sender, EventArgs e)
     {
         String newPassword = ChangeUserPassword.NewPassword;
-        int resetPassword = UserBLO.ResetPassword(userId,newPassword);
+        int resetPassword = UserBLO.ResetPassword(userID,newPassword);
 
-        if (resetPassword>0)
+        if (resetPassword == 1)
         {
             Response.Redirect("~/Account/ChangePasswordSuccess.aspx");
         }

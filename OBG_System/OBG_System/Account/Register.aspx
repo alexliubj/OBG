@@ -139,4 +139,6 @@
             </asp:CreateUserWizardStep>
         </WizardSteps>
     </asp:CreateUserWizard>
+    <br />
+    <asp:Button ID="btnCreate" runat="server" OnClick="btnCreate_Click" Text="Submit" />
 </asp:Content>

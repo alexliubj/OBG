@@ -50,6 +50,8 @@
                         <asp:MenuItem NavigateUrl="Accessories.aspx" Text="Accessories">
                         <asp:MenuItem NavigateUrl="AccAll.aspx" Text="View All"></asp:MenuItem>
                         </asp:MenuItem>
+                         <asp:MenuItem NavigateUrl="Account/UserCenter.aspx" Text="User Center">
+                        </asp:MenuItem>
 
                     </Items>
                 </asp:Menu>

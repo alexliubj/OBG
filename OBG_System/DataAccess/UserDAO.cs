@@ -24,10 +24,10 @@ namespace DataAccess
         public static int Registration(User user)
         {
             DbCommand command = db.GetSqlStringCommond(@"insert into users
-                                (userpwd,username,status,email,companyname,phone,shippingAddress,shippingP
-                                ostcode,firstname,lastName)
-                                values (@userpwd,@username,@status,@email,@companyname,@phone,@shippingAddress,@shippingP
-                                ostcode,@firstname,@lastName)");
+                                (userpwd,username,status,email,companyname,phone,shippingAddress,shippingPostcode
+                                ,firstname,lastName)
+                                values (@userpwd,@username,@status,@email,@companyname,@phone,@shippingAddress,@shippingPostcode
+                                ,@firstname,@lastName)");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@userpwd", DAUtils.MD5(user.Userpwd)),
             new SqlParameter("@username", user.UserName),
