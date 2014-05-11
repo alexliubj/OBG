@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Admin/UserManagement.aspx" hash="655967331" filehash="5c60602ff48ce224" flags="110000" assembly="App_Web_xlfdrqis" type="ASP.admin_usermanagement_aspx">
+    <filedeps>
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Admin/AdminSite.master" />
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Admin/AdminSite.master.cs" />
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Admin/UserManagement.aspx" />
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Admin/UserManagement.aspx.cs" />
+    </filedeps>
+</preserve>

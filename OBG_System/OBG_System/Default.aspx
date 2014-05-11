@@ -8,7 +8,7 @@
         Welcome to OBG System
     </h2>
     <p>
-        Please Login <a href="http://www.asp.net" title="ASP.NET Website">www.asp.net</a>.
+       This is home page
     </p>
     
 </asp:Content>

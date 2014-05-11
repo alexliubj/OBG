@@ -14,40 +14,43 @@ public partial class Default2 : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //for test purpose
-        Session["userID"] = 1;
-
+        //Session["userID"] = 1;
         if (Session["userID"] != null)
         {
-             userID = (int)Session["userID"];
+            userID = (int)Session["userID"];
         }
         else
         {
             Response.Redirect("~/Default.aspx");
         }
-        //test purpose
-        user.UserName = "neobility3";
-        user.FirstName = "neo";
-        user.LastName = "wu";
-        user.Phone = "206478990689";
-        user.CompanyName = "lol";
-        user.ShippingAddress = "address";
-        user.ShippingPostCode = "94105-0011";
-        user.Email = "neo.wu2@gmail.com";
-        user.BillAddress = "dd";
-        user.BillPostCode = "x1d3d2";
-        //
-        userID = 1;
-       user = UserBLO.GetUserInfoWithUserId(userID);
-        UserName.Text = user.UserName;
-        Email.Text = user.Email;
-        FirstName.Text = user.FirstName;
-        LastName.Text = user.LastName;
-        Company.Text = user.CompanyName;
-        Phone.Text = user.Phone;
-        ShippingAddress.Text = user.ShippingAddress;
-        ShippingPostCode.Text = user.ShippingPostCode;
-        BillingAddress.Text = user.BillAddress;
-        BillingPostCode.Text = user.BillPostCode;
+
+        if (!IsPostBack)
+        { 
+            //test purpose
+            //user.UserName = "neobility3";
+            //user.FirstName = "neo";
+            //user.LastName = "wu";
+            //user.Phone = "206478990689";
+            //user.CompanyName = "lol";
+            //user.ShippingAddress = "address";
+            //user.ShippingPostCode = "94105-0011";
+            //user.Email = "neo.wu2@gmail.com";
+            //user.BillAddress = "dd";
+            //user.BillPostCode = "x1d3d2";
+            //
+
+            user = UserBLO.GetUserInfoWithUserId(userID);
+            UserName.Text = user.UserName;
+            Email.Text = user.Email;
+            FirstName.Text = user.FirstName;
+            LastName.Text = user.LastName;
+            Company.Text = user.CompanyName;
+            Phone.Text = user.Phone;
+            ShippingAddress.Text = user.ShippingAddress;
+            ShippingPostCode.Text = user.ShippingPostCode;
+            BillingAddress.Text = user.BillAddress;
+            BillingPostCode.Text = user.BillPostCode;
+        }
     }
     protected void BtnEdit_Click(object sender, EventArgs e)
     {
@@ -69,8 +72,9 @@ public partial class Default2 : System.Web.UI.Page
         User userSaved = new User();
 
         //test purpose
-        userSaved.Userid = 2;
+        //userSaved.Userid = 2;
         //
+        userSaved.Userid = userID;
         userSaved.UserName = UserName.Text;
         userSaved.Email = Email.Text;
         userSaved.FirstName = FirstName.Text;

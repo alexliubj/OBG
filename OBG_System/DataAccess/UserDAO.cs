@@ -73,12 +73,11 @@ namespace DataAccess
                     }
                     else
                     {
-                        loginRet.Us = LoginRet.UserStatus.inactive;
+                        loginRet.Us = LoginRet.UserStatus.active;
                     }
-                    loginRet.Rs = LoginRet.RoleStatus.Admin;
+                    loginRet.Rs = LoginRet.RoleStatus.Customer;
                 }
             }
-
             return loginRet;
         }
 
@@ -117,7 +116,7 @@ namespace DataAccess
                     }
                     else
                     {
-                        loginRet.Us = LoginRet.UserStatus.inactive;
+                        loginRet.Us = LoginRet.UserStatus.active;
                     }
                     loginRet.Rs = LoginRet.RoleStatus.Admin;
                 }
@@ -214,9 +213,9 @@ namespace DataAccess
         /// <param name="userid"></param>
         /// <param name="newPassword"></param>
         /// <returns></returns>
-        public static int ResetPassword(int userid, string newPassword)
+        public static int ResetPassword(int userid, string newPassword, string oldPassword)
         {
-            //
+            //需要加一个参数（oldPassword），改动PASSWORD之前，校验一下旧PASSWORD
             DbCommand command = db.GetSqlStringCommond(@"
                             update users set userpwd = @newpassword where userid = @userid");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid),new SqlParameter(

@@ -128,10 +128,10 @@
                                 </asp:RegularExpressionValidator>
                             </p>
                         </fieldset>
-                        <p class="submitButton">
+                       <%-- <p class="submitButton">
                             <asp:Button ID="CreateUserButton" runat="server" CommandName="MoveNext" Text="Create User"
                                 ValidationGroup="RegisterUserValidationGroup" />
-                        </p>
+                        </p>--%>
                     </div>
                 </ContentTemplate>
                 <CustomNavigationTemplate>

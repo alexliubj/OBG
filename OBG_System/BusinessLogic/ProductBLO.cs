@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using DataAccess;
 using OBGModel;
-using DataAccess;
 using System.Data;
 namespace BusinessLogic
 {

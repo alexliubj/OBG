@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/About.aspx" hash="655967331" filehash="7e2c6382788b5de5" flags="110000" assembly="App_Web_jc0tlimb" type="ASP.about_aspx">
+    <filedeps>
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/About.aspx" />
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/About.aspx.cs" />
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Site.master" />
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Site.master.cs" />
+    </filedeps>
+</preserve>

@@ -4,8 +4,3 @@ C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\Model\bin\Debug\Model.pdb
 C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\Model\obj\Debug\Model.dll
 C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\Model\obj\Debug\Model.pdb
 C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\Model\obj\Debug\OBGModel.csprojResolveAssemblyReference.cache
-C:\Users\Neo\Documents\GitHub\OBG\OBG_System\Model\bin\Debug\Model.dll.config
-C:\Users\Neo\Documents\GitHub\OBG\OBG_System\Model\bin\Debug\Model.dll
-C:\Users\Neo\Documents\GitHub\OBG\OBG_System\Model\bin\Debug\Model.pdb
-C:\Users\Neo\Documents\GitHub\OBG\OBG_System\Model\obj\Debug\Model.dll
-C:\Users\Neo\Documents\GitHub\OBG\OBG_System\Model\obj\Debug\Model.pdb

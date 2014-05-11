@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Account/Login.aspx" hash="655967331" filehash="bd45ff6a4f403e42" flags="110000" assembly="App_Web_dkap4eyf" type="ASP.account_login_aspx">
+    <filedeps>
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Account/Login.aspx" />
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Account/Login.aspx.cs" />
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Site.master" />
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Site.master.cs" />
+    </filedeps>
+</preserve>

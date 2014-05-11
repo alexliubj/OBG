@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Admin/OrderManagement.aspx" hash="655967331" filehash="cd4daf25f6796f3d" flags="110000" assembly="App_Web_tpvllnuu" type="ASP.admin_ordermanagement_aspx">
+    <filedeps>
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Admin/AdminSite.master" />
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Admin/AdminSite.master.cs" />
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Admin/OrderManagement.aspx" />
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Admin/OrderManagement.aspx.cs" />
+    </filedeps>
+</preserve>

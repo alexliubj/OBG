@@ -25,19 +25,22 @@ public partial class Account_Login : System.Web.UI.Page
             //check status 
             if (userlogin.Us == LoginRet.UserStatus.active) //active
             {
+                Session["userID"] = userlogin.UserId;
+                Session["login"] = true;
+
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                             "err_msg",
+                             "alert('success.');",
+                             true);
+                Response.Redirect("~/Default.aspx");
             }
             else //inactive
             {
- 
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                                       "err_msg",
+                                       "alert('wrong.');", true);
             }
-            Session["userID"] = userlogin.UserId;
-            Session["login"] = true;
-
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
-                         "err_msg",
-                         "alert('success.');",
-                         true);
-            Response.Redirect("~/Default.aspx");
+           
         }
         else
         {

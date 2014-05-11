@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Products/ProductSite.master" hash="655967331" filehash="84ab51e4c1a50ec2" flags="110000" assembly="App_Web_pb2b4nkl" type="ASP.products_productsite_master">
+    <filedeps>
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Products/ProductSite.master" />
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Products/ProductSite.master.cs" />
+    </filedeps>
+</preserve>

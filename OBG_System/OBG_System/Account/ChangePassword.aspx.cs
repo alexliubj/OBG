@@ -14,7 +14,7 @@ public partial class Account_ChangePassword : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         //for test purpose
-        Session["userID"] = 1;
+       // Session["userID"] = 1;
 
         if (Session["userID"] != null)
         {
@@ -29,7 +29,8 @@ public partial class Account_ChangePassword : System.Web.UI.Page
     protected void ChangePasswordPushButton_Click(object sender, EventArgs e)
     {
         String newPassword = ChangeUserPassword.NewPassword;
-        int resetPassword = UserBLO.ResetPassword(userID,newPassword);
+        String oldPassword = ChangeUserPassword.CurrentPassword;
+        int resetPassword = UserBLO.ResetPassword(userID,newPassword,oldPassword);
 
         if (resetPassword == 1)
         {

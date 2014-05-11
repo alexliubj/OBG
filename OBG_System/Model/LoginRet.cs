@@ -10,14 +10,14 @@ namespace OBGModel
         public enum RoleStatus
         { 
             Admin,
-            Customher,
+            Customer,
             Other
         }
 
         public enum UserStatus
         {
-            active,
-            inactive
+            inactive,
+            active
         }
         private int userId;
 
