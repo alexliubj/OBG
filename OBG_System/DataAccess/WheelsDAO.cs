@@ -9,29 +9,29 @@ using System.Data.SqlClient;
 
 namespace DataAccess
 {
-    public static class ProductDAO
+    public static class WheelsDAO
     {
 
         private static DbHelper db = new DbHelper();
 
         public static DataTable GetAllProducts()
         {
-            DbCommand command = db.GetSqlStringCommond("SELECT ProductId,Image,Style,Brand,Size,PCD,Finish,Offset,SEAT,BORE,Weight,ONHand,Price,CategoryId FROM  Product");
+            DbCommand command = db.GetSqlStringCommond("SELECT ProductId,Image,Style,Brand,Size,PCD,Finish,Offset,SEAT,BORE,Weight,ONHand,Price,CategoryId FROM Wheels");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
 
         public static int DeleteProductById(int prodId)
         {
-            DbCommand command = db.GetSqlStringCommond(@"delete from product where ProductId=@ProductId");
+            DbCommand command = db.GetSqlStringCommond(@"delete from wheels where ProductId=@ProductId");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@ProductId", prodId)};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
 
-        public static int UpdateProduct(Product prod)
+        public static int UpdateProduct(Wheels prod)
         {
-            DbCommand command = db.GetSqlStringCommond(@"UPDATE [OBG_].[dbo].[Product]
+            DbCommand command = db.GetSqlStringCommond(@"UPDATE [OBG_].[dbo].[Wheels]
                                SET [Image] = @Image
                                   ,[Style] = @Style
                                   ,[Brand] = @Brand
@@ -66,10 +66,10 @@ namespace DataAccess
             return db.ExecuteNonQuery(command);
         }
 
-        public static int AddNewProduct(Product prod)
+        public static int AddNewProduct(Wheels prod)
         {
             DbCommand command = db.GetSqlStringCommond(@"
-                    INSERT INTO [Product]
+                    INSERT INTO [Wheels]
                                ([Image]
                                ,[Style]
                                ,[Brand]

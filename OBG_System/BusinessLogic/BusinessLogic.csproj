@@ -40,11 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessoryBLO.cs" />
     <Compile Include="CategoryBLO.cs" />
     <Compile Include="DiscountBLO.cs" />
     <Compile Include="OrderBLO.cs" />
     <Compile Include="PermissionBLO.cs" />
-    <Compile Include="ProductBLO.cs" />
+    <Compile Include="TiresBLO.cs" />
+    <Compile Include="WheelsBLO.cs" />
     <Compile Include="RegionBLO.cs" />
     <Compile Include="RoleBLO.cs" />
     <Compile Include="UserBLO.cs" />
