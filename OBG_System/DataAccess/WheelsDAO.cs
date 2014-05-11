@@ -31,7 +31,7 @@ namespace DataAccess
 
         public static int UpdateProduct(Wheels prod)
         {
-            DbCommand command = db.GetSqlStringCommond(@"UPDATE [OBG_].[dbo].[Wheels]
+            DbCommand command = db.GetSqlStringCommond(@"UPDATE Wheels
                                SET [Image] = @Image
                                   ,[Style] = @Style
                                   ,[Brand] = @Brand
