@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OBGModel
 {
-    public class Product
+    public class Wheels
     {
         private int productId;
 

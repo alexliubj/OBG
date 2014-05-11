@@ -8,26 +8,26 @@ using DataAccess;
 using System.Data;
 namespace BusinessLogic
 {
-    public static class ProductBLO
+    public static class WheelsBLO
     {
         public static DataTable GetAllProducts()
         {
-            return ProductDAO.GetAllProducts();
+            return WheelsDAO.GetAllProducts();
         }
 
         public static int DeleteProductById(int prodId)
         {
-            return ProductDAO.DeleteProductById(prodId);
+            return WheelsDAO.DeleteProductById(prodId);
         }
 
-        public static int UpdateProduct(Product prod)
+        public static int UpdateProduct(Wheels prod)
         {
-            return ProductDAO.UpdateProduct(prod);
+            return WheelsDAO.UpdateProduct(prod);
         }
 
-        public static int AddNewProduct(Product prod)
+        public static int AddNewProduct(Wheels prod)
         {
-            return ProductDAO.AddNewProduct(prod);
+            return WheelsDAO.AddNewProduct(prod);
         }
     }
 }
