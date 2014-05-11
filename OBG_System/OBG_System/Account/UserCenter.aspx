@@ -163,6 +163,8 @@
             <tr>
                 <td>
                     <asp:Button ID="BtnEdit" runat="server" CommandName="MoveNext" OnClick="BtnEdit_Click" Text="Edit" Width="37px" />
+                    </td><td>
+                    <asp:Button ID="btnChangePassword" runat="server" Text="Change Password" OnClick="btnChangePassword_Click" Width="137px" />
                 </td>
             </tr>
             <tr>

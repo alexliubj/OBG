@@ -13,6 +13,6 @@ public partial class Account_ChangePasswordSuccess : System.Web.UI.Page
     }
     protected void btnBack_Click(object sender, EventArgs e)
     {
-        //go back to somepage
+        Response.Redirect("~/Account/UserCenter.aspx");
     }
 }

@@ -41,13 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessoriesDAO.cs" />
     <Compile Include="CategoryDAO.cs" />
     <Compile Include="DAUtils.cs" />
     <Compile Include="DBHelper.cs" />
     <Compile Include="DiscountDAO.cs" />
     <Compile Include="OrderDAO.cs" />
     <Compile Include="PermissionDAO.cs" />
-    <Compile Include="ProductDAO.cs" />
+    <Compile Include="TiresDAO.cs" />
+    <Compile Include="WheelsDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegionDAO.cs" />
     <Compile Include="RoleDAO.cs" />

@@ -119,12 +119,14 @@ namespace DataAccess
 
         public DbDataReader ExecuteReader(DbCommand cmd)
         {
+            if(cmd.Connection.State != ConnectionState.Open)
             cmd.Connection.Open();
             DbDataReader reader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
             return reader;
         }
         public int ExecuteNonQuery(DbCommand cmd)
         {
+            if (cmd.Connection.State != ConnectionState.Open)
             cmd.Connection.Open();
             int ret = cmd.ExecuteNonQuery();
             cmd.Connection.Close();
@@ -133,6 +135,7 @@ namespace DataAccess
 
         public object ExecuteScalar(DbCommand cmd)
         {
+            if (cmd.Connection.State != ConnectionState.Open)
             cmd.Connection.Open();
             object ret = cmd.ExecuteScalar();
             cmd.Connection.Close();

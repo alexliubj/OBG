@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<preserve resultType="3" virtualPath="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Admin/AdminSite.master" hash="655967331" filehash="d8ef05bae309ae5e" flags="110000" assembly="App_Web_u4n15cc2" type="ASP.admin_adminsite_master">
+    <filedeps>
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Admin/AdminSite.master" />
+        <filedep name="/C:/Users/Neo/Documents/GitHub/OBG/OBG_System/OBG_System/Admin/AdminSite.master.cs" />
+    </filedeps>
+</preserve>

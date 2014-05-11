@@ -11,7 +11,7 @@ namespace DataAccess
 {
     public static class UserDAO
     {
-        
+
         private static DbHelper db = new DbHelper();
 
         /// <summary>
@@ -24,10 +24,10 @@ namespace DataAccess
         public static int Registration(User user)
         {
             DbCommand command = db.GetSqlStringCommond(@"insert into users
-                                (userpwd,username,status,email,companyname,phone,shippingAddress,shippingP
-                                ostcode,firstname,lastName)
-                                values (@userpwd,@username,@status,@email,@companyname,@phone,@shippingAddress,@shippingP
-                                ostcode,@firstname,@lastName)");
+                                (userpwd,username,status,email,companyname,phone,shippingAddress,shippingPostcode
+                                ,firstname,lastName)
+                                values (@userpwd,@username,@status,@email,@companyname,@phone,@shippingAddress,@shippingPostcode
+                                ,@firstname,@lastName); Select @@IDENTITY");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@userpwd", DAUtils.MD5(user.Userpwd)),
             new SqlParameter("@username", user.UserName),
@@ -40,7 +40,7 @@ namespace DataAccess
             new SqlParameter("@firstname", user.FirstName),
              new SqlParameter("@lastName", user.LastName)};
             command.Parameters.AddRange(paras);
-            return db.ExecuteNonQuery(command);
+            return Convert.ToInt32(db.ExecuteScalar(command));
         }
 
         /// <summary>
@@ -49,18 +49,36 @@ namespace DataAccess
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static int ClientLogin(string username, string password)
+        public static LoginRet ClientLogin(string username, string password)
         {
+            LoginRet loginRet = new LoginRet();
+            loginRet.UserId = -1;
             DbCommand command = db.GetSqlStringCommond(@"
-                            select u.userid from users u inner join userrole r
+                            select u.userid,u.status from users u inner join userrole r
                             on u.userid = r.userid
                             where u.username = @username
                             and u.userpwd = @pwd
                             and r.roleid = 1");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@username", username),
-            new SqlParameter("@pwd", password)};
+            new SqlParameter("@pwd", DAUtils.MD5(password))};
             command.Parameters.AddRange(paras);
-            return db.ExecuteNonQuery(command);
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    loginRet.UserId = reader.GetInt32(0);
+                    if (reader.GetInt32(1) == 0)
+                    {
+                        loginRet.Us = LoginRet.UserStatus.inactive;
+                    }
+                    else
+                    {
+                        loginRet.Us = LoginRet.UserStatus.active;
+                    }
+                    loginRet.Rs = LoginRet.RoleStatus.Customer;
+                }
+            }
+            return loginRet;
         }
 
         /// <summary>
@@ -69,21 +87,43 @@ namespace DataAccess
         /// <param name="username"></param>
         /// <param name="password"></param>
         /// <returns></returns>
-        public static int AdminLogin(string username, string password)
+        public static LoginRet AdminLogin(string username, string password)
         {
             //roleid = 0 // amdin
             //roleid = 1 // customer
+            //UserId = -1 // fail
+            LoginRet loginRet = new LoginRet();
+            loginRet.UserId = -1;
 
             DbCommand command = db.GetSqlStringCommond(@"
-                            select u.userid from users u inner join userrole r
+                            select u.userid,u.status from users u inner join userrole r
                             on u.userid = r.userid
                             where u.username = @username
                             and u.userpwd = @pwd
                             and r.roleid = 0");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@username", username),
-            new SqlParameter("@pwd", password)};
+            new SqlParameter("@pwd", DAUtils.MD5(password))};
             command.Parameters.AddRange(paras);
-            return db.ExecuteNonQuery(command);
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+
+                while (reader.Read())
+                {
+                    loginRet.UserId = reader.GetInt32(0);
+                    if (reader.GetInt32(1) == 0)
+                    {
+                        loginRet.Us = LoginRet.UserStatus.inactive;
+                    }
+                    else
+                    {
+                        loginRet.Us = LoginRet.UserStatus.active;
+                    }
+                    loginRet.Rs = LoginRet.RoleStatus.Admin;
+                }
+
+            }
+
+            return loginRet;
         }
 
         /// <summary>
@@ -104,9 +144,24 @@ namespace DataAccess
                                 from users where userid = @userid");
 
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userId) };
+            command.Parameters.AddRange(paras);
             using (DbDataReader reader = db.ExecuteReader(command))
             {
-                retUser.UserName = reader.GetString(0);
+
+                while (reader.Read())
+                {
+                    retUser.UserName = reader.GetString(0);
+                    retUser.Status = reader.GetInt32(1);
+                    retUser.Email = reader.GetString(2);
+                    retUser.CompanyName = reader.GetString(3);
+                    retUser.Phone = reader.GetString(4);
+                    retUser.BillAddress = reader.GetString(5);
+                    retUser.BillPostCode = reader.GetString(6);
+                    retUser.ShippingAddress = reader.GetString(7);
+                    retUser.ShippingPostCode = reader.GetString(8);
+                    retUser.FirstName = reader.GetString(9);
+                    retUser.LastName = reader.GetString(10);
+                }
             }
 
             return retUser;
@@ -124,7 +179,7 @@ namespace DataAccess
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
-            
+
         }
 
         /// <summary>
@@ -150,7 +205,7 @@ namespace DataAccess
             return db.ExecuteNonQuery(command);
 
         }
-    
+
 
         /// <summary>
         /// reset password
@@ -158,18 +213,18 @@ namespace DataAccess
         /// <param name="userid"></param>
         /// <param name="newPassword"></param>
         /// <returns></returns>
-        public static int ResetPassword(int userid, string newPassword)
+        public static int ResetPassword(int userid, string newPassword, string oldPassword)
         {
-            //
+            //需要加一个参数（oldPassword），改动PASSWORD之前，校验一下旧PASSWORD
             DbCommand command = db.GetSqlStringCommond(@"
                             update users set userpwd = @newpassword where userid = @userid");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid),new SqlParameter(
-                "@newpassword",newPassword)};
+                "@newpassword",DAUtils.MD5(newPassword))};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
 
         }
-        
+
         /// <summary>
         /// Chect existing of in rest table
         /// </summary>
@@ -203,7 +258,8 @@ namespace DataAccess
         {
             DbCommand command = db.GetSqlStringCommond(@"Update users
                                 set companyName = @companyname, phone =@phone, shippingAddress=@shippingAddress,
-                                shippingPostcode=@shippingPostcode,billingaddress = @billingaddress, billingpostcode = @billingpostcode, firstname = @firstname, lastname = @lastname
+                                shippingPostcode=@shippingPostcode,billingaddress = @billingaddress,
+                                billingpostcode = @billingpostcode, firstname = @firstname, lastname = @lastname
                                 where userid = @userid");
             SqlParameter[] paras = new SqlParameter[] {
             new SqlParameter("@companyname", user.Email),
@@ -213,7 +269,8 @@ namespace DataAccess
             new SqlParameter("@firstname", user.FirstName),
              new SqlParameter("@lastName", user.LastName),
             new SqlParameter("@billingaddress", user.BillAddress),
-            new SqlParameter("@billingpostcode", user.BillPostCode)};
+            new SqlParameter("@billingpostcode", user.BillPostCode),
+            new SqlParameter("@userid", user.Userid)};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
@@ -226,7 +283,7 @@ namespace DataAccess
         public static int RemoveUserById(int userid)
         {
             DbCommand command = db.GetSqlStringCommond(@"delete users where userid =@userid");
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid)};
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
