@@ -11,4 +11,12 @@ public partial class SiteMaster : System.Web.UI.MasterPage
     {
 
     }
+
+    //protected void LoginStatus1_LoggedOut(object sender, EventArgs e)
+    //{
+    //    FormsAuthentication.SignOut();
+    //    Roles.DeleteCookie();
+    //    Session.Clear();
+    //    FormsAuthentication.RedirectToLoginPage();
+    //}
 }

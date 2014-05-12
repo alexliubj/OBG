@@ -30,7 +30,7 @@ public partial class Account_ChangePassword : System.Web.UI.Page
     {
         String newPassword = ChangeUserPassword.NewPassword;
         String oldPassword = ChangeUserPassword.CurrentPassword;
-        int resetPassword = UserBLO.ResetPassword(userID,newPassword,oldPassword);
+        int resetPassword = UserBLO.ResetPassword(userID,newPassword);
 
         if (resetPassword == 1)
         {

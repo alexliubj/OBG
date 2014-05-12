@@ -88,9 +88,9 @@ namespace BusinessLogic
         /// <param name="userid"></param>
         /// <param name="newPassword"></param>
         /// <returns></returns>
-        public static int ResetPassword(int userid, string newPassword, string oldPassword)
+        public static int ResetPassword(int userid, string newPassword)
         {
-            return UserDAO.ResetPassword(userid, newPassword, oldPassword);
+            return UserDAO.ResetPassword(userid, newPassword);
         }
 
         /// <summary>
