@@ -54,7 +54,6 @@ public partial class Default2 : System.Web.UI.Page
     }
     protected void BtnEdit_Click(object sender, EventArgs e)
     {
-        UserName.ReadOnly = false;
         Email.ReadOnly = false;
         FirstName.ReadOnly = false;
         LastName.ReadOnly = false;
@@ -106,7 +105,6 @@ public partial class Default2 : System.Web.UI.Page
     }
     protected void BtnCancle_Click(object sender, EventArgs e)
     {
-        UserName.ReadOnly = true;
         Email.ReadOnly = true;
         FirstName.ReadOnly = true;
         LastName.ReadOnly = true;
