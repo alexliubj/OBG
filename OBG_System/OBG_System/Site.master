@@ -38,17 +38,17 @@
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
-                        <asp:MenuItem NavigateUrl="Products/ProductHome.aspx" Text="Home"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="Default.aspx" Text="Home"></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="Products/Wheels.aspx" Text="Wheels">
-                        <asp:MenuItem NavigateUrl="WheelAll.aspx" Text="View All"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="ViewByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="Products/WheelAll.aspx" Text="View All"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="Products/ViewByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="Tires.aspx" Text="Tires">
-                        <asp:MenuItem NavigateUrl="TireAll.aspx" Text="View All"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="TireByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="Products/TireAll.aspx" Text="View All"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="Products/TireByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="Accessories.aspx" Text="Accessories">
-                        <asp:MenuItem NavigateUrl="AccAll.aspx" Text="View All"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="Products/AccAll.aspx" Text="View All"></asp:MenuItem>
                         </asp:MenuItem>
                          <asp:MenuItem NavigateUrl="Account/UserCenter.aspx" Text="User Center">
                         </asp:MenuItem>
