@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using OBGModel;
 using DataAccess;
+using System.Data;
 
 namespace BusinessLogic
 {
@@ -16,32 +17,37 @@ namespace BusinessLogic
             finished,
         };
 
-        public static bool AddNewOrder(Order order)
+        public static DataTable GetOrderLineByOrderId(int orderId)
         {
-            return OrderDAO.AddNewOrder(order);
+            return OrderDAO.GetOrderLineByOrderId(orderId);
         }
 
-        public static bool RemoveOrderByOrderId(int orderId)
+        public static int AddNewOrder(Order order, List<OrderLine> listOrderLine)
+        {
+            return OrderDAO.AddNewOrder(order, listOrderLine);
+        }
+
+        public static int RemoveOrderByOrderId(int orderId)
         {
             return OrderDAO.RemoveOrderByOrderId(orderId);
         }
 
-        public static bool ModifyOneOrder(Order order)
+        public static int ModifyOneOrder(Order order, List<OrderLine> listOrderLine)
         {
-            return OrderDAO.ModifyOneOrder(order);
+            return OrderDAO.ModifyOneOrder(order, listOrderLine);
         }
 
-        public static List<Order> GetAllOrder()
+        public static DataTable GetAllOrder()
         {
             return OrderDAO.GetAllOrder();
         }
 
-        public static bool UpdateOrderStatus(int orderId, int status)
+        public static int UpdateOrderStatus(int orderId, int status)
         {
             return OrderDAO.UpdateOrderStatus(orderId, status);
         }
 
-        public static List<Order> GetAllOrderByUserId(int userid)
+        public static DataTable GetAllOrderByUserId(int userid)
         {
             return OrderDAO.GetAllOrderByUserId(userid);
         }
