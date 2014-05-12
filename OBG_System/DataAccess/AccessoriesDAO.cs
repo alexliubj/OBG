@@ -9,6 +9,7 @@ using System.Data.Common;
 using System.Data.SqlClient;
 namespace DataAccess
 {
+    
     public static class AccessoriesDAO
     {
         private static DbHelper db = new DbHelper();

@@ -38,7 +38,7 @@ namespace DataAccess
             new SqlParameter("@shippingAddress", user.ShippingAddress),
             new SqlParameter("@shippingPostcode", user.ShippingPostCode),
             new SqlParameter("@firstname", user.FirstName),
-             new SqlParameter("@lastName", user.LastName)};
+            new SqlParameter("@lastName", user.LastName)};
             command.Parameters.AddRange(paras);
             return Convert.ToInt32(db.ExecuteScalar(command));
         }
@@ -155,10 +155,38 @@ namespace DataAccess
                     retUser.Email = reader.GetString(2);
                     retUser.CompanyName = reader.GetString(3);
                     retUser.Phone = reader.GetString(4);
-                    retUser.BillAddress = reader.GetString(5);
-                    retUser.BillPostCode = reader.GetString(6);
+                    if (reader.IsDBNull(5) == false)
+                    {
+                        retUser.BillAddress = reader.GetString(5);
+                    }
+                    else
+                    {
+                        retUser.BillAddress = "";
+                    }
+                    if (reader.IsDBNull(6) == false)
+                    {
+                        retUser.BillPostCode = reader.GetString(6);
+                    }
+                    else
+                    {
+                        retUser.BillPostCode = "";
+                    }
+                    if (reader.IsDBNull(7) == false)
+                    {
                     retUser.ShippingAddress = reader.GetString(7);
+                    }
+                    else
+                    {
+                        retUser.ShippingAddress = "";
+                    }
+                    if (reader.IsDBNull(8) == false)
+                    {
                     retUser.ShippingPostCode = reader.GetString(8);
+                    }
+                    else
+                    {
+                        retUser.ShippingPostCode = "";
+                    }
                     retUser.FirstName = reader.GetString(9);
                     retUser.LastName = reader.GetString(10);
                 }
@@ -213,7 +241,7 @@ namespace DataAccess
         /// <param name="userid"></param>
         /// <param name="newPassword"></param>
         /// <returns></returns>
-        public static int ResetPassword(int userid, string newPassword, string oldPassword)
+        public static int ResetPassword(int userid, string newPassword)
         {
             //需要加一个参数（oldPassword），改动PASSWORD之前，校验一下旧PASSWORD
             DbCommand command = db.GetSqlStringCommond(@"
@@ -257,17 +285,19 @@ namespace DataAccess
         public static int UpdateUserInfo(User user)
         {
             DbCommand command = db.GetSqlStringCommond(@"Update users
-                                set companyName = @companyname, phone =@phone, shippingAddress=@shippingAddress,
+                                set status = @status, userName = @userName, companyName = @companyname, phone =@phone, shippingAddress=@shippingAddress,
                                 shippingPostcode=@shippingPostcode,billingaddress = @billingaddress,
                                 billingpostcode = @billingpostcode, firstname = @firstname, lastname = @lastname
                                 where userid = @userid");
             SqlParameter[] paras = new SqlParameter[] {
-            new SqlParameter("@companyname", user.Email),
+            new SqlParameter("@status", user.Status),
+            new SqlParameter("@userName", user.UserName),
+            new SqlParameter("@companyname", user.CompanyName),
             new SqlParameter("@phone", user.Phone),
             new SqlParameter("@shippingAddress", user.ShippingAddress),
             new SqlParameter("@shippingPostcode", user.ShippingPostCode),
             new SqlParameter("@firstname", user.FirstName),
-             new SqlParameter("@lastName", user.LastName),
+            new SqlParameter("@lastName", user.LastName),
             new SqlParameter("@billingaddress", user.BillAddress),
             new SqlParameter("@billingpostcode", user.BillPostCode),
             new SqlParameter("@userid", user.Userid)};

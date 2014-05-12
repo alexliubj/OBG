@@ -12,40 +12,77 @@ namespace DataAccess
     public static class OrderDAO
     {
         private static DbHelper db = new DbHelper();
-        public static bool AddNewOrder(Order order)
+
+        //https://github.com/alexliubj/OracleClientForm/blob/master/OracleClient/DataLogic/DataAccessLayer/OrderDAO.cs
+        public static int AddNewOrder(Order order, List<OrderLine> listOrderLine)
         {
-            bool ret = false;
-            return ret;
+            return 0;
         }
 
-        public static bool RemoveOrderByOrderId(int orderId)
+        //should be update in...a transaction
+        public static int RemoveOrderByOrderId(int orderId)
         {
-            bool ret = false;
-            return ret;
+            //remove order 
+            DbCommand command = db.GetSqlStringCommond(@"delete from order where orderId =@orderId");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@orderId", orderId) };
+            command.Parameters.AddRange(paras);
+            //remove from orderline
+            DbCommand command2 = db.GetSqlStringCommond(@"delete from orderline where orderId = @orderId;");
+            SqlParameter[] paras2 = new SqlParameter[] { new SqlParameter("@orderId", orderId) };
+            command2.Parameters.AddRange(paras2);
+            db.ExecuteNonQuery(command);
+            return db.ExecuteNonQuery(command2);
         }
 
-        public static bool ModifyOneOrder(Order order)
+        public static int ModifyOneOrder(Order order, List<OrderLine> listOrderLine)
         {
-            bool ret = false;
-            return ret;
+            return 0;
         }
 
-        public static List<Order> GetAllOrder()
+        public static DataTable GetAllOrder()
         {
-            List<Order> listOrder = new List<Order>();
-            return listOrder;
+            DbCommand command = db.GetSqlStringCommond(@"SELECT [OrderId]
+                                                      ,[UserId]
+                                                      ,[OrderDate]
+                                                      ,[Status]
+                                                      ,[PO]
+                                                  FROM [Order]");
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
         }
 
-        public static bool UpdateOrderStatus(int orderId, int status)
+        public static int UpdateOrderStatus(int orderId, int status)
         {
-            bool ret = false;
-            return ret;
+            DbCommand command = db.GetSqlStringCommond(@"update [order] set [Status]=@status where orderId = @orderId");
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@orderId", orderId),
+                new SqlParameter("@status", status)};
+            command.Parameters.AddRange(paras);
+            return db.ExecuteNonQuery(command); 
         }
 
-        public static List<Order> GetAllOrderByUserId(int userid)
+
+        public static DataTable GetOrderLineByOrderId(int orderId)
         {
-            List<Order> listOrder = new List<Order>();
-            return listOrder;
+            return new DataTable();
+        }
+
+        public static DataTable GetAllOrderByUserId(int userid)
+        {
+            DbCommand command = db.GetSqlStringCommond(@"SELECT [OrderId]
+                                                      ,[UserId]
+                                                      ,[OrderDate]
+                                                      ,[Status]
+                                                      ,[PO]
+                                                  FROM [Order]
+                                                   where UserId = @UserId");
+
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@UserId", userid),
+            };
+            command.Parameters.AddRange(paras);
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
         }
     }
 }

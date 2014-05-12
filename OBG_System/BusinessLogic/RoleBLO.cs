@@ -5,33 +5,34 @@ using System.Text;
 using OBGModel;
 using DataAccess;
 
+using System.Data;
 namespace BusinessLogic
 {
     public static class RoleBLO
     {
-        public static List<Role> GetAllRoleList()
+        public static DataTable GetAllRoleList()
         {
             return RoleDAO.GetAllRoleList();
         }
 
-        public static bool DeleteOneRoleById(int roleId)
+        public static int DeleteOneRoleById(int roleId)
         {
-            return RoleDAO.DeleteOneRoleById(roleId);
+            return RoleDAO.DeleteRoleByRoleId(roleId);
         }
 
-        public static bool ModifyRoleName(int roleId, string roleName)
+        public static int ModifyRoleName(int roleId, string roleName,string description)
         {
-            return RoleDAO.ModifyRoleName(roleId, roleName);
+            return RoleDAO.ModifyRoleName(roleId, roleName, description);
         }
 
-        public static bool DeleteRoleByRoleId(int roleId)
+        public static int AddNewRole(Role role)
         {
-            return RoleDAO.DeleteOneRoleById(roleId);
+            return RoleDAO.CreateNewRole(role);
         }
 
-        public static int AddUserToRole(int userid, int roleId)
+        public static int AddUserToRole(int userid, int roleId, string des)
         {
-            return RoleDAO.AddUserToRole(userid, roleId);
+            return RoleDAO.AddUserToRole(userid, roleId, des);
         }
 
         public static Role GetRoleByUserId(int userid)
@@ -39,13 +40,13 @@ namespace BusinessLogic
             return RoleDAO.GetRoleByUserId(userid);
         }
 
-        public static bool DeleteUserFromRole(int userid, int roleId)
+        public static int DeleteUserFromRole(int userid, int roleId)
         {
             return RoleDAO.DeleteUserFromRole(userid, roleId);
         }
-        public static List<UserRole> GetAllUsersWithRole()
+        public static DataTable GetAllUsersWithRole(int roleId)
         {
-            return RoleDAO.GetAllUsersWithRole();
+            return RoleDAO.GetAllUsersWithRole(roleId);
         }
     }
 }
