@@ -14,53 +14,145 @@ namespace DataAccess
 
         private static DbHelper db = new DbHelper();
 
-        public static List<Role> GetAllRoleList()
+        #region ROLE Managements
+        //ROLE Managements
+
+        public static DataTable GetAllRoleList()
         {
-            List<Role> listRole = new List<Role>();
-            return listRole;
+            DbCommand command = db.GetSqlStringCommond(@"SELECT [RoleId]
+                                                      ,[RoleName]
+                                                      ,[Des]
+                                                  FROM [Role]");
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
         }
 
-        public static bool DeleteOneRoleById(int roleId)
+        public static int CreateNewRole(Role role)
         {
-            return true;
+            DbCommand command = db.GetSqlStringCommond(@"INSERT INTO 
+                                                            [Role]
+                                                       ([RoleName]
+                                                       ,[Des])
+                                                 VALUES
+                                                       (@RoleName
+                                                       ,@Des)");
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@RoleName", role.RoleName),
+            new SqlParameter("@Des", role.Des)};
+            command.Parameters.AddRange(paras);
+            return db.ExecuteNonQuery(command);
         }
 
-        public static bool ModifyRoleName(int roleId, string roleName)
+        public static int ModifyRoleName(int roleId, string roleName, string description)
         {
-            return true;
+            DbCommand command = db.GetSqlStringCommond(@"UPDATE [Role]
+                                           SET [RoleName] = @roleName
+                                              ,[Des] = @Des
+                                         WHERE roleId = @roleId");
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@roleId", roleId),
+            new SqlParameter("@RoleName", roleName),
+            new SqlParameter("@Des", description)};
+            command.Parameters.AddRange(paras);
+            return db.ExecuteNonQuery(command);
         }
 
-        public static bool DeleteRoleByRoleId(int roleId)
+        public static int DeleteRoleByRoleId(int roleId)
         {
-            return true;
+            DbCommand command = db.GetSqlStringCommond(@"delete from discount where roleId = @roleId");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@roleId", roleId) };
+            command.Parameters.AddRange(paras);
+            return db.ExecuteNonQuery(command);
         }
 
-        public static int AddUserToRole(int userid, int roleId)
+        #endregion ROLE Managements
+
+        //User and Role Managements
+
+        #region User and Role Managements
+
+        public static int AddUserToRole(int userid, int roleId,string des)
         {
             DbCommand command = db.GetSqlStringCommond(@"
-                            insert into userrole(roleid,userid,des) values (@roleid,@userid,'customer')");
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@roleid", roleId) , 
-            new SqlParameter("@userid",userid)};
+                            INSERT INTO [UserRole]
+                                       ([RoleId]
+                                       ,[UserId]
+                                       ,[Des])
+                                 VALUES
+                                       (@RoleId
+                                       ,@UserId
+                                       ,@Des)");
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@RoleId", roleId) , 
+            new SqlParameter("@UserId",userid),
+            new SqlParameter("@Des",des)};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
 
         public static Role GetRoleByUserId(int userid)
         {
-            Role aRole = new Role();
-            return aRole;
+            Role retRole = new Role();
+            DbCommand command = db.GetSqlStringCommond(@"
+                            select rl.roleId,rl.roleName,rl.des from
+                                userRole ur inner join role rl
+                                on ur.roleId = rl.roleId
+                                where ur.userId = @userid");
+            SqlParameter[] paras = new SqlParameter[] {
+            new SqlParameter("@userid",userid)};
+            command.Parameters.AddRange(paras);
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    retRole.RoleId = reader.GetInt32(0);
+                    retRole.RoleName = reader.GetString(1);
+                    retRole.Des = reader.GetString(2);
+                }
+            }
+            return retRole;
         }
 
-        public static bool DeleteUserFromRole(int userid, int roleId)
+
+        // haven't finish yet
+        public static int UpdateUserRole(int userId, int roleId, string des)
+        { 
+            
+            DbCommand command = db.GetSqlStringCommond(@"
+                            UPDATE  [UserRole]
+                               SET [RoleId] = @userId
+                                  ,[UserId] = @roleId
+                                  ,[Des] = @des
+                             WHERE <Search Conditions,,>");
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@userid", userId) , 
+            new SqlParameter("@roleId",roleId)};
+            command.Parameters.AddRange(paras);
+            return db.ExecuteNonQuery(command);
+
+        }
+
+        public static int DeleteUserFromRole(int userid, int roleId)
         {
-            return true;
+            DbCommand command = db.GetSqlStringCommond(@"
+                                                    DELETE [UserRole]
+                              WHERE userid=@userid and roleId = @roleId");
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@userid", userid) , 
+            new SqlParameter("@roleId",roleId)};
+            command.Parameters.AddRange(paras);
+            return db.ExecuteNonQuery(command);
         }
 
-        public static List<UserRole> GetAllUsersWithRole()
+        public static DataTable GetAllUsersWithRole(int roleId)
         {
-            List<UserRole> listUserRole = new List<UserRole>();
-            return listUserRole;
+            DbCommand command = db.GetSqlStringCommond(@"SELECT [RoleId]
+                                                      ,[DisRate]
+                                                  FROM [Discount]");
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
         }
 
+        #endregion User and Role Managements
     }
 }

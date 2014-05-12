@@ -94,7 +94,7 @@ public partial class Account_Register : System.Web.UI.Page
 
         int newId = UserBLO.Registration(newUser);
 
-        if (newId > 0 && RoleBLO.AddUserToRole(newId, 1) > 0)
+        if (newId > 0 && RoleBLO.AddUserToRole(newId, 1,"des") > 0)
         {
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                             "err_msg",
