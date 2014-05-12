@@ -4,27 +4,27 @@ using System.Linq;
 using System.Text;
 using OBGModel;
 using DataAccess;
-
+using System.Data;
 namespace BusinessLogic
 {
     public static class RegionBLO
     {
-        public static List<Shipping> GetAllShipping()
+        public static DataTable GetAllShipping()
         {
             return RegionDAO.GetAllShipping();
         }
 
-        public static bool UpdateShipping(Shipping ship)
+        public static int UpdateShipping(Shipping ship)
         {
             return RegionDAO.UpdateShipping(ship);
         }
 
-        public static bool RemoveShippingById(int shipId)
+        public static int RemoveShippingById(int shipId)
         {
             return RegionDAO.RemoveShippingById(shipId);
         }
 
-        public static bool AddNewShippping(Shipping ship)
+        public static int AddNewShippping(Shipping ship)
         {
             return RegionDAO.AddNewShippping(ship);
         }
