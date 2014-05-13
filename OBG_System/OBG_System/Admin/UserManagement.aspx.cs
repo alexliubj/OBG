@@ -25,6 +25,17 @@ public partial class Admin_Default : System.Web.UI.Page
         if (!IsPostBack)
         {
             bind();
+            for(int i = 0; i <GridView1.Rows.Count; i++ )
+            {
+                if (((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text.ToString().Trim() == "0")
+                {
+                    ((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text = "inactive";
+                }
+                else if (((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text.ToString().Trim() == "1")
+                {
+                    ((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text = "active";
+                }
+            }
         }
         
     }
