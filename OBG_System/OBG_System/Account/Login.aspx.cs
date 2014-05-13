@@ -26,6 +26,7 @@ public partial class Account_Login : System.Web.UI.Page
             if (userlogin.Us == LoginRet.UserStatus.active) //active
             {
                 Session["userID"] = userlogin.UserId;
+               // Session["userID"] = ((TextBox)(LoginUser.FindControl("UserName"))).Text;
                 Session["login"] = true;
 
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
@@ -38,7 +39,7 @@ public partial class Account_Login : System.Web.UI.Page
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                                        "err_msg",
-                                       "alert('wrong.');", true);
+                                       "alert('Sorry, Your account is not actived yet!');", true);
             }
            
         }

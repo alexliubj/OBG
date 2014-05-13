@@ -16,8 +16,8 @@ public partial class Products_wheelall : System.Web.UI.Page
         if (!IsPostBack)
             PopuLateControl();
         strProductID = Request.QueryString["ProductId"];
-        wheels = WheelsBLO.GetAllProducts();
-        lblProductId.Text = wheels.ProductId;
+       // wheels = WheelsBLO.GetAllProducts();
+        //lblProductId.Text = wheels.ProductId;
         ImgProduct.ImageUrl = wheels.Image;
 
 
