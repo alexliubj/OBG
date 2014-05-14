@@ -23,6 +23,7 @@ namespace DataAccess
                                               ,[pricing]
                                               ,[categoryId]
                                               ,[name]
+                                                ,[brand]
                                           FROM [Accessories]");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
@@ -31,12 +32,13 @@ namespace DataAccess
         public static int UpdateAccessory(Accessories acc)
         {
             DbCommand command = db.GetSqlStringCommond(@"UPDATE [Accessories]
-                                       SET [partNo] = @
-                                          ,[image] = @
-                                          ,[des] = @
-                                          ,[pricing] = @
-                                          ,[categoryId] = @
-                                          ,[name] = @
+                                       SET [partNo] = @partNo
+                                          ,[image] = @image
+                                          ,[des] = @des
+                                          ,[pricing] = @pricing
+                                          ,[categoryId] = @categoryId
+                                          ,[name] = @name
+                                          ,[brand] = @brand
                                      WHERE accId= @accId");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@partNo", acc.PartNo),
@@ -45,7 +47,8 @@ namespace DataAccess
                 new SqlParameter("@pricing",acc.Pricing),
                 new SqlParameter("@categoryId",acc.CategoryId),
                 new SqlParameter("@name",acc.Name),
-                 new SqlParameter("@accId",acc.AccId)
+                 new SqlParameter("@accId",acc.AccId),
+                 new SqlParameter("@brand",acc.Brand)
             };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
@@ -59,21 +62,24 @@ namespace DataAccess
                                                    ,[des]
                                                    ,[pricing]
                                                    ,[categoryId]
-                                                   ,[name])
+                                                   ,[name]
+                                                   ,[brand])
                                              VALUES
                                                    @partNo
                                                    ,@image
                                                    ,@des
                                                    ,@pricing
                                                    ,@categoryId
-                                                   ,@name");
+                                                   ,@name
+                                                    ,@brand");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@partNo", acc.PartNo),
                 new SqlParameter("@image",acc.Img),
                 new SqlParameter("@des",acc.Des),
                 new SqlParameter("@pricing",acc.Pricing),
                 new SqlParameter("@categoryId",acc.CategoryId),
-                new SqlParameter("@name",acc.Name)
+                new SqlParameter("@name",acc.Name),
+                new SqlParameter("@brand",acc.Brand)
             };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);

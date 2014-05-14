@@ -105,5 +105,7 @@ namespace OBGModel
             get { return categoryId; }
             set { categoryId = value; }
         }
+
+
     }
 }

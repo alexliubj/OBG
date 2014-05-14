@@ -1,39 +1,36 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ShoppingCart.aspx.cs" Inherits="Default2" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ShoppingCart.aspx.cs" Inherits="Default2" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-<center> 
-    <form id="Form1" runat="server"> <table width="500" border="0" cellspacing="0" cellpadding="0"> <tr> <td> 
-        <asp:DataGrid id="ShoppingCartDlt" runat="server" Width="500" BackColor="white" BorderColor="black" ShowFooter="false" CellPadding="3" CellSpacing="0" Font-Name="Verdana" Font-Size="8pt" HeaderStyle-BackColor="#cecfd6" AutoGenerateColumns="false" MaintainState="true"> <Columns> 
-        <asp:TemplateColumn HeaderText="Delete"> 
-        <ItemTemplate> <center> 
-        <asp:CheckBox id="chkProductID" runat="server" /> </center> 
-        </ItemTemplate> 
-        </asp:TemplateColumn> 
-        <asp:BoundColumn DataField="ProdID" HeaderText="ID" /> 
-        <asp:BoundColumn DataField="ProName" HeaderText="Product Name" /> 
-        <asp:BoundColumn DataField="UnitPrice" HeaderText="Price" /> 
-        <asp:TemplateColumn HeaderText="Quatity"> 
-        <ItemTemplate> 
-        <asp:TextBox id="CountTb" runat="server" Text='<%#DataBinder.Eval( Container.DataItem,"ProdCount" )%>'> </asp:TextBox> 
-        </ItemTemplate> </asp:TemplateColumn> 
-        <asp:BoundColumn DataField="TotalPrice" HeaderText="Price" /> </Columns> </asp:DataGrid></td> </tr> </table> <br> <table width="500" border="0" cellspacing="0" cellpadding="0">
-        <tr> 
-        <td> 
-        <asp:Button id="update" runat="server" Text="Update" CssClass="button2" /></td> 
-        <td> 
-        <input type="button" name="close2" value="Continue Shopping" onClick="window.close( ); return false; " class="button2" /></td><td>
-        <asp:Button id="CheckOut" runat="server" Text="Checkout" CssClass="button5" /> 
-        </td> <td align="right">
-        <br> 
-        <asp:Label id="label" runat="server" Width="100px" Visible="True" ForeColor="#FF8080" Height="18px"></asp:Label>
-        </td> 
-        </tr> 
-        </table> 
-        </form> 
-        </center> 
-        
-
+<asp:GridView ID="GVShoppingCart" runat="server" AutoGenerateColumns="False" SkinID="ShoppingCart"
+    Width="100%" OnRowDeleting="GVShoppingCart_RowDeleting" DataKeyNames="ProductID" OnDataBound="GVShoppingCart_DataBound">
+    <Columns>
+        <asp:BoundField DataField="ProductName" HeaderText="Product Name" />
+        <asp:BoundField DataField="AccountPrice" HeaderText="Price" />
+        <asp:BoundField DataField="Account" HeaderText="Discount" />
+        <asp:BoundField DataField="Date" HeaderText="Date" />
+        <asp:TemplateField HeaderText="QTY">
+            <ItemTemplate>
+                <asp:TextBox ID="txtCount" runat="server" Width="35px" Text='<%# Eval("Quantity") %>'></asp:TextBox>
+            </ItemTemplate>
+        </asp:TemplateField>
+        <asp:ButtonField CommandName="delete" Text="Delete" />
+    </Columns>
+</asp:GridView>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td>
+            <strong>Total：</strong></td>
+        <td>
+            <asp:Label ID="lblTatil" runat="server" Style="font-weight: bold; color: #cc0033">0</asp:Label></td>
+       <td style="text-align: right">
+            <asp:LinkButton ID="LBUpdate" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="LBUpdate_Click">Update</asp:LinkButton></td>
+        <td style="text-align: right">
+            <asp:LinkButton ID="LBRepost" runat="server" Font-Bold="True" Font-Size="11pt"  OnClick="LBRepost_Click">Continue</asp:LinkButton></td>
+        <td style="text-align: right">
+            <asp:ImageButton ID="IBTatil" runat="server" ImageUrl="~/Pictures/checkoutButton.png" OnClick="IBTatil_Click" /></td>
+    </tr>
+</table>
         </asp:Content>
 
