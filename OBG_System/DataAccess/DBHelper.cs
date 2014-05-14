@@ -13,7 +13,7 @@ namespace DataAccess
     public class DbHelper
     {
         private static string dbProviderName = @"System.Data.SqlClient";
-        private static string dbConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["OBG_Local"].ToString();
+        private static string dbConnectionString = System.Configuration.ConfigurationManager.ConnectionStrings["OBG_Remote"].ToString();
 
 
         private DbConnection connection;

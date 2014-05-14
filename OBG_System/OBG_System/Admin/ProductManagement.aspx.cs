@@ -24,7 +24,7 @@ public partial class Admin_Default : System.Web.UI.Page
             GridView3_Bind();
         }
     }
-    #region Gridview1
+    #region ViewAllWheels
     public void Gridview1_Bind()
     {
 
@@ -87,13 +87,124 @@ public partial class Admin_Default : System.Web.UI.Page
 
     }
 
+    #endregion
+
+    #region WheelDetailInformation
+
+    protected void BtnSave_Click(object sender, EventArgs e)
+    {
+        Wheels wheel = new Wheels();
+        int productID;
+        productID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
+        wheel.Bore = Bore.Text;
+        wheel.Brand = Brand.Text;
+        wheel.CategoryId = int.Parse(CategoryId.Text);
+        wheel.Finish = Finish.Text;
+        wheel.Image = Image.Text;
+        wheel.Offset = Offset.Text;
+        wheel.Onhand = Onhand.Text;
+        wheel.Pcd = Pcd.Text;
+        wheel.Price = int.Parse(Price.Text);
+        wheel.Seat = Seat.Text;
+        wheel.Size = Size.Text;
+        wheel.Style = Style.Text;
+        wheel.Weight = Weight.Text;
+
+        int update = 0;
+        update = WheelsBLO.UpdateProduct(wheel);
+
+        if (update == 1)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                         "err_msg",
+                         "alert('Wheel has been saved.');",
+                         true);
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                        "err_msg",
+                        "alert('Sorry, Saving Wheel information failed.');",
+                        true);
+        }
+    }
+    protected void BtnCancle_Click(object sender, EventArgs e)
+    {
+        wheelInformation.Visible = false;
+    }
+
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
+        int productID;
+        productID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
+        Wheels wheel = new Wheels();
+        //need method getwheelInfoByProductID
+        // wheel = WheelsBLO.getwheelInfoByProductID(productID);
 
+        Bore.Text = wheel.Bore;
+        Brand.Text = wheel.Brand;
+        CategoryId.Text = wheel.CategoryId.ToString();
+        Finish.Text = wheel.Finish;
+        Image.Text = wheel.Image;
+        Offset.Text = wheel.Offset;
+        Onhand.Text = wheel.Onhand;
+        Pcd.Text = wheel.Pcd;
+        Price.Text = wheel.Price.ToString();
+        Seat.Text = wheel.Seat;
+        Size.Text = wheel.Size;
+        Style.Text = wheel.Style;
+        Weight.Text = wheel.Weight;
+
+        wheelInformation.Visible = true;
+
+        BtnAdd.Visible = false;
+        BtnSave.Visible = true;
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+
+        Bore.Text = null;
+        Brand.Text = null;
+        CategoryId.Text = null;
+        Finish.Text = null;
+        Image.Text = null;
+        Offset.Text = null;
+        Onhand.Text = null;
+        Pcd.Text = null;
+        Price.Text = null;
+        Seat.Text = null;
+        Size.Text = null;
+        Style.Text = null;
+        Weight.Text = null;
+
+        wheelInformation.Visible = true;
+        
+        BtnAdd.Visible = true;
+        BtnSave.Visible = false;
+    }
+    protected void BtnAdd_Click(object sender, EventArgs e)
+    {
+        Wheels wheel = new Wheels();
+
+        wheel.Bore = Bore.Text;
+        wheel.Brand = Brand.Text;
+        wheel.CategoryId = int.Parse(CategoryId.Text);
+        wheel.Finish = Finish.Text;
+        wheel.Image = Image.Text;
+        wheel.Offset = Offset.Text;
+        wheel.Onhand = Onhand.Text;
+        wheel.Pcd = Pcd.Text;
+        wheel.Price = int.Parse(Price.Text);
+        wheel.Seat = Seat.Text;
+        wheel.Size = Size.Text;
+        wheel.Style = Style.Text;
+        wheel.Weight = Weight.Text;
+
+        WheelsBLO.AddNewProduct(wheel);
     }
     #endregion
 
-    #region Gridview2
+    #region ViewAllTires
     public void GridView2_Bind()
     {
 
@@ -162,7 +273,7 @@ public partial class Admin_Default : System.Web.UI.Page
     }
     #endregion
 
-    #region Gridview3
+    #region ViewAllAccessories
     public void GridView3_Bind()
     {
 
@@ -254,4 +365,5 @@ public partial class Admin_Default : System.Web.UI.Page
         }
 
     }
+
 }

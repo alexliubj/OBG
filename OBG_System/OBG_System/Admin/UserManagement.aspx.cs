@@ -168,7 +168,7 @@ public partial class Admin_Default : System.Web.UI.Page
         userSaved.ShippingPostCode = ShippingPostCode.Text;
         userSaved.BillAddress = BillingAddress.Text;
         userSaved.BillPostCode = BillingPostCode.Text;
-
+        
         int update = 0;
         update = UserBLO.UpdateUserInfo(userSaved);
 
@@ -209,11 +209,42 @@ public partial class Admin_Default : System.Web.UI.Page
         BillingAddress.Text = user.BillAddress;
         BillingPostCode.Text = user.BillPostCode;
         userInformation.Visible = true;
+        PasswordLabel.Visible = false;
+        Password.Visible = false;
+        ConfirmPasswordLabel.Visible = false;
+        ConfirmPassword.Visible = false;
+        BtnAdd.Visible = false;
+        BtnSave.Visible = true;
     }
     protected void activeButton_Click(object sender, EventArgs e)
     {
         int userID = Convert.ToInt32(GridView1.SelectedValue.ToString());
         UserBLO.AdminActiveUser(userID);
         Response.Redirect("UserManagement.aspx");
+    }
+    protected void btnAddUser_Click(object sender, EventArgs e)
+    {
+        UserName.ReadOnly = false;
+        UserName.Text = null;
+        Email.Text = null;
+        FirstName.Text = null;
+        LastName.Text = null;
+        Company.Text = null;
+        Phone.Text = null;
+        ShippingAddress.Text = null;
+        ShippingPostCode.Text = null;
+        BillingAddress.Text = null;
+        BillingPostCode.Text = null;
+        userInformation.Visible = true;
+        PasswordLabel.Visible = true;
+        Password.Visible = true;
+        ConfirmPasswordLabel.Visible = true;
+        ConfirmPassword.Visible = true;
+        BtnAdd.Visible = true;
+        BtnSave.Visible = false;
+    }
+    protected void BtnAdd_Click(object sender, EventArgs e)
+    {
+        // add function
     }
 }
