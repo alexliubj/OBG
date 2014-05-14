@@ -3,9 +3,13 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-    <asp:GridView ID="GridView3" runat="server"  GridLines="None" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" ForeColor="#333333"  OnSelectedIndexChanged="GridView3_SelectedIndexChanged"
+    <asp:GridView ID="GridView3" runat="server"  GridLines="None" 
+        AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" 
+        DataKeyNames="AccId" ForeColor="#333333"  OnSelectedIndexChanged="GridView3_SelectedIndexChanged"
           OnRowEditing="GridView3_RowEditing"
-        OnRowUpdating="GridView3_RowUpdating" OnRowCancelingEdit="GridView3_RowCancelingEdit" OnRowDataBound="GridView3_RowDataBound" Visible="False">
+        OnRowUpdating="GridView3_RowUpdating" 
+        OnRowCancelingEdit="GridView3_RowCancelingEdit" 
+        OnRowDataBound="GridView3_RowDataBound">
     <AlternatingRowStyle BackColor="White" />
             <Columns>
             <asp:BoundField DataField="AccId" HeaderText="Acc ID" InsertVisible="False" ReadOnly="True" SortExpression="AccId" />

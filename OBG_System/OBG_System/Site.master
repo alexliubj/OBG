@@ -35,7 +35,7 @@
 
 
              <div class="shoppingcart" align=right>
-                <a href="Account/ShoppingCart.aspx" ><img src="Pictures/shoppingcart.png" style="height: 52px; width: 84px" /></a></div>
+                <a href="Account/ShoppingCart.aspx" ><img src="~/Pictures/shoppingcart.png" style="height: 52px; width: 84px" /></a></div>
 
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
