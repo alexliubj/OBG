@@ -67,9 +67,9 @@ namespace BusinessLogic
         /// </summary>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public static int AdminActiveUser(int userid)
+        public static int AdminActiveUserStatus(int userid , int status)
         {
-            return UserDAO.AdminActiveUser(userid);
+            return UserDAO.AdminActiveUser(userid, status);
         }
 
         /// <summary>

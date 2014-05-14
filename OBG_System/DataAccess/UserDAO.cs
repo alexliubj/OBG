@@ -200,11 +200,13 @@ namespace DataAccess
         /// </summary>
         /// <param name="userid"></param>
         /// <returns></returns>
-        public static int AdminActiveUser(int userid)
+        public static int AdminActiveUser(int userid, int status)
         {
             DbCommand command = db.GetSqlStringCommond(@"
-                            update users set status = 1 where userid= @userid");
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
+                            update users set status = @userstatus where userid= @userid");
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@userid", userid) ,
+            new SqlParameter("@userstatus",status)};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
 
