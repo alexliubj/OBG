@@ -32,6 +32,7 @@
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
                         <asp:MenuItem NavigateUrl="Home.aspx" Text="Home"/>
+                        <asp:MenuItem NavigateUrl="CategoryManagement.aspx" Text="Categroy"/>
                         <asp:MenuItem NavigateUrl="DiscountManagement.aspx" Text="Discount Management"/>
                         <asp:MenuItem NavigateUrl="PermissionManagement.aspx" Text="Permissions"/>
                         <asp:MenuItem NavigateUrl="ProductManagement.aspx" Text="Products"/>
