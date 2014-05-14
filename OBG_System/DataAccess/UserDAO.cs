@@ -209,7 +209,6 @@ namespace DataAccess
             new SqlParameter("@userstatus",status)};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
-
         }
 
         /// <summary>
