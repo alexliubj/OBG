@@ -56,5 +56,13 @@ namespace OBGModel
             get { return name; }
             set { name = value; }
         }
+        private string brand;
+
+        public string Brand
+        {
+            get { return brand; }
+            set { brand = value; }
+        }
+
     }
 }

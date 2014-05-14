@@ -22,6 +22,7 @@ namespace DataAccess
                                                       ,[pricing]
                                                       ,[season]
                                                       ,[categoryId]
+                                                      ,[brand]
                                                   FROM [Tires]");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
@@ -36,7 +37,7 @@ namespace DataAccess
                                                        ,[rimHeight]
                                                        ,[pricing]
                                                        ,[season]
-                                                       ,[categoryId])
+                                                       ,[categoryId],[brand])
                                                  VALUES
                                                        (@partNo
                                                        ,@size
@@ -44,7 +45,7 @@ namespace DataAccess
                                                        ,@rimHeight
                                                        ,@pricing
                                                        ,@season
-                                                       ,@categoryId)");
+                                                       ,@categoryId,@brand)");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@partNo", tire.PartNo),
                 new SqlParameter("@size",tire.Size),
@@ -52,7 +53,8 @@ namespace DataAccess
                 new SqlParameter("@rimHeight",tire.Height),
                 new SqlParameter("@pricing",tire.Pricing),
                 new SqlParameter("@season",tire.Season),
-                new SqlParameter("@categoryId",tire.CategoryId)
+                new SqlParameter("@categoryId",tire.CategoryId),
+                new SqlParameter("@brand",tire.Brand)
             };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
@@ -76,6 +78,7 @@ namespace DataAccess
                                       ,[pricing] = @pricing
                                       ,[season] = @season
                                       ,[categoryId] = @categoryId
+                                      ,[brand] = @brand
                                  WHERE tireId = @tireId)");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@partNo", tire.PartNo),
@@ -85,7 +88,8 @@ namespace DataAccess
                 new SqlParameter("@pricing",tire.Pricing),
                 new SqlParameter("@season",tire.Season),
                 new SqlParameter("@categoryId",tire.CategoryId),
-                new SqlParameter("@tireId",tire.TireId)
+                new SqlParameter("@tireId",tire.TireId),
+                new SqlParameter("@brand",tire.Brand)
             };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);

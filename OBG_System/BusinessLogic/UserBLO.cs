@@ -52,6 +52,31 @@ namespace BusinessLogic
             return UserDAO.AdminLogin(username, password);
         }
 
+
+        public static bool CheckUserNameExists(string username)
+        {
+            if (UserDAO.CheckUserNameExists(username) <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public static bool CheckEmailExists(string email)
+        {
+            if (UserDAO.CheckEmailExists(email) <= 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         /// <summary>
         /// Get user information by userid
         /// </summary>

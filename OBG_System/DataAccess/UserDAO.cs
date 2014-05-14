@@ -43,6 +43,7 @@ namespace DataAccess
             return Convert.ToInt32(db.ExecuteScalar(command));
         }
 
+
         /// <summary>
         /// Client login
         /// </summary>
@@ -235,6 +236,24 @@ namespace DataAccess
 
         }
 
+        public static int CheckUserNameExists(string username)
+        {
+            DbCommand command = db.GetSqlStringCommond(@"
+                            select count(*) from users where username = @username");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@username", username) };
+            command.Parameters.AddRange(paras);
+            return (int)db.ExecuteScalar(command);
+
+        }
+
+        public static int CheckEmailExists(string email)
+        {
+            DbCommand command = db.GetSqlStringCommond(@"
+                            select count(*) from users where email = @email");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@email", email) };
+            command.Parameters.AddRange(paras);
+            return (int)db.ExecuteScalar(command);
+        }
 
         /// <summary>
         /// reset password
