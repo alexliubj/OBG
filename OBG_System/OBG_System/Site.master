@@ -20,7 +20,7 @@
             </div>
 
             <div class="loginDisplay">
-                <%--<asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
                     <AnonymousTemplate>
                         [ <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">Log In</a> ]
                     </AnonymousTemplate>
@@ -28,29 +28,27 @@
                         Welcome <span class="bold"><asp:LoginName ID="HeadLoginName" runat="server" /></span>!
                         [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/"/> ]
                     </LoggedInTemplate>
-                </asp:LoginView>--%>
-               <asp:Label ID="lblWelcome" runat="server" Text="Welcome!"></asp:Label>
-                <asp:Button ID="btnLogin" runat="server" Text="Error" OnClick="btnLogin_Click" />
+                </asp:LoginView>
             </div>
 
 
              <div class="shoppingcart" align=right>
-                <a href="Account/ShoppingCart.aspx" ><img src="Pictures/shoppingcart.png" style="height: 52px; width: 84px" /></a></div>
+                <a href="Account/ShoppingCart.aspx" ><img src="~/Pictures/shoppingcart.png" style="height: 52px; width: 84px" /></a></div>
 
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
                         <asp:MenuItem NavigateUrl="Default.aspx" Text="Home"></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="Products/Wheels.aspx" Text="Wheels">
-                        <asp:MenuItem NavigateUrl="Products/WheelAll.aspx" Text="View All"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="Products/ViewByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Products/WheelAll.aspx" Text="View All"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Products/ViewByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="Tires.aspx" Text="Tires">
-                        <asp:MenuItem NavigateUrl="Products/TireAll.aspx" Text="View All"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="Products/TireByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Products/TireAll.aspx" Text="View All"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Products/TireByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="Accessories.aspx" Text="Accessories">
-                        <asp:MenuItem NavigateUrl="Products/AccAll.aspx" Text="View All"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Products/AccAll.aspx" Text="View All"></asp:MenuItem>
                         </asp:MenuItem>
                          <asp:MenuItem NavigateUrl="Account/UserCenter.aspx" Text="User Center">
                         </asp:MenuItem>

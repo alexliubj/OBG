@@ -25,7 +25,7 @@ public partial class Default2 : System.Web.UI.Page
         }
 
         if (!IsPostBack)
-        { 
+        {
             //test purpose
             //user.UserName = "neobility3";
             //user.FirstName = "neo";

@@ -27,7 +27,7 @@ public partial class _Default : System.Web.UI.Page
         
         User aUser =new User();
         //active a user
-        ret = UserBLO.AdminActiveUser(2);
+        ret = UserBLO.AdminActiveUserStatus(1, 2);
         //forget password
         ret = UserBLO.ForgetPasswordRequest(@"alexliubo@gmail.com");
         
