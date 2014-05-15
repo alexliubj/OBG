@@ -3,6 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+<<<<<<< HEAD
+=======
 <table width="95%" border="0" align="center" cellpadding="3" cellspacing="1" bgcolor="#999999">
           <tr bgcolor="#C7D3E6"> 
             <td height="28" align="center" bgcolor="#F7F7F7">ProductID</td>
@@ -37,5 +39,6 @@
             <td><asp:Label ID="lblQTY" runat="server"></asp:Label></td>
           </tr>
 </table>
+>>>>>>> parent of e52e9f9... update wheel, tire, accessory pages
 </asp:Content>
 

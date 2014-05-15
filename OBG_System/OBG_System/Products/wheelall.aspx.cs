@@ -4,6 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+<<<<<<< HEAD
+
+public partial class Products_wheelall : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+=======
 using OBGModel;
 using BusinessLogic;
 
@@ -26,5 +34,6 @@ public partial class Products_wheelall : System.Web.UI.Page
     private void PopuLateControl()
     {
         throw new NotImplementedException();
+>>>>>>> parent of e52e9f9... update wheel, tire, accessory pages
     }
 }

@@ -4,19 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using OBGModel;
-using BusinessLogic;
-using System.Data;
-using System.Data.SqlClient;
 
 public partial class Admin_Default : System.Web.UI.Page
 {
-    private DataSet wheelsDataSet;
-    private DataSet tiresDataSet;
-    private DataSet accessoriesDataSet;
-
     protected void Page_Load(object sender, EventArgs e)
     {
+<<<<<<< HEAD
+=======
         if (!IsPostBack)
         {
             Gridview1_Bind();
@@ -252,6 +246,7 @@ public partial class Admin_Default : System.Web.UI.Page
             GridView1.Visible = false;
             GridView2.Visible = false;
         }
+>>>>>>> parent of e52e9f9... update wheel, tire, accessory pages
 
     }
 }
