@@ -41,5 +41,17 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
         }
     }
 
-   
+
+    protected void LBUpdate_Click(object sender, EventArgs e)
+    {
+
+    }
+    protected void LBRepost_Click(object sender, EventArgs e)
+    {
+
+    }
+    protected void IBTatil_Click(object sender, ImageClickEventArgs e)
+    {
+
+    }
 }
