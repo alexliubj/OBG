@@ -13,16 +13,8 @@ public partial class Admin_Default : System.Web.UI.Page
 {
     private DataSet userDataSet;
 
-    //SqlConnection sqlcon;
-    //SqlCommand sqlcom;
-    //string strCon = "Data Source=(local);Database=数据库名;Uid=帐号;Pwd=密码";
-
-
     protected void Page_Load(object sender, EventArgs e)
     {
-        //DataTable usersTable = UserBLO.GetAllUsers();
-        //dataSet = new DataSet();
-        //dataSet.Tables.Add(usersTable);
         if (!IsPostBack)
         {
             bind();
@@ -48,12 +40,6 @@ public partial class Admin_Default : System.Web.UI.Page
     }
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        //string sqlstr = "delete from 表 where id='" + GridView1.DataKeys[e.RowIndex].Value.ToString() + "'";
-        //sqlcon = new SqlConnection(strCon);
-        //sqlcom = new SqlCommand(sqlstr, sqlcon);
-        //sqlcon.Open();
-        //sqlcom.ExecuteNonQuery();
-        //sqlcon.Close();
         int userID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
         UserBLO.RemoveUserById(userID);
         bind();
@@ -61,18 +47,6 @@ public partial class Admin_Default : System.Web.UI.Page
 
     protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
-        //sqlcon = new SqlConnection(strCon);
-        //string sqlstr = "update 表 set 字段1='"
-        //    + ((TextBox)(GridView1.Rows[e.RowIndex].Cells[1].Controls[0])).Text.ToString().Trim() + "',字段2='"
-        //    + ((TextBox)(GridView1.Rows[e.RowIndex].Cells[2].Controls[0])).Text.ToString().Trim() + "',字段3='"
-        //    + ((TextBox)(GridView1.Rows[e.RowIndex].Cells[3].Controls[0])).Text.ToString().Trim() + "' where id='"
-        //    + GridView1.DataKeys[e.RowIndex].Value.ToString() + "'";
-        //sqlcom = new SqlCommand(sqlstr, sqlcon);
-        //sqlcon.Open();
-        //sqlcom.ExecuteNonQuery();
-        //sqlcon.Close();
-        //GridView1.EditIndex = -1;
-        //bind();
         int userID = Convert.ToInt32(GridView1.Rows[e.RowIndex].Cells[0].Text);
         User user = UserBLO.GetUserInfoWithUserId(userID);
         user.Userid = userID;
@@ -94,12 +68,6 @@ public partial class Admin_Default : System.Web.UI.Page
 
     public void bind()
     {
-        //string sqlstr = "select * from 表";
-        //sqlcon = new SqlConnection(strCon);
-        //SqlDataAdapter myda = new SqlDataAdapter(sqlstr, sqlcon);
-        //DataSet myds = new DataSet();
-        //sqlcon.Open();
-        //myda.Fill(myds, "表");
 
         DataTable usersTable = UserBLO.GetAllUsers();
         userDataSet = new DataSet();
@@ -107,7 +75,7 @@ public partial class Admin_Default : System.Web.UI.Page
 
         GridView1.DataSource = userDataSet;
         GridView1.DataKeyNames = new string[] { "userid" };
-        GridView1.DataKeyNames = new string[] { "userid" };//主键
+        GridView1.DataKeyNames = new string[] { "userid" };
         GridView1.DataBind();
     }
 
@@ -244,7 +212,7 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void activeButton_Click(object sender, EventArgs e)
     {
         int userID = Convert.ToInt32(GridView1.SelectedValue.ToString());
-       // UserBLO.AdminActiveUser(userID);
+        UserBLO.AdminActiveUserStatus(userID, 1);
         Response.Redirect("UserManagement.aspx");
     }
     protected void btnAddUser_Click(object sender, EventArgs e)
@@ -270,7 +238,29 @@ public partial class Admin_Default : System.Web.UI.Page
     }
     protected void BtnAdd_Click(object sender, EventArgs e)
     {
-        // add function
-       // sqlcon.Close();
+        User userSaved = new User();
+
+        userSaved.UserName = UserName.Text;
+        userSaved.Email = Email.Text;
+        userSaved.FirstName = FirstName.Text;
+        userSaved.LastName = LastName.Text;
+        userSaved.CompanyName = Company.Text;
+        userSaved.Phone = Phone.Text;
+        userSaved.ShippingAddress = ShippingAddress.Text;
+        userSaved.ShippingPostCode = ShippingPostCode.Text;
+        userSaved.BillAddress = BillingAddress.Text;
+        userSaved.BillPostCode = BillingPostCode.Text;
+        userSaved.Userpwd = Password.Text;
+
+        int newId = UserBLO.Registration(userSaved);
+
+        if (newId > 0 && RoleBLO.AddUserToRole(newId, 1, "des") > 0)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                            "err_msg",
+                            "alert('success.');", true);
+            Response.Redirect("UserManagement.aspx");
+            //add To role
+        }
     }
 }

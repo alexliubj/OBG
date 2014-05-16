@@ -24,9 +24,9 @@ namespace DataAccess
         public static int Registration(User user)
         {
             DbCommand command = db.GetSqlStringCommond(@"insert into users
-                                (userpwd,username,status,email,companyname,phone,shippingAddress,shippingPostcode
+                                (userpwd,username,status,email,companyname,phone,shippingAddress,shippingPostcode,billingaddress,billingpostcode
                                 ,firstname,lastName)
-                                values (@userpwd,@username,@status,@email,@companyname,@phone,@shippingAddress,@shippingPostcode
+                                values (@userpwd,@username,@status,@email,@companyname,@phone,@shippingAddress,@shippingPostcode,@billingaddress,@billingpostcode
                                 ,@firstname,@lastName); Select @@IDENTITY");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@userpwd", DAUtils.MD5(user.Userpwd)),
@@ -37,6 +37,8 @@ namespace DataAccess
             new SqlParameter("@phone", user.Phone),
             new SqlParameter("@shippingAddress", user.ShippingAddress),
             new SqlParameter("@shippingPostcode", user.ShippingPostCode),
+            new SqlParameter("@billingaddress", user.BillAddress),
+            new SqlParameter("@billingpostcode", user.BillPostCode),
             new SqlParameter("@firstname", user.FirstName),
             new SqlParameter("@lastName", user.LastName)};
             command.Parameters.AddRange(paras);
