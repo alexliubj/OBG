@@ -9,14 +9,56 @@ using System.Data.SqlClient;
 
 namespace DataAccess
 {
+
+    //should be change to transaction 
     public static class OrderDAO
     {
         private static DbHelper db = new DbHelper();
 
-        //https://github.com/alexliubj/OracleClientForm/blob/master/OracleClient/DataLogic/DataAccessLayer/OrderDAO.cs
         public static int AddNewOrder(Order order, List<OrderLine> listOrderLine)
         {
-            return 0;
+              DbCommand command = db.GetSqlStringCommond(@"INSERT INTO [Order]
+                                                       ([UserId]
+                                                       ,[OrderDate]
+                                                       ,[Status]
+                                                       ,[PO])
+                                                 VALUES
+                                                       (@userId
+                                                       ,@datetime
+                                                       ,@status
+                                                       ,@PO);Select @@IDENTITY;");
+
+            SqlParameter[] paras = new SqlParameter[] { 
+            new SqlParameter("@userId", order.UserId),
+            new SqlParameter("@datetime", order.OrderDate),
+            new SqlParameter("@status", order.Status),
+            new SqlParameter("@PO", order.PO)};
+            command.Parameters.AddRange(paras);
+            int newOrderId = Convert.ToInt32(db.ExecuteScalar(command));
+            if(newOrderId >0)
+            {
+                foreach(OrderLine line in listOrderLine)
+                {
+                    DbCommand command2 = db.GetSqlStringCommond(@"INSERT INTO [OrderLine]
+                                               ([ProductId]
+                                               ,[Qty]
+                                               ,[DiscountRate]
+                                               ,[OrderId])
+                                         VALUES
+                                               (@ProductId
+                                               ,@Qty
+                                               ,@DiscountRate
+                                               ,@OrderId");
+            SqlParameter[] paras2 = new SqlParameter[] { 
+                new SqlParameter("@ProductId", line.OrderId),
+                new SqlParameter("@Qty", line.Qty),
+            new SqlParameter("@DiscountRate", line.DiscountRate),
+                new SqlParameter("@OrderId", newOrderId)};
+            command.Parameters.AddRange(paras2);
+            db.ExecuteNonQuery(command2); 
+                }
+            }
+            return newOrderId;
         }
 
         //should be update in...a transaction
@@ -36,7 +78,42 @@ namespace DataAccess
 
         public static int ModifyOneOrder(Order order, List<OrderLine> listOrderLine)
         {
-            return 0;
+            DbCommand command = db.GetSqlStringCommond(@"UPDATE [Order]
+                                               SET [UserId] = @userId
+                                                  ,[OrderDate] = @datetime
+                                                  ,[Status] = @status
+                                                  ,[PO] = @PO
+                                             WHERE OrderId=@OrderId");
+
+            SqlParameter[] paras = new SqlParameter[] { 
+            new SqlParameter("@userId", order.UserId),
+            new SqlParameter("@datetime", order.OrderDate),
+            new SqlParameter("@status", order.Status),
+            new SqlParameter("@PO", order.PO),
+             new SqlParameter("@OrderId", order.OrderId)
+            };
+            command.Parameters.AddRange(paras);
+            int newOrderId = Convert.ToInt32(db.ExecuteScalar(command));
+            if (newOrderId > 0)
+            {
+                foreach (OrderLine line in listOrderLine)
+                {
+                    DbCommand command2 = db.GetSqlStringCommond(@"UPDATE [OrderLine]
+                                           SET [ProductId] = @ProductId
+                                              ,[Qty] = @Qty
+                                              ,[DiscountRate] = @DiscountRate
+                                         WHERE OrderId=@OrderId
+                                        ");
+                    SqlParameter[] paras2 = new SqlParameter[] { 
+                new SqlParameter("@ProductId", line.OrderId),
+                new SqlParameter("@Qty", line.Qty),
+            new SqlParameter("@DiscountRate", line.DiscountRate),
+                new SqlParameter("@OrderId", newOrderId)};
+                    command.Parameters.AddRange(paras2);
+                    db.ExecuteNonQuery(command2);
+                }
+            }
+            return newOrderId;
         }
 
         public static DataTable GetAllOrder()
@@ -61,10 +138,25 @@ namespace DataAccess
             return db.ExecuteNonQuery(command); 
         }
 
-
+//        select o.orderid, o.orderdate, o.customerid,c.custfname, 
+//c.custlname, sum( ol.unitprice * ol.quantity) as amount,o.DISCOUNT "
+//                                    + " from orders o"
+//                                    + " inner join orderline ol"
+//                                    + " on o.orderid = ol.orderid"
+//                                    + " inner join customers c"
+//                                    + " on o.customerid = c.customerid";
         public static DataTable GetOrderLineByOrderId(int orderId)
         {
-            return new DataTable();
+            DbCommand command = db.GetSqlStringCommond(@"select o.orderId,o.OrderDate,o.status,o.UserId,o.PO
+                                                from [Order] o inner join OrderLine ol
+                                                on o.orderId = ol.OrderId and OrderId = @OrderId");
+
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@OrderId", orderId),
+            };
+            command.Parameters.AddRange(paras);
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
         }
 
         public static DataTable GetAllOrderByUserId(int userid)

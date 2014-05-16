@@ -24,9 +24,9 @@ namespace DataAccess
         public static int Registration(User user)
         {
             DbCommand command = db.GetSqlStringCommond(@"insert into users
-                                (userpwd,username,status,email,companyname,phone,shippingAddress,shippingPostcode
+                                (userpwd,username,status,email,companyname,phone,shippingAddress,shippingPostcode,billingaddress,billingpostcode
                                 ,firstname,lastName)
-                                values (@userpwd,@username,@status,@email,@companyname,@phone,@shippingAddress,@shippingPostcode
+                                values (@userpwd,@username,@status,@email,@companyname,@phone,@shippingAddress,@shippingPostcode,@billingaddress,@billingpostcode
                                 ,@firstname,@lastName); Select @@IDENTITY");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@userpwd", DAUtils.MD5(user.Userpwd)),
@@ -37,6 +37,8 @@ namespace DataAccess
             new SqlParameter("@phone", user.Phone),
             new SqlParameter("@shippingAddress", user.ShippingAddress),
             new SqlParameter("@shippingPostcode", user.ShippingPostCode),
+            new SqlParameter("@billingaddress", user.BillAddress),
+            new SqlParameter("@billingpostcode", user.BillPostCode),
             new SqlParameter("@firstname", user.FirstName),
             new SqlParameter("@lastName", user.LastName)};
             command.Parameters.AddRange(paras);
@@ -347,6 +349,25 @@ namespace DataAccess
             DbCommand command = db.GetSqlStringCommond("select * from users");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
+        }
+
+        /// <summary>
+        /// Update user passwor with old user password
+        /// </summary>
+        /// <param name="oldPwd"></param>
+        /// <param name="newPwd"></param>
+        /// <param name="userid"></param>
+        /// <returns></returns>
+        public static int UpdatePassword(string oldPwd, string newPwd, int userid)
+        {
+            DbCommand command = db.GetSqlStringCommond(@"update users set userPwd = @newPwd where 
+                                                userId = @userId and userPwd = @oldPwd");
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@userId", userid),
+            new SqlParameter("@newPwd", DAUtils.MD5(newPwd)),
+            new SqlParameter("@oldPwd", DAUtils.MD5(oldPwd))};
+            command.Parameters.AddRange(paras);
+            return db.ExecuteNonQuery(command);
         }
     }
 }

@@ -10,10 +10,12 @@ using BusinessLogic;
 public partial class Account_Login : System.Web.UI.Page
 {
     User newUser = new User();
+
     protected void Page_Load(object sender, EventArgs e)
     {
         RegisterHyperLink.NavigateUrl = "Register.aspx?ReturnUrl=" + HttpUtility.UrlEncode(Request.QueryString["ReturnUrl"]);
     }
+
     protected void LoginButton_Click(object sender, EventArgs e)
     {
         newUser.UserName = LoginUser.UserName;
@@ -38,7 +40,7 @@ public partial class Account_Login : System.Web.UI.Page
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                                        "err_msg",
-                                       "alert('wrong.');", true);
+                                       "alert('Sorry, Your account is not actived yet.');", true);
             }
            
         }

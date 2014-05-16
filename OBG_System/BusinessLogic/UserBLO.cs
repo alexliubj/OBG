@@ -19,6 +19,11 @@ namespace BusinessLogic
             return UserDAO.Registration(user);
         }
 
+        public static int UpdatePassword(string oldPwd, string newPwd, int userid)
+        {
+            return UserDAO.UpdatePassword(oldPwd, newPwd, userid);
+        }
+
         /// <summary>
         /// Admin register a New user
         /// </summary>
