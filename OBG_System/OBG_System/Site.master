@@ -34,11 +34,11 @@
                     <Items>
                         <asp:MenuItem NavigateUrl="Default.aspx" Text="Home"></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="Products/Wheels.aspx" Text="Wheels">
-                        <asp:MenuItem NavigateUrl="~/Products/WheelAll.aspx" Text="View All"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Products/WheelsAll.aspx" Text="View All"></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/Products/ViewByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="Tires.aspx" Text="Tires">
-                        <asp:MenuItem NavigateUrl="~/Products/TireAll.aspx" Text="View All"></asp:MenuItem>
+                        <asp:MenuItem NavigateUrl="~/Products/TiresAll.aspx" Text="View All"></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/Products/TireByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
                         </asp:MenuItem>
                         <asp:MenuItem NavigateUrl="Accessories.aspx" Text="Accessories">
