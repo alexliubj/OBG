@@ -350,5 +350,17 @@ namespace DataAccess
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
+
+        public static int UpdatePassword(string oldPwd, string newPwd, int userid)
+        {
+            DbCommand command = db.GetSqlStringCommond(@"update users set userPwd = @newPwd where 
+                                                userId = @userId and userPwd = @oldPwd");
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@userId", userid),
+            new SqlParameter("@newPwd", newPwd),
+            new SqlParameter("@oldPwd", oldPwd)};
+            command.Parameters.AddRange(paras);
+            return db.ExecuteNonQuery(command);
+        }
     }
 }
