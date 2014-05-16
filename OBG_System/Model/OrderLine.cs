@@ -28,12 +28,12 @@ namespace OBGModel
             get { return discountRate; }
             set { discountRate = value; }
         }
-        private int OrderId;
+        private int orderId;
 
-        public int OrderId1
+        public int OrderId
         {
-            get { return OrderId; }
-            set { OrderId = value; }
+            get { return orderId; }
+            set { orderId = value; }
         }
     }
 }

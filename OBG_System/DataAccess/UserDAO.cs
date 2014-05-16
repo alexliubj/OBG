@@ -351,14 +351,21 @@ namespace DataAccess
             return dt;
         }
 
+        /// <summary>
+        /// Update user passwor with old user password
+        /// </summary>
+        /// <param name="oldPwd"></param>
+        /// <param name="newPwd"></param>
+        /// <param name="userid"></param>
+        /// <returns></returns>
         public static int UpdatePassword(string oldPwd, string newPwd, int userid)
         {
             DbCommand command = db.GetSqlStringCommond(@"update users set userPwd = @newPwd where 
                                                 userId = @userId and userPwd = @oldPwd");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@userId", userid),
-            new SqlParameter("@newPwd", newPwd),
-            new SqlParameter("@oldPwd", oldPwd)};
+            new SqlParameter("@newPwd", DAUtils.MD5(newPwd)),
+            new SqlParameter("@oldPwd", DAUtils.MD5(oldPwd))};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
