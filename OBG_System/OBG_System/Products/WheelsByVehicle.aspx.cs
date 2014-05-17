@@ -4,11 +4,90 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using BusinessLogic;
+using System.Data;
+
 
 public partial class Products_viewByVehicle : System.Web.UI.Page
 {
+    private DataSet wheelsDataSet;
     protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            Gridview4_Bind();
+            DataListDepartMent.DataSource = CategoryBLO.GetAllCategory();
+            DataListDepartMent.DataBind();
+            //PopuControl();
+        }
+
+    }
+
+    private void Gridview4_Bind()
+    {
+
+        DataTable wheelsAll = WheelsBLO.GetAllProducts();
+        wheelsDataSet = new DataSet();
+        wheelsDataSet.Tables.Add(wheelsAll);
+
+        GridView4.DataSource = wheelsDataSet;
+        GridView4.DataKeyNames = new string[] { "ProductId" };
+        GridView4.DataBind();
+    }
+    protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+    {
+        GridView4.EditIndex = e.NewEditIndex;
+        Gridview4_Bind();
+
+    }
+
+    protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        int productID = Convert.ToInt32(GridView4.DataKeys[e.RowIndex].Value.ToString());
+        WheelsBLO.DeleteProductById(productID);
+        Gridview4_Bind();
+    }
+
+    protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    {
+        GridView4.EditIndex = -1;
+        Gridview4_Bind();
+    }
+
+    protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+        GridView4.EditIndex = -1;
+        Gridview4_Bind();
+    }
+
+    protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
 
     }
+
+    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+
+    //private void Gridview1_Bind()
+    //{
+    //    throw new NotImplementedException();
+    //}
+
+    private void PopuLateControl()
+    {
+        throw new NotImplementedException();
+    }
+    //protected void PopuControl()
+    //{
+    //    string strQuestring = Request.QueryString["Brand"];
+    //    if (strQuestring != null)
+    //    {
+    //        DataListCateGory.DataSource = CategoryBLO.GetAllCategory();
+    //        DataListCateGory.DataBind();
+            
+    //    }
+    //}
 }
