@@ -59,7 +59,7 @@ namespace DataAccess
 
         public static int DeleteRoleByRoleId(int roleId)
         {
-            DbCommand command = db.GetSqlStringCommond(@"delete from discount where roleId = @roleId");
+            DbCommand command = db.GetSqlStringCommond(@"delete from role where roleId = @roleId");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@roleId", roleId) };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
@@ -143,12 +143,15 @@ namespace DataAccess
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
-
+        //problem
         public static DataTable GetAllUsersWithRole(int roleId)
         {
-            DbCommand command = db.GetSqlStringCommond(@"SELECT [RoleId]
-                                                      ,[DisRate]
-                                                  FROM [Discount]");
+            DbCommand command = db.GetSqlStringCommond(@"SELECT [userid]
+                                                      ,[des]
+                                                  FROM [UserRole]
+                                                  WHERE roleid=@roleid");
+            SqlParameter[] paras = new SqlParameter[] { 
+            new SqlParameter("@roleId",roleId)};
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }

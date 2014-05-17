@@ -335,12 +335,14 @@ public partial class Admin_Default : System.Web.UI.Page
             GridView2.Visible = true;
             GridView1.Visible = false;
             GridView3.Visible = false;
+            wheelInformation.Visible = false;
         }
         if (e.Item.Text == "Accessories")
         {
             GridView3.Visible = true;
             GridView1.Visible = false;
             GridView2.Visible = false;
+            wheelInformation.Visible = false;
         }
 
     }

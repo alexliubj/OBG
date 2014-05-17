@@ -57,7 +57,7 @@ AutoEventWireup="true" CodeFile="UserManagement.aspx.cs" Inherits="Admin_Default
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" />
-            <asp:TemplateField HeaderText="Active">
+            <asp:TemplateField HeaderText="Change Status">
                 <ItemTemplate>
                     <asp:Button ID="activeButton" runat="server" CommandName="Active" Text="Active"
                         OnClick="activeButton_Click" OnClientClick="return confirm('Are you sure you want to active this user?');" />

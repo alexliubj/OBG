@@ -21,7 +21,7 @@ namespace OBGModel
             get { return roleId; }
             set { roleId = value; }
         }
-        private int userId;
+
 
         private string username;
 
@@ -38,6 +38,7 @@ namespace OBGModel
             set { rolename = value; }
         }
 
+        private int userId;
         public int UserId
         {
             get { return userId; }

@@ -1,8 +1,7 @@
-﻿
-<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminSite.master" 
-AutoEventWireup="true" CodeFile="ProductManagement.aspx.cs" Inherits="Admin_Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminSite.master"
+    AutoEventWireup="true" CodeFile="ProductManagement.aspx.cs" Inherits="Admin_Default" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
@@ -154,18 +153,6 @@ AutoEventWireup="true" CodeFile="ProductManagement.aspx.cs" Inherits="Admin_Defa
         <fieldset class="wheelInfo">
             <legend>Wheel Information</legend>
             <table>
-                <tr>
-                    <td>
-                        <asp:Label ID="ProductIdLabel" runat="server" AssociatedControlID="ProductId">Product ID:</asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="ProductId" runat="server" CssClass="textEntry" ReadOnly="false"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="ProductIdRequired" runat="server" ControlToValidate="ProductId"
-                            CssClass="failureNotification" ErrorMessage="Product ID is required." ToolTip="Product ID is required."
-                            ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-                    </td>
-                </tr>
-
                 <tr>
                     <td>
                         <asp:Label ID="ImageLabel" runat="server" AssociatedControlID="Image">Image:</asp:Label>

@@ -265,7 +265,6 @@ namespace DataAccess
         /// <returns></returns>
         public static int ResetPassword(int userid, string newPassword)
         {
-            //需要加一个参数（oldPassword），改动PASSWORD之前，校验一下旧PASSWORD
             DbCommand command = db.GetSqlStringCommond(@"
                             update users set userpwd = @newpassword where userid = @userid");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid),new SqlParameter(

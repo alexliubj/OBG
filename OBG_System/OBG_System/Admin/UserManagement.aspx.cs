@@ -18,17 +18,7 @@ public partial class Admin_Default : System.Web.UI.Page
         if (!IsPostBack)
         {
             bind();
-            for(int i = 0; i <GridView1.Rows.Count; i++ )
-            {
-                if (((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text.ToString().Trim() == "0")
-                {
-                    ((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text = "inactive";
-                }
-                else if (((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text.ToString().Trim() == "1")
-                {
-                    ((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text = "active";
-                }
-            }
+           
         }
         
     }
@@ -75,8 +65,21 @@ public partial class Admin_Default : System.Web.UI.Page
 
         GridView1.DataSource = userDataSet;
         GridView1.DataKeyNames = new string[] { "userid" };
-        GridView1.DataKeyNames = new string[] { "userid" };
         GridView1.DataBind();
+        for (int i = 0; i < GridView1.Rows.Count; i++)
+        {
+            if (((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text.ToString().Trim() == "0")
+            {
+                ((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text = "Inactive";
+                ((Button)GridView1.Rows[i].Cells[7].FindControl("activeButton")).Text = "Active";
+
+            }
+            else if (((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text.ToString().Trim() == "1")
+            {
+                ((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text = "Active";
+                ((Button)GridView1.Rows[i].Cells[7].FindControl("activeButton")).Text = "Inactive";
+            }
+        }
     }
 
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -145,6 +148,7 @@ public partial class Admin_Default : System.Web.UI.Page
         //}
 
     }
+
     protected void BtnSave_Click(object sender, EventArgs e)
     {
         User userSaved = new User();
@@ -212,8 +216,18 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void activeButton_Click(object sender, EventArgs e)
     {
         int userID = Convert.ToInt32(GridView1.SelectedValue.ToString());
-        UserBLO.AdminActiveUserStatus(userID, 1);
-        Response.Redirect("UserManagement.aspx");
+
+        User user = new User();
+        user = UserBLO.GetUserInfoWithUserId(userID);
+        if (user.Status == 0)
+        {
+            UserBLO.AdminActiveUserStatus(userID, 1);
+        }
+        else if (user.Status == 1)
+        {
+            UserBLO.AdminActiveUserStatus(userID, 0);
+        }
+        bind();
     }
     protected void btnAddUser_Click(object sender, EventArgs e)
     {
@@ -259,7 +273,7 @@ public partial class Admin_Default : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                             "err_msg",
                             "alert('success.');", true);
-            Response.Redirect("UserManagement.aspx");
+            bind();
             //add To role
         }
     }
