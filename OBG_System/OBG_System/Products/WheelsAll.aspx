@@ -1,6 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="WheelsAll.aspx.cs" Inherits="Products_wheelall" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+    <style type="text/css">
+        .style1
+        {
+        width: 65px;
+    }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 
@@ -14,14 +20,15 @@
                     <td>
                         <asp:Label ID="StyleLabel" runat="server" >Style:</asp:Label>
                     </td>
-                    <td>
-                         <asp:CheckBox ID="StyleCheck1" runat="server" Text='Europa' />
-                         <asp:CheckBox ID="StyleCheck2" runat="server" Text='R117A' />
-                         <asp:CheckBox ID="StyleCheck3" runat="server" Text='R133A' />
-                         <asp:CheckBox ID="StyleCheck4" runat="server" Text='R152' />
-                         <asp:CheckBox ID="StyleCheck5" runat="server" Text='R115' />
-                         <asp:CheckBox ID="StyleCheck6" runat="server" Text='Numesis' />
-                         <asp:CheckBox ID="StyleCheck7" runat="server" Text='R142' />
+                    <td class="style1">
+                         <asp:CheckBox ID="StyleCheck1" runat="server" Text='All' /></td><td>
+                         <asp:CheckBox ID="StyleCheck2" runat="server" Text='Europa' /></td><td>
+                         <asp:CheckBox ID="StyleCheck3" runat="server" Text='R117A' /></td><td>
+                         <asp:CheckBox ID="StyleCheck4" runat="server" Text='R133A' /></td><td>
+                         <asp:CheckBox ID="StyleCheck5" runat="server" Text='R152' /></td><td>
+                         <asp:CheckBox ID="StyleCheck6" runat="server" Text='R115' /></td><td>
+                         <asp:CheckBox ID="StyleCheck7" runat="server" Text='Numesis' /></td><td>
+                         <asp:CheckBox ID="StyleCheck8" runat="server" Text='R142' /></td><td>
                        
                     </td>
                 </tr>
@@ -30,9 +37,10 @@
                     <td>
                         <asp:Label ID="BrandLabel" runat="server">Brand:</asp:Label>
                     </td>
-                    <td>
-                        <asp:CheckBox ID="BrandCheck1" runat="server" Text='Fast Wheels'></asp:CheckBox>
-                        <asp:CheckBox ID="BrandCheck2" runat="server" Text='Replika'></asp:CheckBox>
+                    <td class="style1">
+                        <asp:CheckBox ID="BrandCheck1" runat="server" Text='All'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="BrandCheck2" runat="server" Text='Fast Wheels'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="BrandCheck3" runat="server" Text='Replika'></asp:CheckBox></td><td>
                         
                         
                     </td>
@@ -44,12 +52,13 @@
                     <td>
                         <asp:Label ID="SizeLabel" runat="server" >Size:</asp:Label>
                     </td>
-                    <td>
-                        <asp:CheckBox ID="SizeCheck1" runat="server" Text='18*8.0'></asp:CheckBox>
-                        <asp:CheckBox ID="SizeCheck2" runat="server" Text='18*8.5'></asp:CheckBox>
-                        <asp:CheckBox ID="SizeCheck3" runat="server" Text='16*7.0'></asp:CheckBox>
-                        <asp:CheckBox ID="SizeCheck4" runat="server" Text='19*8.5'></asp:CheckBox>
-                        <asp:CheckBox ID="SizeCheck5" runat="server" Text='17*8.0'></asp:CheckBox>
+                    <td class="style1">
+                        <asp:CheckBox ID="SizeCheck1" runat="server" Text='All'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="SizeCheck2" runat="server" Text='18*8.0'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="SizeCheck3" runat="server" Text='18*8.5'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="SizeCheck4" runat="server" Text='16*7.0'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="SizeCheck5" runat="server" Text='19*8.5'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="SizeCheck6" runat="server" Text='17*8.0'></asp:CheckBox></td><td>
                         
                     </td>
                 </tr>
@@ -58,10 +67,10 @@
                     <td>
                         <asp:Label ID="PcdLabel" runat="server" >Pcd:</asp:Label>
                     </td>
-                    <td>
-                       
-                        <asp:CheckBox ID="PCDCheck1" runat="server" Text='5*112/114.3'></asp:CheckBox>
-                        <asp:CheckBox ID="PCDCheck2" runat="server" Text='5*112'></asp:CheckBox>
+                    <td class="style1">
+                        <asp:CheckBox ID="PCDCheck1" runat="server" Text='All'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="PCDCheck2" runat="server" Text='5*112/114.3'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="PCDCheck3" runat="server" Text='5*112'></asp:CheckBox></td><td>
                         
                         
                     </td>
@@ -70,10 +79,11 @@
                     <td>
                         <asp:Label ID="FinishLabel" runat="server" >Finish:</asp:Label>
                     </td>
-                    <td>
-                        <asp:CheckBox ID="FinishCheck1" runat="server" Text='Flat Black'></asp:CheckBox>
-                        <asp:CheckBox ID="FinishCheck2" runat="server" Text='Hyper Silver'></asp:CheckBox>
-                        <asp:CheckBox ID="FinishCheck3" runat="server" Text='Santin Black'></asp:CheckBox>
+                    <td class="style1">
+                        <asp:CheckBox ID="FinishCheck1" runat="server" Text='All'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="FinishCheck2" runat="server" Text='Flat Black'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="FinishCheck3" runat="server" Text='Hyper Silver'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="FinishCheck4" runat="server" Text='Santin Black'></asp:CheckBox></td><td>
                        
                     </td>
                 </tr>
@@ -82,11 +92,12 @@
                     <td>
                         <asp:Label ID="OffsetLabel" runat="server" >Offset:</asp:Label>
                     </td>
-                    <td>
-                        <asp:CheckBox ID="OffsetCheck1" runat="server" Text='+45'></asp:CheckBox>
-                        <asp:CheckBox ID="OffsetCheck2" runat="server" Text='+50'></asp:CheckBox>
-                        <asp:CheckBox ID="OffsetCheck3" runat="server" Text='+35'></asp:CheckBox>
-                        <asp:CheckBox ID="OffsetCheck4" runat="server" Text='+42'></asp:CheckBox>
+                    <td class="style1">
+                        <asp:CheckBox ID="OffsetCheck1" runat="server" Text='All'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="OffsetCheck2" runat="server" Text='+45'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="OffsetCheck3" runat="server" Text='+50'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="OffsetCheck4" runat="server" Text='+35'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="OffsetCheck5" runat="server" Text='+42'></asp:CheckBox></td><td>
                         
                     </td>
                 </tr>
@@ -94,9 +105,10 @@
                     <td>
                         <asp:Label ID="SeatLabel" runat="server" >Seat:</asp:Label>
                     </td>
-                    <td>
-                        <asp:CheckBox ID="SeatCheck1" runat="server" Text='60°seat'></asp:CheckBox>
-                        <asp:CheckBox ID="SeatCheck2" runat="server" Text='R13 Radius Seat'></asp:CheckBox>
+                    <td class="style1">
+                        <asp:CheckBox ID="SeatCheck1" runat="server" Text='All'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="SeatCheck2" runat="server" Text='60°seat'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="SeatCheck3" runat="server" Text='R13 Radius Seat'></asp:CheckBox></td><td>
                         
                     </td>
                 </tr>
@@ -105,9 +117,10 @@
                     <td>
                         <asp:Label ID="BoreLabel" runat="server" >Bore:</asp:Label>
                     </td>
-                    <td>
-                        <asp:CheckBox ID="BoreCheck1" runat="server" Text='73.1'></asp:CheckBox>
-                        <asp:CheckBox ID="BoreCheck2" runat="server" Text='66.4'></asp:CheckBox>
+                    <td class="style1">
+                        <asp:CheckBox ID="BoreCheck1" runat="server" Text='All'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="BoreCheck2" runat="server" Text='73.1'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="BoreCheck3" runat="server" Text='66.4'></asp:CheckBox></td><td>
                         
                        
                     </td>
@@ -116,13 +129,14 @@
                     <td>
                         <asp:Label ID="WeightLabel" runat="server" >Weight:</asp:Label>
                     </td>
-                    <td>
-                        <asp:CheckBox ID="WeightCheck1" runat="server" Text='23.1'></asp:CheckBox>
-                        <asp:CheckBox ID="WeightCheck2" runat="server" Text='27.0'></asp:CheckBox>
-                        <asp:CheckBox ID="WeightCheck3" runat="server" Text='19.0'></asp:CheckBox>
-                        <asp:CheckBox ID="WeightCheck4" runat="server" Text='28.2'></asp:CheckBox>
-                        <asp:CheckBox ID="WeightCheck5" runat="server" Text='24.8'></asp:CheckBox>
-                        <asp:CheckBox ID="WeightCheck6" runat="server" Text='22.2'></asp:CheckBox>
+                    <td class="style1">
+                        <asp:CheckBox ID="WeightCheck1" runat="server" Text='All'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="WeightCheck2" runat="server" Text='23.1'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="WeightCheck3" runat="server" Text='27.0'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="WeightCheck4" runat="server" Text='19.0'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="WeightCheck5" runat="server" Text='28.2'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="WeightCheck6" runat="server" Text='24.8'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="WeightCheck7" runat="server" Text='22.2'></asp:CheckBox></td><td>
                        
                     </td>
                 </tr>
@@ -130,37 +144,18 @@
                     <td>
                         <asp:Label ID="OnhandLabel" runat="server" >Onhand:</asp:Label>
                     </td>
-                    <td>
-                        <asp:CheckBox ID="OnhandCheck1" runat="server" Text='100+'></asp:CheckBox>
-                        <asp:CheckBox ID="OnhandCheck2" runat="server" Text='99'></asp:CheckBox>
-                        <asp:CheckBox ID="OnhandCheck3" runat="server" Text='66'></asp:CheckBox>
-                        <asp:CheckBox ID="OnhandCheck4" runat="server" Text='62'></asp:CheckBox>
-                        <asp:CheckBox ID="OnhandCheck5" runat="server" Text='56'></asp:CheckBox>
+                    <td class="style1">
+                        <asp:CheckBox ID="OnhandCheck1" runat="server" Text='All'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="OnhandCheck2" runat="server" Text='100+'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="OnhandCheck3" runat="server" Text='99'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="OnhandCheck4" runat="server" Text='66'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="OnhandCheck5" runat="server" Text='62'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="OnhandCheck6" runat="server" Text='56'></asp:CheckBox></td><td>
                        
 
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="PriceLabel" runat="server">Price:</asp:Label>
-                    </td>
-                    <td>
-                        <asp:CheckBox ID="CheckBox1" runat="server" Text='56'></asp:CheckBox>
-                        
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <asp:Label ID="CategoryIdLabel" runat="server" AssociatedControlID="CategoryId" Visible="false">Category ID:</asp:Label>
-                    </td>
-                    <td>
-                        <asp:TextBox ID="CategoryId" runat="server" CssClass="textEntry" Visible="false"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="CategoryIdRequired" runat="server" ControlToValidate="CategoryId"
-                            CssClass="failureNotification" ErrorMessage="CategoryId is required."
-                            ToolTip="CategoryId is required." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-
-                    </td>
-                </tr>
+                
                
             </table>
         </fieldset>
