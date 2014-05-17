@@ -3,6 +3,86 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+
+<div id="TiresFilter" runat="server" visible="true">
+       
+        <fieldset class="TiresInfo">
+            <legend>Choose your tires</legend>
+            <table>
+                <tr>
+                    <td>
+                        <asp:Label ID="StyleLabel" runat="server" >PartNo:</asp:Label>
+                    </td>
+                    <td>
+                         <asp:CheckBox ID="StyleCheck1" runat="server" Text='Europa' /></td><td>
+                         <asp:CheckBox ID="StyleCheck2" runat="server" Text='R117A' /></td><td>
+                         <asp:CheckBox ID="StyleCheck3" runat="server" Text='R133A' /></td><td>
+                         <asp:CheckBox ID="StyleCheck4" runat="server" Text='R152' /></td><td>
+                         <asp:CheckBox ID="StyleCheck5" runat="server" Text='R115' /></td><td>
+                         <asp:CheckBox ID="StyleCheck6" runat="server" Text='Numesis' /></td><td>
+                         <asp:CheckBox ID="StyleCheck7" runat="server" Text='R142' /></td><td>
+                       
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <asp:Label ID="BrandLabel" runat="server">Size:</asp:Label>
+                    </td>
+                    <td>
+                        <asp:CheckBox ID="BrandCheck1" runat="server" Text='Fast Wheels'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="BrandCheck2" runat="server" Text='Replika'></asp:CheckBox></td><td>
+                        
+                        
+                    </td>
+                </tr>
+
+               
+
+                <tr>
+                    <td>
+                        <asp:Label ID="SizeLabel" runat="server" >Width:</asp:Label>
+                    </td>
+                    <td>
+                        <asp:CheckBox ID="SizeCheck1" runat="server" Text='18*8.0'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="SizeCheck2" runat="server" Text='18*8.5'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="SizeCheck3" runat="server" Text='16*7.0'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="SizeCheck4" runat="server" Text='19*8.5'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="SizeCheck5" runat="server" Text='17*8.0'></asp:CheckBox></td><td>
+                        
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <asp:Label ID="PcdLabel" runat="server" >Height:</asp:Label>
+                    </td>
+                    <td>
+                       
+                        <asp:CheckBox ID="PCDCheck1" runat="server" Text='5*112/114.3'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="PCDCheck2" runat="server" Text='5*112'></asp:CheckBox></td><td>
+                        
+                        
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <asp:Label ID="FinishLabel" runat="server" >Season:</asp:Label>
+                    </td>
+                    <td>
+                        <asp:CheckBox ID="FinishCheck1" runat="server" Text='Flat Black'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="FinishCheck2" runat="server" Text='Hyper Silver'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="FinishCheck3" runat="server" Text='Santin Black'></asp:CheckBox></td><td>
+                       
+                    </td>
+                </tr>
+               
+            </table>
+        </fieldset>
+    </div>
+
+
+
 <asp:GridView ID="GridView2" runat="server"  GridLines="None" 
         AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" 
         DataKeyNames="TireId" ForeColor="#333333"  OnSelectedIndexChanged="GridView2_SelectedIndexChanged"
