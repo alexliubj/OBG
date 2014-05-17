@@ -144,11 +144,17 @@ namespace DataAccess
             return db.ExecuteNonQuery(command);
         }
 
-        public static DataTable GetAllUsersWithRole(int roleId)
+        public static DataTable GetAllUsersWithRole()
         {
-            DbCommand command = db.GetSqlStringCommond(@"SELECT [RoleId]
-                                                      ,[DisRate]
-                                                  FROM [Discount]");
+            DbCommand command = db.GetSqlStringCommond(@"SELECT u.[UserId]
+                                                      ,u.[UserName]
+                                                      ,u.[CompanyName]
+                                                      ,u.[FirstName]
+                                                      ,u.[LastName],r.rolename,r.roleid
+                                                  FROM [Users] u join [UserRole] ur 
+                                                  on u.userid = ur.userid
+                                                  join [Role] r
+                                                  on ur.roleid = r.roleid");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }

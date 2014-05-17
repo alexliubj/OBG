@@ -141,6 +141,14 @@ namespace BusinessLogic
             }
         }
 
+        /// <summary>
+        /// A role name as a column in return datatable
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetAllUsersWithTheirRoleName()
+        {
+            return UserDAO.GetAllUsersWithTheirRoleName();
+        }
 
         /// <summary>
         /// update userinfomation

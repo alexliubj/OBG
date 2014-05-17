@@ -23,13 +23,6 @@ namespace OBGModel
         }
         private int userId;
 
-        private string username;
-
-        public string Username
-        {
-            get { return username; }
-            set { username = value; }
-        }
         private string rolename;
 
         public string Rolename

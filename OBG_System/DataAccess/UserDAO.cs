@@ -351,6 +351,31 @@ namespace DataAccess
             return dt;
         }
 
+        public static DataTable GetAllUsersWithTheirRoleName()
+        {
+
+            DbCommand command = db.GetSqlStringCommond(@" SELECT u.[UserId]
+                                                          ,u.[UserPwd]
+                                                          ,u.[UserName]
+                                                          ,u.[Status]
+                                                          ,u.[Email]
+                                                          ,u.[CompanyName]
+                                                          ,u.[Phone]
+                                                          ,u.[BillingAddress]
+                                                          ,u.[BillingPostCode]
+                                                          ,u.[ShippingAddress]
+                                                          ,u.[ShippingPostCode]
+                                                          ,u.[FirstName]
+                                                          ,u.[LastName],r.rolename
+                                                      FROM [Users] u join [UserRole] ur 
+                                                      on u.userid = ur.userid
+                                                      join [Role] r
+                                                      on ur.roleid = r.roleid");
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
+           
+        }
+
         /// <summary>
         /// Update user passwor with old user password
         /// </summary>
