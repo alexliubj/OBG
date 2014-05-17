@@ -44,9 +44,9 @@ namespace BusinessLogic
         {
             return RoleDAO.DeleteUserFromRole(userid, roleId);
         }
-        public static DataTable GetAllUsersWithRole(int roleId)
+        public static DataTable GetAllUsersWithRole()
         {
-            return RoleDAO.GetAllUsersWithRole(roleId);
+            return RoleDAO.GetAllUsersWithRole();
         }
     }
 }

@@ -59,7 +59,7 @@ namespace DataAccess
 
         public static int DeleteRoleByRoleId(int roleId)
         {
-            DbCommand command = db.GetSqlStringCommond(@"delete from discount where roleId = @roleId");
+            DbCommand command = db.GetSqlStringCommond(@"delete from role where roleId = @roleId");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@roleId", roleId) };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
@@ -71,7 +71,7 @@ namespace DataAccess
 
         #region User and Role Managements
 
-        public static int AddUserToRole(int userid, int roleId,string des)
+        public static int AddUserToRole(int userid, int roleId, string des)
         {
             DbCommand command = db.GetSqlStringCommond(@"
                             INSERT INTO [UserRole]
@@ -113,23 +113,18 @@ namespace DataAccess
             return retRole;
         }
 
-
-        // haven't finish yet
         public static int UpdateUserRole(int userId, int roleId, string des)
-        { 
-            
+        {
             DbCommand command = db.GetSqlStringCommond(@"
                             UPDATE  [UserRole]
-                               SET [RoleId] = @userId
-                                  ,[UserId] = @roleId
+                               SET [RoleId] = @roleId
                                   ,[Des] = @des
-                             WHERE <Search Conditions,,>");
+                             WHERE userid=@userid");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@userid", userId) , 
             new SqlParameter("@roleId",roleId)};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
-
         }
 
         public static int DeleteUserFromRole(int userid, int roleId)
@@ -144,15 +139,20 @@ namespace DataAccess
             return db.ExecuteNonQuery(command);
         }
 
-        public static DataTable GetAllUsersWithRole(int roleId)
+        public static DataTable GetAllUsersWithRole()
         {
-            DbCommand command = db.GetSqlStringCommond(@"SELECT [RoleId]
-                                                      ,[DisRate]
-                                                  FROM [Discount]");
+            DbCommand command = db.GetSqlStringCommond(@"SELECT u.[UserId]
+                                                      ,u.[UserName]
+                                                      ,u.[CompanyName]
+                                                      ,u.[FirstName]
+                                                      ,u.[LastName],r.rolename,r.roleid
+                                                  FROM [Users] u join [UserRole] ur 
+                                                  on u.userid = ur.userid
+                                                  join [Role] r
+                                                  on ur.roleid = r.roleid");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
-
         #endregion User and Role Managements
     }
 }

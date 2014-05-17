@@ -14,9 +14,9 @@ namespace DataAccess
         private static DbHelper db = new DbHelper();
         public static DataTable GetAllDiscount()
         {
-            DbCommand command = db.GetSqlStringCommond(@"SELECT [RoleId]
-                                                      ,[DisRate]
-                                                  FROM [Discount]");
+            DbCommand command = db.GetSqlStringCommond(@"select r.roleid,r.rolename, d.disrate
+                                                    from [Role] r join [Discount] d
+                                                    on r.roleid = d.roleid");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
@@ -37,8 +37,7 @@ namespace DataAccess
 
         public static int UpdateDiscount(int roleId, float rate)
         {
-
-            DbCommand command = db.GetSqlStringCommond(@"UPDATE  [Discount]
+            DbCommand command = db.GetSqlStringCommond(@"UPDATE [Discount]
                                                    SET [DisRate] = @rate
                                                  WHERE roleId=@roleId");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@roleId", roleId) ,

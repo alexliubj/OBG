@@ -265,7 +265,6 @@ namespace DataAccess
         /// <returns></returns>
         public static int ResetPassword(int userid, string newPassword)
         {
-            //需要加一个参数（oldPassword），改动PASSWORD之前，校验一下旧PASSWORD
             DbCommand command = db.GetSqlStringCommond(@"
                             update users set userpwd = @newpassword where userid = @userid");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid),new SqlParameter(
@@ -349,6 +348,31 @@ namespace DataAccess
             DbCommand command = db.GetSqlStringCommond("select * from users");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
+        }
+
+        public static DataTable GetAllUsersWithTheirRoleName()
+        {
+
+            DbCommand command = db.GetSqlStringCommond(@" SELECT u.[UserId]
+                                                          ,u.[UserPwd]
+                                                          ,u.[UserName]
+                                                          ,u.[Status]
+                                                          ,u.[Email]
+                                                          ,u.[CompanyName]
+                                                          ,u.[Phone]
+                                                          ,u.[BillingAddress]
+                                                          ,u.[BillingPostCode]
+                                                          ,u.[ShippingAddress]
+                                                          ,u.[ShippingPostCode]
+                                                          ,u.[FirstName]
+                                                          ,u.[LastName],r.rolename
+                                                      FROM [Users] u join [UserRole] ur 
+                                                      on u.userid = ur.userid
+                                                      join [Role] r
+                                                      on ur.roleid = r.roleid");
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
+           
         }
 
         /// <summary>
