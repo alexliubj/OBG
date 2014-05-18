@@ -37,23 +37,23 @@ public partial class Admin_Default : System.Web.UI.Page
 
     protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
-        int userID = Convert.ToInt32(GridView1.Rows[e.RowIndex].Cells[0].Text);
-        User user = UserBLO.GetUserInfoWithUserId(userID);
-        user.Userid = userID;
-        user.UserName = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[1].FindControl("TextBox2"))).Text.ToString().Trim();
-        DropDownList ddl = (DropDownList)(GridView1.Rows[e.RowIndex].Cells[2].FindControl("DropDownList1"));
-        if (ddl.SelectedItem.Text == "active")
-        {
-            user.Status = 1;
-        }
-        else if (ddl.SelectedItem.Text == "inactive")
-        {
-            user.Status = 0;
-        }
-        user.Status = int.Parse(((TextBox)(GridView1.Rows[e.RowIndex].Cells[2].FindControl("TextBox3"))).Text.ToString().Trim());
-        user.Email = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[3].FindControl("TextBox4"))).Text.ToString().Trim();
-        user.CompanyName = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[4].FindControl("TextBox5"))).Text.ToString().Trim();
-        user.Phone = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[5].FindControl("TextBox1"))).Text.ToString().Trim();
+        //int userID = Convert.ToInt32(GridView1.Rows[e.RowIndex].Cells[0].Text);
+        //User user = UserBLO.GetUserInfoWithUserId(userID);
+        //user.Userid = userID;
+        //user.UserName = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[1].FindControl("TextBox2"))).Text.ToString().Trim();
+        //DropDownList ddl = (DropDownList)(GridView1.Rows[e.RowIndex].Cells[2].FindControl("DropDownList1"));
+        //if (ddl.SelectedItem.Text == "active")
+        //{
+        //    user.Status = 1;
+        //}
+        //else if (ddl.SelectedItem.Text == "inactive")
+        //{
+        //    user.Status = 0;
+        //}
+        //user.Status = int.Parse(((TextBox)(GridView1.Rows[e.RowIndex].Cells[2].FindControl("TextBox3"))).Text.ToString().Trim());
+        //user.Email = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[3].FindControl("TextBox4"))).Text.ToString().Trim();
+        //user.CompanyName = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[4].FindControl("TextBox5"))).Text.ToString().Trim();
+        //user.Phone = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[5].FindControl("TextBox1"))).Text.ToString().Trim();
     }
 
     public void bind()

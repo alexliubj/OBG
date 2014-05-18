@@ -40,8 +40,8 @@ namespace DataAccess
             DbCommand command = db.GetSqlStringCommond(@"UPDATE [Discount]
                                                    SET [DisRate] = @rate
                                                  WHERE roleId=@roleId");
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@roleId", roleId) ,
-            new SqlParameter("@roleId",roleId)};
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@roleId", roleId),
+            new SqlParameter("@rate", rate)};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }

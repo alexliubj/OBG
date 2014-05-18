@@ -94,6 +94,7 @@ public partial class Admin_Default : System.Web.UI.Page
         Wheels wheel = new Wheels();
         int productID;
         productID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
+        wheel.ProductId = productID;
         wheel.Bore = Bore.Text;
         wheel.Brand = Brand.Text;
         wheel.CategoryId = int.Parse(CategoryId.Text);
@@ -113,6 +114,7 @@ public partial class Admin_Default : System.Web.UI.Page
 
         if (update == 1)
         {
+            Gridview1_Bind();
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                          "err_msg",
                          "alert('Wheel has been saved.');",
@@ -136,22 +138,20 @@ public partial class Admin_Default : System.Web.UI.Page
         int productID;
         productID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
         Wheels wheel = new Wheels();
-        //need method getwheelInfoByProductID
-        // wheel = WheelsBLO.getwheelInfoByProductID(productID);
 
-        Bore.Text = wheel.Bore;
-        Brand.Text = wheel.Brand;
-        CategoryId.Text = wheel.CategoryId.ToString();
-        Finish.Text = wheel.Finish;
-        Image.Text = wheel.Image;
-        Offset.Text = wheel.Offset;
-        Onhand.Text = wheel.Onhand;
-        Pcd.Text = wheel.Pcd;
-        Price.Text = wheel.Price.ToString();
-        Seat.Text = wheel.Seat;
-        Size.Text = wheel.Size;
-        Style.Text = wheel.Style;
-        Weight.Text = wheel.Weight;
+        Bore.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label10"))).Text;
+        Brand.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label4"))).Text;
+        CategoryId.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label14"))).Text;
+        Finish.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label7"))).Text;
+        Image.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label2"))).Text;
+        Offset.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label8"))).Text;
+        Onhand.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label12"))).Text;
+        Pcd.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label6"))).Text;
+        Price.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label13"))).Text;
+        Seat.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label9"))).Text;
+        Size.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label5"))).Text;
+        Style.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label3"))).Text;
+        Weight.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label11"))).Text;
 
         wheelInformation.Visible = true;
 
@@ -199,6 +199,7 @@ public partial class Admin_Default : System.Web.UI.Page
         wheel.Weight = Weight.Text;
 
         WheelsBLO.AddNewProduct(wheel);
+        Gridview1_Bind();
     }
     #endregion
 
