@@ -22,9 +22,9 @@ namespace OBGModel
             set { discountRate = value; }
         }
 
-        private int roleName;
+        private string roleName;
 
-        public int RoleName
+        public string RoleName
         {
             get { return roleName; }
             set { roleName = value; }

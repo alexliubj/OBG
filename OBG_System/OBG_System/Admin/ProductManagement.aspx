@@ -53,74 +53,74 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Pcd" SortExpression="Pcd">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Pcd") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox6" runat="server" Text='<%# Bind("Pcd") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Pcd") %>'></asp:Label>
+                    <asp:Label ID="Label6" runat="server" Text='<%# Bind("Pcd") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Finish" SortExpression="Finish">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Finish") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox7" runat="server" Text='<%# Bind("Finish") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Finish") %>'></asp:Label>
+                    <asp:Label ID="Label7" runat="server" Text='<%# Bind("Finish") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Offset" SortExpression="Offset">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Offset") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("Offset") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Offset") %>'></asp:Label>
+                    <asp:Label ID="Label8" runat="server" Text='<%# Bind("Offset") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Seat" SortExpression="Seat">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Seat") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox9" runat="server" Text='<%# Bind("Seat") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Seat") %>'></asp:Label>
+                    <asp:Label ID="Label9" runat="server" Text='<%# Bind("Seat") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Bore" SortExpression="Bore">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Bore") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox10" runat="server" Text='<%# Bind("Bore") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Bore") %>'></asp:Label>
+                    <asp:Label ID="Label10" runat="server" Text='<%# Bind("Bore") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Weight" SortExpression="Weight">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Weight") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox11" runat="server" Text='<%# Bind("Weight") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Weight") %>'></asp:Label>
+                    <asp:Label ID="Label11" runat="server" Text='<%# Bind("Weight") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Onhand" SortExpression="Onhand">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Onhand") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox12" runat="server" Text='<%# Bind("Onhand") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Onhand") %>'></asp:Label>
+                    <asp:Label ID="Label12" runat="server" Text='<%# Bind("Onhand") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Price" SortExpression="Price">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Price") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox13" runat="server" Text='<%# Bind("Price") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Price") %>'></asp:Label>
+                    <asp:Label ID="Label13" runat="server" Text='<%# Bind("Price") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="CategoryId" SortExpression="CategoryId">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CategoryId") %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox14" runat="server" Text='<%# Bind("CategoryId") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("CategoryId") %>'></asp:Label>
+                    <asp:Label ID="Label14" runat="server" Text='<%# Bind("CategoryId") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" />
@@ -162,14 +162,6 @@
                         <asp:RequiredFieldValidator ID="ImageRequired" runat="server" ControlToValidate="Image"
                             CssClass="failureNotification" ErrorMessage="Image is required." ToolTip="Image is required."
                             ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-                        <%--  <asp:RegularExpressionValidator
-                            ID="EmailExpression" runat="SERVER"
-                            ControlToValidate="Email"
-                            CssClass="failureNotification"
-                            ErrorMessage="Enter a valid Email."
-                            ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"
-                            ValidationGroup="RegisterUserValidationGroup">*
-                        </asp:RegularExpressionValidator>--%>
                     </td>
                 </tr>
 
@@ -218,14 +210,6 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="Pcd"
                             CssClass="failureNotification" ErrorMessage="Pcd is required." ToolTip="Pcd is required."
                             ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-                        <%--     <asp:RegularExpressionValidator
-                            ID="PhoneExpression" runat="SERVER"
-                            ControlToValidate="Phone"
-                            CssClass="failureNotification"
-                            ErrorMessage="Enter a valid Phone Number."
-                            ValidationExpression="^([0-9\(\)\/\+ \-]*)$"
-                            ValidationGroup="RegisterUserValidationGroup">*
-                        </asp:RegularExpressionValidator>--%>
                     </td>
                 </tr>
                 <tr>
@@ -248,15 +232,7 @@
                         <asp:TextBox ID="Offset" runat="server" CssClass="textEntry" ReadOnly="false"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="Offset"
                             CssClass="failureNotification" ErrorMessage="Offset is required." ToolTip="Offset is required."
-                            ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-                        <%-- <asp:RegularExpressionValidator
-                            ID="ShippingPostCodeExpression" runat="SERVER"
-                            ControlToValidate="ShippingPostCode"
-                            CssClass="failureNotification"
-                            ErrorMessage="Enter a valid Post Code."
-                            ValidationExpression="\d{5}((-)?\d{4})?|([A-Za-z]\d[A-Za-z]( )?\d[A-Za-z]\d)"
-                            ValidationGroup="RegisterUserValidationGroup">*
-                        </asp:RegularExpressionValidator>--%>
+                            ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>  
                     </td>
                 </tr>
                 <tr>
@@ -280,22 +256,14 @@
                         <asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="Bore"
                             CssClass="failureNotification" ErrorMessage="Bore is required." ToolTip="Bore is required."
                             ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-                        <%--  <asp:RegularExpressionValidator
-                            ID="BillingPostCodeExpression" runat="SERVER"
-                            ControlToValidate="BillingPostCode"
-                            CssClass="failureNotification"
-                            ErrorMessage="Enter a valid Post Code."
-                            ValidationExpression="\d{5}((-)?\d{4})?|([A-Za-z]\d[A-Za-z]( )?\d[A-Za-z]\d)"
-                            ValidationGroup="RegisterUserValidationGroup">*
-                        </asp:RegularExpressionValidator>--%>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="WeightLabel" runat="server" AssociatedControlID="Weight" Visible="false">Weight:</asp:Label>
+                        <asp:Label ID="WeightLabel" runat="server" AssociatedControlID="Weight">Weight:</asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="Weight" runat="server" CssClass="textEntry" Visible="false"></asp:TextBox>
+                        <asp:TextBox ID="Weight" runat="server" CssClass="textEntry"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="WeightRequired" runat="server" ControlToValidate="Weight"
                             CssClass="failureNotification" ErrorMessage="Weight is required." ToolTip="Weight is required."
                             ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
@@ -303,10 +271,10 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="OnhandLabel" runat="server" AssociatedControlID="Onhand" Visible="false">Onhand:</asp:Label>
+                        <asp:Label ID="OnhandLabel" runat="server" AssociatedControlID="Onhand">Onhand:</asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="Onhand" runat="server" CssClass="textEntry" Visible="false"></asp:TextBox>
+                        <asp:TextBox ID="Onhand" runat="server" CssClass="textEntry"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="OnhandRequired" runat="server" ControlToValidate="Onhand"
                             CssClass="failureNotification" ErrorMessage="Onhand is required."
                             ToolTip="Onhand is required." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
@@ -315,25 +283,40 @@
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="PriceLabel" runat="server" AssociatedControlID="Price" Visible="false">Price:</asp:Label>
+                        <asp:Label ID="PriceLabel" runat="server" AssociatedControlID="Price">Price:</asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="Price" runat="server" CssClass="textEntry" Visible="false"></asp:TextBox>
+                        <asp:TextBox ID="Price" runat="server" CssClass="textEntry"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="PriceRequired" runat="server" ControlToValidate="Price"
                             CssClass="failureNotification" ErrorMessage="Price is required."
                             ToolTip="Price is required." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-
+                        <asp:RegularExpressionValidator
+                            ID="PriceExpression" runat="SERVER"
+                            ControlToValidate="Price"
+                            CssClass="failureNotification"
+                            ErrorMessage="Please Enter Only Numbers."
+                            ValidationExpression="^\d+$"
+                            ValidationGroup="RegisterUserValidationGroup">*
+                        </asp:RegularExpressionValidator>
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <asp:Label ID="CategoryIdLabel" runat="server" AssociatedControlID="CategoryId" Visible="false">Category ID:</asp:Label>
+                        <asp:Label ID="CategoryIdLabel" runat="server" AssociatedControlID="CategoryId">Category ID:</asp:Label>
                     </td>
                     <td>
-                        <asp:TextBox ID="CategoryId" runat="server" CssClass="textEntry" Visible="false"></asp:TextBox>
+                        <asp:TextBox ID="CategoryId" runat="server" CssClass="textEntry"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="CategoryIdRequired" runat="server" ControlToValidate="CategoryId"
                             CssClass="failureNotification" ErrorMessage="CategoryId is required."
                             ToolTip="CategoryId is required." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                                                <asp:RegularExpressionValidator
+                            ID="CategoryIdExpression" runat="SERVER"
+                            ControlToValidate="CategoryId"
+                            CssClass="failureNotification"
+                            ErrorMessage="Please Enter Only Numbers."
+                            ValidationExpression="^\d+$"
+                            ValidationGroup="RegisterUserValidationGroup">*
+                        </asp:RegularExpressionValidator>
 
                     </td>
                 </tr>

@@ -24,7 +24,7 @@ namespace DataAccess
         public static int DeleteProductById(int prodId)
         {
             DbCommand command = db.GetSqlStringCommond(@"delete from wheels where ProductId=@ProductId");
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@ProductId", prodId)};
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@ProductId", prodId) };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
@@ -59,8 +59,8 @@ namespace DataAccess
                 new SqlParameter("@Weight",prod.Weight),
                 new SqlParameter("@ONHand",prod.Onhand),
                 new SqlParameter("@Price",prod.Price),
-                 new SqlParameter("@CategoryId",prod.CategoryId),
-                 new SqlParameter("@CategoryId",prod.CategoryId)
+                new SqlParameter("@CategoryId",prod.CategoryId),
+                new SqlParameter("@productId",prod.ProductId)
             };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
@@ -85,18 +85,18 @@ namespace DataAccess
                                ,[CategoryId])
                          VALUES
                                (@Image,
-                               ,@Style,
-                               ,@Brand,
-                               ,@Size,
-                               ,@PCD, 
-                               ,@Finish, 
-                               ,@Offset, 
-                               ,@SEAT,
-                               ,@BORE,
-                               ,@Weight,
-                               ,@ONHand,
-                               ,@Price,
-                               ,@CategoryId)");
+                               @Style,
+                               @Brand,
+                               @Size,
+                               @PCD, 
+                               @Finish, 
+                               @Offset, 
+                               @SEAT,
+                               @BORE,
+                               @Weight,
+                               @ONHand,
+                               @Price,
+                               @CategoryId)");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@Image", prod.Image),
                 new SqlParameter("@Style",prod.Style),
