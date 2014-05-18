@@ -6,18 +6,20 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
+using OBGModel;
 
 
 public partial class Products_viewByVehicle : System.Web.UI.Page
 {
+    string strProductID = "";
     private DataSet wheelsDataSet;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
         {
             Gridview4_Bind();
-            DataListDepartMent.DataSource = CategoryBLO.GetAllCategory();
-            DataListDepartMent.DataBind();
+            //DataListDepartMent.DataSource = CategoryBLO.GetAllCategory();
+            //DataListDepartMent.DataBind();
             //PopuControl();
         }
 
@@ -90,4 +92,10 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
             
     //    }
     //}
+    protected void AddBt_Click(object sender, EventArgs e)
+    {
+        Wheels wheels = new Wheels();
+        WheelsBLO.AddNewProduct(wheels);
+        Response.Redirect("~/ShoppingCart.aspx?ProductId=" + strProductID + "&Num=1");
+    }
 }

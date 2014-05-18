@@ -172,15 +172,7 @@
     <AlternatingRowStyle BackColor="White" />
             <Columns>
             <asp:BoundField DataField="ProductId" HeaderText="Product ID" InsertVisible="False" ReadOnly="True" SortExpression="ProductId" />
-            <asp:TemplateField HeaderText="Choose">
-
-        <ItemTemplate>
-
-            <asp:CheckBox id="cbxId" runat="Server" />
-
-        </ItemTemplate>
-
-    </asp:TemplateField>
+            
             <asp:TemplateField HeaderText="Image" SortExpression="Image">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Image") %>'></asp:TextBox>
@@ -277,13 +269,18 @@
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("Price") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-                  <asp:TemplateField HeaderText="CategoryId" SortExpression="CategoryId">
+                 <%-- <asp:TemplateField HeaderText="CategoryId" SortExpression="CategoryId">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CategoryId") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("CategoryId") %>'></asp:Label>
                 </ItemTemplate>
+            </asp:TemplateField>--%>
+            <asp:TemplateField HeaderText="ADD" SortExpression="ADD">
+            <ItemTemplate>
+            <asp:ImageButton ID="AddBt" runat="server" ImageUrl="../Pictures/images.jpg" OnClick="AddBt_Click"></asp:ImageButton>
+            </ItemTemplate>
             </asp:TemplateField>
         
            <%-- <asp:TemplateField HeaderText="Delete">

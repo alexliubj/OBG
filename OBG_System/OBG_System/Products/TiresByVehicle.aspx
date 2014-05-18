@@ -3,6 +3,34 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+
+<div id="TiresFilter" runat="server" visible="true">
+       
+        <fieldset class="TiresInfo">
+            <legend>Choose your vehicles</legend>
+            <table>
+                <tr>
+                    
+                    <td>
+                         <asp:CheckBox ID="VehicleCheck1" runat="server" Text='All' /></td><td>
+                         <asp:CheckBox ID="VehicleCheck2" runat="server" Text='Ford' /></td><td>
+                         <asp:CheckBox ID="VehicleCheck3" runat="server" Text='BMW' /></td><td>
+                         <asp:CheckBox ID="VehicleCheck4" runat="server" Text='Benz' /></td><td>
+                         <asp:CheckBox ID="VehicleCheck5" runat="server" Text='Toyota' /></td><td>
+                         <asp:CheckBox ID="VehicleCheck6" runat="server" Text='Honda' /></td><td>
+                         <asp:CheckBox ID="VehicleCheck7" runat="server" Text='Hyundai' /></td><td>
+                         <asp:CheckBox ID="VehicleCheck8" runat="server" Text='Chevrolet' /></td><td>
+                         <asp:CheckBox ID="VehicleCheck9" runat="server" Text='Audi' /></td><td>
+                         <asp:CheckBox ID="VehicleCheck10" runat="server" Text='BUICK' /></td><td>
+                    </td>
+                
+                </tr>
+               
+            </table>
+        </fieldset>
+    </div>
+
+
 <asp:GridView ID="GridView5" runat="server"  GridLines="None" 
         AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" 
         DataKeyNames="TireId" ForeColor="#333333"  OnSelectedIndexChanged="GridView2_SelectedIndexChanged"
@@ -13,15 +41,8 @@
     <AlternatingRowStyle BackColor="White" />
             <Columns>
             <asp:BoundField DataField="TireId" HeaderText="Tire ID" InsertVisible="False" ReadOnly="True" SortExpression="TireId" />
-            <asp:TemplateField HeaderText="Choose">
+            
 
-             <ItemTemplate>
-
-            <asp:CheckBox id="cbxId" runat="Server" />
-
-            </ItemTemplate>
-
-    </asp:TemplateField>
             <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>
@@ -69,6 +90,11 @@
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("Season") %>'></asp:Label>
                 </ItemTemplate>
+            </asp:TemplateField>
+             <asp:TemplateField HeaderText="ADD" SortExpression="ADD">
+            <ItemTemplate>
+            <asp:ImageButton ID="AddBt" runat="server" ImageUrl="../Pictures/images.jpg" OnClick="AddBt_Click"></asp:ImageButton>
+            </ItemTemplate>
             </asp:TemplateField>
                 
             

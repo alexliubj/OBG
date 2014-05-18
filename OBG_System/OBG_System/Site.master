@@ -15,7 +15,7 @@
         <div class="header">
             <div class="title">
                 <h1>
-                    My ASP.NET Application
+                    OBG Orderring System
                 </h1>
             </div>
 
@@ -27,21 +27,23 @@
 
 
              <div class="shoppingcart" align=right>
-                <a href="Account/ShoppingCart.aspx" ><img src="~/Pictures/shoppingcart.png" style="height: 52px; width: 84px" /></a></div>
+                 <a ID="shoppingcart" runat="server" href="~/Account/ShoppingCart.aspx"><asp:Image ID="Image1"  runat="server" 
+                     src="Pictures/shoppingcart.png" Height="50px" Width="85px"/></a></div>
+            
 
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
                         <asp:MenuItem NavigateUrl="Default.aspx" Text="Home"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="Products/Wheels.aspx" Text="Wheels">
+                        <asp:MenuItem Text="Wheels">
                         <asp:MenuItem NavigateUrl="~/Products/WheelsAll.aspx" Text="View All"></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/Products/WheelsByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
                         </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="Tires.aspx" Text="Tires">
+                        <asp:MenuItem Text="Tires">
                         <asp:MenuItem NavigateUrl="~/Products/TiresAll.aspx" Text="View All"></asp:MenuItem>
                         <asp:MenuItem NavigateUrl="~/Products/TiresByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
                         </asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="Accessories.aspx" Text="Accessories">
+                        <asp:MenuItem Text="Accessories">
                         <asp:MenuItem NavigateUrl="~/Products/AccessoriesAll.aspx" Text="View All"></asp:MenuItem>
                         </asp:MenuItem>
                          <asp:MenuItem NavigateUrl="Account/UserCenter.aspx" Text="User Center">

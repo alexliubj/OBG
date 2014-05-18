@@ -6,10 +6,11 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using BusinessLogic;
+using OBGModel;
 
 public partial class Products_wheelall : System.Web.UI.Page
 {
-     //string strProductID = "";
+     string strProductID = "";
     //Wheels wheels = new Wheels();
     private DataSet wheelsDataSet;
     //private DataSet tiresDataSet;
@@ -79,7 +80,13 @@ public partial class Products_wheelall : System.Web.UI.Page
 
     }
 
+    protected void AddBt_Click(object sender, EventArgs e)
+    {
+        Wheels wheel = new Wheels();
 
+        WheelsBLO.AddNewProduct(wheel);
+        Response.Redirect("~/ShoppingCart.aspx?ProductId=" + strProductID + "&Num=1");
+    }
     //private void Gridview1_Bind()
     //{
     //    throw new NotImplementedException();

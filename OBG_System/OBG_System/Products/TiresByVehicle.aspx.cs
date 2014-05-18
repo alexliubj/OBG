@@ -6,9 +6,11 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using BusinessLogic;
+using OBGModel;
 
 public partial class Products_tireByVehicle : System.Web.UI.Page
 {
+    string strProductID = "";
     private DataSet tiresDataSet;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -63,5 +65,11 @@ public partial class Products_tireByVehicle : System.Web.UI.Page
     protected void GridView2_SelectedIndexChanged(object sender, EventArgs e)
     {
 
+    }
+    protected void AddBt_Click(object sender, EventArgs e)
+    {
+        Tire tire = new Tire();
+        TiresBLO.CreateNewTire(tire);
+        Response.Redirect("~/ShoppingCart.aspx?ProductId=" + strProductID + "&Num=1");
     }
 }
