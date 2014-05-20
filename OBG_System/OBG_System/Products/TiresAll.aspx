@@ -110,7 +110,7 @@
         OnRowDataBound="GridView2_RowDataBound">
     <AlternatingRowStyle BackColor="White" />
             <Columns>
-            <asp:BoundField DataField="TireId" HeaderText="Tire ID" InsertVisible="False" ReadOnly="True" SortExpression="TireId" />
+            <%--<asp:BoundField DataField="TireId" HeaderText="Tire ID" InsertVisible="False" ReadOnly="True" SortExpression="TireId" />
             <asp:TemplateField HeaderText="Choose">
 
              <ItemTemplate>
@@ -119,7 +119,7 @@
 
             </ItemTemplate>
 
-    </asp:TemplateField>
+    </asp:TemplateField>--%>
             <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>

@@ -228,7 +228,7 @@
         
     <AlternatingRowStyle BackColor="White" />
             <Columns>
-            <asp:BoundField DataField="ProductId" HeaderText="Product ID" InsertVisible="False" ReadOnly="True" SortExpression="ProductId" />
+            <%--<asp:BoundField DataField="ProductId" HeaderText="Product ID" InsertVisible="False" ReadOnly="True" SortExpression="ProductId" />--%>
             
             <asp:TemplateField HeaderText="Image" SortExpression="Image">
                 <EditItemTemplate>
