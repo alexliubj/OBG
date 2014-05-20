@@ -12,6 +12,7 @@ using System.Data.SqlClient;
 public partial class Admin_Default : System.Web.UI.Page
 {
     DataSet rolesDataSet;
+    DataSet userRolesDataSet;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -168,9 +169,9 @@ public partial class Admin_Default : System.Web.UI.Page
     public void Gridview2_Bind()
     {
 
-       // DataTable userRolesTable = RoleBLO.
-        //rolesDataSet = new DataSet();
-        //rolesDataSet.Tables.Add(rolesTable);
+        DataTable userRolesTable = RoleBLO.GetAllUsersWithRole();
+        userRolesDataSet = new DataSet();
+        userRolesDataSet.Tables.Add(userRolesTable);
 
         GridView2.DataSource = rolesDataSet;
         GridView2.DataKeyNames = new string[] { "Uid" };
