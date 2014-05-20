@@ -8,6 +8,13 @@
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
    
     </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .style1
+        {
+            width: 284px;
+            height: 107px;
+        }
+    </style>
 </head>
 <body>
     <form runat="server">
@@ -15,7 +22,7 @@
         <div class="header">
             <div class="title">
                 <h1>
-                    OBG Orderring System
+                    <img class="style1" src="Pictures/logo.png" />OBG Orderring System
                 </h1>
             </div>
 
