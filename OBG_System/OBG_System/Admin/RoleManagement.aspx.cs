@@ -19,6 +19,7 @@ public partial class Admin_Default : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             Gridview1_Bind();
+            Gridview2_Bind();
         }
     }
 
@@ -173,7 +174,7 @@ public partial class Admin_Default : System.Web.UI.Page
         userRolesDataSet = new DataSet();
         userRolesDataSet.Tables.Add(userRolesTable);
 
-        GridView2.DataSource = rolesDataSet;
+        GridView2.DataSource = userRolesDataSet;
         GridView2.DataKeyNames = new string[] { "Uid" };
         GridView2.DataBind();
     }

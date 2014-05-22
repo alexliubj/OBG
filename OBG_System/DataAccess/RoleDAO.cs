@@ -141,11 +141,12 @@ namespace DataAccess
 
         public static DataTable GetAllUsersWithRole()
         {
-            DbCommand command = db.GetSqlStringCommond(@"SELECT u.[UserId]
+            DbCommand command = db.GetSqlStringCommond(@"SELECT ur.[uid]
+                                                      ,u.[UserId]
                                                       ,u.[UserName]
                                                       ,u.[CompanyName]
                                                       ,u.[FirstName]
-                                                      ,u.[LastName],r.rolename,r.roleid
+                                                      ,u.[LastName],r.rolename,r.roleid, ur.[des]
                                                   FROM [Users] u join [UserRole] ur 
                                                   on u.userid = ur.userid
                                                   join [Role] r
