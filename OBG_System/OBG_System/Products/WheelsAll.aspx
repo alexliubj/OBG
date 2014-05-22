@@ -228,103 +228,109 @@
         
     <AlternatingRowStyle BackColor="White" />
             <Columns>
-            <%--<asp:BoundField DataField="ProductId" HeaderText="Product ID" InsertVisible="False" ReadOnly="True" SortExpression="ProductId" />--%>
+            <asp:BoundField DataField="ProductId" HeaderText="Product ID" InsertVisible="False" ReadOnly="True" SortExpression="ProductId" visible="False"/>
             
             <asp:TemplateField HeaderText="Image" SortExpression="Image">
-                <EditItemTemplate>
+                <%--<EditItemTemplate>
                     <asp:TextBox ID="ImageTextBox" runat="server" Text='<%# Bind("Image") %>'></asp:TextBox>
-                </EditItemTemplate>
+                </EditItemTemplate>--%>
                 <ItemTemplate>
                     <asp:Label ID="ImageLable" runat="server" Text='<%# Bind("Image") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Style" SortExpression="Style">
-                <EditItemTemplate>
+                <%--<EditItemTemplate>
                     <asp:TextBox ID="StyleTextBox" runat="server" Text='<%# Bind("Style") %>'></asp:TextBox>
-                </EditItemTemplate>
+                </EditItemTemplate>--%>
                 <ItemTemplate>
                     <asp:Label ID="StyleLabel" runat="server" Text='<%# Bind("Style") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Brand" SortExpression="Brand">
-                <EditItemTemplate>
+                <%--<EditItemTemplate>
                     <asp:TextBox ID="BrandTextBox" runat="server" Text='<%# Bind("Brand") %>'></asp:TextBox>
-                </EditItemTemplate>
+                </EditItemTemplate>--%>
                 <ItemTemplate>
                     <asp:Label ID="BrandLabel" runat="server" Text='<%# Bind("Brand") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Size" SortExpression="Size">
-                <EditItemTemplate>
+                <%--<EditItemTemplate>
                     <asp:TextBox ID="SizeTextBox" runat="server" Text='<%# Bind("Size") %>'></asp:TextBox>
-                </EditItemTemplate>
+                </EditItemTemplate>--%>
                 <ItemTemplate>
                     <asp:Label ID="SizeLabel" runat="server" Text='<%# Bind("Size") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Pcd" SortExpression="Pcd">
-                <EditItemTemplate>
+               <%-- <EditItemTemplate>
                     <asp:TextBox ID="PCDTextBox" runat="server" Text='<%# Bind("Pcd") %>'></asp:TextBox>
-                </EditItemTemplate>
+                </EditItemTemplate>--%>
                 <ItemTemplate>
                     <asp:Label ID="PCDLabel" runat="server" Text='<%# Bind("Pcd") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
                  <asp:TemplateField HeaderText="Finish" SortExpression="Finish">
-                <EditItemTemplate>
+               <%-- <EditItemTemplate>
                     <asp:TextBox ID="FinishTextBox" runat="server" Text='<%# Bind("Finish") %>'></asp:TextBox>
-                </EditItemTemplate>
+                </EditItemTemplate>--%>
                 <ItemTemplate>
                     <asp:Label ID="FinishLabel" runat="server" Text='<%# Bind("Finish") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
                  <asp:TemplateField HeaderText="Offset" SortExpression="Offset">
-                <EditItemTemplate>
+               <%-- <EditItemTemplate>
                     <asp:TextBox ID="OffsetTextBox" runat="server" Text='<%# Bind("Offset") %>'></asp:TextBox>
-                </EditItemTemplate>
+                </EditItemTemplate>--%>
                 <ItemTemplate>
                     <asp:Label ID="OffsetLabel" runat="server" Text='<%# Bind("Offset") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
                    <asp:TemplateField HeaderText="Seat" SortExpression="Seat">
-                <EditItemTemplate>
+                <%--<EditItemTemplate>
                     <asp:TextBox ID="SeatTextBox" runat="server" Text='<%# Bind("Seat") %>'></asp:TextBox>
-                </EditItemTemplate>
+                </EditItemTemplate>--%>
                 <ItemTemplate>
                     <asp:Label ID="SeatLabel" runat="server" Text='<%# Bind("Seat") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
                    <asp:TemplateField HeaderText="Bore" SortExpression="Bore">
-                <EditItemTemplate>
+                <%--<EditItemTemplate>
                     <asp:TextBox ID="BoreTextBox" runat="server" Text='<%# Bind("Bore") %>'></asp:TextBox>
-                </EditItemTemplate>
+                </EditItemTemplate>--%>
                 <ItemTemplate>
                     <asp:Label ID="BoreLabel" runat="server" Text='<%# Bind("Bore") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
                   <asp:TemplateField HeaderText="Weight" SortExpression="Weight">
-                <EditItemTemplate>
+                <%--<EditItemTemplate>
                     <asp:TextBox ID="WeightTextBox" runat="server" Text='<%# Bind("Weight") %>'></asp:TextBox>
-                </EditItemTemplate>
+                </EditItemTemplate>--%>
                 <ItemTemplate>
                     <asp:Label ID="WeightLabel" runat="server" Text='<%# Bind("Weight") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
                   <asp:TemplateField HeaderText="Onhand" SortExpression="Onhand">
-                <EditItemTemplate>
+                <%--<EditItemTemplate>
                     <asp:TextBox ID="OnhandTextBox" runat="server" Text='<%# Bind("Onhand") %>'></asp:TextBox>
-                </EditItemTemplate>
+                </EditItemTemplate>--%>
                 <ItemTemplate>
                     <asp:Label ID="OnhandLabel" runat="server" Text='<%# Bind("Onhand") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
                   <asp:TemplateField HeaderText="Price" SortExpression="Price">
-                <EditItemTemplate>
+                <%--<EditItemTemplate>
                     <asp:TextBox ID="PriceTextBox" runat="server" Text='<%# Bind("Price") %>'></asp:TextBox>
-                </EditItemTemplate>
+                </EditItemTemplate>--%>
                 <ItemTemplate>
                     <asp:Label ID="PriceLabel" runat="server" Text='<%# Bind("Price") %>'></asp:Label>
                 </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="QTY" SortExpression="QTY">
+                <EditItemTemplate>
+                    <asp:TextBox ID="QTYTextBox" runat="server" Text="1"></asp:TextBox>
+                </EditItemTemplate>
+                
             </asp:TemplateField>
                  <%-- <asp:TemplateField HeaderText="CategoryId" SortExpression="CategoryId">
                 <EditItemTemplate>

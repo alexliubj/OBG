@@ -13,37 +13,40 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
 {
     DataTable Cart = new DataTable();
     DataRow dr;
-   
+    private const string SESSION_CAR = "Car";
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        string productId;
-        if (Session["ShoppingCart"]==null)
-        {
-            Cart.Columns.Add(new DataColumn("productid", typeof(string)));
-            Cart.Columns.Add(new DataColumn("productName", typeof(string)));
-            Cart.Columns.Add(new DataColumn("productQTY", typeof(string)));
-            Cart.Columns.Add(new DataColumn("productPrice", typeof(string)));
-            Session["ShoppingCart"] = Cart;
-        }
-        else
-        {
-            Cart = (DataTable)Session["ShoppingCart"];
-        }
-
-        if (Request.QueryString["productid"] != null)
-        {
-            productId = Request.QueryString["productid"];
-            addItem(productId);
-        }
-       // showItem();
     }
 
-    private void addItem(string productId)
-    {
-        //string pidSql="select Pro"
-        throw new NotImplementedException();
-    }
+   // public void AddItem(int pr)
+
+    //    string productId;
+    //    if (Session["ShoppingCart"]==null)
+    //    {
+    //        Cart.Columns.Add(new DataColumn("productid", typeof(string)));
+    //        Cart.Columns.Add(new DataColumn("productName", typeof(string)));
+    //        Cart.Columns.Add(new DataColumn("productQTY", typeof(string)));
+    //        Cart.Columns.Add(new DataColumn("productPrice", typeof(string)));
+    //        Session["ShoppingCart"] = Cart;
+    //    }
+    //    else
+    //    {
+    //        Cart = (DataTable)Session["ShoppingCart"];
+    //    }
+
+    //    if (Request.QueryString["productid"] != null)
+    //    {
+    //        productId = Request.QueryString["productid"];
+    //        addItem(productId);
+    //    }
+    //   // showItem();
+    //}
+
+    //private void addItem(string productId)
+    //{
+    //    //string pidSql="select Pro"
+    //    throw new NotImplementedException();
+    //}
 
 
 

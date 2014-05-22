@@ -14,6 +14,23 @@ namespace OBGModel
             get { return userid; }
             set { userid = value; }
         }
+
+        private int tireId;
+        public int TireId
+        {
+            get { return tireId; }
+            set { tireId = value; }
+        }
+
+        private int accId;
+        public int AccId
+        {
+            get { return tireId; }
+            set { tireId = value; }
+        }
+        
+        
+        
         private int productId;
 
         public int ProductId
@@ -27,6 +44,13 @@ namespace OBGModel
         {
             get { return qty; }
             set { qty = value; }
+        }
+
+        private double pricing;
+        public double Pricing
+        {
+            get { return pricing; }
+            set { pricing = value; }
         }
     }
 }
