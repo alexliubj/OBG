@@ -14,7 +14,7 @@
         <div class="header">
             <div class="title">
                 <h1>
-                    OBG Administrator Management Page
+                    <img class="style1" src="<%= Page.ResolveUrl("~")%>Pictures/logo.png" />OBG Management Page
                 </h1>
             </div>
             <div class="loginDisplay">
