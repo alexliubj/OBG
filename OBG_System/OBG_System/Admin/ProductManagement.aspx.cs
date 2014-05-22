@@ -327,23 +327,21 @@ public partial class Admin_Default : System.Web.UI.Page
     {
         if (e.Item.Text == "Wheels")
         {
-            GridView1.Visible = true;
-            GridView2.Visible = false;
-            GridView3.Visible = false;
+            divWheel.Visible = true;
+            divTire.Visible = false;
+            divAcc.Visible = false;
         }
         if (e.Item.Text == "Tires")
         {
-            GridView2.Visible = true;
-            GridView1.Visible = false;
-            GridView3.Visible = false;
-            wheelInformation.Visible = false;
+            divWheel.Visible = false;
+            divTire.Visible = true;
+            divAcc.Visible = false;
         }
         if (e.Item.Text == "Accessories")
         {
-            GridView3.Visible = true;
-            GridView1.Visible = false;
-            GridView2.Visible = false;
-            wheelInformation.Visible = false;
+            divWheel.Visible = false;
+            divTire.Visible = false;
+            divAcc.Visible = true;
         }
 
     }

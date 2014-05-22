@@ -62,6 +62,11 @@ namespace DataAccess
             DbCommand command = db.GetSqlStringCommond(@"delete from role where roleId = @roleId");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@roleId", roleId) };
             command.Parameters.AddRange(paras);
+            //should be in transaction
+            DbCommand command2 = db.GetSqlStringCommond(@"delete from discount where roleId = @roleId");
+            command2.Parameters.AddRange(paras);
+            db.ExecuteNonQuery(command2);
+
             return db.ExecuteNonQuery(command);
         }
 
@@ -141,11 +146,12 @@ namespace DataAccess
 
         public static DataTable GetAllUsersWithRole()
         {
-            DbCommand command = db.GetSqlStringCommond(@"SELECT u.[UserId]
+            DbCommand command = db.GetSqlStringCommond(@"SELECT ur.[uid]
+                                                      ,u.[UserId]
                                                       ,u.[UserName]
                                                       ,u.[CompanyName]
                                                       ,u.[FirstName]
-                                                      ,u.[LastName],r.rolename,r.roleid
+                                                      ,u.[LastName],r.rolename,r.roleid, ur.[des]
                                                   FROM [Users] u join [UserRole] ur 
                                                   on u.userid = ur.userid
                                                   join [Role] r

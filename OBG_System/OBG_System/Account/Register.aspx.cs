@@ -41,6 +41,8 @@ public partial class Account_Register : System.Web.UI.Page
         newUser.FirstName = FirstName.Text;
         newUser.LastName = LastName.Text;
         newUser.Email = Email.Text;
+        newUser.BillAddress = string.Empty;
+        newUser.BillPostCode = string.Empty;
 
         int newId = UserBLO.Registration(newUser);
 

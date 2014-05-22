@@ -3,7 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-     <asp:Button ID="btnAddRegion" runat="server" Text="Add New Region" OnClick="btnAddRegion_Click" align="right"/>
     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="RegionId" ForeColor="#333333"
         GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
         OnRowDeleting="GridView1_RowDeleting"
@@ -54,6 +53,7 @@
         <SortedDescendingCellStyle BackColor="#E9EBEF" />
         <SortedDescendingHeaderStyle BackColor="#4870BE" />
     </asp:GridView>
+    <asp:Button ID="btnAddRegion" runat="server" Text="Add New Region" OnClick="btnAddRegion_Click" align="right"/>
 
     <div id="regionInformation" runat="server" visible="True">
         <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification"

@@ -8,7 +8,9 @@ AutoEventWireup="true" CodeFile="UserManagement.aspx.cs" Inherits="Admin_Default
     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="UserId" ForeColor="#333333" 
     GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
         OnRowDeleting="GridView1_RowDeleting"
-        OnRowUpdating="GridView1_RowUpdating" OnRowDataBound="GridView1_RowDataBound">
+        OnRowUpdating="GridView1_RowUpdating"
+         OnRowDataBound="GridView1_RowDataBound"
+         OnRowCreated ="GridView1_RowCreated">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:BoundField DataField="UserId" HeaderText="UserId" InsertVisible="False" ReadOnly="True" SortExpression="UserId" />
@@ -56,6 +58,17 @@ AutoEventWireup="true" CodeFile="UserManagement.aspx.cs" Inherits="Admin_Default
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("Phone") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
+
+                 <asp:TemplateField ItemStyle-CssClass="HiddenColumn" HeaderStyle-CssClass="HiddenColumn" FooterStyle-CssClass="none" >
+                 
+            <HeaderStyle CssClass="HiddenColumn" />
+                                    <ItemStyle CssClass="HiddenColumn" /> 
+                    <ItemTemplate>
+                    
+                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select" 
+                            Text="Select"></asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
             <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" />
             <asp:TemplateField HeaderText="Change Status">
                 <ItemTemplate>
@@ -276,4 +289,5 @@ AutoEventWireup="true" CodeFile="UserManagement.aspx.cs" Inherits="Admin_Default
             </table>
         </fieldset>
     </div>
+   
 </asp:Content>
