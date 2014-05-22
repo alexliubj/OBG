@@ -11,39 +11,71 @@ using System.Data;
 
 public partial class Account_ShoppingCart : System.Web.UI.Page
 {
-    string strProductID = "";
-    private DataSet ShoppingDataSet;
+    DataTable Cart = new DataTable();
+    DataRow dr;
+   
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+
+        string productId;
+        if (Session["ShoppingCart"]==null)
         {
-            ShoppingCartGridView_Bind();
+            Cart.Columns.Add(new DataColumn("productid", typeof(string)));
+            Cart.Columns.Add(new DataColumn("productName", typeof(string)));
+            Cart.Columns.Add(new DataColumn("productQTY", typeof(string)));
+            Cart.Columns.Add(new DataColumn("productPrice", typeof(string)));
+            Session["ShoppingCart"] = Cart;
         }
+        else
+        {
+            Cart = (DataTable)Session["ShoppingCart"];
+        }
+
+        if (Request.QueryString["productid"] != null)
+        {
+            productId = Request.QueryString["productid"];
+            addItem(productId);
+        }
+       // showItem();
     }
-    public void ShoppingCartGridView_Bind()
+
+    private void addItem(string productId)
     {
-
-        //DataTable ShoppingTable = OrderBLO.get;
-
+        //string pidSql="select Pro"
+        throw new NotImplementedException();
     }
 
-    protected void GridView2_RowEditing(object sender, GridViewEditEventArgs e)
-    {
 
 
-    }
-
-    //protected void GridView2_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    //    if (!IsPostBack)
+    //    {
+    //        ShoppingCartGridView_Bind();
+    //    }
+    //}
+    //public void ShoppingCartGridView_Bind()
     //{
-    //    int TireID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
-    //    TiresBLO.DeleteTire(TireID);
-    //    GridView2_Bind();
+
+    //    //DataTable ShoppingTable = OrderBLO.get;
+
     //}
 
-   
+    //protected void ShoppingCartGridView_RowEditing(object sender, GridViewEditEventArgs e)
+    //{
+
+
+    //}
+
+    ////protected void GridView2_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    ////{
+    ////    int TireID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
+    ////    TiresBLO.DeleteTire(TireID);
+    ////    GridView2_Bind();
+    ////}
+
+
     protected void IBTCheckout_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("~/ShoppingCart.aspx?ProductID=" + strProductID + "&Num=1");
+       // Response.Redirect("~/ShoppingCart.aspx?ProductID=" + strProductID + "&Num=1");
     }
     protected void LBRepost_Click(object sender, EventArgs e)
     {

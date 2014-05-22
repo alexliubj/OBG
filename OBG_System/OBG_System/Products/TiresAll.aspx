@@ -1,6 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="TiresAll.aspx.cs" Inherits="Products_tireall" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
+    <style type="text/css">
+    .style2
+    {
+        height: 24px;
+    }
+</style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
 
@@ -10,18 +16,26 @@
             <legend>Choose your tires</legend>
             <table>
                 <tr>
-                    <td>
+                    <td class="style2">
                         <asp:Label ID="partLabel" runat="server" >PartNo:</asp:Label>
                     </td>
-                    <td>
-                         <asp:CheckBox ID="partCheck1" runat="server" Text='All' /></td><td>
-                         <asp:CheckBox ID="partCheck2" runat="server" Text='Europa' /></td><td>
-                         <asp:CheckBox ID="partCheck3" runat="server" Text='R117A' /></td><td>
-                         <asp:CheckBox ID="partCheck4" runat="server" Text='R133A' /></td><td>
-                         <asp:CheckBox ID="partCheck5" runat="server" Text='R152' /></td><td>
-                         <asp:CheckBox ID="partCheck6" runat="server" Text='R115' /></td><td>
-                         <asp:CheckBox ID="partCheck7" runat="server" Text='Numesis' /></td><td>
-                         <asp:CheckBox ID="partCheck8" runat="server" Text='R142' /></td><td>
+                    <td class="style2">
+                         <asp:CheckBox ID="partCheck1" runat="server" Text='All' /></td>
+                    <td class="style2">
+                         <asp:CheckBox ID="partCheck2" runat="server" Text='Europa' /></td>
+                    <td class="style2">
+                         <asp:CheckBox ID="partCheck3" runat="server" Text='R117A' /></td>
+                    <td class="style2">
+                         <asp:CheckBox ID="partCheck4" runat="server" Text='R133A' /></td>
+                    <td class="style2">
+                         <asp:CheckBox ID="partCheck5" runat="server" Text='R152' /></td>
+                    <td class="style2">
+                         <asp:CheckBox ID="partCheck6" runat="server" Text='R115' /></td>
+                    <td class="style2">
+                         <asp:CheckBox ID="partCheck7" runat="server" Text='Numesis' /></td>
+                    <td class="style2">
+                         <asp:CheckBox ID="partCheck8" runat="server" Text='R142' /></td>
+                    <td class="style2">
                        
                     </td>
                 </tr>
@@ -96,7 +110,7 @@
         OnRowDataBound="GridView2_RowDataBound">
     <AlternatingRowStyle BackColor="White" />
             <Columns>
-            <asp:BoundField DataField="TireId" HeaderText="Tire ID" InsertVisible="False" ReadOnly="True" SortExpression="TireId" />
+            <%--<asp:BoundField DataField="TireId" HeaderText="Tire ID" InsertVisible="False" ReadOnly="True" SortExpression="TireId" />
             <asp:TemplateField HeaderText="Choose">
 
              <ItemTemplate>
@@ -105,7 +119,7 @@
 
             </ItemTemplate>
 
-    </asp:TemplateField>
+    </asp:TemplateField>--%>
             <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>

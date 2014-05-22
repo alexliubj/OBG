@@ -8,6 +8,13 @@
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
    
     </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .style1
+        {
+            width: 284px;
+            height: 107px;
+        }
+    </style>
 </head>
 <body>
     <form runat="server">
@@ -15,7 +22,7 @@
         <div class="header">
             <div class="title">
                 <h1>
-                    OBG Orderring System
+                    <img class="style1" src="<%= Page.ResolveUrl("~")%>Pictures/logo.png" />OBG Orderring System
                 </h1>
             </div>
 
@@ -27,8 +34,8 @@
 
 
              <div class="shoppingcart" align=right>
-                 <a ID="shoppingcart" runat="server" href="~/Account/ShoppingCart.aspx"><asp:Image ID="Image1"  runat="server" 
-                     src="Pictures/shoppingcart.png" Height="50px" Width="85px"/></a></div>
+                 <a ID="shoppingcart" runat="server" href="~/Account/ShoppingCart.aspx"><img ID="Image1" 
+                     src="<%= Page.ResolveUrl("~")%>Pictures/shoppingcart.png" Height="50px" Width="85px"/></a></div>
             
 
             <div class="clear hideSkiplink">

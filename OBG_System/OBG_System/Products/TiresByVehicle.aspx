@@ -40,7 +40,7 @@
         OnRowDataBound="GridView2_RowDataBound">
     <AlternatingRowStyle BackColor="White" />
             <Columns>
-            <asp:BoundField DataField="TireId" HeaderText="Tire ID" InsertVisible="False" ReadOnly="True" SortExpression="TireId" />
+            <%--<asp:BoundField DataField="TireId" HeaderText="Tire ID" InsertVisible="False" ReadOnly="True" SortExpression="TireId" />--%>
             
 
             <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
