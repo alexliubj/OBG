@@ -58,6 +58,17 @@ AutoEventWireup="true" CodeFile="UserManagement.aspx.cs" Inherits="Admin_Default
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("Phone") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
+
+                 <asp:TemplateField ItemStyle-CssClass="HiddenColumn" HeaderStyle-CssClass="HiddenColumn" FooterStyle-CssClass="none" >
+                 
+            <HeaderStyle CssClass="HiddenColumn" />
+                                    <ItemStyle CssClass="HiddenColumn" /> 
+                    <ItemTemplate>
+                    
+                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select" 
+                            Text="Select"></asp:LinkButton>
+                    </ItemTemplate>
+                </asp:TemplateField>
             <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" />
             <asp:TemplateField HeaderText="Change Status">
                 <ItemTemplate>
@@ -278,4 +289,5 @@ AutoEventWireup="true" CodeFile="UserManagement.aspx.cs" Inherits="Admin_Default
             </table>
         </fieldset>
     </div>
+   
 </asp:Content>

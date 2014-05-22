@@ -1,6 +1,9 @@
 ﻿/* DEFAULTS
 ----------------------------------------------------------*/
 
+.HiddenColumn {
+        display: none;
+        }
 body   
 {
     background: #b6b7bc;

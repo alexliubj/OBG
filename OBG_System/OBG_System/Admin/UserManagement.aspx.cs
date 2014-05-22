@@ -95,8 +95,18 @@ public partial class Admin_Default : System.Web.UI.Page
         }
     }
 
+    //http://hi.baidu.com/utxqrqhkvhbgmwd/item/6f5562e5bd14f301570f1d07
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
+
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            e.Row.Attributes["OnClick"] = ClientScript.GetPostBackEventReference(e.Row.Parent.Parent, "Select$" + e.Row.RowIndex);
+            e.Row.Attributes.Add("onMouseOver", "t=this.style.backgroundColor;this.style.backgroundColor='#ebebce'");
+            e.Row.Attributes.Add("onMouseOut", " this.style.backgroundColor=t");
+            e.Row.Attributes.CssStyle.Add("cursor", "hand");
+        }
+
         //if (e.Row.RowType == DataControlRowType.DataRow)
         //{
         //    ((Button)e.Row.Cells[8].Controls[0]).OnClientClick = "return confirm('Do you really want to delete?');";
