@@ -8,7 +8,9 @@ AutoEventWireup="true" CodeFile="UserManagement.aspx.cs" Inherits="Admin_Default
     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="UserId" ForeColor="#333333" 
     GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
         OnRowDeleting="GridView1_RowDeleting"
-        OnRowUpdating="GridView1_RowUpdating" OnRowDataBound="GridView1_RowDataBound">
+        OnRowUpdating="GridView1_RowUpdating"
+         OnRowDataBound="GridView1_RowDataBound"
+         OnRowCreated ="GridView1_RowCreated">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:BoundField DataField="UserId" HeaderText="UserId" InsertVisible="False" ReadOnly="True" SortExpression="UserId" />

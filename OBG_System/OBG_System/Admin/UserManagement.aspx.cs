@@ -22,6 +22,19 @@ public partial class Admin_Default : System.Web.UI.Page
         }
         
     }
+
+    protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            e.Row.Attributes.Add("onmouseover", "currentcolor=this.style.backgroundColor;this.style.backgroundColor='#C0C0FF';this.style.cursor='hand';");
+            //当鼠标移走时还原该行的背景色
+            e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor=currentcolor");
+            //选择任意处都选择
+            e.Row.Attributes.Add("onClick", "javascript:__doPostBack('" + GridView1.ID + "','Select$" + e.Row.RowIndex + "');");
+        }
+    }
+
     protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
     {
         GridView1.EditIndex = e.NewEditIndex;
@@ -215,19 +228,22 @@ public partial class Admin_Default : System.Web.UI.Page
     }
     protected void activeButton_Click(object sender, EventArgs e)
     {
-        int userID = Convert.ToInt32(GridView1.SelectedValue.ToString());
+        if (GridView1.SelectedValue != null)
+        {
+            int userID = Convert.ToInt32(GridView1.SelectedValue.ToString());
 
-        User user = new User();
-        user = UserBLO.GetUserInfoWithUserId(userID);
-        if (user.Status == 0)
-        {
-            UserBLO.AdminActiveUserStatus(userID, 1);
+            User user = new User();
+            user = UserBLO.GetUserInfoWithUserId(userID);
+            if (user.Status == 0)
+            {
+                UserBLO.AdminActiveUserStatus(userID, 1);
+            }
+            else if (user.Status == 1)
+            {
+                UserBLO.AdminActiveUserStatus(userID, 0);
+            }
+            bind();
         }
-        else if (user.Status == 1)
-        {
-            UserBLO.AdminActiveUserStatus(userID, 0);
-        }
-        bind();
     }
     protected void btnAddUser_Click(object sender, EventArgs e)
     {
