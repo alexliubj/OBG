@@ -18,7 +18,6 @@ public partial class Admin_Default : System.Web.UI.Page
         if (!IsPostBack)
         {
             bind();
-
         }
     }
 
@@ -84,6 +83,7 @@ public partial class Admin_Default : System.Web.UI.Page
                         "alert('Sorry, Saving Region information failed.');",
                         true);
         }
+        bind();
     }
     protected void BtnCancle_Click(object sender, EventArgs e)
     {
@@ -96,9 +96,9 @@ public partial class Admin_Default : System.Web.UI.Page
         Shipping region = new Shipping();
 
         // region = UserBLO.GetUserInfoWithUserId(userID);
-        RegionName.Text = region.RegionName;
-        Price.Text = region.RegionPrice.ToString();
-        DevMethods.Text = region.DevMethods;
+        RegionName.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label2"))).Text;
+        Price.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label3"))).Text;
+        DevMethods.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label4"))).Text;
 
         regionInformation.Visible = true;
         BtnAdd.Visible = false;
@@ -129,7 +129,7 @@ public partial class Admin_Default : System.Web.UI.Page
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                             "err_msg",
                             "alert('success.');", true);
-            bind();
         }
+        bind();
     }
 }

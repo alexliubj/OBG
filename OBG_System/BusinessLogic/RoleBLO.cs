@@ -20,7 +20,7 @@ namespace BusinessLogic
             return RoleDAO.DeleteRoleByRoleId(roleId);
         }
 
-        public static int ModifyRoleName(int roleId, string roleName,string description)
+        public static int ModifyRoleName(int roleId, string roleName, string description)
         {
             return RoleDAO.ModifyRoleName(roleId, roleName, description);
         }
@@ -47,6 +47,11 @@ namespace BusinessLogic
         public static DataTable GetAllUsersWithRole()
         {
             return RoleDAO.GetAllUsersWithRole();
+        }
+
+        public static int UpdateUserRole(int userId, int roleId, string des)
+        {
+            return RoleDAO.UpdateUserRole(userId, roleId, des);
         }
     }
 }

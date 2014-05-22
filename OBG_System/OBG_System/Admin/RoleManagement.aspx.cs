@@ -26,7 +26,7 @@ public partial class Admin_Default : System.Web.UI.Page
     #region Role
     protected void BtnSave_Click(object sender, EventArgs e)
     {
-        Role role = new Role(); 
+        Role role = new Role();
         int roleID;
         roleID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
         role.RoleName = RoleName.Text;
@@ -49,6 +49,7 @@ public partial class Admin_Default : System.Web.UI.Page
                         "alert('Sorry, Saving Role information failed.');",
                         true);
         }
+        Gridview1_Bind();
     }
     protected void BtnCancle_Click(object sender, EventArgs e)
     {
@@ -59,21 +60,18 @@ public partial class Admin_Default : System.Web.UI.Page
     {
         int roleID;
         roleID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
-        Role role = new Role(); 
-        //need method getwheelInfoByProductID
-        // wheel = WheelsBLO.getwheelInfoByProductID(productID);
+        Role role = new Role();
 
-        RoleName.Text = role.RoleName;
-        Des.Text = role.Des;
+        RoleName.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label2"))).Text;
+        Des.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label3"))).Text;
 
         roleInformation.Visible = true;
 
         BtnAdd.Visible = false;
         BtnSave.Visible = true;
     }
-    protected void Button1_Click(object sender, EventArgs e)
+    protected void btnAddRole_Click(object sender, EventArgs e)
     {
-
         RoleName.Text = null;
         Des.Text = null;
 
@@ -89,11 +87,28 @@ public partial class Admin_Default : System.Web.UI.Page
         role.RoleName = RoleName.Text;
         role.Des = Des.Text;
 
-        RoleBLO.AddNewRole(role);
+        int update = 0;
+        update = RoleBLO.AddNewRole(role);
+
+        if (update == 1)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                         "err_msg",
+                         "alert('Role has been created.');",
+                         true);
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                        "err_msg",
+                        "alert('Sorry, Creating Role information failed.');",
+                        true);
+        }
+        Gridview1_Bind();
     }
 
 
-     public void Gridview1_Bind()
+    public void Gridview1_Bind()
     {
 
         DataTable rolesTable = RoleBLO.GetAllRoleList();
@@ -154,17 +169,18 @@ public partial class Admin_Default : System.Web.UI.Page
     {
 
     }
+
     #endregion
 
 
     #region UserRole
     protected void GridView2_SelectedIndexChanged(object sender, EventArgs e)
     {
-        int Uid;
-        Uid = int.Parse(GridView1.SelectedRow.Cells[0].Text);
-        UserRole userRole = new UserRole();
+        //int Uid;
+        //Uid = int.Parse(GridView2.SelectedRow.Cells[0].Text);
+        //UserRole userRole = new UserRole();
         //need method getwheelInfoByProductID
-        // wheel = WheelsBLO.getwheelInfoByProductID(productID);
+        //userRole = RoleBLO.
     }
 
     public void Gridview2_Bind()
@@ -178,5 +194,49 @@ public partial class Admin_Default : System.Web.UI.Page
         GridView2.DataKeyNames = new string[] { "Uid" };
         GridView2.DataBind();
     }
+
+    protected void GridView2_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            DropDownList ddlSelectRoleName = (e.Row.FindControl("ddlSelectRoleName") as DropDownList);
+
+            DataTable rolesTable = RoleBLO.GetAllRoleList();
+            rolesDataSet = new DataSet();
+            rolesDataSet.Tables.Add(rolesTable);
+
+            ddlSelectRoleName.DataSource = rolesDataSet;
+            ddlSelectRoleName.DataTextField = "RoleName";
+            ddlSelectRoleName.DataValueField = "RoleName";
+            ddlSelectRoleName.DataBind();
+
+            ddlSelectRoleName.Items.Insert(0, new ListItem("Please select"));
+
+            string roleName = (e.Row.FindControl("lblSelectRoleName") as Label).Text;
+            ddlSelectRoleName.Items.FindByValue(roleName).Selected = true;
+        }
+    }
+
+    protected void ddlSelectRoleName_Change(object sender, EventArgs e)
+    {
+        // DropDownList ddlSelectRoleName = (GridView2.FindControl("ddlSelectRoleName") as DropDownList);
+        //string roleID = ddlSelectRoleName.SelectedValue;
+        // RoleBLO.
+        //TBA
+    }
     #endregion
+
+    protected void NavigationMenu_MenuItemClick(object sender, MenuEventArgs e)
+    {
+        if (e.Item.Text == "Role Management")
+        {
+            roleManagement.Visible = true;
+            userRoleManagement.Visible = false;
+        }
+        if (e.Item.Text == "UserRole Management")
+        {
+            roleManagement.Visible = false;
+            userRoleManagement.Visible = true;
+        }
+    }
 }
