@@ -50,11 +50,11 @@ public partial class Admin_Default : System.Web.UI.Page
     {
         int roleID = Convert.ToInt32(GridView1.Rows[e.RowIndex].Cells[0].Text);
         Discount discount = new Discount();
-        discount.RoleId = roleID;
+        discount.UserId = roleID;
         //discount.RoleName = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox2"))).Text.ToString().Trim();
         discount.DiscountRate = (float)Convert.ToInt32(((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox3"))).Text.ToString().Trim());
 
-        DiscountBLO.UpdateDiscount(discount.RoleId, discount.DiscountRate);
+        DiscountBLO.UpdateDiscount(discount.UserId, discount.DiscountRate);
 
         GridView1.EditIndex = -1;
         Gridview1_Bind();
