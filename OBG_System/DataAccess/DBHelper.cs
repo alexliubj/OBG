@@ -213,12 +213,14 @@ namespace DataAccess
         public Trans()
         {
             conn = DbHelper.CreateConnection();
+            if(conn.State != ConnectionState.Open)
             conn.Open();
             dbTrans = conn.BeginTransaction();
         }
         public Trans(string connectionString)
         {
             conn = DbHelper.CreateConnection(connectionString);
+            if (conn.State != ConnectionState.Open)
             conn.Open();
             dbTrans = conn.BeginTransaction();
         }
