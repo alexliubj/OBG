@@ -14,42 +14,43 @@ namespace DataAccess
         private static DbHelper db = new DbHelper();
         public static DataTable GetAllDiscount()
         {
-            DbCommand command = db.GetSqlStringCommond(@"select r.roleid,r.rolename, d.disrate
-                                                    from [Role] r join [Discount] d
-                                                    on r.roleid = d.roleid");
+            DbCommand command = db.GetSqlStringCommond(@"select d.userid,d.disrate,u.username
+                                                        from [discount] d inner join [users] u
+                                                        on d.userid = u.userid");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
 
-        public static int AddDiscount(int roleId, float rate)
+        public static int AddDiscount(int userId, float rate)
         {
             DbCommand command = db.GetSqlStringCommond(@"INSERT INTO [Discount]
-                                                   ([RoleId]
+                                                   ([UserId]
                                                    ,[DisRate])
                                              VALUES
-                                                   (@RoleId
+                                                   (@UserId
                                                    ,@DisRate)");
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@roleId", roleId) ,
-            new SqlParameter("@roleId",roleId)};
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@UserId", userId) ,
+            new SqlParameter("@roleId",userId)};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
 
-        public static int UpdateDiscount(int roleId, float rate)
+        public static int UpdateDiscount(int userId, float rate)
         {
             DbCommand command = db.GetSqlStringCommond(@"UPDATE [Discount]
                                                    SET [DisRate] = @rate
-                                                 WHERE roleId=@roleId");
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@roleId", roleId),
+                                                 WHERE userId=@userId");
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@userId", userId),
             new SqlParameter("@rate", rate)};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
 
-        public static int DeleteDiscount(int roleId)
+        public static int DeleteDiscount(int userId)
         {
-            DbCommand command = db.GetSqlStringCommond(@"delete from discount where roleId = @roleId");
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@roleId", roleId) };
+            DbCommand command = db.GetSqlStringCommond(@"delete from discount where userId = @userId");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userId", userId) };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }

@@ -197,7 +197,7 @@ namespace DataAccess
 
             return retUser;
         }
-
+        
         /// <summary>
         /// Active user status by user id 0-inactive/ 1- active / 2- reseved/ 3....
         /// </summary>
@@ -336,6 +336,12 @@ namespace DataAccess
             DbCommand command = db.GetSqlStringCommond(@"delete users where userid =@userid");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
             command.Parameters.AddRange(paras);
+
+            #region should be in transaction
+            DbCommand command2 = db.GetSqlStringCommond(@"delete from discount where userId = @userid");
+            command2.Parameters.AddRange(paras);
+            db.ExecuteNonQuery(command2);
+            #endregion
             return db.ExecuteNonQuery(command);
         }
 

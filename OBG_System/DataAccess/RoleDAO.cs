@@ -63,9 +63,7 @@ namespace DataAccess
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@roleId", roleId) };
             command.Parameters.AddRange(paras);
             //should be in transaction
-            DbCommand command2 = db.GetSqlStringCommond(@"delete from discount where roleId = @roleId");
-            command2.Parameters.AddRange(paras);
-            db.ExecuteNonQuery(command2);
+
 
             return db.ExecuteNonQuery(command);
         }

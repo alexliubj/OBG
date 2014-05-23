@@ -99,7 +99,6 @@ public partial class Admin_Default : System.Web.UI.Page
     //http://hi.baidu.com/utxqrqhkvhbgmwd/item/6f5562e5bd14f301570f1d07
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             e.Row.Attributes["OnClick"] = ClientScript.GetPostBackEventReference(e.Row.Parent.Parent, "Select$" + e.Row.RowIndex);
