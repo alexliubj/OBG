@@ -24,9 +24,9 @@ namespace BusinessLogic
             return DiscountDAO.UpdateDiscount(roleId, rate);
         }
 
-        public static int DeleteDiscount(int roleId)
+        public static int DeleteDiscount(int userId)
         {
-            return DiscountDAO.DeleteDiscount(roleId);
+            return DiscountDAO.DeleteDiscount(userId);
         }
     }
 }
