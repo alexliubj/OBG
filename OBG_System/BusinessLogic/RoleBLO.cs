@@ -49,9 +49,9 @@ namespace BusinessLogic
             return RoleDAO.GetAllUsersWithRole();
         }
 
-        public static int UpdateUserRole(int userId, int roleId, string des)
+        public static int UpdateUserRole(int userId, int roleId)
         {
-            return RoleDAO.UpdateUserRole(userId, roleId, des);
+            return RoleDAO.UpdateUserRole(userId, roleId);
         }
     }
 }

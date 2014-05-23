@@ -118,12 +118,11 @@ namespace DataAccess
             return retRole;
         }
 
-        public static int UpdateUserRole(int userId, int roleId, string des)
+        public static int UpdateUserRole(int userId, int roleId)
         {
             DbCommand command = db.GetSqlStringCommond(@"
                             UPDATE  [UserRole]
                                SET [RoleId] = @roleId
-                                  ,[Des] = @des
                              WHERE userid=@userid");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@userid", userId) , 
