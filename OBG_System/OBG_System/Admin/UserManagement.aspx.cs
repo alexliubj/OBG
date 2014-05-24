@@ -17,8 +17,7 @@ public partial class Admin_Default : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            bind();
-           
+            bind();         
         }
         
     }
@@ -80,6 +79,7 @@ public partial class Admin_Default : System.Web.UI.Page
         GridView1.DataSource = userDataSet;
         GridView1.DataKeyNames = new string[] { "userid" };
         GridView1.DataBind();
+
         for (int i = 0; i < GridView1.Rows.Count; i++)
         {
             if (((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text.ToString().Trim() == "0")
@@ -325,5 +325,59 @@ public partial class Admin_Default : System.Web.UI.Page
             bind();
             //add To role
         }
+    }
+
+    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView1.PageIndex = e.NewPageIndex;
+        //GridView1.DataBind();
+        bind();   
+    }
+
+    protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        //DataTable dataTable = GridView1.DataSource as DataTable;
+        DataTable dataTable = UserBLO.GetAllUsers();
+
+        if (dataTable != null)
+        {
+            DataView dataView = new DataView(dataTable);
+            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+            GridView1.DataSource = dataView;
+            GridView1.DataBind();
+        }
+        for (int i = 0; i < GridView1.Rows.Count; i++)
+        {
+            if (((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text.ToString().Trim() == "0")
+            {
+                ((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text = "Inactive";
+                ((Button)GridView1.Rows[i].Cells[7].FindControl("activeButton")).Text = "Active";
+
+            }
+            else if (((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text.ToString().Trim() == "1")
+            {
+                ((Label)(GridView1.Rows[i].Cells[2].FindControl("Label3"))).Text = "Active";
+                ((Button)GridView1.Rows[i].Cells[7].FindControl("activeButton")).Text = "Inactive";
+            }
+        }
+    }
+
+    private string ConvertSortDirectionToSql(SortDirection sortDirection)
+    {
+        string newSortDirection = String.Empty;
+
+        switch (sortDirection)
+        {
+            case SortDirection.Ascending:
+                newSortDirection = "ASC";
+                break;
+
+            case SortDirection.Descending:
+                newSortDirection = "DESC";
+                break;
+        }
+
+        return newSortDirection;
     }
 }

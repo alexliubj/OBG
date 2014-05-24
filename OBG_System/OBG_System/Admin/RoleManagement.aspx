@@ -10,9 +10,10 @@
         </Items>
     </asp:Menu>
     <div id="roleManagement" runat="server" visible="false">
-        <asp:GridView ID="GridView1" runat="server" GridLines="None" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="RoleId" ForeColor="#333333" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
+        <asp:GridView ID="GridView1" runat="server" GridLines="None" AllowPaging="True" AllowSorting="True" CellPadding="4" DataKeyNames="RoleId" ForeColor="#333333" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
             OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
-            OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDataBound="GridView1_RowDataBound">
+            OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDataBound="GridView1_RowDataBound"
+            OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="RoleId" HeaderText="Role ID" InsertVisible="False" ReadOnly="True" SortExpression="RoleId" />
@@ -101,10 +102,10 @@
     </div>
 
     <div id="userRoleManagement" runat="server" visible="false">
-        <asp:GridView ID="GridView2" runat="server" GridLines="None" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="RoleId" ForeColor="#333333" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" OnRowDataBound="GridView2_RowDataBound">
+        <asp:GridView ID="GridView2" runat="server" GridLines="None" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="RoleId" ForeColor="#333333" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" OnRowDataBound="GridView2_RowDataBound" OnPageIndexChanging="GridView2_PageIndexChanging" OnSorting="GridView2_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:BoundField DataField="Uid" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="Uid" />
+                <asp:BoundField DataField="Uid" HeaderText="ID" InsertVisible="False" ReadOnly="True" SortExpression="Uid" Visible="False"/>
                 <asp:TemplateField HeaderText="Role Name" SortExpression="RoleName">
                     <EditItemTemplate>
                         <asp:TextBox ID="RoleName" runat="server" Text='<%# Bind("RoleName") %>'></asp:TextBox>

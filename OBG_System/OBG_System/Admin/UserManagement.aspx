@@ -5,8 +5,8 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <asp:Button ID="btnAddUser" runat="server" Text="Add New User" OnClick="btnAddUser_Click" align="right" />
-    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="UserId" ForeColor="#333333"
-        GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
+    <asp:GridView ID="GridView1" runat="server" AllowSorting="true" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="UserId" ForeColor="#333333"
+        GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting"
         OnRowDeleting="GridView1_RowDeleting"
         OnRowUpdating="GridView1_RowUpdating"
         OnRowDataBound="GridView1_RowDataBound"

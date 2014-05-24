@@ -170,6 +170,25 @@ public partial class Admin_Default : System.Web.UI.Page
 
     }
 
+    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView1.PageIndex = e.NewPageIndex;
+        Gridview1_Bind();
+    }
+
+    protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        DataTable dataTable = RoleBLO.GetAllRoleList();
+
+        if (dataTable != null)
+        {
+            DataView dataView = new DataView(dataTable);
+            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+            GridView1.DataSource = dataView;
+            GridView1.DataBind();
+        }
+    }
     #endregion
 
 
@@ -243,6 +262,27 @@ public partial class Admin_Default : System.Web.UI.Page
                                    true);
         }
     }
+
+    protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView2.PageIndex = e.NewPageIndex;
+        Gridview2_Bind();
+    }
+
+    protected void GridView2_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        DataTable dataTable = RoleBLO.GetAllUsersWithRole();
+
+        if (dataTable != null)
+        {
+            DataView dataView = new DataView(dataTable);
+            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+            GridView2.DataSource = dataView;
+            GridView2.DataBind();
+        }
+    }
+
     #endregion
 
     protected void NavigationMenu_MenuItemClick(object sender, MenuEventArgs e)
@@ -257,5 +297,23 @@ public partial class Admin_Default : System.Web.UI.Page
             roleManagement.Visible = false;
             userRoleManagement.Visible = true;
         }
+    }
+
+    private string ConvertSortDirectionToSql(SortDirection sortDirection)
+    {
+        string newSortDirection = String.Empty;
+
+        switch (sortDirection)
+        {
+            case SortDirection.Ascending:
+                newSortDirection = "ASC";
+                break;
+
+            case SortDirection.Descending:
+                newSortDirection = "DESC";
+                break;
+        }
+
+        return newSortDirection;
     }
 }

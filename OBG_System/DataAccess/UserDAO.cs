@@ -61,7 +61,7 @@ namespace DataAccess
             new SqlParameter("@UserId",ret),
             new SqlParameter("@Des",@"user registration")};
                     command2.Parameters.AddRange(paras2);
-                    db.ExecuteNonQuery(command2,t);
+                    db.ExecuteNonQuery(command2, t);
                     t.Commit();
                     return ret;
                 }
@@ -204,7 +204,7 @@ namespace DataAccess
                     }
                     if (reader.IsDBNull(7) == false)
                     {
-                    retUser.ShippingAddress = reader.GetString(7);
+                        retUser.ShippingAddress = reader.GetString(7);
                     }
                     else
                     {
@@ -212,7 +212,7 @@ namespace DataAccess
                     }
                     if (reader.IsDBNull(8) == false)
                     {
-                    retUser.ShippingPostCode = reader.GetString(8);
+                        retUser.ShippingPostCode = reader.GetString(8);
                     }
                     else
                     {
@@ -225,7 +225,7 @@ namespace DataAccess
 
             return retUser;
         }
-        
+
         /// <summary>
         /// Active user status by user id 0-inactive/ 1- active / 2- reseved/ 3....
         /// </summary>
@@ -406,7 +406,7 @@ namespace DataAccess
                                                       on ur.roleid = r.roleid");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
-           
+
         }
 
         /// <summary>
