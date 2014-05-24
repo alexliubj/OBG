@@ -10,7 +10,7 @@ using OBGModel;
 
 public partial class Products_wheelall : System.Web.UI.Page
 {
-     //string strProductID = "";
+    //string strProductID = "";
     //Wheels wheels = new Wheels();
     private DataSet wheelsDataSet;
     //private DataSet tiresDataSet;
@@ -42,6 +42,8 @@ public partial class Products_wheelall : System.Web.UI.Page
         GridView1.DataSource = wheelsDataSet;
         GridView1.DataKeyNames = new string[] { "ProductId" };
         GridView1.DataBind();
+
+
     }
 
     protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
@@ -82,14 +84,22 @@ public partial class Products_wheelall : System.Web.UI.Page
 
     protected void AddBt_Click(object sender, EventArgs e)
     {
-        Wheels wheel = new Wheels();
-        int pID, qty;
-        pID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
-        qty = int.Parse(GridView1.SelectedRow.Cells[13].Text);
-        //wheel.ProductId = 
-        //WheelsBLO.AddNewProduct(wheel);
-        //Response.Redirect("~/ShoppingCart.aspx?ProductId=" + strProductID + "&Num=1");
-        }
+        ////Wheels wheel = new Wheels();
+        //List<ShopingCart> shoppingcart = new List<ShopingCart>();
+        //ShopingCart sc = new ShopingCart();
+        //int pID, qty;
+        //double price;
+        //pID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
+        //qty = int.Parse(GridView1.SelectedRow.Cells[13].Text);
+        //price = double.Parse(GridView1.SelectedRow.Cells[12].Text);
+        //sc.ProductId = pID;
+        //sc.Qty = qty;
+        //sc.Pricing = price;
+        //shoppingcart.Add(sc);
+        //Session["Cart"] = shoppingcart;
+
+
+    }
     //private void Gridview1_Bind()
     //{
     //    throw new NotImplementedException();
@@ -100,5 +110,30 @@ public partial class Products_wheelall : System.Web.UI.Page
         throw new NotImplementedException();
     }
 
-    
+    protected void GridView1_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "MyButtonClick")
+        {            
+            //Get rowindex            
+            int rowindex = Convert.ToInt32(e.CommandArgument);
+            //Get Row           
+            GridViewRow gvr = GridView1.Rows[rowindex];
+
+
+            List<ShopingCart> shoppingcart = new List<ShopingCart>();
+            ShopingCart sc = new ShopingCart();
+            int pID, qty;
+            double price;
+            pID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
+            qty = Convert.ToInt32(((TextBox)GridView1.Rows[rowindex].FindControl("QTYTextBox")).Text);
+            price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text);
+            sc.ProductId = pID;
+            sc.Qty = qty;
+            sc.Pricing = price;
+            shoppingcart.Add(sc);
+            Session["Cart"] = shoppingcart;
+        }
+    }
+
+
 }

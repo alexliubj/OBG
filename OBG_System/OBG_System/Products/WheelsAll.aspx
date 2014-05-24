@@ -217,14 +217,16 @@
             </table>
         </fieldset>
     </div>
-
+   
 <asp:GridView ID="GridView1" runat="server"  GridLines="None" 
         AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" 
         DataKeyNames="ProductId" ForeColor="#333333"  OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
          OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
         OnRowUpdating="GridView1_RowUpdating" 
         OnRowCancelingEdit="GridView1_RowCancelingEdit" 
-        OnRowDataBound="GridView1_RowDataBound">
+        OnRowDataBound="GridView1_RowDataBound"
+         OnRowCommand="GridView1_RowCommand">
+
         
     <AlternatingRowStyle BackColor="White" />
             <Columns>
@@ -235,7 +237,139 @@
                     <asp:TextBox ID="ImageTextBox" runat="server" Text='<%# Bind("Image") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
                 <ItemTemplate>
-                    <asp:Label ID="ImageLable" runat="server" Text='<%# Bind("Image") %>'></asp:Label>
+                    <asp:Image class="Imagehub" ID="Image1" runat="server" ImageUrl='<%# Eval("Image") %>'  onclick="DisplayImageInNewWidnow();"></asp:Image>
+                      <div id="ladiv" style="position: absolute;visibility: hidden;overflow: hidden;"></div>
+                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript">
+                 </script>
+                 <%--<script type="text/javascript">
+                     function DisplayImageInNewWidnow() {
+                         var image = document.getElementById('<%= Image1.ClientID %>');
+
+                         htmlcode = "<HTML><HEAD></HEAD>"
+        + "<BODY TOPMARGIN=0 LEFTMARGIN=0 "
+        + "MARGINHEIGHT=0 MARGINWIDTH=0><CENTER>"
+        + "<IMG src='" + image.src + "'"
+        + "BORDER=0 NAME=FullSizeImage "
+        + "onload='window.resizeTo(document.FullSizeImage.width, document.FullSizeImage.height)'>"
+        + "</CENTER>"
+        + "</BODY></HTML>";
+
+                         newWindow = window.open('', 'FullSizeImage', 'toolbar=0,location=0,directories=0,menuBar=0,scrollbars=0,resizable=0,width=1,hight=1');
+                         newWindow.document.open();
+                         newWindow.document.write(htmlcode);
+                         newWindow.document.focus();
+                         newWindow.document.close();
+                     }
+</script>--%>
+                     <%--<script type="text/javascript">
+                         $(function () {
+                             $("img.Imagehub").click(function (e) {
+                                 var newImg = '<img src='
+                                  + $(this).attr("src") + '></img>';
+                                 $('#ladiv')
+                                 .html($(newImg)
+                              .animate({ height: '300', width: '300' }, 1500)); 
+                              $()
+                             });
+                      });
+                      function openLogin() {
+                          document.getElementById("ladiv");
+                      }  
+                 </script>--%>
+
+<%--                 <script src="jquery-1.8.3.min.js"></script> 
+<script>
+    var isopen = false;
+    var newImg;
+    var w = 200; 
+    var h = 200; 
+    $(document).ready(function () {
+        $("img.Imagehub").bind("click", function () {
+            newImg = this;
+            if (!isopen) {
+                isopen = true;
+                $(this).width($(this).width() + w);
+                $(this).height($(this).height() + h);
+                moveImg(10, 10);
+            }
+            else {
+                isopen = false;
+                $(this).width($(this).width() - w);
+                $(this).height($(this).height() - h);
+                moveImg(-10, -10);
+            }
+            
+        });
+    });
+    //移位 
+//    i = 0;
+    function moveImg(left, top) {
+           
+
+    newWindow = window.open('', 'FullSizeImage', 'toolbar=0,location=0,directories=0,menuBar=0,scrollbars=0,resizable=0,width=1,hight=1');
+    newWindow.document.open();
+    newWindow.document.write(htmlcode);
+    newWindow.document.focus();
+    newWindow.document.close();
+    } 
+</script> --%>
+
+
+<script>
+$(function() {
+    $("img.Imagehub").click(function () {
+       
+       
+        var background = $("<div></div>");
+       
+        $(background).attr("id","overlaybackground").animate({
+            'opacity':'.6'
+        },1000).css({
+            "width"  : $(document).width(),
+            'height' : $(document).height(),
+            'background' : '#656565',
+            'z-index' : '100',
+            'position': 'absolute',
+            'top' : '0px',
+            'left' : '0px'
+            });
+        $("body").append(background);
+
+       
+        
+        var newimage = $("<img/>");
+        var width = $('body').width();
+        $(newimage).attr("src",$(this).attr("src")).attr("id","largeimage").css({
+            'left' : width/2-200,
+            'top' : '360px',
+            'position': 'absolute',
+            'z-index' : '300',
+            'display' : 'none',
+            'width': '300px',
+            'height': '300px',
+            'border' : '30px solid #fff'
+        });
+        $("body").append(newimage);
+
+
+       
+        $("#largeimage").fadeIn(2000,function(){
+            $(this).click(function(){
+                $(this).fadeOut(1000);
+                $("div#overlaybackground").fadeOut(1000,function(){
+                    $(this).remove();
+                })
+            })
+        })
+
+       
+    });
+})
+</script>
+
+
+
+
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Style" SortExpression="Style">
@@ -327,9 +461,9 @@
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="QTY" SortExpression="QTY">
-                <EditItemTemplate>
+                <ItemTemplate>
                     <asp:TextBox ID="QTYTextBox" runat="server" Text="1"></asp:TextBox>
-                </EditItemTemplate>
+                </ItemTemplate>
                 
             </asp:TemplateField>
                  <%-- <asp:TemplateField HeaderText="CategoryId" SortExpression="CategoryId">
@@ -342,7 +476,7 @@
             </asp:TemplateField>--%>
             <asp:TemplateField HeaderText="ADD" SortExpression="ADD">
             <ItemTemplate>
-            <asp:ImageButton ID="AddBt" runat="server" ImageUrl="../Pictures/images.jpg" OnClick="AddBt_Click"></asp:ImageButton>
+            <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClick" CommandArgument='<%# Container.DataItemIndex %>' ImageUrl="../Pictures/images.jpg" ></asp:ImageButton>
             </ItemTemplate>
             </asp:TemplateField>
         

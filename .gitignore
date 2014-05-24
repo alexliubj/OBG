@@ -1,2 +1,6 @@
 *.dll
 *.pdb
+OBG_System/BusinessLogic/obj/Debug/BusinessLogic.csprojResolveAssemblyReference.cache
+OBG_System/DataAccess/obj/Debug/DataAccess.csprojResolveAssemblyReference.cache
+OBG_System/DataAccess/obj/Debug/DataAccess.csprojResolveAssemblyReference.cache
+OBG_System/BusinessLogic/obj/Debug/BusinessLogic.csprojResolveAssemblyReference.cache

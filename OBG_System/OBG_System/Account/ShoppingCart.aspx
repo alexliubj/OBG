@@ -14,9 +14,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <asp:GridView ID="ShoppingCartGridView" runat="server" AutoGenerateColumns="False" SkinID="ShoppingCart"
-    Width="100%"  DataKeyNames="ProductID">
+    Width="100%"  DataKeyNames="ProductID" OnRowDataBound="ShoppingCartGridView_RowDataBound">
     <Columns>
-        <asp:BoundField DataField="ProductName" HeaderText="Product Name" />
+        <asp:TemplateField HeaderText="ProductName" SortExpression="ProductName">
+                <ItemTemplate>
+                    <asp:Label ID="ProductNameLable" runat="server" Text='<%# Eval("ProductName") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
         <asp:BoundField DataField="AccountPrice" HeaderText="Price" />
         <asp:BoundField DataField="Account" HeaderText="Discount" />
        <%-- <asp:BoundField DataField="Date" HeaderText="Date" />--%>

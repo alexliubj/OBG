@@ -72,4 +72,29 @@ public partial class Products_tireall : System.Web.UI.Page
         TiresBLO.CreateNewTire(tire);
         Response.Redirect("~/ShoppingCart.aspx?ProductId=" + strProductID + "&Num=1");
     }
+
+    protected void GridView1_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "MyButtonClick")
+        {
+            //Get rowindex            
+            int rowindex = Convert.ToInt32(e.CommandArgument);
+            //Get Row           
+            GridViewRow gvr = GridView2.Rows[rowindex];
+
+
+            List<ShopingCart> shoppingcart = new List<ShopingCart>();
+            ShopingCart sc = new ShopingCart();
+            int tID, qty;
+            double price;
+            tID = Convert.ToInt32(GridView2.DataKeys[rowindex].Value.ToString());
+            qty = Convert.ToInt32(((TextBox)GridView2.Rows[rowindex].FindControl("QTYTextBox")).Text);
+            price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("PriceLabel")).Text);
+            sc.ProductId = tID;
+            sc.Qty = qty;
+            sc.Pricing = price;
+            shoppingcart.Add(sc);
+            Session["Cart"] = shoppingcart;
+        }
+    }
 }
