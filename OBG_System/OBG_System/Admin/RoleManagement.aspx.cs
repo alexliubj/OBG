@@ -176,11 +176,7 @@ public partial class Admin_Default : System.Web.UI.Page
     #region UserRole
     protected void GridView2_SelectedIndexChanged(object sender, EventArgs e)
     {
-        //int Uid;
-        //Uid = int.Parse(GridView2.SelectedRow.Cells[0].Text);
-        //UserRole userRole = new UserRole();
-        //need method getwheelInfoByProductID
-        //userRole = RoleBLO.
+
     }
 
     public void Gridview2_Bind()
@@ -207,13 +203,13 @@ public partial class Admin_Default : System.Web.UI.Page
 
             ddlSelectRoleName.DataSource = rolesDataSet;
             ddlSelectRoleName.DataTextField = "RoleName";
-            ddlSelectRoleName.DataValueField = "RoleName";
+            ddlSelectRoleName.DataValueField = "RoleID";
             ddlSelectRoleName.DataBind();
 
             ddlSelectRoleName.Items.Insert(0, new ListItem("Please select"));
 
-            string roleName = (e.Row.FindControl("lblSelectRoleName") as Label).Text;
-            ddlSelectRoleName.Items.FindByValue(roleName).Selected = true;
+            string roleID = (e.Row.FindControl("lblSelectRoleID") as Label).Text;
+            ddlSelectRoleName.Items.FindByValue(roleID).Selected = true;
         }
     }
 
@@ -223,6 +219,29 @@ public partial class Admin_Default : System.Web.UI.Page
         //string roleID = ddlSelectRoleName.SelectedValue;
         // RoleBLO.
         //TBA
+
+        DropDownList ddl = (DropDownList)sender;
+        GridViewRow gdv = (GridViewRow)ddl.NamingContainer;
+        int index = gdv.RowIndex;
+
+        int userID, roleID;
+        string des;
+        userID = int.Parse((((Label)(GridView2.Rows[index].FindControl("Label3"))).Text));
+        roleID = int.Parse((((DropDownList)(GridView2.Rows[index].FindControl("ddlSelectRoleName"))).SelectedValue.ToString()));
+        //des = (((Label)(GridView2.Rows[index].FindControl("Label5"))).Text);
+        int update = 0;
+        update = RoleBLO.UpdateUserRole(userID, roleID);
+        if (update > 0)
+        {
+            Gridview2_Bind();
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                                   "err_msg",
+                                   "alert('Sorry, Changing role for user failed.');",
+                                   true);
+        }
     }
     #endregion
 

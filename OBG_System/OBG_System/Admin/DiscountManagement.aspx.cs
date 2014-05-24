@@ -8,7 +8,6 @@ using OBGModel;
 using BusinessLogic;
 using System.Data;
 using System.Data.SqlClient;
-using System;
 
 public partial class Admin_Default : System.Web.UI.Page
 {
@@ -29,7 +28,7 @@ public partial class Admin_Default : System.Web.UI.Page
         disDataSet.Tables.Add(disTable);
 
         GridView1.DataSource = disDataSet;
-        GridView1.DataKeyNames = new string[] { "RoleId" };
+        GridView1.DataKeyNames = new string[] { "UserId" };
         GridView1.DataBind();
     }
 
@@ -41,20 +40,20 @@ public partial class Admin_Default : System.Web.UI.Page
 
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        int roleID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
-        DiscountBLO.DeleteDiscount(roleID);
+        int userID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
+        DiscountBLO.DeleteDiscount(userID);
         Gridview1_Bind();
     }
 
     protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
-        int roleID = Convert.ToInt32(GridView1.Rows[e.RowIndex].Cells[0].Text);
+        int userID = Convert.ToInt32(GridView1.Rows[e.RowIndex].Cells[0].Text);
         Discount discount = new Discount();
-        discount.RoleId = roleID;
+        discount.UserId = userID;
         //discount.RoleName = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox2"))).Text.ToString().Trim();
-        discount.DiscountRate = (float)Convert.ToInt32(((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox3"))).Text.ToString().Trim());
+        discount.DiscountRate = (float)Convert.ToDouble(((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox3"))).Text.ToString().Trim());
 
-        DiscountBLO.UpdateDiscount(discount.RoleId, discount.DiscountRate);
+        DiscountBLO.UpdateDiscount(discount.UserId, discount.DiscountRate);
 
         GridView1.EditIndex = -1;
         Gridview1_Bind();

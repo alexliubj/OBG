@@ -7,12 +7,12 @@ namespace OBGModel
 {
     public class Discount
     {
-        private int roleId;
+        private int userId;
 
-        public int RoleId
+        public int UserId
         {
-            get { return roleId; }
-            set { roleId = value; }
+            get { return userId; }
+            set { userId = value; }
         }
         private float discountRate;
 
@@ -22,12 +22,5 @@ namespace OBGModel
             set { discountRate = value; }
         }
 
-        private string roleName;
-
-        public string RoleName
-        {
-            get { return roleName; }
-            set { roleName = value; }
-        }
     }
 }

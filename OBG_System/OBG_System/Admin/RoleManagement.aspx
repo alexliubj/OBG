@@ -141,7 +141,7 @@
                 <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" />
                 <asp:TemplateField HeaderText="Change Role">
                     <ItemTemplate>
-                        <asp:Label ID="lblSelectRoleName" runat="server" Text='<%# Eval("RoleName") %>' Visible="false" />
+                        <asp:Label ID="lblSelectRoleID" runat="server" Text='<%# Eval("RoleID") %>' Visible="false" />
                         <asp:DropDownList ID="ddlSelectRoleName" runat="server" OnSelectedIndexChanged="ddlSelectRoleName_Change" AutoPostBack="true"></asp:DropDownList>
                     </ItemTemplate>
                 </asp:TemplateField>

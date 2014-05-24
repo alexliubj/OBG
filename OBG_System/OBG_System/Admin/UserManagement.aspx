@@ -1,16 +1,17 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminSite.master" 
-AutoEventWireup="true" CodeFile="UserManagement.aspx.cs" Inherits="Admin_Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminSite.master"
+    AutoEventWireup="true" CodeFile="UserManagement.aspx.cs" Inherits="Admin_Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-        <asp:Button ID="btnAddUser" runat="server" Text="Add New User" OnClick="btnAddUser_Click" align="right"/>
-    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="UserId" ForeColor="#333333" 
-    GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
+    <asp:Button ID="btnAddUser" runat="server" Text="Add New User" OnClick="btnAddUser_Click" align="right" />
+    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="UserId" ForeColor="#333333"
+        GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
         OnRowDeleting="GridView1_RowDeleting"
         OnRowUpdating="GridView1_RowUpdating"
-         OnRowDataBound="GridView1_RowDataBound"
-         OnRowCreated ="GridView1_RowCreated">
+        OnRowDataBound="GridView1_RowDataBound"
+        OnRowCreated="GridView1_RowCreated"
+         OnRowCommand="GridView1_RowCommand">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:BoundField DataField="UserId" HeaderText="UserId" InsertVisible="False" ReadOnly="True" SortExpression="UserId" />
@@ -59,21 +60,20 @@ AutoEventWireup="true" CodeFile="UserManagement.aspx.cs" Inherits="Admin_Default
                 </ItemTemplate>
             </asp:TemplateField>
 
-                 <asp:TemplateField ItemStyle-CssClass="HiddenColumn" HeaderStyle-CssClass="HiddenColumn" FooterStyle-CssClass="none" >
-                 
-            <HeaderStyle CssClass="HiddenColumn" />
-                                    <ItemStyle CssClass="HiddenColumn" /> 
-                    <ItemTemplate>
-                    
-                        <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select" 
-                            Text="Select"></asp:LinkButton>
-                    </ItemTemplate>
-                </asp:TemplateField>
+            <asp:TemplateField ItemStyle-CssClass="HiddenColumn" HeaderStyle-CssClass="HiddenColumn" FooterStyle-CssClass="none">
+
+                <HeaderStyle CssClass="HiddenColumn" />
+                <ItemStyle CssClass="HiddenColumn" />
+                <ItemTemplate>
+                    <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Select"
+                        Text="Select"></asp:LinkButton>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" />
             <asp:TemplateField HeaderText="Change Status">
                 <ItemTemplate>
                     <asp:Button ID="activeButton" runat="server" CommandName="Active" Text="Active"
-                        OnClick="activeButton_Click" OnClientClick="return confirm('Are you sure you want to active this user?');" />
+                         CommandArgument='<%# Container.DataItemIndex %>' OnClientClick="return confirm('Are you sure you want to active this user?');" />
                 </ItemTemplate>
             </asp:TemplateField>
             <%--<asp:CommandField HeaderText="Edit" ShowEditButton="True" ButtonType="Button" />--%>
@@ -252,7 +252,7 @@ AutoEventWireup="true" CodeFile="UserManagement.aspx.cs" Inherits="Admin_Default
                         </asp:RegularExpressionValidator>
                     </td>
                 </tr>
-                   <tr>
+                <tr>
                     <td>
                         <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password" Visible="false">Password:</asp:Label>
                     </td>
@@ -266,7 +266,7 @@ AutoEventWireup="true" CodeFile="UserManagement.aspx.cs" Inherits="Admin_Default
                 <tr>
                     <td>
                         <asp:Label ID="ConfirmPasswordLabel" runat="server" AssociatedControlID="ConfirmPassword" Visible="false">Confirm Password:</asp:Label>
-                         </td>
+                    </td>
                     <td>
                         <asp:TextBox ID="ConfirmPassword" runat="server" CssClass="passwordEntry" TextMode="Password" Visible="false"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="ConfirmPasswordRequired" runat="server" ControlToValidate="ConfirmPassword"
@@ -279,7 +279,7 @@ AutoEventWireup="true" CodeFile="UserManagement.aspx.cs" Inherits="Admin_Default
                 </tr>
                 <tr>
                     <td>
-                        <asp:Button ID="BtnAdd" runat="server" Text="Add" OnClick="BtnAdd_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup"/>  
+                        <asp:Button ID="BtnAdd" runat="server" Text="Add" OnClick="BtnAdd_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" />
                         <asp:Button ID="BtnSave" runat="server" OnClick="BtnSave_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" />
                     </td>
                     <td>
@@ -289,5 +289,5 @@ AutoEventWireup="true" CodeFile="UserManagement.aspx.cs" Inherits="Admin_Default
             </table>
         </fieldset>
     </div>
-   
+
 </asp:Content>

@@ -23,12 +23,16 @@ namespace DataAccess
         /// <returns></returns>
         public static int Registration(User user)
         {
-            DbCommand command = db.GetSqlStringCommond(@"insert into users
+            using (Trans t = new Trans())
+            {
+                try
+                {
+                    DbCommand command = db.GetSqlStringCommond(@"insert into users
                                 (userpwd,username,status,email,companyname,phone,shippingAddress,shippingPostcode,billingaddress,billingpostcode
                                 ,firstname,lastName)
                                 values (@userpwd,@username,@status,@email,@companyname,@phone,@shippingAddress,@shippingPostcode,@billingaddress,@billingpostcode
                                 ,@firstname,@lastName); Select @@IDENTITY");
-            SqlParameter[] paras = new SqlParameter[] { 
+                    SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@userpwd", DAUtils.MD5(user.Userpwd)),
             new SqlParameter("@username", user.UserName),
             new SqlParameter("@status", user.Status),
@@ -41,8 +45,32 @@ namespace DataAccess
             new SqlParameter("@billingpostcode", user.BillPostCode),
             new SqlParameter("@firstname", user.FirstName),
             new SqlParameter("@lastName", user.LastName)};
-            command.Parameters.AddRange(paras);
-            return Convert.ToInt32(db.ExecuteScalar(command));
+                    command.Parameters.AddRange(paras);
+                    int ret = Convert.ToInt32(db.ExecuteScalar(command, t));
+                    DbCommand command2 = db.GetSqlStringCommond(@"
+                            INSERT INTO [UserRole]
+                                       ([RoleId]
+                                       ,[UserId]
+                                       ,[Des])
+                                 VALUES
+                                       (@RoleId
+                                       ,@UserId
+                                       ,@Des)");
+                    SqlParameter[] paras2 = new SqlParameter[] { 
+                new SqlParameter("@RoleId", 2) , 
+            new SqlParameter("@UserId",ret),
+            new SqlParameter("@Des",@"user registration")};
+                    command2.Parameters.AddRange(paras2);
+                    db.ExecuteNonQuery(command2,t);
+                    t.Commit();
+                    return ret;
+                }
+                catch
+                {
+                    t.RollBack();
+                    return -1;
+                }
+            }
         }
 
 
@@ -197,7 +225,7 @@ namespace DataAccess
 
             return retUser;
         }
-
+        
         /// <summary>
         /// Active user status by user id 0-inactive/ 1- active / 2- reseved/ 3....
         /// </summary>
@@ -336,6 +364,12 @@ namespace DataAccess
             DbCommand command = db.GetSqlStringCommond(@"delete users where userid =@userid");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
             command.Parameters.AddRange(paras);
+
+            #region should be in transaction
+            DbCommand command2 = db.GetSqlStringCommond(@"delete from discount where userId = @userid");
+            command2.Parameters.AddRange(paras);
+            db.ExecuteNonQuery(command2);
+            #endregion
             return db.ExecuteNonQuery(command);
         }
 

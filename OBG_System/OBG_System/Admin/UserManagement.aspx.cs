@@ -46,6 +46,7 @@ public partial class Admin_Default : System.Web.UI.Page
         int userID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
         UserBLO.RemoveUserById(userID);
         bind();
+ 
     }
 
     protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -98,7 +99,6 @@ public partial class Admin_Default : System.Web.UI.Page
     //http://hi.baidu.com/utxqrqhkvhbgmwd/item/6f5562e5bd14f301570f1d07
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             e.Row.Attributes["OnClick"] = ClientScript.GetPostBackEventReference(e.Row.Parent.Parent, "Select$" + e.Row.RowIndex);
@@ -238,9 +238,31 @@ public partial class Admin_Default : System.Web.UI.Page
     }
     protected void activeButton_Click(object sender, EventArgs e)
     {
-        if (GridView1.SelectedValue != null)
+        //if (GridView1.SelectedValue != null)
+        //{
+        //    int userID = Convert.ToInt32(GridView1.SelectedValue.ToString());
+
+        //    User user = new User();
+        //    user = UserBLO.GetUserInfoWithUserId(userID);
+        //    if (user.Status == 0)
+        //    {
+        //        UserBLO.AdminActiveUserStatus(userID, 1);
+        //    }
+        //    else if (user.Status == 1)
+        //    {
+        //        UserBLO.AdminActiveUserStatus(userID, 0);
+        //    }
+        //    bind();
+        //}
+    }
+
+    protected void GridView1_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "Active")
         {
-            int userID = Convert.ToInt32(GridView1.SelectedValue.ToString());
+            int rowindex = Convert.ToInt32(e.CommandArgument);
+
+            int userID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
 
             User user = new User();
             user = UserBLO.GetUserInfoWithUserId(userID);
@@ -255,6 +277,7 @@ public partial class Admin_Default : System.Web.UI.Page
             bind();
         }
     }
+
     protected void btnAddUser_Click(object sender, EventArgs e)
     {
         UserName.ReadOnly = false;

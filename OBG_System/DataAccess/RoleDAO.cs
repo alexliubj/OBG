@@ -63,9 +63,7 @@ namespace DataAccess
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@roleId", roleId) };
             command.Parameters.AddRange(paras);
             //should be in transaction
-            DbCommand command2 = db.GetSqlStringCommond(@"delete from discount where roleId = @roleId");
-            command2.Parameters.AddRange(paras);
-            db.ExecuteNonQuery(command2);
+
 
             return db.ExecuteNonQuery(command);
         }
@@ -118,12 +116,11 @@ namespace DataAccess
             return retRole;
         }
 
-        public static int UpdateUserRole(int userId, int roleId, string des)
+        public static int UpdateUserRole(int userId, int roleId)
         {
             DbCommand command = db.GetSqlStringCommond(@"
                             UPDATE  [UserRole]
                                SET [RoleId] = @roleId
-                                  ,[Des] = @des
                              WHERE userid=@userid");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@userid", userId) , 
