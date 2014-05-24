@@ -224,7 +224,9 @@
          OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
         OnRowUpdating="GridView1_RowUpdating" 
         OnRowCancelingEdit="GridView1_RowCancelingEdit" 
-        OnRowDataBound="GridView1_RowDataBound">
+        OnRowDataBound="GridView1_RowDataBound"
+         OnRowCommand="GridView1_RowCommand">
+
         
     <AlternatingRowStyle BackColor="White" />
             <Columns>
@@ -235,7 +237,7 @@
                     <asp:TextBox ID="ImageTextBox" runat="server" Text='<%# Bind("Image") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
                 <ItemTemplate>
-                    <asp:Label ID="ImageLable" runat="server" Text='<%# Bind("Image") %>'></asp:Label>
+                    <asp:Image ID="ImageLable" runat="server" ImageUrl='<%# Eval("Image") %>' ></asp:Image>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Style" SortExpression="Style">
@@ -327,9 +329,9 @@
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="QTY" SortExpression="QTY">
-                <EditItemTemplate>
+                <ItemTemplate>
                     <asp:TextBox ID="QTYTextBox" runat="server" Text="1"></asp:TextBox>
-                </EditItemTemplate>
+                </ItemTemplate>
                 
             </asp:TemplateField>
                  <%-- <asp:TemplateField HeaderText="CategoryId" SortExpression="CategoryId">
@@ -342,7 +344,7 @@
             </asp:TemplateField>--%>
             <asp:TemplateField HeaderText="ADD" SortExpression="ADD">
             <ItemTemplate>
-            <asp:ImageButton ID="AddBt" runat="server" ImageUrl="../Pictures/images.jpg" OnClick="AddBt_Click"></asp:ImageButton>
+            <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClick" CommandArgument='<%# Container.DataItemIndex %>' ImageUrl="../Pictures/images.jpg" ></asp:ImageButton>
             </ItemTemplate>
             </asp:TemplateField>
         

@@ -11,70 +11,28 @@ using System.Data;
 
 public partial class Account_ShoppingCart : System.Web.UI.Page
 {
-    DataTable Cart = new DataTable();
-    DataRow dr;
-    private const string SESSION_CAR = "Car";
+    
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (!IsPostBack)
+        {
+            //Gridview1_Bind();
+
+        }
     }
 
-   // public void AddItem(int pr)
+    public void Gridview1_Bind()
+    {
+        //List<ShopingCart> shoppingcart = new List<ShopingCart>();
+        //ShopingCart sc = new ShopingCart();
+        //shoppingcart = (List<ShopingCart>)Session["Cart"];
+        //for (int i = 0; i <= ShoppingCartGridView.Rows.Count; i++)
+        //{
+        //    sc = shoppingcart[i];
+        //    ((Label)(ShoppingCartGridView.Rows[i].Cells[0].FindControl("ProductNameLable"))).Text = sc.ProductId.ToString();
+        //}
 
-    //    string productId;
-    //    if (Session["ShoppingCart"]==null)
-    //    {
-    //        Cart.Columns.Add(new DataColumn("productid", typeof(string)));
-    //        Cart.Columns.Add(new DataColumn("productName", typeof(string)));
-    //        Cart.Columns.Add(new DataColumn("productQTY", typeof(string)));
-    //        Cart.Columns.Add(new DataColumn("productPrice", typeof(string)));
-    //        Session["ShoppingCart"] = Cart;
-    //    }
-    //    else
-    //    {
-    //        Cart = (DataTable)Session["ShoppingCart"];
-    //    }
-
-    //    if (Request.QueryString["productid"] != null)
-    //    {
-    //        productId = Request.QueryString["productid"];
-    //        addItem(productId);
-    //    }
-    //   // showItem();
-    //}
-
-    //private void addItem(string productId)
-    //{
-    //    //string pidSql="select Pro"
-    //    throw new NotImplementedException();
-    //}
-
-
-
-    //    if (!IsPostBack)
-    //    {
-    //        ShoppingCartGridView_Bind();
-    //    }
-    //}
-    //public void ShoppingCartGridView_Bind()
-    //{
-
-    //    //DataTable ShoppingTable = OrderBLO.get;
-
-    //}
-
-    //protected void ShoppingCartGridView_RowEditing(object sender, GridViewEditEventArgs e)
-    //{
-
-
-    //}
-
-    ////protected void GridView2_RowDeleting(object sender, GridViewDeleteEventArgs e)
-    ////{
-    ////    int TireID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
-    ////    TiresBLO.DeleteTire(TireID);
-    ////    GridView2_Bind();
-    ////}
-
+    }
 
     protected void IBTCheckout_Click(object sender, ImageClickEventArgs e)
     {
@@ -84,5 +42,18 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
     {
         Response.Redirect("~/Default.aspx");
     }
-
+    protected void ShoppingCartGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            List<ShopingCart> shoppingcart = new List<ShopingCart>();
+            ShopingCart sc = new ShopingCart();
+            shoppingcart = (List<ShopingCart>)Session["Cart"];
+            for (int i = 0; i <= ShoppingCartGridView.Rows.Count; i++)
+            {
+                sc = shoppingcart[i];
+                ((Label)(e.Row.FindControl("ProductNameLable"))).Text = sc.ProductId.ToString();
+            }
+        }
+    }
 }

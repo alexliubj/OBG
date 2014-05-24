@@ -12,7 +12,7 @@
         OnRowDataBound="GridView3_RowDataBound">
     <AlternatingRowStyle BackColor="White" />
             <Columns>
-            <asp:BoundField DataField="AccId" HeaderText="Acc ID" InsertVisible="False" ReadOnly="True" SortExpression="AccId" />
+            <%--<asp:BoundField DataField="AccId" HeaderText="Acc ID" InsertVisible="False" ReadOnly="True" SortExpression="AccId" />
             <asp:TemplateField HeaderText="Choose">
 
               <ItemTemplate>
@@ -29,13 +29,13 @@
                 <ItemTemplate>
                     <asp:Label ID="Label2" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                 </ItemTemplate>
-            </asp:TemplateField>
+            </asp:TemplateField>--%>
             <asp:TemplateField HeaderText="Img" SortExpression="Img">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("image") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label3" runat="server" Text='<%# Bind("image") %>'></asp:Label>
+                    <asp:Image ID="ImageLable" runat="server" ImageUrl='<%# Eval("Image") %>' ></asp:Image>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Des" SortExpression="Des">
@@ -54,14 +54,14 @@
                     <asp:Label ID="Label5" runat="server" Text='<%# Bind("Pricing") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="CategoryId" SortExpression="CategoryId">
+            <%--<asp:TemplateField HeaderText="CategoryId" SortExpression="CategoryId">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CategoryId") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("CategoryId") %>'></asp:Label>
                 </ItemTemplate>
-            </asp:TemplateField>
+            </asp:TemplateField>--%>
                  <asp:TemplateField HeaderText="Name" SortExpression="Name">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Name") %>'></asp:TextBox>

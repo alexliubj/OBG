@@ -51,7 +51,8 @@
          OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
         OnRowUpdating="GridView1_RowUpdating" 
         OnRowCancelingEdit="GridView1_RowCancelingEdit" 
-        OnRowDataBound="GridView1_RowDataBound">
+        OnRowDataBound="GridView1_RowDataBound"
+        OnRowCommand="GridView4_RowCommand>
         
     <AlternatingRowStyle BackColor="White" />
             <Columns>
@@ -62,7 +63,7 @@
                     <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Image") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label2" runat="server" Text='<%# Bind("Image") %>'></asp:Label>
+                   <asp:Image ID="ImageLable" runat="server" ImageUrl='<%# Eval("Image") %>' ></asp:Image>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Style" SortExpression="Style">
