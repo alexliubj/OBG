@@ -330,13 +330,11 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
-        //GridView1.DataBind();
         bind();   
     }
 
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
     {
-        //DataTable dataTable = GridView1.DataSource as DataTable;
         DataTable dataTable = UserBLO.GetAllUsers();
 
         if (dataTable != null)

@@ -51,7 +51,10 @@ public partial class Admin_Default : System.Web.UI.Page
         Discount discount = new Discount();
         discount.UserId = userID;
         //discount.RoleName = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox2"))).Text.ToString().Trim();
-        discount.DiscountRate = (float)Convert.ToDouble(((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox3"))).Text.ToString().Trim());
+        //discount.DiscountRate = (float)Convert.ToDouble(((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox3"))).Text.ToString().Trim());
+        string disrate = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox3"))).Text.ToString().Trim();
+        //discount.DiscountRate = (float)double.Parse(disrate.Replace("%", "")) / 100;
+        discount.DiscountRate = (float)double.Parse(disrate);
 
         DiscountBLO.UpdateDiscount(discount.UserId, discount.DiscountRate);
 
@@ -83,5 +86,43 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
 
+    }
+
+    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView1.PageIndex = e.NewPageIndex;
+        Gridview1_Bind();
+    }
+
+    protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        DataTable dataTable = DiscountBLO.GetAllDiscount();
+
+        if (dataTable != null)
+        {
+            DataView dataView = new DataView(dataTable);
+            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+            GridView1.DataSource = dataView;
+            GridView1.DataBind();
+        }
+    }
+
+    private string ConvertSortDirectionToSql(SortDirection sortDirection)
+    {
+        string newSortDirection = String.Empty;
+
+        switch (sortDirection)
+        {
+            case SortDirection.Ascending:
+                newSortDirection = "ASC";
+                break;
+
+            case SortDirection.Descending:
+                newSortDirection = "DESC";
+                break;
+        }
+
+        return newSortDirection;
     }
 }
