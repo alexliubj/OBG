@@ -97,4 +97,45 @@ public partial class Products_tireall : System.Web.UI.Page
             Session["Cart"] = shoppingcart;
         }
     }
+
+    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView2.PageIndex = e.NewPageIndex;
+        //GridView1.DataBind();
+        GridView2_Bind();
+    }
+
+    protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        //DataTable dataTable = GridView1.DataSource as DataTable;
+        DataTable dataTable = TiresBLO.GetAllTires();
+
+        if (dataTable != null)
+        {
+            DataView dataView = new DataView(dataTable);
+            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+            GridView2.DataSource = dataView;
+            GridView2.DataBind();
+        }
+
+    }
+
+    private string ConvertSortDirectionToSql(SortDirection sortDirection)
+    {
+        string newSortDirection = String.Empty;
+
+        switch (sortDirection)
+        {
+            case SortDirection.Ascending:
+                newSortDirection = "ASC";
+                break;
+
+            case SortDirection.Descending:
+                newSortDirection = "DESC";
+                break;
+        }
+
+        return newSortDirection;
+    }
 }

@@ -25,7 +25,7 @@ public partial class Products_accAll : System.Web.UI.Page
         AccDataSet.Tables.Add(tiresTable);
 
         GridView6.DataSource = AccDataSet;
-        GridView6.DataKeyNames = new string[] { "TireId" };
+        GridView6.DataKeyNames = new string[] { "AccId" };
         GridView6.DataBind();
     }
 

@@ -98,4 +98,45 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
         WheelsBLO.AddNewProduct(wheels);
         Response.Redirect("~/ShoppingCart.aspx?ProductId=" + strProductID + "&Num=1");
     }
+
+    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView4.PageIndex = e.NewPageIndex;
+        //GridView1.DataBind();
+        Gridview4_Bind();
+    }
+
+    protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        //DataTable dataTable = GridView1.DataSource as DataTable;
+        DataTable dataTable = WheelsBLO.GetAllProducts();
+
+        if (dataTable != null)
+        {
+            DataView dataView = new DataView(dataTable);
+            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+            GridView4.DataSource = dataView;
+            GridView4.DataBind();
+        }
+
+    }
+
+    private string ConvertSortDirectionToSql(SortDirection sortDirection)
+    {
+        string newSortDirection = String.Empty;
+
+        switch (sortDirection)
+        {
+            case SortDirection.Ascending:
+                newSortDirection = "ASC";
+                break;
+
+            case SortDirection.Descending:
+                newSortDirection = "DESC";
+                break;
+        }
+
+        return newSortDirection;
+    }
 }

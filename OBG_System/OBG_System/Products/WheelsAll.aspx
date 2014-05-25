@@ -219,13 +219,14 @@
     </div>
    
 <asp:GridView ID="GridView1" runat="server"  GridLines="None" 
-        AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" 
+        AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" AllowSorting="true"
         DataKeyNames="ProductId" ForeColor="#333333"  OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
          OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
         OnRowUpdating="GridView1_RowUpdating" 
         OnRowCancelingEdit="GridView1_RowCancelingEdit" 
         OnRowDataBound="GridView1_RowDataBound"
-         OnRowCommand="GridView1_RowCommand">
+         OnRowCommand="GridView1_RowCommand"
+          OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">
 
         
     <AlternatingRowStyle BackColor="White" />
