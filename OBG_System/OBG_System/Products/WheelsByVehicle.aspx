@@ -52,7 +52,6 @@
         OnRowUpdating="GridView1_RowUpdating" 
         OnRowCancelingEdit="GridView1_RowCancelingEdit" 
         OnRowDataBound="GridView1_RowDataBound"
-        AllowSorting="true"  OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting"
         >
         
     <AlternatingRowStyle BackColor="White" />
@@ -64,62 +63,8 @@
                     <asp:TextBox ID="ImageBox" runat="server" Text='<%# Bind("Image") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
                 <ItemTemplate>
-                   <asp:Image class="Imagehub" ID="ImageLable" runat="server" ImageUrl='<%# Eval("Image") %>' ></asp:Image>
-                   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript">
-                 </script>
-                <script>
-                    $(function () {
-                        $("img.Imagehub").click(function () {
-
-
-                            var background = $("<div></div>");
-
-                            $(background).attr("id", "overlaybackground").animate({
-                                'opacity': '.6'
-                            }, 1000).css({
-                                "width": $(document).width(),
-                                'height': $(document).height(),
-                                'background': '#656565',
-                                'z-index': '100',
-                                'position': 'absolute',
-                                'top': '0px',
-                                'left': '0px'
-                            });
-                            $("body").append(background);
-
-
-
-                            var newimage = $("<img/>");
-                            var width = $('body').width();
-                            $(newimage).attr("src", $(this).attr("src")).attr("id", "largeimage").css({
-                                'left': width / 2 - 200,
-                                'top': '360px',
-                                'position': 'absolute',
-                                'z-index': '300',
-                                'display': 'none',
-                                'width': '300px',
-                                'height': '300px',
-                                'border': '30px solid #fff'
-                            });
-                            $("body").append(newimage);
-
-
-
-                            $("#largeimage").fadeIn(2000, function () {
-                                $(this).click(function () {
-                                    $(this).fadeOut(1000);
-                                    $("div#overlaybackground").fadeOut(1000, function () {
-                                        $(this).remove();
-                                    })
-                                })
-                            })
-
-
-                        });
-                    })
-</script>
+                   <asp:Image ID="ImageLable" runat="server" ImageUrl='<%# Eval("Image") %>' ></asp:Image>
                 </ItemTemplate>
-                 
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Style" SortExpression="Style">
                 <%--<EditItemTemplate>
@@ -208,12 +153,6 @@
                 <ItemTemplate>
                     <asp:Label ID="PriceLabel" runat="server" Text='<%# Bind("Price") %>'></asp:Label>
                 </ItemTemplate>
-            </asp:TemplateField>
-             <asp:TemplateField HeaderText="QTY" SortExpression="QTY">
-                <ItemTemplate>
-                    <asp:TextBox ID="QTYTextBox" runat="server" Text="1"></asp:TextBox>
-                </ItemTemplate>
-                
             </asp:TemplateField>
                   <asp:TemplateField HeaderText="ADD" SortExpression="ADD">
             <ItemTemplate>
