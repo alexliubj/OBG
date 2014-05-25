@@ -476,7 +476,7 @@ $(function() {
             </asp:TemplateField>--%>
             <asp:TemplateField HeaderText="ADD" SortExpression="ADD">
             <ItemTemplate>
-            <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClick" CommandArgument='<%# Container.DataItemIndex %>' ImageUrl="../Pictures/images.jpg" ></asp:ImageButton>
+            <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg" ></asp:ImageButton>
             </ItemTemplate>
             </asp:TemplateField>
         

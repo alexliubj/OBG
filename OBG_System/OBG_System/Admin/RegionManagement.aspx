@@ -3,10 +3,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="RegionId" ForeColor="#333333"
+    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="RegionId" ForeColor="#333333"
         GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
         OnRowDeleting="GridView1_RowDeleting"
-        OnRowUpdating="GridView1_RowUpdating" OnRowDataBound="GridView1_RowDataBound">
+        OnRowUpdating="GridView1_RowUpdating" OnRowDataBound="GridView1_RowDataBound"
+        OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:BoundField DataField="RegionId" HeaderText="RegionId" InsertVisible="False" ReadOnly="True" SortExpression="RegionId" />

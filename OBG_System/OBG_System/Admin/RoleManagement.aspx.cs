@@ -244,7 +244,7 @@ public partial class Admin_Default : System.Web.UI.Page
         int index = gdv.RowIndex;
 
         int userID, roleID;
-        string des;
+        //string des;
         userID = int.Parse((((Label)(GridView2.Rows[index].FindControl("Label3"))).Text));
         roleID = int.Parse((((DropDownList)(GridView2.Rows[index].FindControl("ddlSelectRoleName"))).SelectedValue.ToString()));
         //des = (((Label)(GridView2.Rows[index].FindControl("Label5"))).Text);

@@ -4,7 +4,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <asp:Button ID="btnAddUser" runat="server" Text="Add New User" OnClick="btnAddUser_Click" align="right" />
     <asp:GridView ID="GridView1" runat="server" AllowSorting="true" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="UserId" ForeColor="#333333"
         GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting"
         OnRowDeleting="GridView1_RowDeleting"
@@ -73,7 +72,7 @@
             <asp:TemplateField HeaderText="Change Status">
                 <ItemTemplate>
                     <asp:Button ID="activeButton" runat="server" CommandName="Active" Text="Active"
-                         CommandArgument='<%# Container.DataItemIndex %>' OnClientClick="return confirm('Are you sure you want to active this user?');" />
+                         CommandArgument='<%#((GridViewRow)Container).RowIndex%>' OnClientClick="return confirm('Are you sure you want to active this user?');" Width="65" Height="22" />
                 </ItemTemplate>
             </asp:TemplateField>
             <%--<asp:CommandField HeaderText="Edit" ShowEditButton="True" ButtonType="Button" />--%>
@@ -96,7 +95,7 @@
         <SortedDescendingCellStyle BackColor="#E9EBEF" />
         <SortedDescendingHeaderStyle BackColor="#4870BE" />
     </asp:GridView>
-
+    <asp:Button ID="btnAddUser" runat="server" Text="Add New User" OnClick="btnAddUser_Click"/>
     <div id="userInformation" runat="server" visible="false">
         <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification"
             ValidationGroup="RegisterUserValidationGroup" />

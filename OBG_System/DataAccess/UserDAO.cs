@@ -57,7 +57,7 @@ namespace DataAccess
                                        ,@UserId
                                        ,@Des)");
                     SqlParameter[] paras2 = new SqlParameter[] { 
-                new SqlParameter("@RoleId", 2) , 
+                new SqlParameter("@RoleId", 1) , 
             new SqlParameter("@UserId",ret),
             new SqlParameter("@Des",@"user registration")};
                     command2.Parameters.AddRange(paras2);

@@ -10,7 +10,7 @@
         </Items>
     </asp:Menu>
     <div id="roleManagement" runat="server" visible="false">
-        <asp:GridView ID="GridView1" runat="server" GridLines="None" AllowPaging="True" AllowSorting="True" CellPadding="4" DataKeyNames="RoleId" ForeColor="#333333" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" GridLines="None" AllowPaging="True" AllowSorting="True" CellPadding="4" DataKeyNames="RoleId" ForeColor="#333333" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
             OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
             OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDataBound="GridView1_RowDataBound"
             OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">

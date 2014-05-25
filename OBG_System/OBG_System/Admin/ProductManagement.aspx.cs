@@ -85,6 +85,26 @@ public partial class Admin_Default : System.Web.UI.Page
 
     }
 
+    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView1.PageIndex = e.NewPageIndex;
+        Gridview1_Bind();
+    }
+
+    protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        DataTable dataTable = WheelsBLO.GetAllProducts();
+
+        if (dataTable != null)
+        {
+            DataView dataView = new DataView(dataTable);
+            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+            GridView1.DataSource = dataView;
+            GridView1.DataBind();
+        }
+    }
+
     #endregion
 
     #region WheelDetailInformation
@@ -270,6 +290,26 @@ public partial class Admin_Default : System.Web.UI.Page
     {
 
     }
+
+    protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView2.PageIndex = e.NewPageIndex;
+        GridView2_Bind();
+    }
+
+    protected void GridView2_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        DataTable dataTable = TiresBLO.GetAllTires();
+
+        if (dataTable != null)
+        {
+            DataView dataView = new DataView(dataTable);
+            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+            GridView2.DataSource = dataView;
+            GridView2.DataBind();
+        }
+    }
     #endregion
 
     #region ViewAllAccessories
@@ -320,6 +360,26 @@ public partial class Admin_Default : System.Web.UI.Page
     {
 
     }
+
+    protected void GridView3_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView3.PageIndex = e.NewPageIndex;
+        GridView3_Bind();
+    }
+
+    protected void GridView3_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        DataTable dataTable = AccessoryBLO.GetAllAccessories();
+
+        if (dataTable != null)
+        {
+            DataView dataView = new DataView(dataTable);
+            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+            GridView3.DataSource = dataView;
+            GridView3.DataBind();
+        }
+    }
     #endregion
 
 
@@ -344,6 +404,24 @@ public partial class Admin_Default : System.Web.UI.Page
             divAcc.Visible = true;
         }
 
+    }
+
+    private string ConvertSortDirectionToSql(SortDirection sortDirection)
+    {
+        string newSortDirection = String.Empty;
+
+        switch (sortDirection)
+        {
+            case SortDirection.Ascending:
+                newSortDirection = "ASC";
+                break;
+
+            case SortDirection.Descending:
+                newSortDirection = "DESC";
+                break;
+        }
+
+        return newSortDirection;
     }
 
 }

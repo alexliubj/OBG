@@ -13,9 +13,9 @@
         </Items>
     </asp:Menu>
     <div id="divWheel" runat="server" visible="false">
-        <asp:GridView ID="GridView1" runat="server" GridLines="None" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ProductId" ForeColor="#333333" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
+        <asp:GridView ID="GridView1" runat="server" GridLines="None" AllowPaging="True"  AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ProductId" ForeColor="#333333" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
             OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
-            OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDataBound="GridView1_RowDataBound" Visible="true">
+            OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDataBound="GridView1_RowDataBound" Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="ProductId" HeaderText="Product ID" InsertVisible="False" ReadOnly="True" SortExpression="ProductId" />
@@ -335,9 +335,9 @@
     </div>
 
     <div id="divTire" runat="server" visible="false">
-        <asp:GridView ID="GridView2" runat="server" GridLines="None" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="TireId" ForeColor="#333333" OnSelectedIndexChanged="GridView2_SelectedIndexChanged"
+        <asp:GridView ID="GridView2" runat="server" GridLines="None" AllowPaging="True"  AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="TireId" ForeColor="#333333" OnSelectedIndexChanged="GridView2_SelectedIndexChanged"
             OnRowDeleting="GridView2_RowDeleting" OnRowEditing="GridView2_RowEditing"
-            OnRowUpdating="GridView2_RowUpdating" OnRowCancelingEdit="GridView2_RowCancelingEdit" OnRowDataBound="GridView2_RowDataBound" Visible="true">
+            OnRowUpdating="GridView2_RowUpdating" OnRowCancelingEdit="GridView2_RowCancelingEdit" OnRowDataBound="GridView2_RowDataBound" Visible="true" OnPageIndexChanging="GridView2_PageIndexChanging" OnSorting="GridView2_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="TireId" HeaderText="Tire ID" InsertVisible="False" ReadOnly="True" SortExpression="TireId" />
@@ -357,7 +357,7 @@
                         <asp:Label ID="Label3" runat="server" Text='<%# Bind("Size") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Width" SortExpression="Width">
+                <asp:TemplateField HeaderText="Width" SortExpression="rimWith">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("rimWith") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -365,7 +365,7 @@
                         <asp:Label ID="Label4" runat="server" Text='<%# Bind("rimWith") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Height" SortExpression="Height">
+                <asp:TemplateField HeaderText="Height" SortExpression="rimHeight">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("rimHeight") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -423,9 +423,9 @@
     </div>
 
     <div id="divAcc" runat="server" visible="false">
-        <asp:GridView ID="GridView3" runat="server" GridLines="None" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" ForeColor="#333333" OnSelectedIndexChanged="GridView3_SelectedIndexChanged"
+        <asp:GridView ID="GridView3" runat="server" GridLines="None" AllowPaging="True"  AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" ForeColor="#333333" OnSelectedIndexChanged="GridView3_SelectedIndexChanged"
             OnRowDeleting="GridView3_RowDeleting" OnRowEditing="GridView3_RowEditing"
-            OnRowUpdating="GridView3_RowUpdating" OnRowCancelingEdit="GridView3_RowCancelingEdit" OnRowDataBound="GridView3_RowDataBound" Visible="true">
+            OnRowUpdating="GridView3_RowUpdating" OnRowCancelingEdit="GridView3_RowCancelingEdit" OnRowDataBound="GridView3_RowDataBound" Visible="true" OnPageIndexChanging="GridView3_PageIndexChanging" OnSorting="GridView3_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="AccId" HeaderText="Acc ID" InsertVisible="False" ReadOnly="True" SortExpression="AccId" />
@@ -437,7 +437,7 @@
                         <asp:Label ID="Label2" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Img" SortExpression="Img">
+                <asp:TemplateField HeaderText="Image" SortExpression="image">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("image") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -445,7 +445,7 @@
                         <asp:Label ID="Label3" runat="server" Text='<%# Bind("image") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Des" SortExpression="Des">
+                <asp:TemplateField HeaderText="Description" SortExpression="Des">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Des") %>'></asp:TextBox>
                     </EditItemTemplate>
