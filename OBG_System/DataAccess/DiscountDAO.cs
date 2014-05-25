@@ -30,7 +30,7 @@ namespace DataAccess
                                                    (@UserId
                                                    ,@DisRate)");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@UserId", userId) ,
-            new SqlParameter("@roleId",userId)};
+            new SqlParameter("@DisRate",rate)};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }

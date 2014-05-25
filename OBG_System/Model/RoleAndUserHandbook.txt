@@ -1,0 +1,18 @@
+﻿			RoleStatus
+			{ 
+				Admin, 0 
+				Customer, 1
+				Other 2
+			}
+
+			UserStatus
+			{
+				inactive, 0 
+				active 1
+			}
+			 enum OrderStatus
+			{
+				created,
+				shipped,
+				finished,
+			};

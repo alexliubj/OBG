@@ -62,6 +62,19 @@ namespace DataAccess
             new SqlParameter("@Des",@"user registration")};
                     command2.Parameters.AddRange(paras2);
                     db.ExecuteNonQuery(command2, t);
+
+                    DbCommand command3 = db.GetSqlStringCommond(@"INSERT INTO [Discount]
+                                                   ([UserId]
+                                                   ,[DisRate])
+                                             VALUES
+                                                   (@UserId
+                                                   ,@DisRate)");
+                    SqlParameter[] paras3 = new SqlParameter[] {
+                        new SqlParameter("@UserId", ret) ,
+            new SqlParameter("@DisRate",1.0f)};
+                    command3.Parameters.AddRange(paras3);
+                    db.ExecuteNonQuery(command3, t);
+
                     t.Commit();
                     return ret;
                 }
@@ -361,16 +374,26 @@ namespace DataAccess
         /// <returns></returns>
         public static int RemoveUserById(int userid)
         {
-            DbCommand command = db.GetSqlStringCommond(@"delete users where userid =@userid");
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
-            command.Parameters.AddRange(paras);
-
-            #region should be in transaction
-            DbCommand command2 = db.GetSqlStringCommond(@"delete from discount where userId = @userid");
-            command2.Parameters.AddRange(paras);
-            db.ExecuteNonQuery(command2);
-            #endregion
-            return db.ExecuteNonQuery(command);
+            using (Trans t = new Trans())
+            {
+                try
+                {
+                    DbCommand command = db.GetSqlStringCommond(@"delete users where userid =@userid");
+                    SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
+                    command.Parameters.AddRange(paras);
+                    db.ExecuteNonQuery(command,t);
+                    DbCommand command2 = db.GetSqlStringCommond(@"delete from discount where userId = @userid");
+                    command2.Parameters.AddRange(paras);
+                    int ret = db.ExecuteNonQuery(command2,t);
+                    t.Commit();
+                    return ret;
+                }
+                catch
+                {
+                    t.RollBack();
+                    return -1;
+                }
+            }
         }
 
         /// <summary>
