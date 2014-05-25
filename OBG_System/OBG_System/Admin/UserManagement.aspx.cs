@@ -192,6 +192,7 @@ public partial class Admin_Default : System.Web.UI.Page
         int update = 0;
         update = UserBLO.UpdateUserInfo(userSaved);
 
+
         if (update == 1)
         {
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),

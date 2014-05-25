@@ -68,7 +68,7 @@
                     <asp:Label ID="SizeLabel" runat="server" Text='<%# Bind("Size") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Width" SortExpression="Width">
+            <asp:TemplateField HeaderText="Width" SortExpression="rimWith">
                 <%--<EditItemTemplate>
                     <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("rimWith") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
@@ -76,7 +76,7 @@
                     <asp:Label ID="WidthLabel" runat="server" Text='<%# Bind("rimWith") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Height" SortExpression="Height">
+            <asp:TemplateField HeaderText="Height" SortExpression="rimHeight">
                 <%--<EditItemTemplate>
                     <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("rimHeight") %>'></asp:TextBox>
                 </EditItemTemplate>--%>

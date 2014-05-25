@@ -64,4 +64,45 @@ public partial class Products_accAll : System.Web.UI.Page
     {
 
     }
+
+    protected void GridView6_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView6.PageIndex = e.NewPageIndex;
+        //GridView1.DataBind();
+        GridView6_Bind();
+    }
+
+    protected void GridView6_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        //DataTable dataTable = GridView1.DataSource as DataTable;
+        DataTable dataTable = AccessoryBLO.GetAllAccessories();
+
+        if (dataTable != null)
+        {
+            DataView dataView = new DataView(dataTable);
+            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+            GridView6.DataSource = dataView;
+            GridView6.DataBind();
+        }
+
+    }
+
+    private string ConvertSortDirectionToSql(SortDirection sortDirection)
+    {
+        string newSortDirection = String.Empty;
+
+        switch (sortDirection)
+        {
+            case SortDirection.Ascending:
+                newSortDirection = "ASC";
+                break;
+
+            case SortDirection.Descending:
+                newSortDirection = "DESC";
+                break;
+        }
+
+        return newSortDirection;
+    }
 }

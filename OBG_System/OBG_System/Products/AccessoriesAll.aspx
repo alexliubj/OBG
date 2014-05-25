@@ -5,10 +5,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
     <asp:GridView ID="GridView6" runat="server" GridLines="None" AllowPaging="True" 
     AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" 
-    ForeColor="#333333">
+    ForeColor="#333333"
+        AllowSorting="true"  OnPageIndexChanging="GridView6_PageIndexChanging" OnSorting="GridView6_Sorting">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
-            <asp:BoundField DataField="AccId" HeaderText="Acc ID" InsertVisible="False" ReadOnly="True" SortExpression="AccId" />
+            <asp:BoundField DataField="AccId" HeaderText="Acc ID" InsertVisible="False" ReadOnly="True" SortExpression="AccId" visible="false"/>
             <%--<asp:TemplateField HeaderText="Choose">
 
              <ItemTemplate>
@@ -25,6 +26,14 @@
                 </EditItemTemplate>--%>
                 <ItemTemplate>
                     <asp:Label ID="PNLabel" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+             <asp:TemplateField HeaderText="Name" SortExpression="Name">
+               <%-- <EditItemTemplate>
+                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Name") %>'></asp:TextBox>
+                </EditItemTemplate>--%>
+                <ItemTemplate>
+                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <%--<asp:TemplateField HeaderText="Img" SortExpression="Img">
@@ -50,6 +59,12 @@
                 <ItemTemplate>
                     <asp:Label ID="PricingLabel" runat="server" Text='<%# Bind("Pricing") %>'></asp:Label>
                 </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="QTY" SortExpression="QTY">
+                <ItemTemplate>
+                    <asp:TextBox ID="QTYTextBox" runat="server" Text="1"></asp:TextBox>
+                </ItemTemplate>
+                
             </asp:TemplateField>
             <%--<asp:TemplateField HeaderText="CategoryId" SortExpression="CategoryId">
                 <EditItemTemplate>
