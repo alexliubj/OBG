@@ -17,7 +17,12 @@ namespace DataAccess
 
         public static int AddNewOrder(Order order, List<OrderLine> listOrderLine)
         {
-              DbCommand command = db.GetSqlStringCommond(@"INSERT INTO [Order]
+            int newOrderId = 0;
+            using (Trans t = new Trans())
+            {
+                try
+                {
+                    DbCommand command = db.GetSqlStringCommond(@"INSERT INTO [Order]
                                                        ([UserId]
                                                        ,[OrderDate]
                                                        ,[Status]
@@ -28,18 +33,18 @@ namespace DataAccess
                                                        ,@status
                                                        ,@PO);Select @@IDENTITY;");
 
-            SqlParameter[] paras = new SqlParameter[] { 
+                    SqlParameter[] paras = new SqlParameter[] { 
             new SqlParameter("@userId", order.UserId),
             new SqlParameter("@datetime", order.OrderDate),
             new SqlParameter("@status", order.Status),
             new SqlParameter("@PO", order.PO)};
-            command.Parameters.AddRange(paras);
-            int newOrderId = Convert.ToInt32(db.ExecuteScalar(command));
-            if(newOrderId >0)
-            {
-                foreach(OrderLine line in listOrderLine)
-                {
-                    DbCommand command2 = db.GetSqlStringCommond(@"INSERT INTO [OrderLine]
+                    command.Parameters.AddRange(paras);
+                    newOrderId = Convert.ToInt32(db.ExecuteScalar(command, t));
+                    if (newOrderId > 0)
+                    {
+                        foreach (OrderLine line in listOrderLine)
+                        {
+                            DbCommand command2 = db.GetSqlStringCommond(@"INSERT INTO [OrderLine]
                                                ([ProductId]
                                                ,[Qty]
                                                ,[DiscountRate]
@@ -49,71 +54,106 @@ namespace DataAccess
                                                ,@Qty
                                                ,@DiscountRate
                                                ,@OrderId");
-            SqlParameter[] paras2 = new SqlParameter[] { 
+                            SqlParameter[] paras2 = new SqlParameter[] { 
                 new SqlParameter("@ProductId", line.OrderId),
                 new SqlParameter("@Qty", line.Qty),
             new SqlParameter("@DiscountRate", line.DiscountRate),
                 new SqlParameter("@OrderId", newOrderId)};
-            command.Parameters.AddRange(paras2);
-            db.ExecuteNonQuery(command2); 
+                            command.Parameters.AddRange(paras2);
+                            db.ExecuteNonQuery(command2, t);
+                        }
+                    }
+
+                    t.Commit();
+                    return newOrderId;
+                }
+                catch
+                {
+                    t.RollBack();
+                    return -1;
                 }
             }
-            return newOrderId;
         }
 
         //should be update in...a transaction
         public static int RemoveOrderByOrderId(int orderId)
         {
-            //remove order 
-            DbCommand command = db.GetSqlStringCommond(@"delete from order where orderId =@orderId");
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@orderId", orderId) };
-            command.Parameters.AddRange(paras);
-            //remove from orderline
-            DbCommand command2 = db.GetSqlStringCommond(@"delete from orderline where orderId = @orderId;");
-            SqlParameter[] paras2 = new SqlParameter[] { new SqlParameter("@orderId", orderId) };
-            command2.Parameters.AddRange(paras2);
-            db.ExecuteNonQuery(command);
-            return db.ExecuteNonQuery(command2);
+            using (Trans t = new Trans())
+            {
+                try
+                {
+                    DbCommand command = db.GetSqlStringCommond(@"delete from order where orderId =@orderId");
+                    SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@orderId", orderId) };
+                    command.Parameters.AddRange(paras);
+
+                    DbCommand command2 = db.GetSqlStringCommond(@"delete from orderline where orderId = @orderId;");
+                    SqlParameter[] paras2 = new SqlParameter[] { new SqlParameter("@orderId", orderId) };
+                    command2.Parameters.AddRange(paras2);
+                    int ret = db.ExecuteNonQuery(command, t);
+                    db.ExecuteNonQuery(command2, t);
+                    t.Commit();
+                    return ret;
+                }
+                catch
+                {
+                    t.RollBack();
+                    return -1;
+                }
+            }
         }
 
         public static int ModifyOneOrder(Order order, List<OrderLine> listOrderLine)
         {
-            DbCommand command = db.GetSqlStringCommond(@"UPDATE [Order]
+            int newOrderId = -1;
+            using (Trans t = new Trans())
+            {
+                try
+                {
+
+                    DbCommand command = db.GetSqlStringCommond(@"UPDATE [Order]
                                                SET [UserId] = @userId
                                                   ,[OrderDate] = @datetime
                                                   ,[Status] = @status
                                                   ,[PO] = @PO
                                              WHERE OrderId=@OrderId");
 
-            SqlParameter[] paras = new SqlParameter[] { 
+                    SqlParameter[] paras = new SqlParameter[] { 
             new SqlParameter("@userId", order.UserId),
             new SqlParameter("@datetime", order.OrderDate),
             new SqlParameter("@status", order.Status),
             new SqlParameter("@PO", order.PO),
              new SqlParameter("@OrderId", order.OrderId)
             };
-            command.Parameters.AddRange(paras);
-            int newOrderId = Convert.ToInt32(db.ExecuteScalar(command));
-            if (newOrderId > 0)
-            {
-                foreach (OrderLine line in listOrderLine)
-                {
-                    DbCommand command2 = db.GetSqlStringCommond(@"UPDATE [OrderLine]
+                    command.Parameters.AddRange(paras);
+                    newOrderId = Convert.ToInt32(db.ExecuteScalar(command));
+                    if (newOrderId > 0)
+                    {
+                        foreach (OrderLine line in listOrderLine)
+                        {
+                            DbCommand command2 = db.GetSqlStringCommond(@"UPDATE [OrderLine]
                                            SET [ProductId] = @ProductId
                                               ,[Qty] = @Qty
                                               ,[DiscountRate] = @DiscountRate
                                          WHERE OrderId=@OrderId
                                         ");
-                    SqlParameter[] paras2 = new SqlParameter[] { 
+                            SqlParameter[] paras2 = new SqlParameter[] { 
                 new SqlParameter("@ProductId", line.OrderId),
                 new SqlParameter("@Qty", line.Qty),
             new SqlParameter("@DiscountRate", line.DiscountRate),
                 new SqlParameter("@OrderId", newOrderId)};
-                    command.Parameters.AddRange(paras2);
-                    db.ExecuteNonQuery(command2);
+                            command.Parameters.AddRange(paras2);
+                            db.ExecuteNonQuery(command2);
+                        }
+                    }
+                    t.Commit();
+                    return newOrderId;
+                }
+                catch
+                {
+                    t.RollBack();
+                    return -1;
                 }
             }
-            return newOrderId;
         }
 
         public static DataTable GetAllOrder()
