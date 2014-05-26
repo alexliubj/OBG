@@ -12,6 +12,7 @@ namespace DataAccess
     {
         private static DbHelper db = new DbHelper();
 
+        #region Region dataAccess
         public static DataTable GetAllShipping()
         {
             DbCommand command = db.GetSqlStringCommond(@"SELECT [RegionId]
@@ -64,5 +65,7 @@ namespace DataAccess
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
+        #endregion Region dataAccess
+
     }
 }
