@@ -39,9 +39,9 @@ namespace DataAccess
             new SqlParameter("@email", user.Email),
             new SqlParameter("@companyname", user.Email),
             new SqlParameter("@phone", user.Phone),
-            new SqlParameter("@shippingAddress", user.ShippingAddress),
+            new SqlParameter("@shippingAddress", user.ShippingHouseNo),
             new SqlParameter("@shippingPostcode", user.ShippingPostCode),
-            new SqlParameter("@billingaddress", user.BillAddress),
+            new SqlParameter("@billingaddress", user.BillingHouseNo),
             new SqlParameter("@billingpostcode", user.BillPostCode),
             new SqlParameter("@firstname", user.FirstName),
             new SqlParameter("@lastName", user.LastName)};
@@ -232,11 +232,11 @@ namespace DataAccess
                     retUser.Phone = reader.GetString(4);
                     if (reader.IsDBNull(5) == false)
                     {
-                        retUser.BillAddress = reader.GetString(5);
+                        retUser.BillingHouseNo = reader.GetString(5);
                     }
                     else
                     {
-                        retUser.BillAddress = "";
+                        retUser.BillingHouseNo = "";
                     }
                     if (reader.IsDBNull(6) == false)
                     {
@@ -248,11 +248,11 @@ namespace DataAccess
                     }
                     if (reader.IsDBNull(7) == false)
                     {
-                        retUser.ShippingAddress = reader.GetString(7);
+                        retUser.ShippingHouseNo = reader.GetString(7);
                     }
                     else
                     {
-                        retUser.ShippingAddress = "";
+                        retUser.ShippingHouseNo = "";
                     }
                     if (reader.IsDBNull(8) == false)
                     {
@@ -387,11 +387,11 @@ namespace DataAccess
             new SqlParameter("@userName", user.UserName),
             new SqlParameter("@companyname", user.CompanyName),
             new SqlParameter("@phone", user.Phone),
-            new SqlParameter("@shippingAddress", user.ShippingAddress),
+            new SqlParameter("@shippingAddress", user.ShippingHouseNo),
             new SqlParameter("@shippingPostcode", user.ShippingPostCode),
             new SqlParameter("@firstname", user.FirstName),
             new SqlParameter("@lastName", user.LastName),
-            new SqlParameter("@billingaddress", user.BillAddress),
+            new SqlParameter("@billingaddress", user.BillingHouseNo),
             new SqlParameter("@billingpostcode", user.BillPostCode),
             new SqlParameter("@userid", user.Userid)};
             command.Parameters.AddRange(paras);

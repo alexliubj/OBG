@@ -36,12 +36,12 @@ public partial class Account_Register : System.Web.UI.Page
         newUser.Userpwd = Password.Text;
         newUser.CompanyName = Company.Text;
         newUser.Phone = Phone.Text;
-        newUser.ShippingAddress = ShippingAddress.Text;
+        newUser.ShippingHouseNo = ShippingAddress.Text;
         newUser.ShippingPostCode = ShippingPostCode.Text;
         newUser.FirstName = FirstName.Text;
         newUser.LastName = LastName.Text;
         newUser.Email = Email.Text;
-        newUser.BillAddress = string.Empty;
+        newUser.BillingHouseNo = string.Empty;
         newUser.BillPostCode = string.Empty;
 
         int newId = UserBLO.Registration(newUser);
