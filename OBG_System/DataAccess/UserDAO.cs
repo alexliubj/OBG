@@ -86,6 +86,37 @@ namespace DataAccess
             }
         }
 
+        public static LoginRet ClientEmailLogin(string email, string password)
+        {
+            LoginRet loginRet = new LoginRet();
+            loginRet.UserId = -1;
+            DbCommand command = db.GetSqlStringCommond(@"
+                            select u.userid,u.status from users u inner join userrole r
+                            on u.userid = r.userid
+                            where u.email = @email
+                            and u.userpwd = @pwd
+                            and r.roleid = 1");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@email", email),
+            new SqlParameter("@pwd", DAUtils.MD5(password))};
+            command.Parameters.AddRange(paras);
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    loginRet.UserId = reader.GetInt32(0);
+                    if (reader.GetInt32(1) == 0)
+                    {
+                        loginRet.Us = LoginRet.UserStatus.inactive;
+                    }
+                    else
+                    {
+                        loginRet.Us = LoginRet.UserStatus.active;
+                    }
+                    loginRet.Rs = LoginRet.RoleStatus.Customer;
+                }
+            }
+            return loginRet;
+        }
 
         /// <summary>
         /// Client login

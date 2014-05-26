@@ -24,6 +24,11 @@ namespace BusinessLogic
             return UserDAO.UpdatePassword(oldPwd, newPwd, userid);
         }
 
+        public static LoginRet ClientEmailLogin(string email, string password)
+        {
+            return UserDAO.ClientEmailLogin(email, password);
+        }
+
         /// <summary>
         /// Admin register a New user
         /// </summary>
