@@ -151,5 +151,14 @@ namespace OBGModel
             get { return isSameAddress; }
             set { isSameAddress = value; }
         }
+
+        private int regionId;
+
+        public int RegionId
+        {
+            get { return regionId; }
+            set { regionId = value; }
+        }
+
     }
 }
