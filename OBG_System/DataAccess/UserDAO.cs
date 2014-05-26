@@ -27,11 +27,47 @@ namespace DataAccess
             {
                 try
                 {
-                    DbCommand command = db.GetSqlStringCommond(@"insert into users
-                                (userpwd,username,status,email,companyname,phone,shippingAddress,shippingPostcode,billingaddress,billingpostcode
-                                ,firstname,lastName)
-                                values (@userpwd,@username,@status,@email,@companyname,@phone,@shippingAddress,@shippingPostcode,@billingaddress,@billingpostcode
-                                ,@firstname,@lastName); Select @@IDENTITY");
+                    DbCommand command = db.GetSqlStringCommond(@"INSERT INTO [OBG_].[dbo].[Users]
+                                                               ([UserPwd]
+                                                               ,[UserName]
+                                                               ,[Status]
+                                                               ,[Email]
+                                                               ,[CompanyName]
+                                                               ,[Phone]
+                                                               ,[BillingHouseNo]
+                                                               ,[BillingPostCode]
+                                                               ,[ShippingHouseNo]
+                                                               ,[ShippingPostCode]
+                                                               ,[FirstName]
+                                                               ,[LastName]
+                                                               ,[ShippingStreet]
+                                                               ,[ShippingCity]
+                                                               ,[ShippingPro]
+                                                               ,[BillingStreet]
+                                                               ,[BillingCity]
+                                                               ,[BillingPro]
+                                                               ,[IsSameAddress]
+                                                               ,[RegionId])
+                                                        values (@userpwd,
+                                                                @username,
+                                                                @status,
+                                                                @email,
+                                                                @companyname,
+                                                                @phone,
+                                                                @BillingHouseNo,
+                                                                @BillingPostCode,
+                                                                @ShippingHouseNo,
+                                                                @ShippingPostCode,
+                                                                @firstname,
+                                                                @lastName,
+                                                                @ShippingStreet,
+                                                                @ShippingCity,
+                                                                @ShippingPro,
+                                                                @BillingStreet,
+                                                                @BillingCity,
+                                                                @BillingPro,
+                                                                @IsSameAddress,
+                                                                @RegionId); Select @@IDENTITY");
                     SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@userpwd", DAUtils.MD5(user.Userpwd)),
             new SqlParameter("@username", user.UserName),
@@ -39,12 +75,20 @@ namespace DataAccess
             new SqlParameter("@email", user.Email),
             new SqlParameter("@companyname", user.Email),
             new SqlParameter("@phone", user.Phone),
-            new SqlParameter("@shippingAddress", user.ShippingAddress),
-            new SqlParameter("@shippingPostcode", user.ShippingPostCode),
-            new SqlParameter("@billingaddress", user.BillAddress),
-            new SqlParameter("@billingpostcode", user.BillPostCode),
+            new SqlParameter("@BillingHouseNo", user.BillingHouseNo),
+            new SqlParameter("@BillingPostCode", user.BillPostCode),
+            new SqlParameter("@ShippingHouseNo", user.ShippingHouseNo),
+            new SqlParameter("@ShippingPostCode", user.ShippingPostCode),
             new SqlParameter("@firstname", user.FirstName),
-            new SqlParameter("@lastName", user.LastName)};
+            new SqlParameter("@lastName", user.LastName),
+            new SqlParameter("@ShippingStreet", user.ShippingStreet),
+            new SqlParameter("@ShippingCity", user.ShippingCity),
+            new SqlParameter("@ShippingPro", user.ShippingProvince),
+            new SqlParameter("@BillingStreet", user.BillingStreet),
+            new SqlParameter("@BillingCity", user.BillingCity),
+            new SqlParameter("@BillingPro", user.BillingProvince),
+            new SqlParameter("@IsSameAddress", user.IsSameAddress),
+            new SqlParameter("@RegionId", user.RegionId)};
                     command.Parameters.AddRange(paras);
                     int ret = Convert.ToInt32(db.ExecuteScalar(command, t));
                     DbCommand command2 = db.GetSqlStringCommond(@"
@@ -86,6 +130,37 @@ namespace DataAccess
             }
         }
 
+        public static LoginRet ClientEmailLogin(string email, string password)
+        {
+            LoginRet loginRet = new LoginRet();
+            loginRet.UserId = -1;
+            DbCommand command = db.GetSqlStringCommond(@"
+                            select u.userid,u.status from users u inner join userrole r
+                            on u.userid = r.userid
+                            where u.email = @email
+                            and u.userpwd = @pwd
+                            and r.roleid = 1");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@email", email),
+            new SqlParameter("@pwd", DAUtils.MD5(password))};
+            command.Parameters.AddRange(paras);
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    loginRet.UserId = reader.GetInt32(0);
+                    if (reader.GetInt32(1) == 0)
+                    {
+                        loginRet.Us = LoginRet.UserStatus.inactive;
+                    }
+                    else
+                    {
+                        loginRet.Us = LoginRet.UserStatus.active;
+                    }
+                    loginRet.Rs = LoginRet.RoleStatus.Customer;
+                }
+            }
+            return loginRet;
+        }
 
         /// <summary>
         /// Client login
@@ -181,10 +256,25 @@ namespace DataAccess
 
             User retUser = new User();
             DbCommand command = db.GetSqlStringCommond(@"
-                                select username,status,email,companyname,
-                                phone,billingaddress, billingpostcode,
-                                shippingaddress, shippingpostcode,
-                                firstname,lastname 
+                                SELECT [UserName]
+                                      ,[Status]
+                                      ,[Email]
+                                      ,[CompanyName]
+                                      ,[Phone]
+                                      ,[BillingHouseNo]
+                                      ,[BillingPostCode]
+                                      ,[ShippingHouseNo]
+                                      ,[ShippingPostCode]
+                                      ,[FirstName]
+                                      ,[LastName]
+                                      ,[ShippingStreet]
+                                      ,[ShippingCity]
+                                      ,[ShippingPro]
+                                      ,[BillingStreet]
+                                      ,[BillingCity]
+                                      ,[BillingPro]
+                                      ,[IsSameAddress]
+                                      ,[RegionId]
                                 from users where userid = @userid");
 
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userId) };
@@ -199,15 +289,17 @@ namespace DataAccess
                     retUser.Email = reader.GetString(2);
                     retUser.CompanyName = reader.GetString(3);
                     retUser.Phone = reader.GetString(4);
-                    if (reader.IsDBNull(5) == false)
+
+
+                    if (!reader.IsDBNull(5))
                     {
-                        retUser.BillAddress = reader.GetString(5);
+                        retUser.BillingHouseNo = reader.GetString(5);
                     }
                     else
                     {
-                        retUser.BillAddress = "";
+                        retUser.BillingHouseNo = string.Empty;
                     }
-                    if (reader.IsDBNull(6) == false)
+                    if (!reader.IsDBNull(6))
                     {
                         retUser.BillPostCode = reader.GetString(6);
                     }
@@ -217,11 +309,11 @@ namespace DataAccess
                     }
                     if (reader.IsDBNull(7) == false)
                     {
-                        retUser.ShippingAddress = reader.GetString(7);
+                        retUser.ShippingHouseNo = reader.GetString(7);
                     }
                     else
                     {
-                        retUser.ShippingAddress = "";
+                        retUser.ShippingHouseNo = "";
                     }
                     if (reader.IsDBNull(8) == false)
                     {
@@ -231,8 +323,63 @@ namespace DataAccess
                     {
                         retUser.ShippingPostCode = "";
                     }
+
+                    
                     retUser.FirstName = reader.GetString(9);
                     retUser.LastName = reader.GetString(10);
+
+                    if (reader.IsDBNull(11) == false)
+                    {
+                        retUser.ShippingStreet = reader.GetString(11);
+                    }
+                    else
+                    {
+                        retUser.ShippingStreet = "";
+                    }
+                    if (reader.IsDBNull(12) == false)
+                    {
+                        retUser.ShippingCity = reader.GetString(12);
+                    }
+                    else
+                    {
+                        retUser.ShippingCity = "";
+                    }
+                    if (reader.IsDBNull(13) == false)
+                    {
+                        retUser.ShippingHouseNo = reader.GetString(13);
+                    }
+                    else
+                    {
+                        retUser.BillingStreet = "";
+                    }
+                    if (reader.IsDBNull(14) == false)
+                    {
+                        retUser.BillingStreet = reader.GetString(14);
+                    }
+                    else
+                    {
+                        retUser.BillingStreet = "";
+                    }
+                    if (reader.IsDBNull(15) == false)
+                    {
+                        retUser.BillingCity = reader.GetString(15);
+                    }
+                    else
+                    {
+                        retUser.BillingCity = "";
+                    }
+                    if (reader.IsDBNull(16) == false)
+                    {
+                        retUser.BillingProvince = reader.GetString(16);
+                    }
+                    else
+                    {
+                        retUser.BillingProvince = "";
+                    }
+
+                    retUser.IsSameAddress = reader.GetInt32(17)==0?true:false;
+                    retUser.RegionId = reader.GetInt32(18);
+
                 }
             }
 
@@ -347,22 +494,43 @@ namespace DataAccess
         public static int UpdateUserInfo(User user)
         {
             DbCommand command = db.GetSqlStringCommond(@"Update users
-                                set status = @status, userName = @userName, companyName = @companyname, phone =@phone, shippingAddress=@shippingAddress,
-                                shippingPostcode=@shippingPostcode,billingaddress = @billingaddress,
-                                billingpostcode = @billingpostcode, firstname = @firstname, lastname = @lastname
+                                set status = @status, userName = @userName, companyName = @companyname, phone =@phone,
+                               [BillingHouseNo] = @BillingHouseNo
+                              ,[BillingPostCode] = @BillingPostCode
+                              ,[ShippingHouseNo] = @ShippingHouseNo
+                              ,[ShippingPostCode] = @ShippingPostCode
+                              ,[FirstName] = @FirstName
+                              ,[LastName] = @LastName
+                              ,[ShippingStreet] = @ShippingStreet
+                              ,[ShippingCity] = @ShippingCity
+                              ,[ShippingPro] = @ShippingPro
+                              ,[BillingStreet] = @BillingStreet
+                              ,[BillingCity] = @BillingCity
+                              ,[BillingPro] = @BillingPro
+                              ,[IsSameAddress] = @IsSameAddress
+                              ,[RegionId] = @RegionId
                                 where userid = @userid");
             SqlParameter[] paras = new SqlParameter[] {
+            new SqlParameter("@userpwd", DAUtils.MD5(user.Userpwd)),
+            new SqlParameter("@username", user.UserName),
             new SqlParameter("@status", user.Status),
-            new SqlParameter("@userName", user.UserName),
-            new SqlParameter("@companyname", user.CompanyName),
+            new SqlParameter("@email", user.Email),
+            new SqlParameter("@companyname", user.Email),
             new SqlParameter("@phone", user.Phone),
-            new SqlParameter("@shippingAddress", user.ShippingAddress),
-            new SqlParameter("@shippingPostcode", user.ShippingPostCode),
+            new SqlParameter("@BillingHouseNo", user.BillingHouseNo),
+            new SqlParameter("@BillingPostCode", user.BillPostCode),
+            new SqlParameter("@ShippingHouseNo", user.ShippingHouseNo),
+            new SqlParameter("@ShippingPostCode", user.ShippingPostCode),
             new SqlParameter("@firstname", user.FirstName),
             new SqlParameter("@lastName", user.LastName),
-            new SqlParameter("@billingaddress", user.BillAddress),
-            new SqlParameter("@billingpostcode", user.BillPostCode),
-            new SqlParameter("@userid", user.Userid)};
+            new SqlParameter("@ShippingStreet", user.ShippingStreet),
+            new SqlParameter("@ShippingCity", user.ShippingCity),
+            new SqlParameter("@ShippingPro", user.ShippingProvince),
+            new SqlParameter("@BillingStreet", user.BillingStreet),
+            new SqlParameter("@BillingCity", user.BillingCity),
+            new SqlParameter("@BillingPro", user.BillingProvince),
+            new SqlParameter("@IsSameAddress", user.IsSameAddress),
+            new SqlParameter("@RegionId", user.RegionId)};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
@@ -410,19 +578,28 @@ namespace DataAccess
         public static DataTable GetAllUsersWithTheirRoleName()
         {
 
-            DbCommand command = db.GetSqlStringCommond(@" SELECT u.[UserId]
-                                                          ,u.[UserPwd]
-                                                          ,u.[UserName]
-                                                          ,u.[Status]
-                                                          ,u.[Email]
-                                                          ,u.[CompanyName]
-                                                          ,u.[Phone]
-                                                          ,u.[BillingAddress]
-                                                          ,u.[BillingPostCode]
-                                                          ,u.[ShippingAddress]
-                                                          ,u.[ShippingPostCode]
-                                                          ,u.[FirstName]
-                                                          ,u.[LastName],r.rolename
+            DbCommand command = db.GetSqlStringCommond(@" SELECT SELECT [UserId]
+                                                      ,u.[UserPwd]
+                                                      ,u.[UserName]
+                                                      ,u.[Status]
+                                                      ,u.[Email]
+                                                      ,u.[CompanyName]
+                                                      ,u.[Phone]
+                                                      ,u.[BillingHouseNo]
+                                                      ,u.[BillingPostCode]
+                                                      ,u.[ShippingHouseNo]
+                                                      ,u.[ShippingPostCode]
+                                                      ,u.[FirstName]
+                                                      ,u.[LastName]
+                                                      ,u.[ShippingStreet]
+                                                      ,u.[ShippingCity]
+                                                      ,u.[ShippingPro]
+                                                      ,u.[BillingStreet]
+                                                      ,u.[BillingCity]
+                                                      ,u.[BillingPro]
+                                                      ,u.[IsSameAddress]
+                                                      ,u.[RegionId],
+                                                       r.rolename
                                                       FROM [Users] u join [UserRole] ur 
                                                       on u.userid = ur.userid
                                                       join [Role] r

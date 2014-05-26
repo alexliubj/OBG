@@ -46,9 +46,9 @@ public partial class Default2 : System.Web.UI.Page
             LastName.Text = user.LastName;
             Company.Text = user.CompanyName;
             Phone.Text = user.Phone;
-            ShippingAddress.Text = user.ShippingAddress;
+            ShippingAddress.Text = user.ShippingHouseNo;
             ShippingPostCode.Text = user.ShippingPostCode;
-            BillingAddress.Text = user.BillAddress;
+            BillingAddress.Text = user.BillingHouseNo;
             BillingPostCode.Text = user.BillPostCode;
         }
     }
@@ -80,9 +80,9 @@ public partial class Default2 : System.Web.UI.Page
         userSaved.LastName = LastName.Text;
         userSaved.CompanyName = Company.Text;
         userSaved.Phone = Phone.Text;
-        userSaved.ShippingAddress = ShippingAddress.Text;
+        userSaved.ShippingHouseNo = ShippingAddress.Text;
         userSaved.ShippingPostCode = ShippingPostCode.Text;
-        userSaved.BillAddress = BillingAddress.Text;
+        userSaved.BillingHouseNo = BillingAddress.Text;
         userSaved.BillPostCode = BillingPostCode.Text;
 
         int update = 0;

@@ -72,11 +72,56 @@ namespace OBGModel
         }
         private string billAddress;
 
-        public string BillAddress
+        public string BillingHouseNo
         {
             get { return billAddress; }
             set { billAddress = value; }
         }
+
+        private string billingStreet;
+
+        public string BillingStreet
+        {
+            get { return billingStreet; }
+            set { billingStreet = value; }
+        }
+        private string billingCity;
+
+        public string BillingCity
+        {
+            get { return billingCity; }
+            set { billingCity = value; }
+        }
+        private string billingProvince;
+
+        public string BillingProvince
+        {
+            get { return billingProvince; }
+            set { billingProvince = value; }
+        }
+
+        private string shippingStreet;
+
+        public string ShippingStreet
+        {
+            get { return shippingStreet; }
+            set { shippingStreet = value; }
+        }
+        private string shippingCity;
+
+        public string ShippingCity
+        {
+            get { return shippingCity; }
+            set { shippingCity = value; }
+        }
+        private string shippingProvince;
+
+        public string ShippingProvince
+        {
+            get { return shippingProvince; }
+            set { shippingProvince = value; }
+        }
+
         private string billPostCode;
 
         public string BillPostCode
@@ -84,12 +129,12 @@ namespace OBGModel
             get { return billPostCode; }
             set { billPostCode = value; }
         }
-        private string shippingAddress;
+        private string shippingHouseNo;
 
-        public string ShippingAddress
+        public string ShippingHouseNo
         {
-            get { return shippingAddress; }
-            set { shippingAddress = value; }
+            get { return shippingHouseNo; }
+            set { shippingHouseNo = value; }
         }
         private string shippingPostCode;
 
@@ -98,5 +143,22 @@ namespace OBGModel
             get { return shippingPostCode; }
             set { shippingPostCode = value; }
         }
+
+        private bool isSameAddress;
+
+        public bool IsSameAddress
+        {
+            get { return isSameAddress; }
+            set { isSameAddress = value; }
+        }
+
+        private int regionId;
+
+        public int RegionId
+        {
+            get { return regionId; }
+            set { regionId = value; }
+        }
+
     }
 }

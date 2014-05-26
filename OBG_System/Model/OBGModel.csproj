@@ -45,6 +45,7 @@
     <Compile Include="Accessories.cs" />
     <Compile Include="Category.cs" />
     <Compile Include="Discount.cs" />
+    <Compile Include="HomeImage.cs" />
     <Compile Include="Inventory.cs" />
     <Compile Include="LoginRet.cs" />
     <Compile Include="Order.cs" />
