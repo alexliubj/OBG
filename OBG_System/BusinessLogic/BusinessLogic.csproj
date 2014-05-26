@@ -43,6 +43,7 @@
     <Compile Include="AccessoryBLO.cs" />
     <Compile Include="CategoryBLO.cs" />
     <Compile Include="DiscountBLO.cs" />
+    <Compile Include="EmailUtilities.cs" />
     <Compile Include="HomePageBLO.cs" />
     <Compile Include="OrderBLO.cs" />
     <Compile Include="PermissionBLO.cs" />
