@@ -317,7 +317,7 @@
 
 
 <script>
-$(function() {
+    $(document).ready(function () {
     $("img.Imagehub").click(function () {
        
        

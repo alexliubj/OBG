@@ -192,6 +192,7 @@ public partial class Admin_Default : System.Web.UI.Page
         int update = 0;
         update = UserBLO.UpdateUserInfo(userSaved);
 
+
         if (update == 1)
         {
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
@@ -317,7 +318,7 @@ public partial class Admin_Default : System.Web.UI.Page
 
         int newId = UserBLO.Registration(userSaved);
 
-        if (newId > 0 && RoleBLO.AddUserToRole(newId, 1, "des") > 0)
+        if (newId > 0)
         {
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                             "err_msg",
