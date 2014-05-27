@@ -58,7 +58,11 @@
     <AlternatingRowStyle BackColor="White" />
             <Columns>
             <%--<asp:BoundField DataField="ProductId" HeaderText="Product ID" InsertVisible="False" ReadOnly="True" SortExpression="ProductId" />--%>
-            
+            <%--<asp:TemplateField HeaderText ="PartNo" SortExpression="PartNo">
+                <ItemTemplate>
+                    <asp:Label ID="PNLabel" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>--%>
             <asp:TemplateField HeaderText="Image" SortExpression="Image">
                <%-- <EditItemTemplate>
                     <asp:TextBox ID="ImageBox" runat="server" Text='<%# Bind("Image") %>'></asp:TextBox>

@@ -16,9 +16,8 @@ namespace DataAccess
         {
             DbCommand command = db.GetSqlStringCommond(@"SELECT [tireId]
                                                       ,[partNo]
+                                                      ,[image]
                                                       ,[size]
-                                                      ,[rimWith]
-                                                      ,[rimHeight]
                                                       ,[pricing]
                                                       ,[season]
                                                       ,[categoryId]
@@ -32,25 +31,24 @@ namespace DataAccess
         {
             DbCommand command = db.GetSqlStringCommond(@"INSERT INTO [Tires]
                                                        ([partNo]
-                                                       ,[size]
-                                                       ,[rimWith]
-                                                       ,[rimHeight]
+                                                       ,[image]
+                                                       ,[size]                                                      
                                                        ,[pricing]
                                                        ,[season]
                                                        ,[categoryId],[brand])
                                                  VALUES
                                                        (@partNo
+                                                        @image
                                                        ,@size
-                                                       ,@rimWith
-                                                       ,@rimHeight
                                                        ,@pricing
                                                        ,@season
                                                        ,@categoryId,@brand)");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@partNo", tire.PartNo),
                 new SqlParameter("@size",tire.Size),
-                new SqlParameter("@rimWith",tire.Width),
-                new SqlParameter("@rimHeight",tire.Height),
+                new SqlParameter("@image",tire.Image),
+                //new SqlParameter("@rimWith",tire.Width),
+                //new SqlParameter("@rimHeight",tire.Height),
                 new SqlParameter("@pricing",tire.Pricing),
                 new SqlParameter("@season",tire.Season),
                 new SqlParameter("@categoryId",tire.CategoryId),
@@ -72,9 +70,8 @@ namespace DataAccess
         {
             DbCommand command = db.GetSqlStringCommond(@"UPDATE [OBG_].[dbo].[Tires]
                                    SET [partNo] = @partNo
+                                      ,[image] = @image
                                       ,[size] = @size
-                                      ,[rimWith] = @rimWith
-                                      ,[rimHeight] = @rimHeight
                                       ,[pricing] = @pricing
                                       ,[season] = @season
                                       ,[categoryId] = @categoryId
@@ -83,8 +80,9 @@ namespace DataAccess
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@partNo", tire.PartNo),
                 new SqlParameter("@size",tire.Size),
-                new SqlParameter("@rimWith",tire.Width),
-                new SqlParameter("@rimHeight",tire.Height),
+                new SqlParameter("@image", tire.Image),
+                //new SqlParameter("@rimWith",tire.Width),
+                //new SqlParameter("@rimHeight",tire.Height),
                 new SqlParameter("@pricing",tire.Pricing),
                 new SqlParameter("@season",tire.Season),
                 new SqlParameter("@categoryId",tire.CategoryId),

@@ -33,9 +33,18 @@
                     <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Name") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
                 <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
+                    <asp:Label ID="NameLabel" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
+            <asp:TemplateField HeaderText="Image" SortExpression="Image">
+               <%-- <EditItemTemplate>
+                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Name") %>'></asp:TextBox>
+                </EditItemTemplate>--%>
+                <ItemTemplate>
+                    <asp:Image class="Imagehub" ID="Image1" runat="server" ImageUrl='<%# Eval("Image") %>'  onclick="DisplayImageInNewWidnow();"></asp:Image>
+                </ItemTemplate>
+            </asp:TemplateField>
+
             <%--<asp:TemplateField HeaderText="Img" SortExpression="Img">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("image") %>'></asp:TextBox>
@@ -74,16 +83,21 @@
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("CategoryId") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>--%>
-            <asp:TemplateField HeaderText="Name" SortExpression="Name">
+            <%--<asp:TemplateField HeaderText="Name" SortExpression="Name">--%>
                <%-- <EditItemTemplate>
                     <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Name") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
-                <ItemTemplate>
+               <%-- <ItemTemplate>
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                 </ItemTemplate>
-            </asp:TemplateField>
+            </asp:TemplateField>--%>
             
             <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
+             <asp:TemplateField HeaderText="ADD" SortExpression="ADD">
+            <ItemTemplate>
+            <asp:ImageButton ID="AddBt" runat="server" ImageUrl="../Pictures/images.jpg" OnClick="AddBt_Click"></asp:ImageButton>
+            </ItemTemplate>
+            </asp:TemplateField>
         </Columns>
 
         <EditRowStyle BackColor="#2461BF" />

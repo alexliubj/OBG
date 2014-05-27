@@ -55,7 +55,7 @@
 
                
 
-                <tr>
+                <%--<tr>
                     <td>
                         <asp:Label ID="WidthLabel" runat="server" >Width:</asp:Label>
                     </td>
@@ -68,9 +68,9 @@
                         <asp:CheckBox ID="WidthChcek6" runat="server" Text='17*8.0'></asp:CheckBox></td><td>
                         
                     </td>
-                </tr>
+                </tr>--%>
 
-                <tr>
+                <%--<tr>
                     <td>
                         <asp:Label ID="HeightLabel" runat="server" >Height:</asp:Label>
                     </td>
@@ -81,7 +81,7 @@
                         
                         
                     </td>
-                </tr>
+                </tr>--%>
                 <tr>
                     <td>
                         <asp:Label ID="SeasonLabel" runat="server" >Season:</asp:Label>
@@ -122,9 +122,9 @@
 
     </asp:TemplateField>--%>
             <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
-                <EditItemTemplate>
+                <%--<EditItemTemplate>
                     <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>
-                </EditItemTemplate>
+                </EditItemTemplate>--%>
                 <ItemTemplate>
                     <asp:Label ID="PNLabel" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                 </ItemTemplate>
@@ -137,6 +137,22 @@
                    <asp:Image ID="ImageLable" runat="server" ImageUrl='<%# Eval("Image") %>' ></asp:Image>
                 </ItemTemplate>
             </asp:TemplateField>--%>
+                <asp:TemplateField HeaderText="Brand" SortExpression="Brand">
+                <%--<EditItemTemplate>
+                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>
+                </EditItemTemplate>--%>
+                <ItemTemplate>
+                    <asp:Label ID="BrandLabel" runat="server" Text='<%# Bind("Brand") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+                <asp:TemplateField HeaderText="Image" SortExpression="Image">
+                <%--<EditItemTemplate>
+                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>
+                </EditItemTemplate>--%>
+                <ItemTemplate>
+                   <asp:Image class="Imagehub" ID="Image1" runat="server" ImageUrl='<%# Eval("image") %>'  onclick="DisplayImageInNewWidnow();"></asp:Image>
+                </ItemTemplate>
+            </asp:TemplateField>
 
             <asp:TemplateField HeaderText="Size" SortExpression="Size">
                 <%--<EditItemTemplate>
@@ -146,22 +162,22 @@
                     <asp:Label ID="SizeLabel" runat="server" Text='<%# Bind("Size") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Width" SortExpression="rimWith">
+           <%-- <asp:TemplateField HeaderText="Width" SortExpression="rimWith">--%>
                 <%--<EditItemTemplate>
                     <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("rimWith") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
-                <ItemTemplate>
+                <%--<ItemTemplate>
                     <asp:Label ID="WidthLabel" runat="server" Text='<%# Bind("rimWith") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Height" SortExpression="rimHeight">
+            <asp:TemplateField HeaderText="Height" SortExpression="rimHeight">--%>
                 <%--<EditItemTemplate>
                     <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("rimHeight") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
-                <ItemTemplate>
+                <%--<ItemTemplate>
                     <asp:Label ID="HeightLabel" runat="server" Text='<%# Bind("rimHeight") %>'></asp:Label>
                 </ItemTemplate>
-            </asp:TemplateField>
+            </asp:TemplateField>--%>
             <asp:TemplateField HeaderText="Pricing" SortExpression="Pricing">
                <%-- <EditItemTemplate>
                     <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Pricing") %>'></asp:TextBox>

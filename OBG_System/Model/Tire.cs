@@ -21,6 +21,13 @@ namespace OBGModel
             get { return partNo; }
             set { partNo = value; }
         }
+        private string image;
+
+        public string Image
+        {
+            get { return image; }
+            set { image = value; }
+        }
         private string size;
 
         public string Size

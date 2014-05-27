@@ -25,7 +25,7 @@
         <fieldset class="wheelInfo">
             <legend>Choose your wheels</legend>
             <table>
-                <tr>
+                <%--<tr>
                     <td class="style11">
                         <asp:Label ID="StyleLabel" runat="server" >Style:</asp:Label>
                     </td>
@@ -48,9 +48,9 @@
                     <td class="style11">
                        
                     </td>
-                </tr>
+                </tr>--%>
 
-                <tr>
+                <%--<tr>
                     <td class="style11">
                         <asp:Label ID="BrandLabel" runat="server">Brand:</asp:Label>
                     </td>
@@ -60,11 +60,8 @@
                         <asp:CheckBox ID="BrandCheck2" runat="server" Text='Fast Wheels'></asp:CheckBox></td>
                     <td class="style11">
                         <asp:CheckBox ID="BrandCheck3" runat="server" Text='Replika'></asp:CheckBox></td>
-                    <td class="style11">
-                        
-                        
-                    </td>
-                </tr>
+                    <td class="style11"></td>
+                </tr>--%>
 
                
 
@@ -169,7 +166,7 @@
                        
                     </td>
                 </tr>
-                <tr>
+                <%--<tr>
                     <td class="style11">
                         <asp:Label ID="WeightLabel" runat="server" >Weight:</asp:Label>
                     </td>
@@ -190,8 +187,8 @@
                     <td class="style11">
                        
                     </td>
-                </tr>
-                <tr>
+                </tr>--%>
+                <%--<tr>
                     <td class="style11">
                         <asp:Label ID="OnhandLabel" runat="server" >Onhand:</asp:Label>
                     </td>
@@ -211,7 +208,7 @@
                        
 
                     </td>
-                </tr>
+                </tr>--%>
                 
                
             </table>
@@ -232,7 +229,11 @@
     <AlternatingRowStyle BackColor="White" />
             <Columns>
             <asp:BoundField DataField="ProductId" HeaderText="Product ID" InsertVisible="False" ReadOnly="True" SortExpression="ProductId" visible="False"/>
-            
+            <%--<asp:TemplateField HeaderText ="PartNo" SortExpression="PartNo">
+                <ItemTemplate>
+                    <asp:Label ID="PNLabel" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>--%>
             <asp:TemplateField HeaderText="Image" SortExpression="Image">
                 <%--<EditItemTemplate>
                     <asp:TextBox ID="ImageTextBox" runat="server" Text='<%# Bind("Image") %>'></asp:TextBox>
