@@ -28,13 +28,12 @@
             </asp:TemplateField>
             <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" />
             <asp:CommandField HeaderText="Edit" ShowEditButton="True" ButtonType="Button" />
-            <asp:TemplateField HeaderText="Delete">
+ <%--           <asp:TemplateField HeaderText="Delete">
                 <ItemTemplate>
                     <asp:Button ID="deleteButton" runat="server" CommandName="Delete" Text="Delete"
-                        OnClientClick="return confirm('Are you sure you want to delete this discount?');" />
-                 <%--   <asp:Button ID="btnInsert" runat="Server" Text="Insert" CommandName="Insert" UseSubmitBehavior="False" />--%>
+                        OnClientClick="return confirm('Are you sure you want to delete this discount?');" /> 
                 </ItemTemplate>
-            </asp:TemplateField>
+            </asp:TemplateField>--%>
             <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
         </Columns>
 

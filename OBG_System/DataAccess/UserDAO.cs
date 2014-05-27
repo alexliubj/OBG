@@ -346,11 +346,11 @@ namespace DataAccess
                     }
                     if (reader.IsDBNull(13) == false)
                     {
-                        retUser.ShippingHouseNo = reader.GetString(13);
+                        retUser.ShippingProvince = reader.GetString(13);
                     }
                     else
                     {
-                        retUser.BillingStreet = "";
+                        retUser.ShippingProvince = "";
                     }
                     if (reader.IsDBNull(14) == false)
                     {
@@ -511,7 +511,7 @@ namespace DataAccess
                               ,[RegionId] = @RegionId
                                 where userid = @userid");
             SqlParameter[] paras = new SqlParameter[] {
-            new SqlParameter("@userpwd", DAUtils.MD5(user.Userpwd)),
+            new SqlParameter("@userid", user.Userid),
             new SqlParameter("@username", user.UserName),
             new SqlParameter("@status", user.Status),
             new SqlParameter("@email", user.Email),
