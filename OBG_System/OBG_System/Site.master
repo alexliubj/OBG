@@ -6,11 +6,9 @@
     <title></title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
-   
     </asp:ContentPlaceHolder>
     <style type="text/css">
-        .style1
-        {
+        .style1 {
             width: 284px;
             height: 107px;
         }
@@ -18,57 +16,55 @@
 </head>
 <body>
     <form runat="server">
-    <div class="page">
-        <div class="header">
-            <div class="title">
-                <h1>
-                    <img class="style1" src="<%= Page.ResolveUrl("~")%>Pictures/logo.png" />OBG Orderring System
-                </h1>
+        <div class="page">
+            <div class="header">
+                <div class="title">
+                    <h1>
+                        <img class="style1" src="<%= Page.ResolveUrl("~")%>Pictures/logo.png" />OBG Orderring System
+                    </h1>
+                </div>
+
+                <div class="loginDisplay">
+                    <asp:Label ID="lblWelcome" runat="server" Text="Welcome!"></asp:Label>
+                    <asp:Button ID="btnLogin" runat="server" Text="Error" OnClick="btnLogin_Click" />
+
+                </div>
+
+
+                <div class="shoppingcart" align="right">
+                    <a id="shoppingcart" runat="server" href="~/Account/ShoppingCart.aspx">
+                        <img id="Image1"
+                            src="<%= Page.ResolveUrl("~")%>Pictures/shoppingcart.png" height="50px" width="85px" /></a>
+                </div>
+                <div class="clear hideSkiplink">
+                    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="true" IncludeStyleBlock="false" Orientation="Horizontal">
+                        <Items>
+                            <asp:MenuItem NavigateUrl="Default.aspx" Text="Home"></asp:MenuItem>
+                            <asp:MenuItem Text="Wheels">
+                                <asp:MenuItem NavigateUrl="~/Products/WheelsAll.aspx" Text="View All Wheels"></asp:MenuItem>
+                                <asp:MenuItem NavigateUrl="~/Products/WheelsByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
+                            </asp:MenuItem>
+                            <asp:MenuItem Text="Tires">
+                                <asp:MenuItem NavigateUrl="~/Products/TiresAll.aspx" Text="View All Tires"></asp:MenuItem>
+                                <asp:MenuItem NavigateUrl="~/Products/TiresByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
+                            </asp:MenuItem>
+                            <asp:MenuItem Text="Accessories">
+                                <asp:MenuItem NavigateUrl="~/Products/AccessoriesAll.aspx" Text="View All Accessories"></asp:MenuItem>
+                            </asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="Account/UserCenter.aspx" Text="User Center"></asp:MenuItem>
+
+                        </Items>
+                    </asp:Menu>
+                </div>
             </div>
-
-            <div class="loginDisplay">
-               <asp:Label ID="lblWelcome" runat="server" Text="Welcome!"></asp:Label>
-                <asp:Button ID="btnLogin" runat="server" Text="Error" OnClick="btnLogin_Click" />
-
+            <div class="main">
+                <asp:ContentPlaceHolder ID="MainContent" runat="server" />
             </div>
-
-
-             <div class="shoppingcart" align=right>
-                 <a ID="shoppingcart" runat="server" href="~/Account/ShoppingCart.aspx"><img ID="Image1" 
-                     src="<%= Page.ResolveUrl("~")%>Pictures/shoppingcart.png" Height="50px" Width="85px"/></a></div>
-            
-
-            <div class="clear hideSkiplink">
-                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
-                    <Items>
-                        <asp:MenuItem NavigateUrl="Default.aspx" Text="Home"></asp:MenuItem>
-                        <asp:MenuItem Text="Wheels">
-                        <asp:MenuItem NavigateUrl="~/Products/WheelsAll.aspx" Text="View All"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Products/WheelsByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
-                        </asp:MenuItem>
-                        <asp:MenuItem Text="Tires">
-                        <asp:MenuItem NavigateUrl="~/Products/TiresAll.aspx" Text="View All"></asp:MenuItem>
-                        <asp:MenuItem NavigateUrl="~/Products/TiresByVehicle.aspx" Text="View By Vehicle"></asp:MenuItem>
-                        </asp:MenuItem>
-                        <asp:MenuItem Text="Accessories">
-                        <asp:MenuItem NavigateUrl="~/Products/AccessoriesAll.aspx" Text="View All"></asp:MenuItem>
-                        </asp:MenuItem>
-                         <asp:MenuItem NavigateUrl="Account/UserCenter.aspx" Text="User Center">
-                        </asp:MenuItem>
-
-                    </Items>
-                </asp:Menu>
+            <div class="clear">
             </div>
         </div>
-        <div class="main">
-            <asp:ContentPlaceHolder ID="MainContent" runat="server"/>
+        <div class="footer">
         </div>
-        <div class="clear">
-        </div>
-    </div>
-    <div class="footer">
-        
-    </div>
     </form>
 </body>
 </html>

@@ -34,23 +34,25 @@ public partial class Account_Register : System.Web.UI.Page
 
         newUser.UserName = UserName.Text;
         newUser.Userpwd = Password.Text;
-        newUser.CompanyName = Company.Text;
-        newUser.Phone = Phone.Text;
-        newUser.ShippingHouseNo = ShippingAddress.Text;
-        newUser.ShippingPostCode = ShippingPostCode.Text;
-        newUser.FirstName = FirstName.Text;
-        newUser.LastName = LastName.Text;
-        newUser.Email = Email.Text;
-        newUser.BillingHouseNo = string.Empty;
-        newUser.BillPostCode = string.Empty;
-        newUser.BillingCity = string.Empty;
-        newUser.BillingProvince = string.Empty;
-        newUser.BillingStreet = string.Empty;
+        newUser.CompanyName = Company.Text.ToString().Trim();
+        newUser.Phone = Phone.Text.ToString().Trim();
+        newUser.ShippingHouseNo = ShippingHouseNo.Text.ToString().Trim();
+        newUser.ShippingPostCode = ShippingPostCode.Text.ToString().Trim();
+        newUser.ShippingCity = ShippingCity.Text.ToString().Trim();
+        newUser.ShippingProvince = ShippingPro.SelectedValue;
+        newUser.ShippingStreet = ShippingStreet.Text.ToString().Trim();
+        newUser.FirstName = FirstName.Text.ToString().Trim();
+        newUser.LastName = LastName.Text.ToString().Trim();
+        newUser.Email = Email.Text.ToString().Trim();
+        newUser.BillingHouseNo = BillingHouseNo.Text.ToString().Trim();
+        newUser.BillPostCode = BillingPostCode.Text.ToString().Trim();
+        newUser.BillingCity = BillingCity.Text.ToString().Trim();
+        newUser.BillingProvince = BillingPro.SelectedValue;
+        newUser.BillingStreet = BillingStreet.Text.ToString().Trim();
+        //need change later
         newUser.IsSameAddress = false;
         newUser.RegionId = 0;
-        newUser.ShippingCity = string.Empty;
-        newUser.ShippingProvince = string.Empty;
-        newUser.ShippingStreet = string.Empty;
+        //
 
         int newId = UserBLO.Registration(newUser);
 
@@ -58,7 +60,7 @@ public partial class Account_Register : System.Web.UI.Page
         {
             Response.Redirect("~/Account/RegisterSuccess.aspx");
         }
-        else if (newId <= 0)
+        else
         {
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                                        "err_msg",
@@ -76,7 +78,7 @@ public partial class Account_Register : System.Web.UI.Page
             UserName.Focus();
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                      "err_msg",
-                     "alert('Sorry, the user name has been used by other user.');", true);
+                     "alert('Username already exists.\\nPlease choose a different username.');", true);
         }
         else
         {
@@ -93,11 +95,22 @@ public partial class Account_Register : System.Web.UI.Page
             Email.Focus();
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                       "err_msg",
-                      "alert('Sorry, the email has been used by other user.');", true);
+                      "alert('Supplied email address has already been used.');", true);
         }
         else
         {
             Password.Focus();
+        }
+    }
+    protected void CheckBoxIsSameAddress_Clicked(Object sender, EventArgs e)
+    {
+        if (checkBoxIsSameAddress.Checked == true)
+        {
+            BillingHouseNo.Text = ShippingHouseNo.Text.ToString().Trim();
+            BillingPostCode.Text = ShippingPostCode.Text.ToString().Trim();
+            BillingCity.Text = ShippingCity.Text.ToString().Trim();
+            BillingPro.SelectedValue = ShippingPro.SelectedValue;
+            BillingStreet.Text = ShippingStreet.Text.ToString().Trim();
         }
     }
 }

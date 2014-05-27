@@ -31,10 +31,16 @@ public partial class Default2 : System.Web.UI.Page
             LastName.Text = user.LastName;
             Company.Text = user.CompanyName;
             Phone.Text = user.Phone;
-            ShippingAddress.Text = user.ShippingHouseNo;
+            ShippingHouseNo.Text = user.ShippingHouseNo;
             ShippingPostCode.Text = user.ShippingPostCode;
-            BillingAddress.Text = user.BillingHouseNo;
+            ShippingCity.Text = user.ShippingCity;
+            ShippingPro.SelectedValue = user.ShippingProvince;
+            ShippingStreet.Text = user.ShippingStreet;
+            BillingHouseNo.Text = user.BillingHouseNo;
             BillingPostCode.Text = user.BillPostCode;
+            BillingCity.Text = user.BillingCity;
+            BillingPro.SelectedValue = user.BillingProvince;
+            BillingStreet.Text = user.BillingStreet;
         }
     }
     protected void BtnEdit_Click(object sender, EventArgs e)
@@ -44,10 +50,16 @@ public partial class Default2 : System.Web.UI.Page
         LastName.ReadOnly = false;
         Company.ReadOnly = false;
         Phone.ReadOnly = false;
-        ShippingAddress.ReadOnly = false;
+        ShippingHouseNo.ReadOnly = false;
         ShippingPostCode.ReadOnly = false;
-        BillingAddress.ReadOnly = false;
+        ShippingStreet.ReadOnly = false;
+        ShippingCity.ReadOnly = false;
+        ShippingPro.Enabled = true;
+        BillingHouseNo.ReadOnly = false;
         BillingPostCode.ReadOnly = false;
+        BillingStreet.ReadOnly = false;
+        BillingCity.ReadOnly = false;
+        BillingPro.Enabled = true;
         BtnSave.Visible = true;
         BtnCancle.Visible = true;
     }
@@ -57,30 +69,48 @@ public partial class Default2 : System.Web.UI.Page
         userSaved = UserBLO.GetUserInfoWithUserId(userID);
 
         userSaved.Userid = userID;
-        userSaved.Email = Email.Text;
-        userSaved.FirstName = FirstName.Text;
-        userSaved.LastName = LastName.Text;
-        userSaved.CompanyName = Company.Text;
-        userSaved.Phone = Phone.Text;
-        userSaved.ShippingHouseNo = ShippingAddress.Text;
-        userSaved.ShippingPostCode = ShippingPostCode.Text;
-        userSaved.BillingHouseNo = BillingAddress.Text;
+        userSaved.Email = Email.Text.ToString().Trim();
+        userSaved.FirstName = FirstName.Text.ToString().Trim();
+        userSaved.LastName = LastName.Text.ToString().Trim();
+        userSaved.CompanyName = Company.ToString().Trim();
+        userSaved.Phone = Phone.Text.ToString().Trim();
+        userSaved.ShippingHouseNo = ShippingHouseNo.Text.ToString().Trim();
+        userSaved.ShippingPostCode = ShippingPostCode.Text.ToString().Trim();
+        userSaved.ShippingCity = ShippingCity.Text.ToString().Trim();
+        userSaved.ShippingProvince = ShippingPro.SelectedValue;
+        userSaved.ShippingStreet = ShippingStreet.Text.ToString().Trim();
+        userSaved.BillingHouseNo = BillingHouseNo.Text;
         userSaved.BillPostCode = BillingPostCode.Text;
+        userSaved.BillingCity = BillingCity.Text.ToString().Trim();
+        userSaved.BillingProvince = BillingPro.SelectedValue;
+        userSaved.BillingStreet = BillingStreet.Text.ToString().Trim();
 
-        //userSaved.BillingCity = string.Empty;
-        //userSaved.BillingProvince = string.Empty;
-        //userSaved.BillingStreet = string.Empty;
         //userSaved.IsSameAddress = false;
         //userSaved.RegionId = 0;
-        //userSaved.ShippingCity = string.Empty;
-        //userSaved.ShippingProvince = string.Empty;
-        //userSaved.ShippingStreet = string.Empty;
 
         int update = 0;
         update = UserBLO.UpdateUserInfo(userSaved);
 
         if (update == 1)
         {
+            Email.ReadOnly = true;
+            FirstName.ReadOnly = true;
+            LastName.ReadOnly = true;
+            Company.ReadOnly = true;
+            Phone.ReadOnly = true;
+            ShippingHouseNo.ReadOnly = true;
+            ShippingPostCode.ReadOnly = true;
+            ShippingStreet.ReadOnly = true;
+            ShippingCity.ReadOnly = true;
+            ShippingPro.Enabled = false;
+            BillingHouseNo.ReadOnly = true;
+            BillingPostCode.ReadOnly = true;
+            BillingStreet.ReadOnly = true;
+            BillingCity.ReadOnly = true;
+            BillingPro.Enabled = false;
+            BtnSave.Visible = false;
+            BtnCancle.Visible = false;
+
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                          "err_msg",
                          "alert('Account information has been saved.');",
@@ -101,10 +131,16 @@ public partial class Default2 : System.Web.UI.Page
         LastName.ReadOnly = true;
         Company.ReadOnly = true;
         Phone.ReadOnly = true;
-        ShippingAddress.ReadOnly = true;
+        ShippingHouseNo.ReadOnly = true;
         ShippingPostCode.ReadOnly = true;
-        BillingAddress.ReadOnly = true;
+        ShippingStreet.ReadOnly = true;
+        ShippingCity.ReadOnly = true;
+        ShippingPro.Enabled = false;
+        BillingHouseNo.ReadOnly = true;
         BillingPostCode.ReadOnly = true;
+        BillingStreet.ReadOnly = true;
+        BillingCity.ReadOnly = true;
+        BillingPro.Enabled = false;
         BtnSave.Visible = false;
         BtnCancle.Visible = false;
     }

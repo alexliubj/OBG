@@ -404,6 +404,12 @@ public partial class Admin_Default : System.Web.UI.Page
             divAcc.Visible = true;
         }
 
+        MenuItem ms = NavigationMenu.FindItem(e.Item.Text);
+        if (ms != null)
+        {
+            ms.Selectable = false;
+        }
+
     }
 
     private string ConvertSortDirectionToSql(SortDirection sortDirection)

@@ -18,7 +18,7 @@
                 </h1>
             </div>
             <div class="clear hideSkiplink">
-                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="true" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
                         <asp:MenuItem NavigateUrl="Home.aspx" Text="Home"/>
                         <asp:MenuItem NavigateUrl="DiscountManagement.aspx" Text="Discount Management"/>
