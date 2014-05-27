@@ -27,9 +27,12 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             btnLogin.Text = "Log In";
             lblWelcome.Text = "Welcom, please ";
         }
-
+        MenuItem ms = NavigationMenu.FindItem(Page.Header.Title);
+        if (ms != null)
+        {
+            ms.Selectable = false;
+        }
     }
-
     protected void btnLogin_Click(object sender, EventArgs e)
     {
         if (btnLogin.Text == "Log Out")

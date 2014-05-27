@@ -166,9 +166,9 @@ div.menu ul
     width: auto;
 }
 
-div.menu ul li a, div.menu ul li a:visited
+div.menu ul li a
 {
-    background-color: #465c71;
+    background-color: darkblue;
     border: 1px #4e667d solid;
     color: White;
     display: block;
@@ -177,6 +177,17 @@ div.menu ul li a, div.menu ul li a:visited
     text-decoration: none;
     white-space: nowrap;
 }
+    div.menu ul li a:visited 
+    {
+            background-color: #465c71;
+    border: 1px #4e667d solid;
+    color: White;
+    display: block;
+    line-height: 1.35em;
+    padding: 4px 20px;
+    text-decoration: none;
+    white-space: nowrap;
+    }
 
 div.menu ul li a:hover
 {
@@ -191,6 +202,7 @@ div.menu ul li a:active
     color: #cfdbe6;
     text-decoration: none;
 }
+div.menu
 
 /* FORM ELEMENTS   
 ----------------------------------------------------------*/

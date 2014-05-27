@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminSite.master"
+﻿<%@ Page Title="Products" Language="C#" MasterPageFile="~/Admin/AdminSite.master"
     AutoEventWireup="true" CodeFile="ProductManagement.aspx.cs" Inherits="Admin_Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">

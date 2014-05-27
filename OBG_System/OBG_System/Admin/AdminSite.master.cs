@@ -9,6 +9,10 @@ public partial class SiteMaster : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        MenuItem ms = NavigationMenu.FindItem(Page.Header.Title);
+        if (ms != null)
+        {
+            ms.Selectable = false;
+        }
     }
 }

@@ -106,6 +106,12 @@ namespace OBGModel
             set { categoryId = value; }
         }
 
+        private string partNO;
 
+        public string PartNO
+        {
+            get { return partNO; }
+            set { partNO = value; }
+        }
     }
 }
