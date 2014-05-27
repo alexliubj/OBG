@@ -43,18 +43,28 @@ public partial class Account_Register : System.Web.UI.Page
         newUser.Email = Email.Text;
         newUser.BillingHouseNo = string.Empty;
         newUser.BillPostCode = string.Empty;
+        newUser.BillingCity = string.Empty;
+        newUser.BillingProvince = string.Empty;
+        newUser.BillingStreet = string.Empty;
+        newUser.IsSameAddress = false;
+        newUser.RegionId = 0;
+        newUser.ShippingCity = string.Empty;
+        newUser.ShippingProvince = string.Empty;
+        newUser.ShippingStreet = string.Empty;
 
         int newId = UserBLO.Registration(newUser);
 
         if (newId > 0)
         {
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
-                            "err_msg",
-                            "alert('success.');", true);
             Response.Redirect("~/Account/RegisterSuccess.aspx");
-
-            //add To role
         }
+        else if (newId <= 0)
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                                       "err_msg",
+                                       "alert('Registration failed.');", true);
+        }
+
     }
 
     protected void UserName_TextChanged(object sender, EventArgs e)

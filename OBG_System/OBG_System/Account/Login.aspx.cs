@@ -32,7 +32,7 @@ public partial class Account_Login : System.Web.UI.Page
 
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                              "err_msg",
-                             "alert('success.');",
+                             "alert('Login Success.');",
                              true);
                 Response.Redirect("~/Default.aspx");
             }
@@ -48,7 +48,7 @@ public partial class Account_Login : System.Web.UI.Page
         {
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                         "err_msg",
-                        "alert('wrong.');", true);
+                        "alert('Invalid log in or server error. Please try again.');", true);
         }
     }
     protected void LoginUser_LoggedIn(object sender, EventArgs e) 

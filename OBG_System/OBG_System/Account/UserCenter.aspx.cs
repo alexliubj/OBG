@@ -13,8 +13,6 @@ public partial class Default2 : System.Web.UI.Page
     User user = new User();
     protected void Page_Load(object sender, EventArgs e)
     {
-        //for test purpose
-        //Session["userID"] = 1;
         if (Session["userID"] != null)
         {
             userID = (int)Session["userID"];
@@ -26,19 +24,6 @@ public partial class Default2 : System.Web.UI.Page
 
         if (!IsPostBack)
         {
-            //test purpose
-            //user.UserName = "neobility3";
-            //user.FirstName = "neo";
-            //user.LastName = "wu";
-            //user.Phone = "206478990689";
-            //user.CompanyName = "lol";
-            //user.ShippingAddress = "address";
-            //user.ShippingPostCode = "94105-0011";
-            //user.Email = "neo.wu2@gmail.com";
-            //user.BillAddress = "dd";
-            //user.BillPostCode = "x1d3d2";
-            //
-
             user = UserBLO.GetUserInfoWithUserId(userID);
             UserName.Text = user.UserName;
             Email.Text = user.Email;
@@ -69,12 +54,9 @@ public partial class Default2 : System.Web.UI.Page
     protected void BtnSave_Click(object sender, EventArgs e)
     {
         User userSaved = new User();
+        userSaved = UserBLO.GetUserInfoWithUserId(userID);
 
-        //test purpose
-        //userSaved.Userid = 2;
-        //
         userSaved.Userid = userID;
-        userSaved.UserName = UserName.Text;
         userSaved.Email = Email.Text;
         userSaved.FirstName = FirstName.Text;
         userSaved.LastName = LastName.Text;
@@ -84,6 +66,15 @@ public partial class Default2 : System.Web.UI.Page
         userSaved.ShippingPostCode = ShippingPostCode.Text;
         userSaved.BillingHouseNo = BillingAddress.Text;
         userSaved.BillPostCode = BillingPostCode.Text;
+
+        //userSaved.BillingCity = string.Empty;
+        //userSaved.BillingProvince = string.Empty;
+        //userSaved.BillingStreet = string.Empty;
+        //userSaved.IsSameAddress = false;
+        //userSaved.RegionId = 0;
+        //userSaved.ShippingCity = string.Empty;
+        //userSaved.ShippingProvince = string.Empty;
+        //userSaved.ShippingStreet = string.Empty;
 
         int update = 0;
         update = UserBLO.UpdateUserInfo(userSaved);

@@ -40,9 +40,9 @@ public partial class Admin_Default : System.Web.UI.Page
 
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        int userID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
-        DiscountBLO.DeleteDiscount(userID);
-        Gridview1_Bind();
+        //int userID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
+        //DiscountBLO.DeleteDiscount(userID);
+        //Gridview1_Bind();
     }
 
     protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
