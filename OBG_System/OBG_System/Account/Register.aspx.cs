@@ -111,6 +111,16 @@ public partial class Account_Register : System.Web.UI.Page
             BillingCity.Text = ShippingCity.Text.ToString().Trim();
             BillingPro.SelectedValue = ShippingPro.SelectedValue;
             BillingStreet.Text = ShippingStreet.Text.ToString().Trim();
+            //billingAddressDiv.Visible = false;
+        }
+        else if (checkBoxIsSameAddress.Checked == false)
+        {
+            BillingHouseNo.Text = null;
+            BillingPostCode.Text = null;
+            BillingCity.Text = null;
+            BillingPro.SelectedValue = "";
+            BillingStreet.Text = null;
+            billingAddressDiv.Visible = true;
         }
     }
 }

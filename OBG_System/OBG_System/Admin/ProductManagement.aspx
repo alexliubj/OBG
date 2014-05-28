@@ -115,12 +115,12 @@
                         <asp:Label ID="Label13" runat="server" Text='<%# Bind("Price") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="CategoryId" SortExpression="CategoryId">
+                <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
                     <EditItemTemplate>
-                        <asp:TextBox ID="TextBox14" runat="server" Text='<%# Bind("CategoryId") %>'></asp:TextBox>
+                        <asp:TextBox ID="TextBox14" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label14" runat="server" Text='<%# Bind("CategoryId") %>'></asp:Label>
+                        <asp:Label ID="Label14" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" />
