@@ -551,7 +551,8 @@ namespace DataAccess
                     command.Parameters.AddRange(paras);
                     db.ExecuteNonQuery(command,t);
                     DbCommand command2 = db.GetSqlStringCommond(@"delete from discount where userId = @userid");
-                    command2.Parameters.AddRange(paras);
+                    SqlParameter[] paras2 = new SqlParameter[] { new SqlParameter("@userid", userid) };
+                    command2.Parameters.AddRange(paras2);
                     int ret = db.ExecuteNonQuery(command2,t);
                     t.Commit();
                     return ret;

@@ -66,7 +66,6 @@ public partial class Account_Register : System.Web.UI.Page
                                        "err_msg",
                                        "alert('Registration failed.');", true);
         }
-
     }
 
     protected void UserName_TextChanged(object sender, EventArgs e)

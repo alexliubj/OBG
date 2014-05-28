@@ -6,6 +6,7 @@ using BusinessLogic;
 using System.Data;
 using System.Data.SqlClient;
 using System;
+using System.IO;
 
 public partial class Admin_Default : System.Web.UI.Page
 {
@@ -111,29 +112,48 @@ public partial class Admin_Default : System.Web.UI.Page
 
     protected void BtnSave_Click(object sender, EventArgs e)
     {
+        string filename = Path.GetFileName(FileUploadControl.FileName);
         Wheels wheel = new Wheels();
         int productID;
         productID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
         wheel.ProductId = productID;
-        wheel.Bore = Bore.Text;
-        wheel.Brand = Brand.Text;
-        wheel.CategoryId = int.Parse(CategoryId.Text);
-        wheel.Finish = Finish.Text;
-        wheel.Image = Image.Text;
-        wheel.Offset = Offset.Text;
-        wheel.Onhand = Onhand.Text;
-        wheel.Pcd = Pcd.Text;
-        wheel.Price = int.Parse(Price.Text);
-        wheel.Seat = Seat.Text;
-        wheel.Size = Size.Text;
-        wheel.Style = Style.Text;
-        wheel.Weight = Weight.Text;
+        wheel.Bore = Bore.Text.ToString().Trim();
+        wheel.Brand = Brand.Text.ToString().Trim();
+        wheel.PartNO = PartNo.Text.ToString().Trim();
+        wheel.Finish = Finish.Text.ToString().Trim();
+
+        if (FileUploadControl.HasFile)
+        { 
+            string imgPath = "~/Pictures/" + filename;
+            wheel.Image = imgPath;
+        }
+        else
+        {
+            DataTable wheelsTable = WheelsBLO.GetAllProducts();
+            wheelsTable.PrimaryKey = new DataColumn[] { wheelsTable.Columns["ProductID"] };
+            DataRow foundRow = wheelsTable.Rows.Find(productID);
+            wheel.Image = foundRow[1].ToString();
+        }
+
+        wheel.Offset = Offset.Text.ToString().Trim();
+        wheel.Onhand = Onhand.Text.ToString().Trim();
+        wheel.Pcd = Pcd.Text.ToString().Trim();
+        wheel.Price = int.Parse(Price.Text.ToString().Trim());
+        wheel.Seat = Seat.Text.ToString().Trim();
+        wheel.Size = Size.Text.ToString().Trim();
+        wheel.Style = Style.Text.ToString().Trim();
+        wheel.Weight = Weight.Text.ToString().Trim();
 
         int update = 0;
         update = WheelsBLO.UpdateProduct(wheel);
 
+
         if (update == 1)
         {
+            if (FileUploadControl.HasFile)
+            {
+                    FileUploadControl.SaveAs(Server.MapPath("~/Pictures/") + filename);
+            }
             Gridview1_Bind();
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                          "err_msg",
@@ -161,9 +181,9 @@ public partial class Admin_Default : System.Web.UI.Page
 
         Bore.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label10"))).Text;
         Brand.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label4"))).Text;
-        CategoryId.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label14"))).Text;
+        PartNo.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label14"))).Text;
         Finish.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label7"))).Text;
-        Image.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label2"))).Text;
+        Image1.ImageUrl = ((Image)(GridView1.SelectedRow.Cells[0].FindControl("Image1"))).ImageUrl;
         Offset.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label8"))).Text;
         Onhand.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label12"))).Text;
         Pcd.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label6"))).Text;
@@ -183,9 +203,9 @@ public partial class Admin_Default : System.Web.UI.Page
 
         Bore.Text = null;
         Brand.Text = null;
-        CategoryId.Text = null;
+        PartNo.Text = null;
         Finish.Text = null;
-        Image.Text = null;
+        Image1.ImageUrl = null;
         Offset.Text = null;
         Onhand.Text = null;
         Pcd.Text = null;
@@ -204,22 +224,53 @@ public partial class Admin_Default : System.Web.UI.Page
     {
         Wheels wheel = new Wheels();
 
-        wheel.Bore = Bore.Text;
-        wheel.Brand = Brand.Text;
-        wheel.CategoryId = int.Parse(CategoryId.Text);
-        wheel.Finish = Finish.Text;
-        wheel.Image = Image.Text;
-        wheel.Offset = Offset.Text;
-        wheel.Onhand = Onhand.Text;
-        wheel.Pcd = Pcd.Text;
-        wheel.Price = int.Parse(Price.Text);
-        wheel.Seat = Seat.Text;
-        wheel.Size = Size.Text;
-        wheel.Style = Style.Text;
-        wheel.Weight = Weight.Text;
+        wheel.Bore = Bore.Text.ToString().Trim();
+        wheel.Brand = Brand.Text.ToString().Trim();
+        wheel.PartNO = PartNo.Text.ToString().Trim();
+        wheel.Finish = Finish.Text.ToString().Trim();
 
-        WheelsBLO.AddNewProduct(wheel);
-        Gridview1_Bind();
+        string filename = Path.GetFileName(FileUploadControl.FileName);
+        string imgPath = "~/Pictures/" + filename;
+        wheel.Image = imgPath;
+
+        wheel.Offset = Offset.Text.ToString().Trim();
+        wheel.Onhand = Onhand.Text.ToString().Trim();
+        wheel.Pcd = Pcd.Text.ToString().Trim();
+        wheel.Price = int.Parse(Price.Text.ToString().Trim());
+        wheel.Seat = Seat.Text.ToString().Trim();
+        wheel.Size = Size.Text.ToString().Trim();
+        wheel.Style = Style.Text.ToString().Trim();
+        wheel.Weight = Weight.Text.ToString().Trim();
+        int update = WheelsBLO.AddNewProduct(wheel);
+
+        if (update == 1)
+        {
+            if (FileUploadControl.HasFile)
+            {
+                try
+                {
+                    //string filename = Path.GetFileName(FileUploadControl.FileName);
+                    FileUploadControl.SaveAs(Server.MapPath("~/Pictures/") + filename);
+                    // StatusLabel.Text = "Upload status: File uploaded!";
+                }
+                catch (Exception ex)
+                {
+                    // StatusLabel.Text = "Upload status: The file could not be uploaded. The following error occured: " + ex.Message;
+                }
+            }
+            Gridview1_Bind();
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                         "err_msg",
+                         "alert('New Wheel has been created.');",
+                         true);
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                        "err_msg",
+                        "alert('Sorry, Creating Wheel failed.');",
+                        true);
+        }
     }
     #endregion
 
@@ -430,4 +481,56 @@ public partial class Admin_Default : System.Web.UI.Page
         return newSortDirection;
     }
 
+    #region upload image
+
+    protected void UploadButton_Click(object sender, EventArgs e)
+    {
+        //    if(FileUploadControl.HasFile)
+        //{
+        //    try
+        //    {
+        //        if(FileUploadControl.PostedFile.ContentType == "image/jpeg")
+        //        {
+        //            if(FileUploadControl.PostedFile.ContentLength < 102400)
+        //            {
+        //                string filename = Path.GetFileName(FileUploadControl.FileName);
+        //                FileUploadControl.SaveAs(Server.MapPath("~/") + filename);
+        //                StatusLabel.Text = "Upload status: File uploaded!";
+        //            }
+        //            else
+        //                StatusLabel.Text = "Upload status: The file has to be less than 100 kb!";
+        //        }
+        //        else
+        //            StatusLabel.Text = "Upload status: Only JPEG files are accepted!";
+        //    }
+        //    catch(Exception ex)
+        //    {
+        //        StatusLabel.Text = "Upload status: The file could not be uploaded. The following error occured: " + ex.Message;
+        //    }
+    }
+
+    protected void btnPreviewImage_Click(object sender, EventArgs e) 
+    {
+        //bug: after click preview, the image would not upload, cause FileUploadControl.HasFile=false
+        if (FileUploadControl.HasFile)   
+         {   
+             string path = Server.MapPath("TempImages");   
+    
+             FileInfo oFileInfo = new FileInfo(
+                  FileUploadControl.PostedFile.FileName);
+             string fileName = oFileInfo.Name;
+
+             string fullFileName = path + "\\" + fileName;
+             string imagePath = "TempImages/" + fileName;
+
+             if (!Directory.Exists(path))
+             {
+                 Directory.CreateDirectory(path);
+             }
+
+             FileUploadControl.PostedFile.SaveAs(fullFileName);
+             Image1.ImageUrl = imagePath;
+         }
+    }
+    #endregion
 }
