@@ -93,11 +93,11 @@
             </asp:TemplateField>--%>
             
             <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
-             <asp:TemplateField HeaderText="ADD" SortExpression="ADD">
+            <%-- <asp:TemplateField HeaderText="ADD" SortExpression="ADD">
             <ItemTemplate>
             <asp:ImageButton ID="AddBt" runat="server" ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
             </ItemTemplate>
-            </asp:TemplateField>
+            </asp:TemplateField>--%>
         </Columns>
 
         <EditRowStyle BackColor="#2461BF" />

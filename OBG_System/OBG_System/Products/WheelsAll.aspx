@@ -374,6 +374,14 @@
 
                 </ItemTemplate>
             </asp:TemplateField>
+                <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
+                <%--<EditItemTemplate>
+                    <asp:TextBox ID="StyleTextBox" runat="server" Text='<%# Bind("Style") %>'></asp:TextBox>
+                </EditItemTemplate>--%>
+                <ItemTemplate>
+                    <asp:Label ID="PNLabel" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField HeaderText="Style" SortExpression="Style">
                 <%--<EditItemTemplate>
                     <asp:TextBox ID="StyleTextBox" runat="server" Text='<%# Bind("Style") %>'></asp:TextBox>
