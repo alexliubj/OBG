@@ -48,6 +48,7 @@
     <Compile Include="OrderBLO.cs" />
     <Compile Include="PermissionBLO.cs" />
     <Compile Include="TiresBLO.cs" />
+    <Compile Include="ValidationUtility.cs" />
     <Compile Include="WheelsBLO.cs" />
     <Compile Include="RegionBLO.cs" />
     <Compile Include="RoleBLO.cs" />
