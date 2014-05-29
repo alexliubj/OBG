@@ -47,6 +47,7 @@
     <Compile Include="DBHelper.cs" />
     <Compile Include="DiscountDAO.cs" />
     <Compile Include="HomePageDAO.cs" />
+    <Compile Include="IPAddress.cs" />
     <Compile Include="OrderDAO.cs" />
     <Compile Include="PermissionDAO.cs" />
     <Compile Include="TiresDAO.cs" />

@@ -238,28 +238,32 @@ public partial class Admin_Default : System.Web.UI.Page
         //string roleID = ddlSelectRoleName.SelectedValue;
         // RoleBLO.
         //TBA
-
         DropDownList ddl = (DropDownList)sender;
         GridViewRow gdv = (GridViewRow)ddl.NamingContainer;
         int index = gdv.RowIndex;
 
-        int userID, roleID;
-        //string des;
-        userID = int.Parse((((Label)(GridView2.Rows[index].FindControl("Label3"))).Text));
-        roleID = int.Parse((((DropDownList)(GridView2.Rows[index].FindControl("ddlSelectRoleName"))).SelectedValue.ToString()));
-        //des = (((Label)(GridView2.Rows[index].FindControl("Label5"))).Text);
-        int update = 0;
-        update = RoleBLO.UpdateUserRole(userID, roleID);
-        if (update > 0)
+        if (((DropDownList)(GridView2.Rows[index].FindControl("ddlSelectRoleName"))).SelectedValue.ToString() != "Please select")
         {
-            Gridview2_Bind();
-        }
-        else
-        {
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
-                                   "err_msg",
-                                   "alert('Sorry, Changing role for user failed.');",
-                                   true);
+            int userID, roleID;
+            //string des;
+            userID = int.Parse((((Label)(GridView2.Rows[index].FindControl("Label3"))).Text));
+
+            roleID = int.Parse((((DropDownList)(GridView2.Rows[index].FindControl("ddlSelectRoleName"))).SelectedValue.ToString()));
+
+            //des = (((Label)(GridView2.Rows[index].FindControl("Label5"))).Text);
+            int update = 0;
+            update = RoleBLO.UpdateUserRole(userID, roleID);
+            if (update > 0)
+            {
+                Gridview2_Bind();
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                                       "err_msg",
+                                       "alert('Sorry, Changing role for user failed.');",
+                                       true);
+            }
         }
     }
 

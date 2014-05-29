@@ -43,8 +43,8 @@ namespace DataAccess
                 while (reader.Read())
                 {
                     hi.Image1 = reader.GetString(0);
-                    hi.Image2 = reader.GetString(1);
-                    hi.Des1 = reader.GetString(2);
+                    hi.Image2 = reader.GetString(2);
+                    hi.Des1 = reader.GetString(1);
                     hi.Des2 = reader.GetString(3);
                 }
             }

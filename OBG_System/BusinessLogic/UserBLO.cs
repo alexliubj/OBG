@@ -156,6 +156,15 @@ namespace BusinessLogic
         }
 
         /// <summary>
+        /// A region name as a column in return datatable
+        /// </summary>
+        /// <returns></returns>
+        public static DataTable GetAllUsersWithTheirRegionName()
+        {
+            return UserDAO.GetAllUsersWithTheirRegionName();
+        }
+
+        /// <summary>
         /// update userinfomation
         /// </summary>
         /// <param name="user"></param>

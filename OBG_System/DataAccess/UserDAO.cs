@@ -376,13 +376,24 @@ namespace DataAccess
                     {
                         retUser.BillingProvince = "";
                     }
-
-                    retUser.IsSameAddress = reader.GetInt32(17)==0?true:false;
-                    retUser.RegionId = reader.GetInt32(18);
-
+                    if (reader.IsDBNull(17) == false)
+                    {
+                        retUser.IsSameAddress = reader.GetInt32(17) == 0 ? true : false;
+                    }
+                    else
+                    {
+                        retUser.IsSameAddress = false;
+                    }
+                    if (reader.IsDBNull(18) == false)
+                    {
+                        retUser.RegionId = reader.GetInt32(18);
+                    }
+                    else
+                    {
+                        retUser.RegionId = 0;
+                    }
                 }
             }
-
             return retUser;
         }
 
@@ -579,7 +590,7 @@ namespace DataAccess
         public static DataTable GetAllUsersWithTheirRoleName()
         {
 
-            DbCommand command = db.GetSqlStringCommond(@" SELECT SELECT [UserId]
+            DbCommand command = db.GetSqlStringCommond(@"SELECT [UserId]
                                                       ,u.[UserPwd]
                                                       ,u.[UserName]
                                                       ,u.[Status]
@@ -605,6 +616,38 @@ namespace DataAccess
                                                       on u.userid = ur.userid
                                                       join [Role] r
                                                       on ur.roleid = r.roleid");
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
+
+        }
+
+        public static DataTable GetAllUsersWithTheirRegionName()
+        {
+
+            DbCommand command = db.GetSqlStringCommond(@"SELECT [UserId]
+                                                      ,u.[UserPwd]
+                                                      ,u.[UserName]
+                                                      ,u.[Status]
+                                                      ,u.[Email]
+                                                      ,u.[CompanyName]
+                                                      ,u.[Phone]
+                                                      ,u.[BillingHouseNo]
+                                                      ,u.[BillingPostCode]
+                                                      ,u.[ShippingHouseNo]
+                                                      ,u.[ShippingPostCode]
+                                                      ,u.[FirstName]
+                                                      ,u.[LastName]
+                                                      ,u.[ShippingStreet]
+                                                      ,u.[ShippingCity]
+                                                      ,u.[ShippingPro]
+                                                      ,u.[BillingStreet]
+                                                      ,u.[BillingCity]
+                                                      ,u.[BillingPro]
+                                                      ,u.[IsSameAddress]
+                                                      ,u.[RegionId],
+                                                       s.regionname
+                                                      FROM [Users] u join [Shipping] s 
+                                                      on u.regionid = s.regionid");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
 

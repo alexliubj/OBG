@@ -63,13 +63,6 @@ namespace OBGModel
             get { return season; }
             set { season = value; }
         }
-        private int categoryId;
-
-        public int CategoryId
-        {
-            get { return categoryId; }
-            set { categoryId = value; }
-        }
 
         private string brand;
 
@@ -78,6 +71,16 @@ namespace OBGModel
             get { return brand; }
             set { brand = value; }
         }
+
+        private string des;
+
+        public string Des
+        {
+            get { return des; }
+            set { des = value; }
+        }
+
+
 
     }
 }

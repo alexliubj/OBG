@@ -3,6 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+      <%--<asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification"
+            ValidationGroup="RegisterUserValidationGroup" />--%>
     <asp:GridView ID="GridView1" runat="server" GridLines="None" AllowPaging="True"  AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="RoleId" ForeColor="#333333" 
         OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
         OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDataBound="GridView1_RowDataBound"  OnRowCommand="GridView1_OnRowCommand1" 
@@ -20,7 +22,15 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Discount Rate" SortExpression="DisRate">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# string.Format("{0:0.### }", Eval("DisRate")) %>'></asp:TextBox>
+                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# string.Format("{0:0.###}", Eval("DisRate")) %>'></asp:TextBox>
+                  <%--   <asp:RegularExpressionValidator
+                                        ID="DisRateExpression" runat="SERVER"
+                                        ControlToValidate="TextBox3"
+                                        CssClass="failureNotification"
+                                        ErrorMessage="Enter a Number."
+                                        ValidationExpression="-?\d+(\.\d{1,x})?"
+                                        ValidationGroup="RegisterUserValidationGroup">*
+                                    </asp:RegularExpressionValidator>--%>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="Label3" runat="server" Text='<%# string.Format("{0:0.### %}", Eval("DisRate")) %>'></asp:Label>
