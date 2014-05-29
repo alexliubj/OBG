@@ -10,8 +10,11 @@ namespace BusinessLogic
     {
         public static bool IsEmailAddress(string email)
         {
+            //return System.Text.RegularExpressions.Regex.IsMatch(email,
+            //@"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9] {1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\)?]$");
             return System.Text.RegularExpressions.Regex.IsMatch(email,
-            @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9] {1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\)?]$");
+            @"\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*");
+        
         }
 
         public static bool IPCheck(string IP)

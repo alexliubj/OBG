@@ -18,36 +18,13 @@ public partial class Account_Login : System.Web.UI.Page
 
     protected void LoginButton_Click(object sender, EventArgs e)
     {
-        newUser.UserName = LoginUser.UserName;
+        string account = LoginUser.UserName;
+
         newUser.Userpwd = LoginUser.Password;
-        LoginRet userLogin = UserBLO.ClientLogin(newUser.UserName, newUser.Userpwd);
 
-        if (userLogin.UserId > 0)
+        if (ValidationUtility.IsEmailAddress(account))
         {
-            //check status 
-            if (userLogin.Us == LoginRet.UserStatus.active) //active
-            {
-                Session["userID"] = userLogin.UserId;
-                Session["login"] = true;
-                Session["role"] = userLogin.Rs;
-
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
-                             "err_msg",
-                             "alert('Login Success.');",
-                             true);
-                Response.Redirect("~/Default.aspx");
-            }
-            else //inactive
-            {
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
-                                       "err_msg",
-                                       "alert('Sorry, Your account is not actived yet.');", true);
-            }
-        }
-        else if (newUser.UserName.Contains("@"))
-        {
-            
-            newUser.Email = LoginUser.UserName;
+            newUser.Email = account;
             LoginRet emailLogin = UserBLO.ClientEmailLogin(newUser.Email, newUser.Userpwd);
             if (emailLogin.UserId > 0)
             {
@@ -71,13 +48,46 @@ public partial class Account_Login : System.Web.UI.Page
                                            "alert('Sorry, Your account is not actived yet.');", true);
                 }
             }
-
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                            "err_msg",
+                            "alert('Invalid log in or server error. Please try again.');", true);
+            }
         }
         else
         {
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
-                        "err_msg",
-                        "alert('Invalid log in or server error. Please try again.');", true);
+            newUser.UserName = account;
+            LoginRet userLogin = UserBLO.ClientLogin(newUser.UserName, newUser.Userpwd);
+
+            if (userLogin.UserId > 0)
+            {
+                //check status 
+                if (userLogin.Us == LoginRet.UserStatus.active) //active
+                {
+                    Session["userID"] = userLogin.UserId;
+                    Session["login"] = true;
+                    Session["role"] = userLogin.Rs;
+
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                                 "err_msg",
+                                 "alert('Login Success.');",
+                                 true);
+                    Response.Redirect("~/Default.aspx");
+                }
+                else //inactive
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                                           "err_msg",
+                                           "alert('Sorry, Your account is not actived yet.');", true);
+                }
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                            "err_msg",
+                            "alert('Invalid log in or server error. Please try again.');", true);
+            }
         }
     }
     protected void LoginUser_LoggedIn(object sender, EventArgs e)
