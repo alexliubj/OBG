@@ -21,7 +21,6 @@ namespace DataAccess
                                               ,[image]
                                               ,[des]
                                               ,[pricing]
-                                              ,[categoryId]
                                               ,[name]
                                                 ,[brand]
                                           FROM [Accessories]");
@@ -36,7 +35,6 @@ namespace DataAccess
                                           ,[image] = @image
                                           ,[des] = @des
                                           ,[pricing] = @pricing
-                                          ,[categoryId] = @categoryId
                                           ,[name] = @name
                                           ,[brand] = @brand
                                      WHERE accId= @accId");
@@ -45,7 +43,6 @@ namespace DataAccess
                 new SqlParameter("@image",acc.Img),
                 new SqlParameter("@des",acc.Des),
                 new SqlParameter("@pricing",acc.Pricing),
-                new SqlParameter("@categoryId",acc.CategoryId),
                 new SqlParameter("@name",acc.Name),
                  new SqlParameter("@accId",acc.AccId),
                  new SqlParameter("@brand",acc.Brand)
@@ -61,7 +58,6 @@ namespace DataAccess
                                                    ,[image]
                                                    ,[des]
                                                    ,[pricing]
-                                                   ,[categoryId]
                                                    ,[name]
                                                    ,[brand])
                                              VALUES
@@ -69,7 +65,6 @@ namespace DataAccess
                                                    ,@image
                                                    ,@des
                                                    ,@pricing
-                                                   ,@categoryId
                                                    ,@name
                                                     ,@brand");
             SqlParameter[] paras = new SqlParameter[] { 
@@ -77,7 +72,6 @@ namespace DataAccess
                 new SqlParameter("@image",acc.Img),
                 new SqlParameter("@des",acc.Des),
                 new SqlParameter("@pricing",acc.Pricing),
-                new SqlParameter("@categoryId",acc.CategoryId),
                 new SqlParameter("@name",acc.Name),
                 new SqlParameter("@brand",acc.Brand)
             };
