@@ -17,9 +17,9 @@ public partial class Admin_Default : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            bind();         
+            bind();
         }
-        
+
     }
 
     protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
@@ -38,14 +38,14 @@ public partial class Admin_Default : System.Web.UI.Page
     {
         GridView1.EditIndex = e.NewEditIndex;
         bind();
-      
+
     }
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int userID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
         UserBLO.RemoveUserById(userID);
         bind();
- 
+
     }
 
     protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -178,23 +178,31 @@ public partial class Admin_Default : System.Web.UI.Page
         int userID;
         userID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
         userSaved.Userid = userID;
-        userSaved.UserName = UserName.Text;
-        userSaved.Email = Email.Text;
-        userSaved.FirstName = FirstName.Text;
-        userSaved.LastName = LastName.Text;
-        userSaved.CompanyName = Company.Text;
-        userSaved.Phone = Phone.Text;
-        userSaved.ShippingHouseNo = ShippingAddress.Text;
-        userSaved.ShippingPostCode = ShippingPostCode.Text;
-        userSaved.BillingHouseNo = BillingAddress.Text;
-        userSaved.BillPostCode = BillingPostCode.Text;
-        
+        userSaved.UserName = UserName.Text.ToString().Trim();
+        userSaved.Email = Email.Text.ToString().Trim();
+        userSaved.FirstName = FirstName.Text.ToString().Trim();
+        userSaved.LastName = LastName.Text.ToString().Trim();
+        userSaved.CompanyName = Company.Text.ToString().Trim();
+        userSaved.Phone = Phone.Text.ToString().Trim();
+
+        userSaved.ShippingHouseNo = ShippingHouseNo.Text.ToString().Trim();
+        userSaved.ShippingPostCode = ShippingPostCode.Text.ToString().Trim();
+        userSaved.ShippingCity = ShippingCity.Text.ToString().Trim();
+        userSaved.ShippingProvince = ShippingPro.SelectedValue;
+        userSaved.ShippingStreet = ShippingStreet.Text.ToString().Trim();
+        userSaved.BillingHouseNo = BillingHouseNo.Text.ToString().Trim();
+        userSaved.BillPostCode = BillingPostCode.Text.ToString().Trim();
+        userSaved.BillingCity = BillingCity.Text.ToString().Trim();
+        userSaved.BillingProvince = BillingPro.SelectedValue;
+        userSaved.BillingStreet = BillingStreet.Text.ToString().Trim();
+
         int update = 0;
         update = UserBLO.UpdateUserInfo(userSaved);
 
 
         if (update == 1)
         {
+            bind();
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                          "err_msg",
                          "alert('Account information has been saved.');",
@@ -225,10 +233,19 @@ public partial class Admin_Default : System.Web.UI.Page
         LastName.Text = user.LastName;
         Company.Text = user.CompanyName;
         Phone.Text = user.Phone;
-        ShippingAddress.Text = user.ShippingHouseNo;
+
+        ShippingHouseNo.Text = user.ShippingHouseNo;
         ShippingPostCode.Text = user.ShippingPostCode;
-        BillingAddress.Text = user.BillingHouseNo;
+        ShippingCity.Text = user.ShippingCity;
+        ShippingPro.SelectedValue = user.ShippingProvince;
+        ShippingStreet.Text = user.ShippingStreet;
+
+        BillingHouseNo.Text = user.BillingHouseNo;
         BillingPostCode.Text = user.BillPostCode;
+        BillingCity.Text = user.BillingCity;
+        BillingPro.SelectedValue = user.BillingProvince;
+        BillingStreet.Text = user.BillingStreet;
+
         userInformation.Visible = true;
         PasswordLabel.Visible = false;
         Password.Visible = false;
@@ -288,10 +305,19 @@ public partial class Admin_Default : System.Web.UI.Page
         LastName.Text = null;
         Company.Text = null;
         Phone.Text = null;
-        ShippingAddress.Text = null;
+
+        ShippingHouseNo.Text = null;
         ShippingPostCode.Text = null;
-        BillingAddress.Text = null;
+        ShippingCity.Text = null;
+        ShippingPro.SelectedValue = null;
+        ShippingStreet.Text = null;
+
+        BillingHouseNo.Text = null;
         BillingPostCode.Text = null;
+        BillingCity.Text = null;
+        BillingPro.SelectedValue = null;
+        BillingStreet.Text = null;
+
         userInformation.Visible = true;
         PasswordLabel.Visible = true;
         Password.Visible = true;
@@ -304,16 +330,22 @@ public partial class Admin_Default : System.Web.UI.Page
     {
         User userSaved = new User();
 
-        userSaved.UserName = UserName.Text;
-        userSaved.Email = Email.Text;
-        userSaved.FirstName = FirstName.Text;
-        userSaved.LastName = LastName.Text;
-        userSaved.CompanyName = Company.Text;
-        userSaved.Phone = Phone.Text;
-        userSaved.ShippingHouseNo = ShippingAddress.Text;
-        userSaved.ShippingPostCode = ShippingPostCode.Text;
-        userSaved.BillingHouseNo = BillingAddress.Text;
-        userSaved.BillPostCode = BillingPostCode.Text;
+        userSaved.UserName = UserName.Text.ToString().Trim();
+        userSaved.Email = Email.Text.ToString().Trim();
+        userSaved.FirstName = FirstName.Text.ToString().Trim();
+        userSaved.LastName = LastName.Text.ToString().Trim();
+        userSaved.CompanyName = Company.Text.ToString().Trim();
+        userSaved.Phone = Phone.Text.ToString().Trim();
+        userSaved.ShippingHouseNo = ShippingHouseNo.Text.ToString().Trim();
+        userSaved.ShippingPostCode = ShippingPostCode.Text.ToString().Trim();
+        userSaved.ShippingCity = ShippingCity.Text.ToString().Trim();
+        userSaved.ShippingProvince = ShippingPro.SelectedValue;
+        userSaved.ShippingStreet = ShippingStreet.Text.ToString().Trim();
+        userSaved.BillingHouseNo = BillingHouseNo.Text.ToString().Trim();
+        userSaved.BillPostCode = BillingPostCode.Text.ToString().Trim();
+        userSaved.BillingCity = BillingCity.Text.ToString().Trim();
+        userSaved.BillingProvince = BillingPro.SelectedValue;
+        userSaved.BillingStreet = BillingStreet.Text.ToString().Trim();
         userSaved.Userpwd = Password.Text;
 
         int newId = UserBLO.Registration(userSaved);
@@ -328,10 +360,32 @@ public partial class Admin_Default : System.Web.UI.Page
         }
     }
 
+    protected void CheckBoxIsSameAddress_Clicked(Object sender, EventArgs e)
+    {
+        if (checkBoxIsSameAddress.Checked == true)
+        {
+            BillingHouseNo.Text = ShippingHouseNo.Text.ToString().Trim();
+            BillingPostCode.Text = ShippingPostCode.Text.ToString().Trim();
+            BillingCity.Text = ShippingCity.Text.ToString().Trim();
+            BillingPro.SelectedValue = ShippingPro.SelectedValue;
+            BillingStreet.Text = ShippingStreet.Text.ToString().Trim();
+            //billingAddressDiv.Visible = false;
+        }
+        else if (checkBoxIsSameAddress.Checked == false)
+        {
+            BillingHouseNo.Text = null;
+             BillingPostCode.Text = null;
+            BillingCity.Text = null;
+            BillingPro.SelectedValue = "";
+            BillingStreet.Text = null;
+            billingAddressDiv.Visible = true;
+        }
+    }
+
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
-        bind();   
+        bind();
     }
 
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)

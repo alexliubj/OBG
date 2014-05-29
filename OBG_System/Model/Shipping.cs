@@ -21,9 +21,9 @@ namespace OBGModel
             get { return regionName; }
             set { regionName = value; }
         }
-        private float regionPrice;
+        private double regionPrice;
 
-        public float RegionPrice
+        public double RegionPrice
         {
             get { return regionPrice; }
             set { regionPrice = value; }

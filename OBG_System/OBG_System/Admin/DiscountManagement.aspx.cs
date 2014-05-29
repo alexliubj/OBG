@@ -8,6 +8,7 @@ using OBGModel;
 using BusinessLogic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 public partial class Admin_Default : System.Web.UI.Page
 {
@@ -54,12 +55,16 @@ public partial class Admin_Default : System.Web.UI.Page
         //discount.DiscountRate = (float)Convert.ToDouble(((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox3"))).Text.ToString().Trim());
         string disrate = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox3"))).Text.ToString().Trim();
         //discount.DiscountRate = (float)double.Parse(disrate.Replace("%", "")) / 100;
-        discount.DiscountRate = (float)double.Parse(disrate);
+        Match mtch = Regex.Match(disrate, @"-?\d+(\.\d{1,x})?");
+        if (mtch.Success)
+        {
+            discount.DiscountRate = (float)double.Parse(disrate);
 
-        DiscountBLO.UpdateDiscount(discount.UserId, discount.DiscountRate);
+            DiscountBLO.UpdateDiscount(discount.UserId, discount.DiscountRate);
 
-        GridView1.EditIndex = -1;
-        Gridview1_Bind();
+            GridView1.EditIndex = -1;
+            Gridview1_Bind();
+        }
     }
 
     protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
