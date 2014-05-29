@@ -98,13 +98,6 @@ namespace OBGModel
             get { return price; }
             set { price = value; }
         }
-        private int categoryId;
-
-        public int CategoryId
-        {
-            get { return categoryId; }
-            set { categoryId = value; }
-        }
 
         private string partNO;
 

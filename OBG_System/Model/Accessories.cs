@@ -42,13 +42,6 @@ namespace OBGModel
             get { return pricing; }
             set { pricing = value; }
         }
-        private int categoryId;
-
-        public int CategoryId
-        {
-            get { return categoryId; }
-            set { categoryId = value; }
-        }
         private string name;
 
         public string Name

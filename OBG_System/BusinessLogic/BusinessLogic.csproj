@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -45,6 +46,7 @@
     <Compile Include="DiscountBLO.cs" />
     <Compile Include="EmailUtilities.cs" />
     <Compile Include="HomePageBLO.cs" />
+    <Compile Include="IPUtility.cs" />
     <Compile Include="OrderBLO.cs" />
     <Compile Include="PermissionBLO.cs" />
     <Compile Include="TiresBLO.cs" />
