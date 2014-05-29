@@ -1,6 +1,5 @@
 ﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeFile="Register.aspx.cs" Inherits="Account_Register" %>
-
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
@@ -246,12 +245,11 @@
                                 </asp:TableRow>
                             </asp:Table>
                         </fieldset>
-                        <fieldset class="billingAddress">
-                            <legend>Billing Address</legend>
-                            <asp:Label ID="IsSameAddress" runat="server" Text="Billing Address is the same as shipping address?"></asp:Label>
+                        <asp:Label ID="IsSameAddress" runat="server" Text="Billing Address is the same as shipping address?"></asp:Label>
                                         <asp:CheckBox ID="checkBoxIsSameAddress" runat="server" OnCheckedChanged="CheckBoxIsSameAddress_Clicked" AutoPostBack="true" Checked="false"/>
-                            <br/>
-                            <p></p>
+                        <div id="billingAddressDiv" runat="server">
+                        <fieldset class="billingAddress">
+                            <legend>Billing Address</legend>                         
                             <asp:Table runat="server">
                                 <asp:TableRow VerticalAlign="Top">
                                     <asp:TableCell>
@@ -341,6 +339,7 @@
                                 </asp:TableRow>
                             </asp:Table>
                         </fieldset>
+                            </div>
                     </fieldset>
                 </asp:TableCell>
             </asp:TableRow>

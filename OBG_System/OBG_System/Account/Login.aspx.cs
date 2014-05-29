@@ -20,15 +20,16 @@ public partial class Account_Login : System.Web.UI.Page
     {
         newUser.UserName = LoginUser.UserName;
         newUser.Userpwd = LoginUser.Password;
-        LoginRet userlogin = UserBLO.ClientLogin(newUser.UserName, newUser.Userpwd);
+        LoginRet userLogin = UserBLO.ClientLogin(newUser.UserName, newUser.Userpwd);
 
-        if (userlogin.UserId > 0)
+        if (userLogin.UserId > 0)
         {
             //check status 
-            if (userlogin.Us == LoginRet.UserStatus.active) //active
+            if (userLogin.Us == LoginRet.UserStatus.active) //active
             {
-                Session["userID"] = userlogin.UserId;
+                Session["userID"] = userLogin.UserId;
                 Session["login"] = true;
+                Session["role"] = userLogin.Rs;
 
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                              "err_msg",
@@ -42,7 +43,35 @@ public partial class Account_Login : System.Web.UI.Page
                                        "err_msg",
                                        "alert('Sorry, Your account is not actived yet.');", true);
             }
-           
+        }
+        else if (newUser.UserName.Contains("@"))
+        {
+            
+            newUser.Email = LoginUser.UserName;
+            LoginRet emailLogin = UserBLO.ClientEmailLogin(newUser.Email, newUser.Userpwd);
+            if (emailLogin.UserId > 0)
+            {
+                //check status 
+                if (emailLogin.Us == LoginRet.UserStatus.active) //active
+                {
+                    Session["userID"] = emailLogin.UserId;
+                    Session["login"] = true;
+                    Session["role"] = emailLogin.Rs;
+
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                                 "err_msg",
+                                 "alert('Login Success.');",
+                                 true);
+                    Response.Redirect("~/Default.aspx");
+                }
+                else //inactive
+                {
+                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                                           "err_msg",
+                                           "alert('Sorry, Your account is not actived yet.');", true);
+                }
+            }
+
         }
         else
         {
@@ -51,8 +80,8 @@ public partial class Account_Login : System.Web.UI.Page
                         "alert('Invalid log in or server error. Please try again.');", true);
         }
     }
-    protected void LoginUser_LoggedIn(object sender, EventArgs e) 
+    protected void LoginUser_LoggedIn(object sender, EventArgs e)
     {
-        
+
     }
 }
