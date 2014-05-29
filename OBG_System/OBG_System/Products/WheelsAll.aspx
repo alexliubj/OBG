@@ -15,6 +15,15 @@
         width: 54px;
         height: 24px;
     }
+        .auto-style1
+        {
+            width: 339px;
+        }
+        .auto-style2
+        {
+            height: 24px;
+            width: 339px;
+        }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
@@ -24,7 +33,71 @@
        
         <fieldset class="wheelInfo">
             <legend>Choose your wheels</legend>
-            <table>
+            <table style="width: 909px">
+                <tr>
+                    <td>Size</td>
+                    <asp:CheckBoxList ID="chkCountries" runat="server" AutoPostBack="true" TextAlign="Left"  RepeatDirection="Horizontal" >
+                        <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
+                        <asp:ListItem Text="18*8.0" Value="Austria"></asp:ListItem>
+                        <asp:ListItem Text="18*8.5" Value="Belgium"></asp:ListItem>
+                        <asp:ListItem Text="16*7.0" Value="Brazil"></asp:ListItem>
+                        <asp:ListItem Text="19*8.5" Value="Canada"></asp:ListItem>
+                        <asp:ListItem Text="17*8.0" Value="Canada"></asp:ListItem>
+                    </asp:CheckBoxList>
+                    </tr>
+
+                <tr>
+                    <td>PCD</td>
+                    <asp:CheckBoxList ID="CheckBoxList1" runat="server" AutoPostBack="true" TextAlign="Left"   RepeatDirection="Horizontal" >
+                        <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
+                        <asp:ListItem Text="5*112/114.3" Value="Austria"></asp:ListItem>
+                        <asp:ListItem Text="5*112" Value="Belgium"></asp:ListItem>
+                        
+                    </asp:CheckBoxList>
+                    </tr>
+                
+                <tr>
+                    <td>Finish</td>
+                    <asp:CheckBoxList ID="CheckBoxList2" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" Width="703px">
+                        <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
+                        <asp:ListItem Text="Flat Black" Value="Austria"></asp:ListItem>
+                        <asp:ListItem Text="Hyper Silver" Value="Belgium"></asp:ListItem>
+                        <asp:ListItem Text="Santin Black" Value="Brazil"></asp:ListItem>
+                        
+                    </asp:CheckBoxList>
+                    </tr>
+
+                <tr>
+                    <td>Offset</td>
+                    <asp:CheckBoxList ID="CheckBoxList3" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" Width="397px">
+                        <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
+                        <asp:ListItem Text="+45" Value="Austria"></asp:ListItem>
+                        <asp:ListItem Text="+50" Value="Belgium"></asp:ListItem>
+                        <asp:ListItem Text="+35" Value="Brazil"></asp:ListItem>
+                        <asp:ListItem Text="+42" Value="Canada"></asp:ListItem>
+                        
+                    </asp:CheckBoxList>
+                    </tr>
+
+                <tr>
+                    <td>Seat</td>
+                    <asp:CheckBoxList ID="CheckBoxList4" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" Width="397px">
+                        <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
+                        <asp:ListItem Text="60°seat" Value="Austria"></asp:ListItem>
+                        <asp:ListItem Text="R13 Radius Seat" Value="Belgium"></asp:ListItem>
+                        
+                    </asp:CheckBoxList>
+                    </tr>
+
+                <tr>
+                    <td>Bore</td>
+                    <asp:CheckBoxList ID="CheckBoxList5" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" Width="397px">
+                        <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
+                        <asp:ListItem Text="73.1" Value="Austria"></asp:ListItem>
+                        <asp:ListItem Text="66.4" Value="Belgium"></asp:ListItem>
+                        
+                    </asp:CheckBoxList>
+                    </tr>
                 <%--<tr>
                     <td class="style11">
                         <asp:Label ID="StyleLabel" runat="server" >Style:</asp:Label>
@@ -65,8 +138,8 @@
 
                
 
-                <tr>
-                    <td class="style11">
+                <%--<tr>
+                    <td class="auto-style2">
                         <asp:Label ID="SizeLabel" runat="server" >Size:</asp:Label>
                     </td>
                     <td class="style12">
@@ -87,7 +160,7 @@
                 </tr>
 
                 <tr>
-                    <td class="style11">
+                    <td class="auto-style2">
                         <asp:Label ID="PcdLabel" runat="server" >Pcd:</asp:Label>
                     </td>
                     <td class="style12">
@@ -102,7 +175,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="style11">
+                    <td class="auto-style2">
                         <asp:Label ID="FinishLabel" runat="server" >Finish:</asp:Label>
                     </td>
                     <td class="style12">
@@ -119,7 +192,7 @@
                 </tr>
 
                 <tr>
-                    <td class="style11">
+                    <td class="auto-style2">
                         <asp:Label ID="OffsetLabel" runat="server" >Offset:</asp:Label>
                     </td>
                     <td class="style12">
@@ -137,7 +210,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td class="style11">
+                    <td class="auto-style2">
                         <asp:Label ID="SeatLabel" runat="server" >Seat:</asp:Label>
                     </td>
                     <td class="style12">
@@ -152,7 +225,7 @@
                 </tr>
 
                 <tr>
-                    <td class="style11">
+                    <td class="auto-style2">
                         <asp:Label ID="BoreLabel" runat="server" >Bore:</asp:Label>
                     </td>
                     <td class="style12">
@@ -165,7 +238,7 @@
                         
                        
                     </td>
-                </tr>
+                </tr>--%>
                 <%--<tr>
                     <td class="style11">
                         <asp:Label ID="WeightLabel" runat="server" >Weight:</asp:Label>
