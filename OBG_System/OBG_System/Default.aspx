@@ -4,11 +4,18 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <h2>
+    <h1>
+        <center>
         Welcome to OBG System
-    </h2>
-    <p>
-       This is home page
-    </p>
+            </center>
+    </h1>
+    <hr />
+ <center>
+       <asp:Image ID="Image1" runat="server"  Width="500" Height="400"/>
+     </center>
+<hr />
+    <center>
+     <asp:Image ID="Image2" runat="server"   Width="500" Height="400" />
+        </center>
     
 </asp:Content>

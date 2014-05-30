@@ -13,6 +13,15 @@ public partial class _Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
        // TestSQLQueries();
+        Bind();
+    }
+    public void Bind()
+    {
+        HomeImage homeImage = HomePageBLO.GetHomePageInformation();
+        Image1.ImageUrl = homeImage.Image1;
+        Image2.ImageUrl = homeImage.Image2;
+        Image1.ToolTip = homeImage.Des1;
+        Image2.ToolTip = homeImage.Des2;
     }
 
     private void TestSQLQueries()

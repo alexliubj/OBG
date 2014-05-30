@@ -22,7 +22,7 @@
                     <asp:Label ID="Label2" runat="server" Text='<%# Bind("UserName") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Status" SortExpression="Status">
+            <asp:TemplateField HeaderText="Current Status" SortExpression="Status">
                 <EditItemTemplate>
                     <asp:DropDownList ID="DropDownList1" runat="server">
                         <asp:ListItem Text="active"></asp:ListItem>
