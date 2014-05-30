@@ -20,7 +20,6 @@ namespace BusinessLogic
                     return addresses[0];
                 }
             }
-
             return context.Request.ServerVariables["REMOTE_ADDR"];
         }
     }
