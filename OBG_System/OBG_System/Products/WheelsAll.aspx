@@ -15,28 +15,44 @@
         width: 54px;
         height: 24px;
     }
-        .auto-style1
+        .auto-style3
         {
-            width: 339px;
+            height: 28px;
+            width: 492px;
         }
-        .auto-style2
+        .auto-style4
         {
-            height: 24px;
-            width: 339px;
+            width: 100%;
+            height: 28px;
+        }
+        .auto-style5
+        {
+            width: 492px;
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+    <script src="Scripts/jquery-1.2.6.js" type="text/javascript"></script>
+   
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#chkAll').click(
+             function () {
+                 $("INPUT[type='checkbox']").attr('checked', $('#chkAll').is(':checked'));
+             });
+        });
 
+     </script>
 
     <div id="wheelFilter" runat="server" visible="true">
        
         <fieldset class="wheelInfo">
             <legend>Choose your wheels</legend>
-            <table style="width: 909px">
+            <table style="width: 201px">
                 <tr>
-                    <td>Size</td>
-                    <asp:CheckBoxList ID="chkCountries" runat="server" AutoPostBack="true" TextAlign="Left"  RepeatDirection="Horizontal" >
+                    <td class="auto-style5">Size:</td>
+                     <td>
+                    <asp:CheckBoxList CssClass="CBLayout" ID="chkCountries" runat="server" AutoPostBack="true" TextAlign="Right"  RepeatLayout="Table" RepeatDirection="Horizontal" >
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="18*8.0" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="18*8.5" Value="Belgium"></asp:ListItem>
@@ -44,31 +60,37 @@
                         <asp:ListItem Text="19*8.5" Value="Canada"></asp:ListItem>
                         <asp:ListItem Text="17*8.0" Value="Canada"></asp:ListItem>
                     </asp:CheckBoxList>
+                         </td>
                     </tr>
 
                 <tr>
-                    <td>PCD</td>
-                    <asp:CheckBoxList ID="CheckBoxList1" runat="server" AutoPostBack="true" TextAlign="Left"   RepeatDirection="Horizontal" >
+                    <td class="auto-style5">PCD:</td>
+                     <td>
+                    <asp:CheckBoxList  CssClass  ="CBLayout" ID="CheckBoxList1" runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table"   RepeatDirection="Horizontal" >
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="5*112/114.3" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="5*112" Value="Belgium"></asp:ListItem>
                         
                     </asp:CheckBoxList>
+                         </td>
                     </tr>
                 
                 <tr>
-                    <td>Finish</td>
-                    <asp:CheckBoxList ID="CheckBoxList2" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" Width="703px">
+                    <td class="auto-style3">Finish:</td>
+                     <td>
+                    <asp:CheckBoxList ID="CheckBoxList2" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" Width="703px" Height="23px">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="Flat Black" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="Hyper Silver" Value="Belgium"></asp:ListItem>
                         <asp:ListItem Text="Santin Black" Value="Brazil"></asp:ListItem>
                         
                     </asp:CheckBoxList>
+                         </td>
                     </tr>
 
                 <tr>
-                    <td>Offset</td>
+                    <td class="auto-style5">Offset:</td>
+                     <td>
                     <asp:CheckBoxList ID="CheckBoxList3" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" Width="397px">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="+45" Value="Austria"></asp:ListItem>
@@ -77,26 +99,31 @@
                         <asp:ListItem Text="+42" Value="Canada"></asp:ListItem>
                         
                     </asp:CheckBoxList>
+                         </td>
                     </tr>
 
                 <tr>
-                    <td>Seat</td>
+                    <td class="auto-style5">Seat:</td>
+                     <td>
                     <asp:CheckBoxList ID="CheckBoxList4" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" Width="397px">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="60°seat" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="R13 Radius Seat" Value="Belgium"></asp:ListItem>
                         
                     </asp:CheckBoxList>
+                         </td>
                     </tr>
 
                 <tr>
-                    <td>Bore</td>
+                    <td class="auto-style5">Bore:</td>
+                     <td>
                     <asp:CheckBoxList ID="CheckBoxList5" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" Width="397px">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="73.1" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="66.4" Value="Belgium"></asp:ListItem>
                         
                     </asp:CheckBoxList>
+                         </td>
                     </tr>
                 <%--<tr>
                     <td class="style11">

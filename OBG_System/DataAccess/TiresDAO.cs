@@ -51,7 +51,7 @@ namespace DataAccess
                 //new SqlParameter("@rimHeight",tire.Height),
                 new SqlParameter("@pricing",tire.Pricing),
                 new SqlParameter("@season",tire.Season),
-                new SqlParameter("@categoryId",tire.CategoryId),
+                //new SqlParameter("@categoryId",tire.CategoryId),
                 new SqlParameter("@brand",tire.Brand)
             };
             command.Parameters.AddRange(paras);
@@ -85,7 +85,7 @@ namespace DataAccess
                 //new SqlParameter("@rimHeight",tire.Height),
                 new SqlParameter("@pricing",tire.Pricing),
                 new SqlParameter("@season",tire.Season),
-                new SqlParameter("@categoryId",tire.CategoryId),
+                //new SqlParameter("@categoryId",tire.CategoryId),
                 new SqlParameter("@tireId",tire.TireId),
                 new SqlParameter("@brand",tire.Brand)
             };
