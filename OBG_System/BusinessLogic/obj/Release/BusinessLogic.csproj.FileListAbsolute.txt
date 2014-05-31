@@ -1,0 +1,9 @@
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Release\BusinessLogic.dll
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Release\BusinessLogic.pdb
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Release\DataAccess.dll
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Release\Model.dll
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Release\DataAccess.pdb
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Release\Model.pdb
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\obj\Release\BusinessLogic.csprojResolveAssemblyReference.cache
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\obj\Release\BusinessLogic.dll
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\obj\Release\BusinessLogic.pdb

@@ -1,0 +1,6 @@
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\Model\bin\Release\Model.dll.config
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\Model\bin\Release\Model.dll
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\Model\bin\Release\Model.pdb
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\Model\obj\Release\OBGModel.csprojResolveAssemblyReference.cache
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\Model\obj\Release\Model.dll
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\Model\obj\Release\Model.pdb
