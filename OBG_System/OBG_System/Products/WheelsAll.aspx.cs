@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Data;
 using BusinessLogic;
 using OBGModel;
+using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class Products_wheelall : System.Web.UI.Page
 {
@@ -177,5 +179,43 @@ public partial class Products_wheelall : System.Web.UI.Page
         return newSortDirection;
     }
 
+    protected void CheckBoxList1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        SqlConnection cnn = new SqlConnection(
+            ConfigurationManager.ConnectionStrings["OBG_Local"].ConnectionString.Trim());
+        SqlCommand cmd = new SqlCommand();
+        DataTable wheelsAll = WheelsBLO.GetAllProducts();
+        wheelsDataSet = new DataSet();
+
+        String sqlText = "select * from Wheels ";
+        String sqlFilterText = "";
+        int index = 0;
+        foreach (ListItem item in CheckBoxList1.Items)
+        {
+            index += 1;
+            if (item.Selected)
+            {
+                String paramName = "@param" + index.ToString().Trim();
+                SqlParameter param = new SqlParameter(paramName, SqlDbType.UniqueIdentifier);
+                param.Value = new Guid(item.Value.Trim());
+                cmd.Parameters.Add(param);
+
+                sqlFilterText += " ProductId = " + paramName + " or ";
+            }
+        }
+
+        if (!String.IsNullOrEmpty(sqlFilterText))
+        {
+            sqlText += " Where " + sqlFilterText.Substring(0, sqlFilterText.Length - 3);
+        }
+        cmd.CommandText = sqlText;
+        cmd.Connection = cnn;
+
+        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+        //DataTable tbl = new DataTable();
+        adapter.Fill(wheelsAll);
+        GridView1.DataSource = wheelsAll;
+        Gridview1_Bind();
+    }
 
 }
