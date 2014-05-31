@@ -15,28 +15,41 @@
         width: 54px;
         height: 24px;
     }
-        .auto-style1
+        .auto-style3
         {
-            width: 339px;
+            height: 28px;
+            width: 69px;
         }
-        .auto-style2
+        .auto-style5
         {
-            height: 24px;
-            width: 339px;
+            width: 69px;
         }
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+    <script src="Scripts/jquery-1.2.6.js" type="text/javascript"></script>
+   
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#chkAll').click(
+             function () {
+                 $("INPUT[type='checkbox']").attr('checked', $('#chkAll').is(':checked'));
+             });
+        });
 
+     </script>
 
     <div id="wheelFilter" runat="server" visible="true">
        
         <fieldset class="wheelInfo">
             <legend>Choose your wheels</legend>
-            <table style="width: 909px">
+            <table style="width: 852px">
                 <tr>
-                    <td>Size</td>
-                    <asp:CheckBoxList ID="chkCountries" runat="server" AutoPostBack="true" TextAlign="Left"  RepeatDirection="Horizontal" >
+                    <td class="auto-style5">Size:</td>
+                     <td>
+                    <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Size"
+            DataValueField="ProductId"
+ CssClass="CBLayout" ID="chkCountries" runat="server" AutoPostBack="true" TextAlign="Right"  RepeatLayout="Table" RepeatDirection="Horizontal" onselectedindexchanged="CheckBoxList1_SelectedIndexChanged">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="18*8.0" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="18*8.5" Value="Belgium"></asp:ListItem>
@@ -44,32 +57,46 @@
                         <asp:ListItem Text="19*8.5" Value="Canada"></asp:ListItem>
                         <asp:ListItem Text="17*8.0" Value="Canada"></asp:ListItem>
                     </asp:CheckBoxList>
+                         </td>
                     </tr>
 
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server"
+            ConnectionString="<%$ ConnectionStrings:OBG_Local %>"
+            SelectCommand="SELECT * FROM [Wheels]"></asp:SqlDataSource>
+
+
                 <tr>
-                    <td>PCD</td>
-                    <asp:CheckBoxList ID="CheckBoxList1" runat="server" AutoPostBack="true" TextAlign="Left"   RepeatDirection="Horizontal" >
+                    <td class="auto-style5">PCD:</td>
+                     <td>
+                    <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="PCD"
+            DataValueField="ProductId"  CssClass  ="CBLayout" ID="CheckBoxList1" runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table"   RepeatDirection="Horizontal" onselectedindexchanged="CheckBoxList1_SelectedIndexChanged">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="5*112/114.3" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="5*112" Value="Belgium"></asp:ListItem>
                         
                     </asp:CheckBoxList>
+                         </td>
                     </tr>
                 
                 <tr>
-                    <td>Finish</td>
-                    <asp:CheckBoxList ID="CheckBoxList2" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" Width="703px">
+                    <td class="auto-style3">Finish:</td>
+                     <td>
+                    <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Finish"
+            DataValueField="ProductId" CssClass  ="CBLayout" ID="CheckBoxList2" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" onselectedindexchanged="CheckBoxList1_SelectedIndexChanged">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="Flat Black" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="Hyper Silver" Value="Belgium"></asp:ListItem>
                         <asp:ListItem Text="Santin Black" Value="Brazil"></asp:ListItem>
                         
                     </asp:CheckBoxList>
+                         </td>
                     </tr>
 
                 <tr>
-                    <td>Offset</td>
-                    <asp:CheckBoxList ID="CheckBoxList3" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" Width="397px">
+                    <td class="auto-style5">Offset:</td>
+                     <td>
+                    <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Offset"
+            DataValueField="ProductId" CssClass  ="CBLayout" ID="CheckBoxList3" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" onselectedindexchanged="CheckBoxList1_SelectedIndexChanged">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="+45" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="+50" Value="Belgium"></asp:ListItem>
@@ -77,26 +104,33 @@
                         <asp:ListItem Text="+42" Value="Canada"></asp:ListItem>
                         
                     </asp:CheckBoxList>
+                         </td>
                     </tr>
 
                 <tr>
-                    <td>Seat</td>
-                    <asp:CheckBoxList ID="CheckBoxList4" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" Width="397px">
+                    <td class="auto-style5">Seat:</td>
+                     <td>
+                    <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Seat"
+            DataValueField="ProductId" CssClass  ="CBLayout" ID="CheckBoxList4" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" onselectedindexchanged="CheckBoxList1_SelectedIndexChanged">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="60°seat" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="R13 Radius Seat" Value="Belgium"></asp:ListItem>
                         
                     </asp:CheckBoxList>
+                         </td>
                     </tr>
 
                 <tr>
-                    <td>Bore</td>
-                    <asp:CheckBoxList ID="CheckBoxList5" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" Width="397px">
+                    <td class="auto-style5">Bore:</td>
+                     <td>
+                    <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Bore"
+            DataValueField="ProductId" CssClass  ="CBLayout" ID="CheckBoxList5" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" onselectedindexchanged="CheckBoxList1_SelectedIndexChanged">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="73.1" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="66.4" Value="Belgium"></asp:ListItem>
                         
                     </asp:CheckBoxList>
+                         </td>
                     </tr>
                 <%--<tr>
                     <td class="style11">

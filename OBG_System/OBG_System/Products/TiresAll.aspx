@@ -19,7 +19,11 @@
                     <td class="style2">
                         <asp:Label ID="partLabel" runat="server" >PartNo:</asp:Label>
                     </td>
-                    <td class="style2">
+                    <td>
+                        <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Brand"
+            DataValueField="tireId" CssClass  ="CBLayout" ID="CheckBoxList1" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal"/>
+                        </td>
+                    <%--<td class="style2">
                          <asp:CheckBox ID="partCheck1" runat="server" Text='All' /></td>
                     <td class="style2">
                          <asp:CheckBox ID="partCheck2" runat="server" Text='Europa' /></td>
@@ -35,19 +39,24 @@
                          <asp:CheckBox ID="partCheck7" runat="server" Text='Numesis' /></td>
                     <td class="style2">
                          <asp:CheckBox ID="partCheck8" runat="server" Text='R142' /></td>
-                    <td class="style2">
+                    <td class="style2">--%>
                        
-                    </td>
+                   <%-- </td>--%>
                 </tr>
 
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server"
+            ConnectionString="<%$ ConnectionStrings:OBG_Local %>"
+            SelectCommand="SELECT * FROM [Tires]"></asp:SqlDataSource>
                 <tr>
                     <td>
                         <asp:Label ID="SizeLabel" runat="server">Size:</asp:Label>
                     </td>
                     <td>
-                        <asp:CheckBox ID="SizeCheck1" runat="server" Text='All'></asp:CheckBox></td><td> 
+                        <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Size"
+            DataValueField="tireId" CssClass  ="CBLayout" ID="CheckBoxList2" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal"/>
+                        <%--<asp:CheckBox ID="SizeCheck1" runat="server" Text='All'></asp:CheckBox></td><td> 
                         <asp:CheckBox ID="SizeCheck2" runat="server" Text='Fast Wheels'></asp:CheckBox></td><td>
-                        <asp:CheckBox ID="SizeCheck3" runat="server" Text='Replika'></asp:CheckBox></td><td>
+                        <asp:CheckBox ID="SizeCheck3" runat="server" Text='Replika'></asp:CheckBox></td><td>--%>
                         
                         
                     </td>
@@ -87,12 +96,16 @@
                         <asp:Label ID="SeasonLabel" runat="server" >Season:</asp:Label>
                     </td>
                     <td>
+                        <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Season"
+            DataValueField="tireId" CssClass  ="CBLayout" ID="CheckBoxList3" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" />
+                        </td>
+                    <%--<td>
                     <asp:CheckBox ID="SeasonCheck1" runat="server" Text='All'></asp:CheckBox></td><td>
                         <asp:CheckBox ID="SeasonCheck2" runat="server" Text='Flat Black'></asp:CheckBox></td><td>
                         <asp:CheckBox ID="SeasonCheck3" runat="server" Text='Hyper Silver'></asp:CheckBox></td><td>
                         <asp:CheckBox ID="SeasonCheck4" runat="server" Text='Santin Black'></asp:CheckBox></td><td>
                        
-                    </td>
+                    </td>--%>
                 </tr>
                
             </table>
