@@ -38,7 +38,7 @@ public partial class _Default : System.Web.UI.Page
         //active a user
         ret = UserBLO.AdminActiveUserStatus(1, 2);
         //forget password
-        ret = UserBLO.ForgetPasswordRequest(@"alexliubo@gmail.com");
+        //ret = UserBLO.ForgetPasswordRequest(@"alexliubo@gmail.com");
         
         //delete user
         ret = UserBLO.RemoveUserById(2);

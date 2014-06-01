@@ -25,13 +25,10 @@
             e.Message.Subject = "New password on Web site.";
         }
     </script>
-
-    <%-- <head id="Head1" runat="server">
-</head>--%>
     <asp:PasswordRecovery ID="PasswordRecovery1" runat="server" BorderStyle="Solid" BorderWidth="1px" BackColor="#F7F7DE"
         Font-Size="10pt" Font-Names="Verdana" BorderColor="#CCCC99" HelpPageText="Need help?" HelpPageUrl="recoveryHelp.aspx" OnUserLookupError="PasswordRecovery1_UserLookupError" OnLoad="PasswordRecovery1_Load"
         maildefinition-from="neo.wu2@gmail.com"
-         onsendingmail="PasswordRecovery1_SendingMail">
+         onsendingmail="PasswordRecovery1_SendingMail" UserNameInstructionText="Enter your email to receive your password." UserNameLabelText="Email Address:" UserNameRequiredErrorMessage="Email Address is required." OnVerifyingUser="PasswordRecovery1_VerifyingUser">
         <SuccessTemplate>
             <table border="0" style="font-size: 10pt;">
                 <tr>

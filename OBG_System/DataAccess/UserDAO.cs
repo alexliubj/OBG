@@ -73,7 +73,7 @@ namespace DataAccess
             new SqlParameter("@username", user.UserName),
             new SqlParameter("@status", user.Status),
             new SqlParameter("@email", user.Email),
-            new SqlParameter("@companyname", user.Email),
+            new SqlParameter("@companyname", user.CompanyName),
             new SqlParameter("@phone", user.Phone),
             new SqlParameter("@BillingHouseNo", user.BillingHouseNo),
             new SqlParameter("@BillingPostCode", user.BillPostCode),
@@ -418,7 +418,7 @@ namespace DataAccess
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        public static int ForgetPasswordRequest(string email)
+        public static string ForgetPasswordRequest(string email)
         {
             // get 1st random string 
             string Rand1 = DAUtils.GenerateRandomString(8);
@@ -433,8 +433,14 @@ namespace DataAccess
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@email", email) , 
             new SqlParameter("@key",docNum)};
             command.Parameters.AddRange(paras);
-            return db.ExecuteNonQuery(command);
-
+            if (db.ExecuteNonQuery(command) > 0)
+            {
+                return docNum;
+            }
+            else
+            {
+                return "";
+            }
         }
 
         public static int CheckUserNameExists(string username)
@@ -462,11 +468,11 @@ namespace DataAccess
         /// <param name="userid"></param>
         /// <param name="newPassword"></param>
         /// <returns></returns>
-        public static int ResetPassword(int userid, string newPassword)
+        public static int ResetPassword(string email, string newPassword)
         {
             DbCommand command = db.GetSqlStringCommond(@"
-                            update users set userpwd = @newpassword where userid = @userid");
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid),new SqlParameter(
+                            update users set userpwd = @newpassword where email = @email");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@email", email),new SqlParameter(
                 "@newpassword",DAUtils.MD5(newPassword))};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
@@ -481,12 +487,20 @@ namespace DataAccess
         /// <returns></returns>
         public static int CheckReset(string email, string key)
         {
+            int uid = -1;
             DbCommand command = db.GetSqlStringCommond(@"
                             select * from resetpwds where email = @email and sectKey = @sectKey");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@email", email),new SqlParameter(
                 "@sectKey",key)};
             command.Parameters.AddRange(paras);
-            return db.ExecuteNonQuery(command);
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    uid = reader.GetInt32(0);
+                }
+            }
+            return uid;
         }
 
         /// <summary>
@@ -496,7 +510,7 @@ namespace DataAccess
         /// <returns></returns>
         public static int RemoveResetRecord(string email)
         {
-            DbCommand command = db.GetSqlStringCommond(@"delete resetpwds where 'email' = @email");
+            DbCommand command = db.GetSqlStringCommond(@"delete resetpwds where email = @email");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@email", email) };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
@@ -670,6 +684,24 @@ namespace DataAccess
             new SqlParameter("@oldPwd", DAUtils.MD5(oldPwd))};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
+        }
+
+        public static int GetUserIDByEmail(string email)
+        {
+            int userID = -1;
+            DbCommand command = db.GetSqlStringCommond(@"
+                            select userid from users
+                            where email = @email");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@email", email)};
+            command.Parameters.AddRange(paras);
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    userID = reader.GetInt32(0);
+                }
+            }
+            return userID;
         }
     }
 }
