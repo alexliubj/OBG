@@ -187,16 +187,18 @@ public partial class Products_wheelall : System.Web.UI.Page
         DataTable wheelsAll = WheelsBLO.GetAllProducts();
         wheelsDataSet = new DataSet();
 
-        String sqlText = "select * from Wheels ";
+        String sqlText = "SELECT * FROM WHEELS";
         String sqlFilterText = "";
         int index = 0;
-        foreach (ListItem item in CheckBoxList1.Items)
+        foreach (ListItem item in chkCountries.Items)
         {
             index += 1;
             if (item.Selected)
             {
+                //String paramName = item.Value.Trim();
                 String paramName = "@param" + index.ToString().Trim();
-                SqlParameter param = new SqlParameter(paramName, SqlDbType.UniqueIdentifier);
+
+               SqlParameter param = new SqlParameter(paramName, SqlDbType.UniqueIdentifier);
                 param.Value = new Guid(item.Value.Trim());
                 cmd.Parameters.Add(param);
 
@@ -206,7 +208,7 @@ public partial class Products_wheelall : System.Web.UI.Page
 
         if (!String.IsNullOrEmpty(sqlFilterText))
         {
-            sqlText += " Where " + sqlFilterText.Substring(0, sqlFilterText.Length - 3);
+            sqlText += " Where " + sqlFilterText.Substring(0, sqlFilterText.Length - 4);
         }
         cmd.CommandText = sqlText;
         cmd.Connection = cnn;
@@ -214,6 +216,8 @@ public partial class Products_wheelall : System.Web.UI.Page
         SqlDataAdapter adapter = new SqlDataAdapter(cmd);
         //DataTable tbl = new DataTable();
         adapter.Fill(wheelsAll);
+
+        //wheelsAll.DefaultView.RowFilter.(sqlText);
         GridView1.DataSource = wheelsAll;
         Gridview1_Bind();
     }

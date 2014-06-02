@@ -48,7 +48,7 @@
                     <td class="auto-style5">Size:</td>
                      <td>
                     <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Size"
-            DataValueField="ProductId"
+            DataValueField="Size"
  CssClass="CBLayout" ID="chkCountries" runat="server" AutoPostBack="true" TextAlign="Right"  RepeatLayout="Table" RepeatDirection="Horizontal" onselectedindexchanged="CheckBoxList1_SelectedIndexChanged">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="18*8.0" Value="Austria"></asp:ListItem>
