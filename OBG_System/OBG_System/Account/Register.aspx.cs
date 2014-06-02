@@ -51,7 +51,7 @@ public partial class Account_Register : System.Web.UI.Page
         newUser.BillingStreet = BillingStreet.Text.ToString().Trim();
         //need change later
         newUser.IsSameAddress = false;
-        newUser.RegionId = 0;
+        newUser.RegionId = 1;
         //
 
         int newId = UserBLO.Registration(newUser);

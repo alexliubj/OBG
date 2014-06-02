@@ -112,7 +112,7 @@ namespace BusinessLogic
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        public static int ForgetPasswordRequest(string email)
+        public static string ForgetPasswordRequest(string email)
         {
             return UserDAO.ForgetPasswordRequest(email);
             
@@ -123,9 +123,9 @@ namespace BusinessLogic
         /// <param name="userid"></param>
         /// <param name="newPassword"></param>
         /// <returns></returns>
-        public static int ResetPassword(int userid, string newPassword)
+        public static int ResetPassword(string email, string newPassword)
         {
-            return UserDAO.ResetPassword(userid, newPassword);
+            return UserDAO.ResetPassword(email, newPassword);
         }
 
         /// <summary>
@@ -194,5 +194,9 @@ namespace BusinessLogic
             return UserDAO.GetAllUsers();
         }
 
+        public static int GetUserIDByEmail(string email)
+        {
+            return UserDAO.GetUserIDByEmail(email);
+        }
     }
 }

@@ -347,6 +347,7 @@ public partial class Admin_Default : System.Web.UI.Page
         userSaved.BillingProvince = BillingPro.SelectedValue;
         userSaved.BillingStreet = BillingStreet.Text.ToString().Trim();
         userSaved.Userpwd = Password.Text;
+        userSaved.RegionId = 1;
 
         int newId = UserBLO.Registration(userSaved);
 
