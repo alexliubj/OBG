@@ -13,9 +13,14 @@ public partial class Admin_Default : System.Web.UI.Page
     private DataSet wheelsDataSet;
     private DataSet tiresDataSet;
     private DataSet accessoriesDataSet;
+    //private HttpPostedFile postedFile = null;
+
+
+
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        //FileUploadControl.Attributes.Add("onchange", "FileUploadControl_onchange(this);");
         if (!IsPostBack)
         {
             Gridview1_Bind();
@@ -112,7 +117,7 @@ public partial class Admin_Default : System.Web.UI.Page
 
     protected void BtnSave_Click(object sender, EventArgs e)
     {
-        string filename = Path.GetFileName(FileUploadControl.FileName);
+        string filename = null;
         Wheels wheel = new Wheels();
         int productID;
         productID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
@@ -123,16 +128,26 @@ public partial class Admin_Default : System.Web.UI.Page
         wheel.Finish = Finish.Text.ToString().Trim();
 
         if (FileUploadControl.HasFile)
-        { 
+        {
+            filename = Path.GetFileName(FileUploadControl.FileName);
             string imgPath = "~/Pictures/" + filename;
             wheel.Image = imgPath;
         }
         else
         {
-            DataTable wheelsTable = WheelsBLO.GetAllProducts();
-            wheelsTable.PrimaryKey = new DataColumn[] { wheelsTable.Columns["ProductID"] };
-            DataRow foundRow = wheelsTable.Rows.Find(productID);
-            wheel.Image = foundRow[1].ToString();
+            //if (flag == true)
+            //{
+            //    filename = postedFile.FileName;
+            //    string imgPath = "~/Pictures/" + filename;
+            //    wheel.Image = imgPath;
+            //}
+            //else
+            //{
+                DataTable wheelsTable = WheelsBLO.GetAllProducts();
+                wheelsTable.PrimaryKey = new DataColumn[] { wheelsTable.Columns["ProductID"] };
+                DataRow foundRow = wheelsTable.Rows.Find(productID);
+                wheel.Image = foundRow[1].ToString();
+            //}  
         }
 
         wheel.Offset = Offset.Text.ToString().Trim();
@@ -152,9 +167,14 @@ public partial class Admin_Default : System.Web.UI.Page
         {
             if (FileUploadControl.HasFile)
             {
-                    FileUploadControl.SaveAs(Server.MapPath("~/Pictures/") + filename);
+                FileUploadControl.SaveAs(Server.MapPath("~/Pictures/") + filename);
             }
+            //else if (flag == true)
+            //{
+            //    postedFile.SaveAs(Server.MapPath("~/Pictures/") + filename);
+            //}
             Gridview1_Bind();
+            Image1.ImageUrl = ((Image)(GridView1.SelectedRow.Cells[0].FindControl("Image1"))).ImageUrl;
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                          "err_msg",
                          "alert('Wheel has been saved.');",
@@ -509,28 +529,37 @@ public partial class Admin_Default : System.Web.UI.Page
         //    }
     }
 
-    protected void btnPreviewImage_Click(object sender, EventArgs e) 
-    {
-        //bug: after click preview, the image would not upload, cause FileUploadControl.HasFile=false
-        if (FileUploadControl.HasFile)   
-         {   
-             string path = Server.MapPath("TempImages");   
+    //protected void btnPreviewImage_Click(object sender, EventArgs e) 
+    //{
+    //    //bug: after click preview, the image would not upload, cause FileUploadControl.HasFile=false
+    //    if (FileUploadControl.HasFile)   
+    //     {   
+    //         string path = Server.MapPath("TempImages");   
     
-             FileInfo oFileInfo = new FileInfo(
-                  FileUploadControl.PostedFile.FileName);
-             string fileName = oFileInfo.Name;
+    //         FileInfo oFileInfo = new FileInfo(
+    //              FileUploadControl.PostedFile.FileName);
+    //         string fileName = oFileInfo.Name;
 
-             string fullFileName = path + "\\" + fileName;
-             string imagePath = "TempImages/" + fileName;
+    //         string fullFileName = path + "\\" + fileName;
+    //         string imagePath = "TempImages/" + fileName;
 
-             if (!Directory.Exists(path))
-             {
-                 Directory.CreateDirectory(path);
-             }
+    //         if (!Directory.Exists(path))
+    //         {
+    //             Directory.CreateDirectory(path);
+    //         }
+             
+    //       // postedFile= FileUploadControl.PostedFile;
+    //        FileUploadControl.PostedFile.SaveAs(fullFileName);
+    //        //flag = true;
 
-             FileUploadControl.PostedFile.SaveAs(fullFileName);
-             Image1.ImageUrl = imagePath;
-         }
-    }
+    //        Image1.ImageUrl = imagePath;
+    //     }
+    //}
+
+    //protected void FileUploadControl_Load(object sender, EventArgs e)
+    //{
+    //    btnPreviewImage_Click(this, null);
+    //}
+
     #endregion
 }

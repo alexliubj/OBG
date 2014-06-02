@@ -21,7 +21,7 @@
                 <asp:BoundField DataField="ProductId" HeaderText="Product ID" InsertVisible="False" ReadOnly="True" SortExpression="ProductId" />
                 <asp:TemplateField HeaderText="Image" SortExpression="Image">
                     <ItemTemplate>
-                        <asp:Image ID="Image1" runat="server" ImageUrl='<%# Bind("Image") %>' ControlStyle-Width="50" ControlStyle-Height="50" />
+                        <asp:Image ID="Image1" runat="server" ImageUrl='<%# Bind("Image") %>' Width="50" Height="50" />
                     </ItemTemplate>
                 </asp:TemplateField>
 
@@ -153,7 +153,7 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-        <asp:Button ID="btnAddWheel" runat="server" OnClick="Button1_Click" Text="Add new Wheel" align="right" />
+        <asp:Button ID="btnAddWheel" runat="server" OnClick="Button1_Click" Text="Add new Wheel" />
 
         <div id="wheelInformation" runat="server" visible="false">
             <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification"
@@ -173,9 +173,9 @@
 
                         </script>
                         <td>
-                            <asp:Image ID="Image1" runat="server" ControlStyle-Width="50" ControlStyle-Height="50" />
-                            <asp:FileUpload ID="FileUploadControl" runat="server" onchange="FileUploadControl_onchange(this);" />
-                            <asp:Button ID="btnPreviewImage" runat="server" OnClick="btnPreviewImage_Click"  Text="Preview"/>
+                            <asp:Image ID="Image1" runat="server" Width="50" Height="50" />
+                            <asp:FileUpload ID="FileUploadControl" runat="server"    onchange="document.getElementById('btnPreviewImage').click();"/>
+                            <asp:Button ID="btnPreviewImage" runat="server" Text="Preview" Visible="false"/>
                            <%-- <asp:RequiredFieldValidator ID="ImageRequired" runat="server" ControlToValidate="FileUploadControl"
                                 CssClass="failureNotification" ErrorMessage="Image is required." ToolTip="Image is required."
                                 ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>--%>

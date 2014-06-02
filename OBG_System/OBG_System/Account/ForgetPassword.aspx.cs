@@ -38,7 +38,7 @@ public partial class Default2 : System.Web.UI.Page
     {
         if (ValidationUtility.IsEmailAddress(PasswordRecovery1.UserName))
         {
-            string email = PasswordRecovery1.UserName;
+            string email = PasswordRecovery1.UserName.ToString().Trim();
             int userID = 0;
             string securityKey = "";
 
@@ -85,10 +85,10 @@ public partial class Default2 : System.Web.UI.Page
     ///<param name="ToEmail">目的地地址</param>
     ///<param name="memberid">会员ID</param>
     ///<returns></returns>
-    public static bool SendMail(string ToEmail, string securityKey)
+    public bool SendMail(string ToEmail, string securityKey)
     {
-        string Email = "neobility2014@gmail.com";
-        string password = "wg726813";
+        string Email = "noreply@centennialsoft.ca ";
+        string password = "obgtest";
         Encoding EnCode = Encoding.UTF8;
         System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
         Message.From = new MailAddress(Email, "OBG Master", EnCode);
@@ -110,13 +110,14 @@ public partial class Default2 : System.Web.UI.Page
 
         try
         {
-            SmtpClient smtp = new SmtpClient("smtp.gmail.com", 465);
+            SmtpClient smtp = new SmtpClient("smtpout.secureserver.net", 80);
             smtp.Credentials = new NetworkCredential(Email, password);
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.Send(Message);
         }
-        catch (Exception)
+        catch (Exception e)
         {
+            //this.RegisterClientScriptBlock("key", string.Format("alert('{0}');", e.Message));
             return false;
         }
         finally
