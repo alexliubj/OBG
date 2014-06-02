@@ -61,12 +61,12 @@ namespace DataAccess
                                                    ,[name]
                                                    ,[brand])
                                              VALUES
-                                                   @partNo
+                                                   (@partNo
                                                    ,@image
                                                    ,@des
                                                    ,@pricing
                                                    ,@name
-                                                    ,@brand");
+                                                    ,@brand)");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@partNo", acc.PartNo),
                 new SqlParameter("@image",acc.Img),

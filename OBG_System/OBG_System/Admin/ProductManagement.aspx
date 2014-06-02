@@ -117,10 +117,10 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Price" SortExpression="Price">
                     <EditItemTemplate>
-                        <asp:TextBox ID="TextBox13" runat="server" Text='<%# Bind("Price") %>'></asp:TextBox>
+                        <asp:TextBox ID="TextBox13" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Price")) %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label13" runat="server" Text='<%# Bind("Price") %>'></asp:Label>
+                        <asp:Label ID="Label13" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Price")) %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
@@ -136,7 +136,7 @@
                 <asp:TemplateField HeaderText="Delete">
                     <ItemTemplate>
                         <asp:Button ID="deleteButton" runat="server" CommandName="Delete" Text="Delete"
-                            OnClientClick="return confirm('Are you sure you want to delete this user?');" />
+                            OnClientClick="return confirm('Are you sure you want to delete this wheel?');" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
@@ -174,11 +174,8 @@
                         </script>
                         <td>
                             <asp:Image ID="Image1" runat="server" Width="50" Height="50" />
-                            <asp:FileUpload ID="FileUploadControl" runat="server"    onchange="document.getElementById('btnPreviewImage').click();"/>
-                            <asp:Button ID="btnPreviewImage" runat="server" Text="Preview" Visible="false"/>
-                           <%-- <asp:RequiredFieldValidator ID="ImageRequired" runat="server" ControlToValidate="FileUploadControl"
-                                CssClass="failureNotification" ErrorMessage="Image is required." ToolTip="Image is required."
-                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>--%>
+                            <asp:FileUpload ID="FileUploadControl" runat="server" onchange="document.getElementById('btnPreviewImage').click();" />
+                            <asp:Button ID="btnPreviewImage" runat="server" Text="Preview" Visible="false" />
                         </td>
                     </tr>
 
@@ -312,7 +309,7 @@
                                 ControlToValidate="Price"
                                 CssClass="failureNotification"
                                 ErrorMessage="Please Enter Only Numbers."
-                                ValidationExpression="^\d+$"
+                                ValidationExpression="[-+]?[0-9]*\.?[0-9]+"
                                 ValidationGroup="RegisterUserValidationGroup">*
                             </asp:RegularExpressionValidator>
                         </td>
@@ -365,28 +362,18 @@
                         <asp:Label ID="Label3" runat="server" Text='<%# Bind("Size") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <%--     <asp:TemplateField HeaderText="Width" SortExpression="rimWith">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("rimWith") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("rimWith") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>--%>
                 <asp:TemplateField HeaderText="Image" SortExpression="Image">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("Image") %>'></asp:TextBox>
-                    </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("Image") %>'></asp:Label>
+                        <asp:Image ID="Image1" runat="server" ImageUrl='<%# Bind("Image") %>' Width="50" Height="50" />
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Pricing" SortExpression="Pricing">
+
+                <asp:TemplateField HeaderText="Price" SortExpression="Pricing">
                     <EditItemTemplate>
-                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Pricing") %>'></asp:TextBox>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("Pricing") %>'></asp:Label>
+                        <asp:Label ID="Label4" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Season" SortExpression="Season">
@@ -394,7 +381,7 @@
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Season") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("Season") %>'></asp:Label>
+                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("Season") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Brand" SortExpression="Brand">
@@ -402,7 +389,15 @@
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Brand") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("Brand") %>'></asp:Label>
+                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("Brand") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Description" SortExpression="Des">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Des") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label7" runat="server" Text='<%# Bind("Des") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
 
@@ -411,7 +406,7 @@
                 <asp:TemplateField HeaderText="Delete">
                     <ItemTemplate>
                         <asp:Button ID="deleteButton" runat="server" CommandName="Delete" Text="Delete"
-                            OnClientClick="return confirm('Are you sure you want to delete this user?');" />
+                            OnClientClick="return confirm('Are you sure you want to delete this tire?');" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
@@ -428,7 +423,114 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
+        <asp:Button ID="BtnAddNewTire" runat="server" OnClick="BtnAddNewTire_Click" Text="Add new Tire" />
+        <div id="DivTireInformation" runat="server" visible="false">
+            <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="failureNotification"
+                ValidationGroup="RegisterUserValidationGroup" />
+            <fieldset class="tireInfo">
+                <legend>Tire Information</legend>
+                <table>
+                    <tr>
+                        <td>
+                            <asp:Label ID="TireImageLabel" runat="server" AssociatedControlID="TireFileUploadControl">Image:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:Image ID="TireImage" runat="server" Width="50" Height="50" />
+                            <asp:FileUpload ID="TireFileUploadControl" runat="server" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <asp:Label ID="TirePartNoLabel" runat="server" AssociatedControlID="TirePartNo">Part NO.:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TirePartNo" runat="server" CssClass="textEntry" ReadOnly="false"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="TirePartNo"
+                                CssClass="failureNotification" ErrorMessage="Part NO. is required." ToolTip="Part NO. is required."
+                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <asp:Label ID="TireSizeLabel" runat="server" AssociatedControlID="TireSize">Size:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TireSize" runat="server" CssClass="textEntry" ReadOnly="false"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="TireSize"
+                                CssClass="failureNotification" ErrorMessage="Size is required." ToolTip="Size is required."
+                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <asp:Label ID="TirePriceLabel" runat="server" AssociatedControlID="TirePrice">Price:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TirePrice" runat="server" CssClass="textEntry" ReadOnly="false"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="TirePrice"
+                                CssClass="failureNotification" ErrorMessage="Price is required." ToolTip="Price is required."
+                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator
+                                ID="RegularExpressionValidator1" runat="SERVER"
+                                ControlToValidate="TirePrice"
+                                CssClass="failureNotification"
+                                ErrorMessage="Please Enter Only Numbers."
+                                ValidationExpression="[-+]?[0-9]*\.?[0-9]+"
+                                ValidationGroup="RegisterUserValidationGroup">*
+                            </asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <asp:Label ID="TireSeasonLabel" runat="server" AssociatedControlID="TireSeason">Season:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TireSeason" runat="server" CssClass="textEntry" ReadOnly="false"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="TireSeason"
+                                CssClass="failureNotification" ErrorMessage="Season is required." ToolTip="Season is required."
+                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="TireBrandLabel" runat="server" AssociatedControlID="TireBrand">Brand:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TireBrand" runat="server" CssClass="textEntry" ReadOnly="false"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="TireBrand"
+                                CssClass="failureNotification" ErrorMessage="Brand is required." ToolTip="Brand is required."
+                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="TireDesLabel" runat="server" AssociatedControlID="TireDes">Description:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="TireDes" runat="server" CssClass="textEntry" ReadOnly="false"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="TireDes"
+                                CssClass="failureNotification" ErrorMessage="Description is required." ToolTip="Description is required."
+                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Button ID="BtnAddTire" runat="server" Text="Add" OnClick="BtnAddTire_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" />
+                            <asp:Button ID="BtnSaveTire" runat="server" OnClick="BtnSaveTire_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" />
+                        </td>
+                        <td>
+                            <asp:Button ID="BtnCancelTire" runat="server" OnClick="BtnCancelTire_Click" Text="Cancle" Visible="true" />
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div>
     </div>
+
 
     <div id="divAcc" runat="server" visible="false">
         <asp:GridView ID="GridView3" runat="server" GridLines="None" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" ForeColor="#333333" OnSelectedIndexChanged="GridView3_SelectedIndexChanged"
@@ -445,12 +547,9 @@
                         <asp:Label ID="Label2" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Image" SortExpression="image">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("image") %>'></asp:TextBox>
-                    </EditItemTemplate>
+                <asp:TemplateField HeaderText="Image" SortExpression="Image">
                     <ItemTemplate>
-                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("image") %>'></asp:Label>
+                        <asp:Image ID="Image1" runat="server" ImageUrl='<%# Bind("Image") %>' Width="50" Height="50" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Description" SortExpression="Des">
@@ -461,20 +560,20 @@
                         <asp:Label ID="Label4" runat="server" Text='<%# Bind("Des") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Pricing" SortExpression="Pricing">
+                <asp:TemplateField HeaderText="Price" SortExpression="Pricing">
                     <EditItemTemplate>
-                        <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("Pricing") %>'></asp:TextBox>
+                        <asp:TextBox ID="TextBox5" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("Pricing") %>'></asp:Label>
+                        <asp:Label ID="Label5" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="CategoryId" SortExpression="CategoryId">
+                <asp:TemplateField HeaderText="Brand" SortExpression="Brand">
                     <EditItemTemplate>
-                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CategoryId") %>'></asp:TextBox>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Brand") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("CategoryId") %>'></asp:Label>
+                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("Brand") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Name" SortExpression="Name">
@@ -482,7 +581,7 @@
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Name") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label1" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
+                        <asp:Label ID="Label7" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" />
@@ -490,7 +589,7 @@
                 <asp:TemplateField HeaderText="Delete">
                     <ItemTemplate>
                         <asp:Button ID="deleteButton" runat="server" CommandName="Delete" Text="Delete"
-                            OnClientClick="return confirm('Are you sure you want to delete this user?');" />
+                            OnClientClick="return confirm('Are you sure you want to delete this accessory?');" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
@@ -507,5 +606,101 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
+
+        <asp:Button ID="BtnAddNewAcc" runat="server" OnClick="BtnAddNewAcc_Click" Text="Add new Accessory" />
+        <div id="DivAccInformation" runat="server" visible="false">
+            <asp:ValidationSummary ID="ValidationSummary2" runat="server" CssClass="failureNotification"
+                ValidationGroup="RegisterUserValidationGroup" />
+            <fieldset class="accInfo">
+                <legend>Accessory Information</legend>
+                <table>
+                    <tr>
+                        <td>
+                            <asp:Label ID="AccImageLabel" runat="server" AssociatedControlID="AccFileUploadControl">Image:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:Image ID="AccImage" runat="server" Width="50" Height="50" />
+                            <asp:FileUpload ID="AccFileUploadControl" runat="server" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <asp:Label ID="AccPartNoLabel" runat="server" AssociatedControlID="AccPartNo">Part NO.:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="AccPartNo" runat="server" CssClass="textEntry" ReadOnly="false"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator15" runat="server" ControlToValidate="AccPartNo"
+                                CssClass="failureNotification" ErrorMessage="Part NO. is required." ToolTip="Part NO. is required."
+                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <asp:Label ID="AccNameLabel" runat="server" AssociatedControlID="AccName">Name:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="AccName" runat="server" CssClass="textEntry" ReadOnly="false"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator16" runat="server" ControlToValidate="AccName"
+                                CssClass="failureNotification" ErrorMessage="Name is required." ToolTip="Name is required."
+                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <asp:Label ID="AccPriceLabel" runat="server" AssociatedControlID="AccPrice">Price:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="AccPrice" runat="server" CssClass="textEntry" ReadOnly="false"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator17" runat="server" ControlToValidate="AccPrice"
+                                CssClass="failureNotification" ErrorMessage="Price is required." ToolTip="Price is required."
+                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator
+                                ID="RegularExpressionValidator2" runat="SERVER"
+                                ControlToValidate="TirePrice"
+                                CssClass="failureNotification"
+                                ErrorMessage="Please Enter Only Numbers."
+                                ValidationExpression="[-+]?[0-9]*\.?[0-9]+"
+                                ValidationGroup="RegisterUserValidationGroup">*
+                            </asp:RegularExpressionValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="AccBrandLabel" runat="server" AssociatedControlID="AccBrand">Brand:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="AccBrand" runat="server" CssClass="textEntry" ReadOnly="false"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator19" runat="server" ControlToValidate="AccBrand"
+                                CssClass="failureNotification" ErrorMessage="Brand is required." ToolTip="Brand is required."
+                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Label ID="AccDesLabel" runat="server" AssociatedControlID="AccDes">Description:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="AccDes" runat="server" CssClass="textEntry" ReadOnly="false"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator20" runat="server" ControlToValidate="AccDes"
+                                CssClass="failureNotification" ErrorMessage="Description is required." ToolTip="Description is required."
+                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:Button ID="BtnAddAcc" runat="server" Text="Add" OnClick="BtnAddAcc_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" />
+                            <asp:Button ID="BtnSaveAcc" runat="server" OnClick="BtnSaveAcc_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" />
+                        </td>
+                        <td>
+                            <asp:Button ID="BtnCancelAcc" runat="server" OnClick="BtnCancelAcc_Click" Text="Cancle" Visible="true" />
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div>
     </div>
+
 </asp:Content>

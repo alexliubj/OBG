@@ -21,6 +21,7 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void BtnSave_Click(object sender, EventArgs e)
     {
         string filename = Path.GetFileName(FileUploadControl.FileName);
+        string filenameWithTimeStamp = AppendTimeStamp(filename);
 
         HomeImage oldHomeImage = new HomeImage();
         oldHomeImage = HomePageBLO.GetHomePageInformation();
@@ -33,7 +34,7 @@ public partial class Admin_Default : System.Web.UI.Page
 
         if(FileUploadControl.HasFile)
         {
-            string imgPath = "~/Pictures/News/" + filename;
+            string imgPath = "~/Pictures/News/" + filenameWithTimeStamp;
             newHomeImage.Image1 = imgPath;
         }
         else
@@ -48,7 +49,7 @@ public partial class Admin_Default : System.Web.UI.Page
         {
             if (FileUploadControl.HasFile)
             {
-                FileUploadControl.SaveAs(Server.MapPath("~/Pictures/News/") + filename);
+                FileUploadControl.SaveAs(Server.MapPath("~/Pictures/News/") + filenameWithTimeStamp);
             }
 
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
@@ -103,5 +104,14 @@ public partial class Admin_Default : System.Web.UI.Page
             ms.Selectable = false;
         }
 
+    }
+
+    public static string AppendTimeStamp(string fileName)
+    {
+        return string.Concat(
+            Path.GetFileNameWithoutExtension(fileName),
+            DateTime.Now.ToString("yyyyMMddHHmmssfff"),
+            Path.GetExtension(fileName)
+            );
     }
 }

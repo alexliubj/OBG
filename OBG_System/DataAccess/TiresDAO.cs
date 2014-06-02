@@ -21,6 +21,7 @@ namespace DataAccess
                                                       ,[pricing]
                                                       ,[season]
                                                       ,[brand]
+                                                      ,[des]
                                                   FROM [Tires]");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
@@ -33,14 +34,15 @@ namespace DataAccess
                                                        ,[image]
                                                        ,[size]                                                      
                                                        ,[pricing]
-                                                       ,[season],[brand])
+                                                       ,[season],[brand],[des])
                                                  VALUES
                                                        (@partNo
-                                                        @image
+                                                       ,@image
                                                        ,@size
                                                        ,@pricing
                                                        ,@season
-                                                       ,@brand)");
+                                                       ,@brand
+                                                       ,@des)");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@partNo", tire.PartNo),
                 new SqlParameter("@size",tire.Size),
@@ -49,7 +51,7 @@ namespace DataAccess
                 //new SqlParameter("@rimHeight",tire.Height),
                 new SqlParameter("@pricing",tire.Pricing),
                 new SqlParameter("@season",tire.Season),
-               // new SqlParameter("@categoryId",tire.CategoryId),
+                new SqlParameter("@des",tire.Des),
                 new SqlParameter("@brand",tire.Brand)
             };
             command.Parameters.AddRange(paras);
@@ -73,13 +75,14 @@ namespace DataAccess
                                       ,[pricing] = @pricing
                                       ,[season] = @season
                                       ,[brand] = @brand
-                                 WHERE tireId = @tireId)");
+                                      ,[des] = @des
+                                 WHERE tireId = @tireId");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@partNo", tire.PartNo),
                 new SqlParameter("@size",tire.Size),
                 new SqlParameter("@image", tire.Image),
                 //new SqlParameter("@rimWith",tire.Width),
-                //new SqlParameter("@rimHeight",tire.Height),
+                new SqlParameter("@des",tire.Des),
                 new SqlParameter("@pricing",tire.Pricing),
                 new SqlParameter("@season",tire.Season),
                 new SqlParameter("@tireId",tire.TireId),

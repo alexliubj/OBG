@@ -118,6 +118,7 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void BtnSave_Click(object sender, EventArgs e)
     {
         string filename = null;
+        string filenameWithTimeStamp = null;
         Wheels wheel = new Wheels();
         int productID;
         productID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
@@ -130,7 +131,8 @@ public partial class Admin_Default : System.Web.UI.Page
         if (FileUploadControl.HasFile)
         {
             filename = Path.GetFileName(FileUploadControl.FileName);
-            string imgPath = "~/Pictures/" + filename;
+            filenameWithTimeStamp = AppendTimeStamp(filename);
+            string imgPath = "~/Pictures/" + filenameWithTimeStamp;
             wheel.Image = imgPath;
         }
         else
@@ -143,17 +145,17 @@ public partial class Admin_Default : System.Web.UI.Page
             //}
             //else
             //{
-                DataTable wheelsTable = WheelsBLO.GetAllProducts();
-                wheelsTable.PrimaryKey = new DataColumn[] { wheelsTable.Columns["ProductID"] };
-                DataRow foundRow = wheelsTable.Rows.Find(productID);
-                wheel.Image = foundRow[1].ToString();
+            DataTable wheelsTable = WheelsBLO.GetAllProducts();
+            wheelsTable.PrimaryKey = new DataColumn[] { wheelsTable.Columns["ProductID"] };
+            DataRow foundRow = wheelsTable.Rows.Find(productID);
+            wheel.Image = foundRow[1].ToString();
             //}  
         }
 
         wheel.Offset = Offset.Text.ToString().Trim();
         wheel.Onhand = Onhand.Text.ToString().Trim();
         wheel.Pcd = Pcd.Text.ToString().Trim();
-        wheel.Price = int.Parse(Price.Text.ToString().Trim());
+        wheel.Price = (float)double.Parse(Price.Text.ToString().Trim());
         wheel.Seat = Seat.Text.ToString().Trim();
         wheel.Size = Size.Text.ToString().Trim();
         wheel.Style = Style.Text.ToString().Trim();
@@ -167,7 +169,7 @@ public partial class Admin_Default : System.Web.UI.Page
         {
             if (FileUploadControl.HasFile)
             {
-                FileUploadControl.SaveAs(Server.MapPath("~/Pictures/") + filename);
+                FileUploadControl.SaveAs(Server.MapPath("~/Pictures/") + filenameWithTimeStamp);
             }
             //else if (flag == true)
             //{
@@ -250,13 +252,14 @@ public partial class Admin_Default : System.Web.UI.Page
         wheel.Finish = Finish.Text.ToString().Trim();
 
         string filename = Path.GetFileName(FileUploadControl.FileName);
-        string imgPath = "~/Pictures/" + filename;
+        string filenameWithTimeStamp = AppendTimeStamp(filename);
+        string imgPath = "~/Pictures/" + filenameWithTimeStamp;
         wheel.Image = imgPath;
 
         wheel.Offset = Offset.Text.ToString().Trim();
         wheel.Onhand = Onhand.Text.ToString().Trim();
         wheel.Pcd = Pcd.Text.ToString().Trim();
-        wheel.Price = int.Parse(Price.Text.ToString().Trim());
+        wheel.Price = (float)double.Parse(Price.Text.ToString().Trim());
         wheel.Seat = Seat.Text.ToString().Trim();
         wheel.Size = Size.Text.ToString().Trim();
         wheel.Style = Style.Text.ToString().Trim();
@@ -270,7 +273,7 @@ public partial class Admin_Default : System.Web.UI.Page
                 try
                 {
                     //string filename = Path.GetFileName(FileUploadControl.FileName);
-                    FileUploadControl.SaveAs(Server.MapPath("~/Pictures/") + filename);
+                    FileUploadControl.SaveAs(Server.MapPath("~/Pictures/") + filenameWithTimeStamp);
                     // StatusLabel.Text = "Upload status: File uploaded!";
                 }
                 catch (Exception ex)
@@ -316,7 +319,7 @@ public partial class Admin_Default : System.Web.UI.Page
 
     protected void GridView2_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        int TireID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
+        int TireID = Convert.ToInt32(GridView2.DataKeys[e.RowIndex].Value.ToString());
         TiresBLO.DeleteTire(TireID);
         GridView2_Bind();
     }
@@ -357,11 +360,6 @@ public partial class Admin_Default : System.Web.UI.Page
 
     }
 
-    protected void GridView2_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-    }
-
     protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView2.PageIndex = e.NewPageIndex;
@@ -380,6 +378,147 @@ public partial class Admin_Default : System.Web.UI.Page
             GridView2.DataSource = dataView;
             GridView2.DataBind();
         }
+    }
+    #endregion
+
+    #region TireDetailInformation
+    protected void BtnCancelTire_Click(object sender, EventArgs e)
+    {
+        DivTireInformation.Visible = false;
+    }
+    protected void BtnSaveTire_Click(object sender, EventArgs e)
+    {
+        string filename = null;
+        string filenameWithTimeStamp = null;
+        Tire tire = new Tire();
+        int tireID;
+        tireID = int.Parse(GridView2.SelectedRow.Cells[0].Text);
+        tire.TireId = tireID;
+        tire.PartNo = TirePartNo.Text.ToString().Trim();
+        tire.Size = TireSize.Text.ToString().Trim();
+        tire.Pricing = (float)double.Parse(TirePrice.Text.ToString().Trim());
+        tire.Season = TireSeason.Text.ToString().Trim();
+
+        if (TireFileUploadControl.HasFile)
+        {
+            filename = Path.GetFileName(TireFileUploadControl.FileName);
+            filenameWithTimeStamp = AppendTimeStamp(filename);
+            string imgPath = "~/Pictures/" + filenameWithTimeStamp;
+            tire.Image = imgPath;
+        }
+        else
+        {
+            DataTable tiresTable = TiresBLO.GetAllTires();
+            tiresTable.PrimaryKey = new DataColumn[] { tiresTable.Columns["TireID"] };
+            DataRow foundRow = tiresTable.Rows.Find(tireID);
+            tire.Image = foundRow[2].ToString();
+        }
+
+        tire.Brand = TireBrand.Text.ToString().Trim();
+        tire.Des = TireDes.Text.ToString().Trim();
+
+        int update = 0;
+        update = TiresBLO.UpdateTire(tire);
+
+
+        if (update == 1)
+        {
+            if (TireFileUploadControl.HasFile)
+            {
+                TireFileUploadControl.SaveAs(Server.MapPath("~/Pictures/") + filenameWithTimeStamp);
+            }
+            GridView2_Bind();
+            TireImage.ImageUrl = ((Image)(GridView2.SelectedRow.Cells[0].FindControl("Image1"))).ImageUrl;
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                         "err_msg",
+                         "alert('Tire has been saved.');",
+                         true);
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                        "err_msg",
+                        "alert('Sorry, Saving Tire information failed.');",
+                        true);
+        }
+    }
+    protected void BtnAddTire_Click(object sender, EventArgs e)
+    {
+        Tire tire = new Tire();
+
+        tire.PartNo = TirePartNo.Text.ToString().Trim();
+        tire.Size = TireSize.Text.ToString().Trim();
+        tire.Pricing = (float)double.Parse(TirePrice.Text.ToString().Trim());
+        tire.Season = TireSeason.Text.ToString().Trim();
+
+        string filename = Path.GetFileName(TireFileUploadControl.FileName);
+        string filenameWithTimeStamp = AppendTimeStamp(filename);
+        string imgPath = "~/Pictures/" + filenameWithTimeStamp;
+        tire.Image = imgPath;
+
+        tire.Brand = TireBrand.Text.ToString().Trim();
+        tire.Des = TireDes.Text.ToString().Trim();
+
+        int update = TiresBLO.CreateNewTire(tire);
+
+        if (update == 1)
+        {
+            if (TireFileUploadControl.HasFile)
+            {
+                try
+                {
+                    TireFileUploadControl.SaveAs(Server.MapPath("~/Pictures/") + filenameWithTimeStamp);
+                }
+                catch (Exception ex)
+                {
+                    
+                }
+            }
+            GridView2_Bind();
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                         "err_msg",
+                         "alert('New Tire has been created.');",
+                         true);
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                        "err_msg",
+                        "alert('Sorry, Creating Tire failed.');",
+                        true);
+        }
+    }
+
+    protected void GridView2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        TirePartNo.Text = ((Label)(GridView2.SelectedRow.Cells[0].FindControl("Label2"))).Text;
+        TireSize.Text = ((Label)(GridView2.SelectedRow.Cells[0].FindControl("Label3"))).Text;
+        TirePrice.Text = ((Label)(GridView2.SelectedRow.Cells[0].FindControl("Label4"))).Text;
+        TireSeason.Text = ((Label)(GridView2.SelectedRow.Cells[0].FindControl("Label5"))).Text;
+        TireImage.ImageUrl = ((Image)(GridView2.SelectedRow.Cells[0].FindControl("Image1"))).ImageUrl;
+        TireBrand.Text = ((Label)(GridView2.SelectedRow.Cells[0].FindControl("Label6"))).Text;
+        TireDes.Text = ((Label)(GridView2.SelectedRow.Cells[0].FindControl("Label7"))).Text;
+
+        DivTireInformation.Visible = true;
+
+        BtnAddTire.Visible = false;
+        BtnSaveTire.Visible = true;
+    }
+
+    protected void BtnAddNewTire_Click(object sender, EventArgs e)
+    {
+        TirePartNo.Text = null;
+        TireSize.Text = null;
+        TirePrice.Text = null;
+        TireSeason.Text = null;
+        TireImage.ImageUrl = null;
+        TireBrand.Text = null;
+        TireDes.Text = null;
+
+        DivTireInformation.Visible = true;
+
+        BtnAddTire.Visible = true;
+        BtnSaveTire.Visible = false;
     }
     #endregion
 
@@ -405,7 +544,7 @@ public partial class Admin_Default : System.Web.UI.Page
 
     protected void GridView3_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        int AccID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
+        int AccID = Convert.ToInt32(GridView3.DataKeys[e.RowIndex].Value.ToString());
         AccessoryBLO.DeleteOneAccessory(AccID);
         GridView3_Bind();
     }
@@ -423,11 +562,6 @@ public partial class Admin_Default : System.Web.UI.Page
     }
 
     protected void GridView3_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
-
-    }
-
-    protected void GridView3_SelectedIndexChanged(object sender, EventArgs e)
     {
 
     }
@@ -453,6 +587,143 @@ public partial class Admin_Default : System.Web.UI.Page
     }
     #endregion
 
+    #region AccDetailInformation
+    protected void BtnCancelAcc_Click(object sender, EventArgs e)
+    {
+        DivAccInformation.Visible = false;
+    }
+    protected void BtnSaveAcc_Click(object sender, EventArgs e)
+    {
+        string filename = null;
+        string filenameWithTimeStamp = null;
+        Accessories acc = new Accessories();
+        int accID;
+        accID = int.Parse(GridView3.SelectedRow.Cells[0].Text);
+        acc.AccId = accID;
+        acc.PartNo = AccPartNo.Text.ToString().Trim();
+        acc.Pricing = (float)double.Parse(AccPrice.Text.ToString().Trim());
+        acc.Name = AccName.Text.ToString().Trim();
+
+        if (AccFileUploadControl.HasFile)
+        {
+            filename = Path.GetFileName(AccFileUploadControl.FileName);
+            filenameWithTimeStamp = AppendTimeStamp(filename);
+            string imgPath = "~/Pictures/" + filenameWithTimeStamp;
+            acc.Img = imgPath;
+        }
+        else
+        {
+            DataTable accsTable = AccessoryBLO.GetAllAccessories();
+            accsTable.PrimaryKey = new DataColumn[] { accsTable.Columns["AccID"] };
+            DataRow foundRow = accsTable.Rows.Find(accID);
+            acc.Img = foundRow[2].ToString();
+        }
+
+        acc.Brand = AccBrand.Text.ToString().Trim();
+        acc.Des = AccDes.Text.ToString().Trim();
+
+        int update = 0;
+        update = AccessoryBLO.UpdateAccessory(acc);
+
+
+        if (update == 1)
+        {
+            if (AccFileUploadControl.HasFile)
+            {
+                AccFileUploadControl.SaveAs(Server.MapPath("~/Pictures/") + filenameWithTimeStamp);
+            }
+            GridView3_Bind();
+            AccImage.ImageUrl = ((Image)(GridView3.SelectedRow.Cells[0].FindControl("Image1"))).ImageUrl;
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                         "err_msg",
+                         "alert('Accessory has been saved.');",
+                         true);
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                        "err_msg",
+                        "alert('Sorry, Saving Accessory information failed.');",
+                        true);
+        }
+    }
+    protected void BtnAddAcc_Click(object sender, EventArgs e)
+    {
+        Accessories acc = new Accessories();
+
+        acc.PartNo = AccPartNo.Text.ToString().Trim();
+        acc.Pricing = (float)double.Parse(AccPrice.Text.ToString().Trim());
+        acc.Name = AccName.Text.ToString().Trim();
+
+        string filename = Path.GetFileName(AccFileUploadControl.FileName);
+        string filenameWithTimeStamp = AppendTimeStamp(filename);
+        string imgPath = "~/Pictures/" + filenameWithTimeStamp;
+        acc.Img = imgPath;
+
+        acc.Brand = AccBrand.Text.ToString().Trim();
+        acc.Des = AccDes.Text.ToString().Trim();
+
+
+        int update = AccessoryBLO.CreateNewAccessory(acc);
+
+        if (update == 1)
+        {
+            if (AccFileUploadControl.HasFile)
+            {
+                try
+                {
+                    AccFileUploadControl.SaveAs(Server.MapPath("~/Pictures/") + filenameWithTimeStamp);
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            GridView3_Bind();
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                         "err_msg",
+                         "alert('New Accessory has been created.');",
+                         true);
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                        "err_msg",
+                        "alert('Sorry, Creating Accessory failed.');",
+                        true);
+        }
+    }
+
+    protected void GridView3_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        AccPartNo.Text = ((Label)(GridView3.SelectedRow.Cells[0].FindControl("Label2"))).Text;
+        AccName.Text = ((Label)(GridView3.SelectedRow.Cells[0].FindControl("Label7"))).Text;
+        AccPrice.Text = ((Label)(GridView3.SelectedRow.Cells[0].FindControl("Label5"))).Text;
+        AccImage.ImageUrl = ((Image)(GridView3.SelectedRow.Cells[0].FindControl("Image1"))).ImageUrl;
+        AccBrand.Text = ((Label)(GridView3.SelectedRow.Cells[0].FindControl("Label6"))).Text;
+        AccDes.Text = ((Label)(GridView3.SelectedRow.Cells[0].FindControl("Label4"))).Text;
+
+        DivAccInformation.Visible = true;
+
+        BtnAddAcc.Visible = false;
+        BtnSaveAcc.Visible = true;
+    }
+
+    protected void BtnAddNewAcc_Click(object sender, EventArgs e)
+    {
+        AccPartNo.Text = null;
+        AccName.Text = null;
+        AccPrice.Text = null;
+        AccBrand.Text = null;
+        AccImage.ImageUrl = null;
+        AccDes.Text = null;
+
+        DivAccInformation.Visible = true;
+
+        BtnAddAcc.Visible = true;
+        BtnSaveAcc.Visible = false;
+    }
+    #endregion
 
     protected void NavigationMenu_MenuItemClick(object sender, MenuEventArgs e)
     {
@@ -535,7 +806,7 @@ public partial class Admin_Default : System.Web.UI.Page
     //    if (FileUploadControl.HasFile)   
     //     {   
     //         string path = Server.MapPath("TempImages");   
-    
+
     //         FileInfo oFileInfo = new FileInfo(
     //              FileUploadControl.PostedFile.FileName);
     //         string fileName = oFileInfo.Name;
@@ -547,7 +818,7 @@ public partial class Admin_Default : System.Web.UI.Page
     //         {
     //             Directory.CreateDirectory(path);
     //         }
-             
+
     //       // postedFile= FileUploadControl.PostedFile;
     //        FileUploadControl.PostedFile.SaveAs(fullFileName);
     //        //flag = true;
@@ -562,4 +833,16 @@ public partial class Admin_Default : System.Web.UI.Page
     //}
 
     #endregion
+
+    public static string AppendTimeStamp(string fileName)
+    {
+        return string.Concat(
+            Path.GetFileNameWithoutExtension(fileName),
+            DateTime.Now.ToString("yyyyMMddHHmmssfff"),
+            Path.GetExtension(fileName)
+            );
+    }
+
+
+
 }
