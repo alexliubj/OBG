@@ -35,5 +35,13 @@ namespace OBGModel
             get { return orderId; }
             set { orderId = value; }
         }
+
+
+        private int productType;
+        public int ProductType
+        {
+            get { return productId; }
+            set { productId = value; }
+        }
     }
 }

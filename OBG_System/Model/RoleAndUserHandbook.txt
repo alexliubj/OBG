@@ -16,3 +16,9 @@
 				shipped,
 				finished,
 			};
+			enum ProductType
+			{
+				wheels,
+				tires,
+				accs,
+			}

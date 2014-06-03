@@ -48,17 +48,18 @@ namespace DataAccess
                                                ([ProductId]
                                                ,[Qty]
                                                ,[DiscountRate]
-                                               ,[OrderId])
+                                               ,[OrderId],[ProductType])
                                          VALUES
                                                (@ProductId
                                                ,@Qty
                                                ,@DiscountRate
-                                               ,@OrderId");
+                                               ,@OrderId,@ProductType)");
                             SqlParameter[] paras2 = new SqlParameter[] { 
                 new SqlParameter("@ProductId", line.OrderId),
                 new SqlParameter("@Qty", line.Qty),
             new SqlParameter("@DiscountRate", line.DiscountRate),
-                new SqlParameter("@OrderId", newOrderId)};
+                new SqlParameter("@OrderId", newOrderId),
+                    new SqlParameter("@ProductType",line.ProductType)};
                             command.Parameters.AddRange(paras2);
                             db.ExecuteNonQuery(command2, t);
                         }
@@ -75,7 +76,6 @@ namespace DataAccess
             }
         }
 
-        //should be update in...a transaction
         public static int RemoveOrderByOrderId(int orderId)
         {
             using (Trans t = new Trans())
@@ -109,7 +109,6 @@ namespace DataAccess
             {
                 try
                 {
-
                     DbCommand command = db.GetSqlStringCommond(@"UPDATE [Order]
                                                SET [UserId] = @userId
                                                   ,[OrderDate] = @datetime
@@ -118,12 +117,12 @@ namespace DataAccess
                                              WHERE OrderId=@OrderId");
 
                     SqlParameter[] paras = new SqlParameter[] { 
-            new SqlParameter("@userId", order.UserId),
-            new SqlParameter("@datetime", order.OrderDate),
-            new SqlParameter("@status", order.Status),
-            new SqlParameter("@PO", order.PO),
-             new SqlParameter("@OrderId", order.OrderId)
-            };
+                                            new SqlParameter("@userId", order.UserId),
+                                            new SqlParameter("@datetime", order.OrderDate),
+                                            new SqlParameter("@status", order.Status),
+                                            new SqlParameter("@PO", order.PO),
+                                             new SqlParameter("@OrderId", order.OrderId)
+                                    };
                     command.Parameters.AddRange(paras);
                     newOrderId = Convert.ToInt32(db.ExecuteScalar(command));
                     if (newOrderId > 0)
@@ -133,14 +132,15 @@ namespace DataAccess
                             DbCommand command2 = db.GetSqlStringCommond(@"UPDATE [OrderLine]
                                            SET [ProductId] = @ProductId
                                               ,[Qty] = @Qty
-                                              ,[DiscountRate] = @DiscountRate
+                                              ,[DiscountRate] = @DiscountRate, [ProductType]=@ProductType
                                          WHERE OrderId=@OrderId
                                         ");
                             SqlParameter[] paras2 = new SqlParameter[] { 
                 new SqlParameter("@ProductId", line.OrderId),
                 new SqlParameter("@Qty", line.Qty),
             new SqlParameter("@DiscountRate", line.DiscountRate),
-                new SqlParameter("@OrderId", newOrderId)};
+                new SqlParameter("@OrderId", newOrderId),
+                            new SqlParameter("@ProductType",line.ProductType)};
                             command.Parameters.AddRange(paras2);
                             db.ExecuteNonQuery(command2);
                         }

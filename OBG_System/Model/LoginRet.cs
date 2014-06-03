@@ -5,6 +5,12 @@ using System.Text;
 
 namespace OBGModel
 {
+    public enum ProductType
+    {
+        wheels,
+        tires,
+        accs,
+    }
     public class LoginRet
     {
         public enum RoleStatus
@@ -13,6 +19,7 @@ namespace OBGModel
             Customer,
             Other
         }
+
 
         public enum UserStatus
         {
