@@ -34,6 +34,29 @@ namespace DataAccess
             return db.ExecuteNonQuery(command);
         }
 
+        public static int InsertImages(HomeImage hi)
+        {
+            DbCommand command = db.GetSqlStringCommond(@"INSERT INTO [HomePage]
+                                                           ([Image1]
+                                                           ,[Des1]
+                                                           ,[Image2]
+                                                           ,[Des2])
+                                                     VALUES
+                                                           (@image1,
+                                                           ,@des1
+                                                           ,@image2
+                                                           ,@des2)");
+
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@image1", hi.Image1),
+                new SqlParameter("@des1",hi.Des1),
+                new SqlParameter("@image2",hi.Image2),
+                new SqlParameter("@des2",hi.Des2)
+            };
+            command.Parameters.AddRange(paras);
+            return db.ExecuteNonQuery(command);
+        }
+
         public static HomeImage GetHomePageInformation()
         {
             HomeImage hi = new HomeImage();

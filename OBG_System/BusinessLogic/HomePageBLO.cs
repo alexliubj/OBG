@@ -18,5 +18,10 @@ namespace BusinessLogic
         {
             return HomePageDAO.GetHomePageInformation();
         }
+
+        public static int InsertImages(HomeImage hi)
+        {
+            return HomePageDAO.InsertImages(hi);
+        }
     }
 }

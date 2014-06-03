@@ -143,13 +143,13 @@ namespace BusinessLogic
         protected void Send_Click(object sender, EventArgs e)
         {
             EmailUtilities email = new EmailUtilities();
-            email.mailFrom = "发送人的邮箱地址";
-            email.mailPwd = "发送人邮箱的密码";
+            email.mailFrom = "alexliu0506@126.com";
+            email.mailPwd = "5631247";
             email.mailSubject = "邮件主题";
             email.mailBody = "邮件内容";
             email.isbodyHtml = true;    //是否是HTML
             email.host = "smtp.126.com";//如果是QQ邮箱则：smtp:qq.com,依次类推
-            email.mailToArray = new string[] { "******@qq.com","12345678@qq.com"};//接收者邮件集合
+            email.mailToArray = new string[] { "langis@163.com","12345678@qq.com"};//接收者邮件集合
             email.mailCcArray = new string[] { "******@qq.com" };//抄送者邮件集合
             if (email.Send())
             {
