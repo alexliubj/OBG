@@ -181,9 +181,9 @@ public partial class Products_wheelall : System.Web.UI.Page
 
     protected void CheckBoxList1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        SqlConnection cnn = new SqlConnection(
-            ConfigurationManager.ConnectionStrings["OBG_Local"].ConnectionString.Trim());
-        SqlCommand cmd = new SqlCommand();
+        //SqlConnection cnn = new SqlConnection(
+        //    ConfigurationManager.ConnectionStrings["OBG_Local"].ConnectionString.Trim());
+        //SqlCommand cmd = new SqlCommand();
         DataTable wheelsAll = WheelsBLO.GetAllProducts();
         wheelsDataSet = new DataSet();
 
@@ -195,29 +195,33 @@ public partial class Products_wheelall : System.Web.UI.Page
             index += 1;
             if (item.Selected)
             {
-                //String paramName = item.Value.Trim();
-                String paramName = "@param" + index.ToString().Trim();
+                //String paramName ="@param" +item.Value.Trim();
+                //String paramName = "@param" + index.ToString().Trim();
 
-               SqlParameter param = new SqlParameter(paramName, SqlDbType.UniqueIdentifier);
-                param.Value = new Guid(item.Value.Trim());
-                cmd.Parameters.Add(param);
-
-                sqlFilterText += " ProductId = " + paramName + " or ";
+                SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+               //param.Value = new Guid(item.Value.Trim());
+                //cmd.Parameters.Add(param);
+               // sqlFilterText += item.Value + paramName + " or ";
+              // sqlFilterText += " ProductId = " + paramName + " or ";
+                //sizeLB.Text = (Master.FindControl("sizeLB") as Label).Text;
+                sqlFilterText += sizeLB.Text + " = " + "'" + item.Value.Trim() + "'" + " or ";
             }
         }
 
         if (!String.IsNullOrEmpty(sqlFilterText))
         {
-            sqlText += " Where " + sqlFilterText.Substring(0, sqlFilterText.Length - 4);
+            sqlText += " Where " + sqlFilterText.Substring(0, sqlFilterText.Length - 3);
+            //sqlText += " Where " + sqlFilterText.Substring(0, sqlFilterText.Length - 4);
         }
-        cmd.CommandText = sqlText;
-        cmd.Connection = cnn;
+        //cmd.CommandText = sqlText;
+        //cmd.Connection = cnn;
 
-        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+        //SqlDataAdapter adapter = new SqlDataAdapter(cmd);
         //DataTable tbl = new DataTable();
-        adapter.Fill(wheelsAll);
+        //adapter.Fill(wheelsDataSet, "Wheels");
+        //adapter.Fill(wheelsAll);
 
-        //wheelsAll.DefaultView.RowFilter.(sqlText);
+        wheelsAll.DefaultView.RowFilter = sqlText;
         GridView1.DataSource = wheelsAll;
         Gridview1_Bind();
     }

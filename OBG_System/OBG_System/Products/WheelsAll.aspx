@@ -45,7 +45,8 @@
             <legend>Choose your wheels</legend>
             <table style="width: 852px">
                 <tr>
-                    <td class="auto-style5">Size:</td>
+                    <td>
+                        <asp:label id="sizeLB" class="label" runat="server" text="Size"></asp:label></td>
                      <td>
                     <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Size"
             DataValueField="Size"
