@@ -50,7 +50,7 @@
                      <td>
                     <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Size"
             DataValueField="Size"
- CssClass="CBLayout" ID="chkCountries" runat="server" AutoPostBack="true" TextAlign="Right"  RepeatLayout="Table" RepeatDirection="Horizontal" onselectedindexchanged="CheckBoxList1_SelectedIndexChanged">
+ CssClass="CBLayout" ID="chkSize" runat="server" AutoPostBack="true" TextAlign="Right"  RepeatLayout="Table" RepeatDirection="Horizontal" onselectedindexchanged="chkSize_SelectedIndexChanged">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="18*8.0" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="18*8.5" Value="Belgium"></asp:ListItem>
@@ -70,7 +70,7 @@
                     <td class="auto-style5">PCD:</td>
                      <td>
                     <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="PCD"
-            DataValueField="ProductId"  CssClass  ="CBLayout" ID="CheckBoxList1" runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table"   RepeatDirection="Horizontal" onselectedindexchanged="CheckBoxList1_SelectedIndexChanged">
+            DataValueField="ProductId"  CssClass  ="CBLayout" ID="chkPCD" runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table"   RepeatDirection="Horizontal" onselectedindexchanged="chkPCD_SelectedIndexChanged">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="5*112/114.3" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="5*112" Value="Belgium"></asp:ListItem>
@@ -83,7 +83,7 @@
                     <td class="auto-style3">Finish:</td>
                      <td>
                     <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Finish"
-            DataValueField="ProductId" CssClass  ="CBLayout" ID="CheckBoxList2" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" onselectedindexchanged="CheckBoxList1_SelectedIndexChanged">
+            DataValueField="ProductId" CssClass  ="CBLayout" ID="chkFinish" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" onselectedindexchanged="chkFinish_SelectedIndexChanged">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="Flat Black" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="Hyper Silver" Value="Belgium"></asp:ListItem>
@@ -97,7 +97,7 @@
                     <td class="auto-style5">Offset:</td>
                      <td>
                     <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Offset"
-            DataValueField="ProductId" CssClass  ="CBLayout" ID="CheckBoxList3" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" onselectedindexchanged="CheckBoxList1_SelectedIndexChanged">
+            DataValueField="ProductId" CssClass  ="CBLayout" ID="chkOffset" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" onselectedindexchanged="chkOffset_SelectedIndexChanged">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="+45" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="+50" Value="Belgium"></asp:ListItem>
@@ -112,7 +112,7 @@
                     <td class="auto-style5">Seat:</td>
                      <td>
                     <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Seat"
-            DataValueField="ProductId" CssClass  ="CBLayout" ID="CheckBoxList4" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" onselectedindexchanged="CheckBoxList1_SelectedIndexChanged">
+            DataValueField="ProductId" CssClass  ="CBLayout" ID="chkSeat" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" onselectedindexchanged="chkSeat_SelectedIndexChanged">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="60°seat" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="R13 Radius Seat" Value="Belgium"></asp:ListItem>
@@ -125,7 +125,7 @@
                     <td class="auto-style5">Bore:</td>
                      <td>
                     <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Bore"
-            DataValueField="ProductId" CssClass  ="CBLayout" ID="CheckBoxList5" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" onselectedindexchanged="CheckBoxList1_SelectedIndexChanged">
+            DataValueField="ProductId" CssClass  ="CBLayout" ID="chkBore" runat="server" AutoPostBack="true"  RepeatDirection="Horizontal" onselectedindexchanged="chkBore_SelectedIndexChanged">
                         <asp:ListItem Text="All" Value="Argentina"></asp:ListItem>
                         <asp:ListItem Text="73.1" Value="Austria"></asp:ListItem>
                         <asp:ListItem Text="66.4" Value="Belgium"></asp:ListItem>
