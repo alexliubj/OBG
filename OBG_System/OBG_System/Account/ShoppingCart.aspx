@@ -39,7 +39,7 @@
                 <td class="style1">
                     <strong>Total：</strong></td>
                 <td>
-                    <asp:Label ID="lblTatil" runat="server" Style="font-weight: bold; color: #cc0033">0</asp:Label></td>
+                    <asp:Label ID="lblTotal" runat="server" Style="font-weight: bold; color: #cc0033">0</asp:Label></td>
                 <td style="text-align: right" class="style2">
                     <asp:LinkButton ID="LBRepost" runat="server" Font-Bold="True" Font-Size="11pt"
                         OnClick="LBRepost_Click">Continue</asp:LinkButton></td>

@@ -11,15 +11,41 @@ using System.Data;
 
 public partial class Account_ShoppingCart : System.Web.UI.Page
 {
+    //protected System.Web.UI.WebControls.DataGrid ShoppingCartDlt;
+    //protected System.Web.UI.WebControls.Button update;
+    //protected System.Web.UI.WebControls.Button CheckOut;
+    //protected System.Web.UI.HtmlControls.HtmlForm Form1;
+    //protected System.Web.UI.WebControls.Label label;
+    //protected System.Web.UI.WebControls.CheckBox chkProductID;
+    //protected System.Web.UI.WebControls.TextBox txtCount;
+    //protected System.Web.UI.WebControls.TextBox CountTb;
+    //string AddProID; 
     
     protected void Page_Load(object sender, EventArgs e)
     {
+        try
+        {
+            if (Session["login"] != "yes" || Session["username"] == null)
+            {
+                Response.Redirect("error.htm");
+            }
+        }
+        catch
+        {
+            Response.Redirect("error.htm");
+        } 
         if (!IsPostBack)
         {
             //Gridview1_Bind();
 
         }
     }
+
+
+
+
+
+
 
     public void Gridview1_Bind()
     {
