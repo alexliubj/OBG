@@ -186,8 +186,9 @@ public partial class Products_wheelall : System.Web.UI.Page
     {
 
         DataTable wheelsAll = WheelsBLO.GetAllProducts();
+        String sqlText = "";
 
-        String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";  
+        //String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";
         String sqlFilterSize = "", sqlFilterPCD = "", sqlFilterFinish = "", sqlFilterOffset = "", sqlFilterSeat = "", sqlFilterBore = "";
         int index = 0;
         foreach (ListItem item in chkSize.Items)
@@ -197,7 +198,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterSize += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterSize += "size = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
         foreach (ListItem item in chkPCD.Items)
@@ -216,7 +217,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterFinish += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterFinish += "Finish = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
@@ -227,7 +228,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterOffset += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterOffset += "Offset = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
@@ -238,7 +239,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterSeat += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterSeat += "seat = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
@@ -249,224 +250,351 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterBore += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterBore += "Bore = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
-        if (!String.IsNullOrEmpty(sqlFilterPCD) )
+        if (!String.IsNullOrEmpty(sqlFilterPCD))
         {
-            sqlTextPCD += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3);
+            sqlText += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3) + " and ";
         }
 
         if (!String.IsNullOrEmpty(sqlFilterSize))
         {
-            sqlTextSize += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3);
-        }
-
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
+            sqlText += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3) + " and ";
         }
 
         if (!String.IsNullOrEmpty(sqlFilterFinish))
         {
-            sqlTextFinish += sqlFilterSize.Substring(0, sqlFilterFinish.Length - 3);
+            sqlText += sqlFilterFinish.Substring(0, sqlFilterFinish.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        if (!String.IsNullOrEmpty(sqlFilterOffset))
         {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + sqlTextPCD + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
+            sqlText += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlTextOffset))
+        if (!String.IsNullOrEmpty(sqlFilterSeat))
         {
-            sqlTextOffset += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3);
+            sqlText += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset))
+        if (!String.IsNullOrEmpty(sqlFilterBore))
         {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextPCD + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + sqlTextFinish + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + sqlTextPCD + sqlTextFinish + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextOffset;
+            sqlText += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlTextSeat))
-        {
-            sqlTextSeat += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3);
-        }
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + sqlTextFinish + sqlTextBore; 
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextFinish + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + sqlTextPCD + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + sqlTextPCD + sqlTextOffset + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + sqlTextSize + sqlTextOffset + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + sqlTextSize + sqlTextOffset + sqlTextPCD + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
-        }
-
-
-        if (!String.IsNullOrEmpty(sqlTextBore))
-        {
-            sqlTextBore += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3);
-        }
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlTextBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextFinish + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextSize + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextOffset + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize + sqlTextOffset + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize + sqlTextOffset + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextOffset + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextOffset + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterOffset + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextSize + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterSeat + " and " + sqlTextBore + sqlTextOffset + sqlTextFinish + sqlTextSize + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterFinish + " and " + sqlTextBore + sqlTextOffset + sqlTextSeat + sqlTextSize + sqlTextPCD;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat;
-        }
-
+        wheelsAll.DefaultView.RowFilter = sqlText.Substring(0, sqlText.Length - 5);
         GridView1.DataSource = wheelsAll.DefaultView;
         GridView1.DataBind();
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize;
+        //}
+
+
+        //else
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    sqlTextFinish += sqlFilterFinish.Substring(0, sqlFilterFinish.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish;
+        //}
+        //else
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlTextOffset))
+        //{
+        //    sqlTextOffset += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset ;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset ;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset ;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+        //if (!String.IsNullOrEmpty(sqlTextSeat))
+        //{
+        //    sqlTextSeat += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat ;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat;
+        //}
+        //else
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
+        //}
+
+
+        //if (!String.IsNullOrEmpty(sqlTextBore))
+        //{
+        //    sqlTextBore += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlTextBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore ;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore ;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore ;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore ;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterOffset + " and " + sqlTextBore ;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterFinish + " and " + sqlTextBore;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+        //GridView1.DataSource = wheelsAll.DefaultView;
+        //GridView1.DataBind();
     }
     protected void chkPCD_SelectedIndexChanged(object sender, EventArgs e)
     {
+
+        DataTable wheelsAll = WheelsBLO.GetAllProducts();
+        String sqlText = "";
+
+        //String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";
+        String sqlFilterSize = "", sqlFilterPCD = "", sqlFilterFinish = "", sqlFilterOffset = "", sqlFilterSeat = "", sqlFilterBore = "";
+        int index = 0;
+        foreach (ListItem item in chkSize.Items)
+        {
+            index += 1;
+            if (item.Selected)
+            {
+                SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+                sqlFilterSize += "size = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+            }
+        }
+        foreach (ListItem item in chkPCD.Items)
+        {
+            index += 1;
+            if (item.Selected)
+            {
+                SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+                sqlFilterPCD += "PCD = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+            }
+        }
+        foreach (ListItem item in chkFinish.Items)
+        {
+            index += 1;
+            if (item.Selected)
+            {
+                SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+                sqlFilterFinish += "Finish = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+            }
+        }
+
+        foreach (ListItem item in chkOffset.Items)
+        {
+            index += 1;
+            if (item.Selected)
+            {
+                SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+                sqlFilterOffset += "Offset = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+            }
+        }
+
+        foreach (ListItem item in chkSeat.Items)
+        {
+            index += 1;
+            if (item.Selected)
+            {
+                SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+                sqlFilterSeat += "seat = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+            }
+        }
+
+        foreach (ListItem item in chkBore.Items)
+        {
+            index += 1;
+            if (item.Selected)
+            {
+                SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+                sqlFilterBore += "Bore = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+            }
+        }
+
+        if (!String.IsNullOrEmpty(sqlFilterPCD))
+        {
+            sqlText += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3) + " and ";
+        }
+
+        if (!String.IsNullOrEmpty(sqlFilterSize))
+        {
+            sqlText += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3) + " and ";
+        }
+
+        if (!String.IsNullOrEmpty(sqlFilterFinish))
+        {
+            sqlText += sqlFilterFinish.Substring(0, sqlFilterFinish.Length - 3) + " and ";
+        }
+
+        if (!String.IsNullOrEmpty(sqlFilterOffset))
+        {
+            sqlText += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3) + " and ";
+        }
+
+        if (!String.IsNullOrEmpty(sqlFilterSeat))
+        {
+            sqlText += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3) + " and ";
+        }
+
+        if (!String.IsNullOrEmpty(sqlFilterBore))
+        {
+            sqlText += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3) + " and ";
+        }
+
+        wheelsAll.DefaultView.RowFilter = sqlText.Substring(0, sqlText.Length - 5);
+        GridView1.DataSource = wheelsAll.DefaultView;
+        GridView1.DataBind();
         //DataTable wheelsAll = WheelsBLO.GetAllProducts();
 
         //String sqlTextSize = "", sqlTextPCD = "";
@@ -563,291 +691,293 @@ public partial class Products_wheelall : System.Web.UI.Page
         //GridView1.DataSource = wheelsAll.DefaultView;
         //GridView1.DataBind();
 
-       DataTable wheelsAll = WheelsBLO.GetAllProducts();
+        //DataTable wheelsAll = WheelsBLO.GetAllProducts();
 
-        String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";  
-        String sqlFilterSize = "", sqlFilterPCD = "", sqlFilterFinish = "", sqlFilterOffset = "", sqlFilterSeat = "", sqlFilterBore = "";
-        int index = 0;
-        foreach (ListItem item in chkSize.Items)
-        {
-            index += 1;
-            if (item.Selected)
-            {
-                SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+        //String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";
+        //String sqlFilterSize = "", sqlFilterPCD = "", sqlFilterFinish = "", sqlFilterOffset = "", sqlFilterSeat = "", sqlFilterBore = "";
+        //int index = 0;
+        //foreach (ListItem item in chkSize.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterSize += "size = " + "'" + item.Value.Trim() + "'" + " or ";
-            }
-        }
-        foreach (ListItem item in chkPCD.Items)
-        {
-            index += 1;
-            if (item.Selected)
-            {
-                SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
-                sqlFilterPCD += "PCD = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
-            }
-        }
-        foreach (ListItem item in chkFinish.Items)
-        {
-            index += 1;
-            if (item.Selected)
-            {
-                SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+        //        sqlFilterSize += "size = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+        //foreach (ListItem item in chkPCD.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+        //        sqlFilterPCD += "PCD = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+        //foreach (ListItem item in chkFinish.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterFinish += "size = " + "'" + item.Value.Trim() + "'" + " or ";
-            }
-        }
+        //        sqlFilterFinish += "Finish = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
 
-        foreach (ListItem item in chkOffset.Items)
-        {
-            index += 1;
-            if (item.Selected)
-            {
-                SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+        //foreach (ListItem item in chkOffset.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterOffset += "size = " + "'" + item.Value.Trim() + "'" + " or ";
-            }
-        }
+        //        sqlFilterOffset += "Offset = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
 
-        foreach (ListItem item in chkSeat.Items)
-        {
-            index += 1;
-            if (item.Selected)
-            {
-                SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+        //foreach (ListItem item in chkSeat.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterSeat += "size = " + "'" + item.Value.Trim() + "'" + " or ";
-            }
-        }
+        //        sqlFilterSeat += "seat = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
 
-        foreach (ListItem item in chkBore.Items)
-        {
-            index += 1;
-            if (item.Selected)
-            {
-                SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+        //foreach (ListItem item in chkBore.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterBore += "size = " + "'" + item.Value.Trim() + "'" + " or ";
-            }
-        }
+        //        sqlFilterBore += "Bore = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
 
-        if (!String.IsNullOrEmpty(sqlFilterPCD) )
-        {
-            sqlTextPCD += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3);
-        }
+        //if (!String.IsNullOrEmpty(sqlFilterPCD))
+        //{
+        //    sqlTextPCD += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3);
+        //}
 
-        if (!String.IsNullOrEmpty(sqlFilterSize))
-        {
-            sqlTextSize += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3);
-        }
-
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
-        }
-
-        if (!String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            sqlTextFinish += sqlFilterSize.Substring(0, sqlFilterFinish.Length - 3);
-        }
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + sqlTextPCD + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-
-        if (!String.IsNullOrEmpty(sqlTextOffset))
-        {
-            sqlTextOffset += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3);
-        }
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextPCD + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + sqlTextFinish + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + sqlTextPCD + sqlTextFinish + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextOffset;
-        }
-
-        if (!String.IsNullOrEmpty(sqlTextSeat))
-        {
-            sqlTextSeat += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3);
-        }
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + sqlTextFinish + sqlTextBore; 
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextFinish + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + sqlTextPCD + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + sqlTextPCD + sqlTextOffset + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + sqlTextSize + sqlTextOffset + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + sqlTextSize + sqlTextOffset + sqlTextPCD + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
-        }
+        //if (!String.IsNullOrEmpty(sqlFilterSize))
+        //{
+        //    sqlTextSize += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3);
+        //}
 
 
-        if (!String.IsNullOrEmpty(sqlTextBore))
-        {
-            sqlTextBore += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3);
-        }
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
+        ////}
 
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlTextBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextFinish + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextSize + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextOffset + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize + sqlTextOffset + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize + sqlTextOffset + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextOffset + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextOffset + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterOffset + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextSize + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterSeat + " and " + sqlTextBore + sqlTextOffset + sqlTextFinish + sqlTextSize + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterFinish + " and " + sqlTextBore + sqlTextOffset + sqlTextSeat + sqlTextSize + sqlTextPCD;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat;
-        }
+        //if (!String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    sqlTextFinish += sqlFilterFinish.Substring(0, sqlFilterFinish.Length - 3);
+        //}
 
-        GridView1.DataSource = wheelsAll.DefaultView;
-        GridView1.DataBind();
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
+        ////}
+
+        //if (!String.IsNullOrEmpty(sqlTextOffset))
+        //{
+        //    sqlTextOffset += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+        //if (!String.IsNullOrEmpty(sqlTextSeat))
+        //{
+        //    sqlTextSeat += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+
+        //if (!String.IsNullOrEmpty(sqlTextBore))
+        //{
+        //    sqlTextBore += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlTextBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterOffset + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterFinish + " and " + sqlTextBore;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+        //GridView1.DataSource = wheelsAll.DefaultView;
+        //GridView1.DataBind();
     }
     protected void chkFinish_SelectedIndexChanged(object sender, EventArgs e)
     {
-        DataTable wheelsAll = WheelsBLO.GetAllProducts();
 
-        String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";  
+        DataTable wheelsAll = WheelsBLO.GetAllProducts();
+        String sqlText = "";
+
+        //String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";
         String sqlFilterSize = "", sqlFilterPCD = "", sqlFilterFinish = "", sqlFilterOffset = "", sqlFilterSeat = "", sqlFilterBore = "";
         int index = 0;
         foreach (ListItem item in chkSize.Items)
@@ -857,7 +987,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterSize += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterSize += "size = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
         foreach (ListItem item in chkPCD.Items)
@@ -876,7 +1006,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterFinish += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterFinish += "Finish = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
@@ -887,7 +1017,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterOffset += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterOffset += "Offset = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
@@ -898,7 +1028,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterSeat += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterSeat += "seat = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
@@ -909,228 +1039,331 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterBore += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterBore += "Bore = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
-        if (!String.IsNullOrEmpty(sqlFilterPCD) )
+        if (!String.IsNullOrEmpty(sqlFilterPCD))
         {
-            sqlTextPCD += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3);
+            sqlText += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3) + " and ";
         }
 
         if (!String.IsNullOrEmpty(sqlFilterSize))
         {
-            sqlTextSize += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3);
-        }
-
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
+            sqlText += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3) + " and ";
         }
 
         if (!String.IsNullOrEmpty(sqlFilterFinish))
         {
-            sqlTextFinish += sqlFilterSize.Substring(0, sqlFilterFinish.Length - 3);
+            sqlText += sqlFilterFinish.Substring(0, sqlFilterFinish.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        if (!String.IsNullOrEmpty(sqlFilterOffset))
         {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + sqlTextPCD + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
+            sqlText += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlTextOffset))
+        if (!String.IsNullOrEmpty(sqlFilterSeat))
         {
-            sqlTextOffset += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3);
+            sqlText += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset))
+        if (!String.IsNullOrEmpty(sqlFilterBore))
         {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextPCD + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + sqlTextFinish + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + sqlTextPCD + sqlTextFinish + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextOffset;
+            sqlText += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlTextSeat))
-        {
-            sqlTextSeat += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3);
-        }
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + sqlTextFinish + sqlTextBore; 
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextFinish + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + sqlTextPCD + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + sqlTextPCD + sqlTextOffset + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + sqlTextSize + sqlTextOffset + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + sqlTextSize + sqlTextOffset + sqlTextPCD + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
-        }
-
-
-        if (!String.IsNullOrEmpty(sqlTextBore))
-        {
-            sqlTextBore += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3);
-        }
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlTextBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextFinish + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextSize + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextOffset + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize + sqlTextOffset + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize + sqlTextOffset + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextOffset + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextOffset + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterOffset + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextSize + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterSeat + " and " + sqlTextBore + sqlTextOffset + sqlTextFinish + sqlTextSize + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterFinish + " and " + sqlTextBore + sqlTextOffset + sqlTextSeat + sqlTextSize + sqlTextPCD;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat;
-        }
-
+        wheelsAll.DefaultView.RowFilter = sqlText.Substring(0, sqlText.Length - 5);
         GridView1.DataSource = wheelsAll.DefaultView;
         GridView1.DataBind();
+        //DataTable wheelsAll = WheelsBLO.GetAllProducts();
+
+        //String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";
+        //String sqlFilterSize = "", sqlFilterPCD = "", sqlFilterFinish = "", sqlFilterOffset = "", sqlFilterSeat = "", sqlFilterBore = "";
+        //int index = 0;
+        //foreach (ListItem item in chkSize.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterSize += "size = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+        //foreach (ListItem item in chkPCD.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+        //        sqlFilterPCD += "PCD = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+        //foreach (ListItem item in chkFinish.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterFinish += "Finish = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //foreach (ListItem item in chkOffset.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterOffset += "Offset = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //foreach (ListItem item in chkSeat.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterSeat += "seat = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //foreach (ListItem item in chkBore.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterBore += "Bore = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterPCD))
+        //{
+        //    sqlTextPCD += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize))
+        //{
+        //    sqlTextSize += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3);
+        //}
+
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
+        ////}
+
+        //if (!String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    sqlTextFinish += sqlFilterFinish.Substring(0, sqlFilterFinish.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
+        ////}
+
+        //if (!String.IsNullOrEmpty(sqlTextOffset))
+        //{
+        //    sqlTextOffset += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+        //if (!String.IsNullOrEmpty(sqlTextSeat))
+        //{
+        //    sqlTextSeat += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+
+        //if (!String.IsNullOrEmpty(sqlTextBore))
+        //{
+        //    sqlTextBore += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlTextBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterOffset + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterFinish + " and " + sqlTextBore;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+        //GridView1.DataSource = wheelsAll.DefaultView;
+        //GridView1.DataBind();
     }
  
     protected void chkOffset_SelectedIndexChanged(object sender, EventArgs e)
     {
-       DataTable wheelsAll = WheelsBLO.GetAllProducts();
 
-        String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";  
+        DataTable wheelsAll = WheelsBLO.GetAllProducts();
+        String sqlText = "";
+
+        //String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";
         String sqlFilterSize = "", sqlFilterPCD = "", sqlFilterFinish = "", sqlFilterOffset = "", sqlFilterSeat = "", sqlFilterBore = "";
         int index = 0;
         foreach (ListItem item in chkSize.Items)
@@ -1140,7 +1373,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterSize += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterSize += "size = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
         foreach (ListItem item in chkPCD.Items)
@@ -1159,7 +1392,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterFinish += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterFinish += "Finish = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
@@ -1170,7 +1403,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterOffset += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterOffset += "Offset = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
@@ -1181,7 +1414,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterSeat += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterSeat += "seat = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
@@ -1192,227 +1425,330 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterBore += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterBore += "Bore = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
-        if (!String.IsNullOrEmpty(sqlFilterPCD) )
+        if (!String.IsNullOrEmpty(sqlFilterPCD))
         {
-            sqlTextPCD += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3);
+            sqlText += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3) + " and ";
         }
 
         if (!String.IsNullOrEmpty(sqlFilterSize))
         {
-            sqlTextSize += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3);
-        }
-
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
+            sqlText += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3) + " and ";
         }
 
         if (!String.IsNullOrEmpty(sqlFilterFinish))
         {
-            sqlTextFinish += sqlFilterSize.Substring(0, sqlFilterFinish.Length - 3);
+            sqlText += sqlFilterFinish.Substring(0, sqlFilterFinish.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        if (!String.IsNullOrEmpty(sqlFilterOffset))
         {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + sqlTextPCD + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
+            sqlText += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlTextOffset))
+        if (!String.IsNullOrEmpty(sqlFilterSeat))
         {
-            sqlTextOffset += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3);
+            sqlText += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset))
+        if (!String.IsNullOrEmpty(sqlFilterBore))
         {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextPCD + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + sqlTextFinish + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + sqlTextPCD + sqlTextFinish + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextOffset;
+            sqlText += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlTextSeat))
-        {
-            sqlTextSeat += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3);
-        }
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + sqlTextFinish + sqlTextBore; 
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextFinish + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + sqlTextPCD + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + sqlTextPCD + sqlTextOffset + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + sqlTextSize + sqlTextOffset + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + sqlTextSize + sqlTextOffset + sqlTextPCD + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
-        }
-
-
-        if (!String.IsNullOrEmpty(sqlTextBore))
-        {
-            sqlTextBore += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3);
-        }
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlTextBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextFinish + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextSize + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextOffset + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize + sqlTextOffset + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize + sqlTextOffset + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextOffset + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextOffset + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterOffset + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextSize + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterSeat + " and " + sqlTextBore + sqlTextOffset + sqlTextFinish + sqlTextSize + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterFinish + " and " + sqlTextBore + sqlTextOffset + sqlTextSeat + sqlTextSize + sqlTextPCD;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat;
-        }
-
+        wheelsAll.DefaultView.RowFilter = sqlText.Substring(0, sqlText.Length - 5);
         GridView1.DataSource = wheelsAll.DefaultView;
         GridView1.DataBind();
+        //DataTable wheelsAll = WheelsBLO.GetAllProducts();
+
+        //String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";
+        //String sqlFilterSize = "", sqlFilterPCD = "", sqlFilterFinish = "", sqlFilterOffset = "", sqlFilterSeat = "", sqlFilterBore = "";
+        //int index = 0;
+        //foreach (ListItem item in chkSize.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterSize += "size = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+        //foreach (ListItem item in chkPCD.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+        //        sqlFilterPCD += "PCD = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+        //foreach (ListItem item in chkFinish.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterFinish += "Finish = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //foreach (ListItem item in chkOffset.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterOffset += "Offset = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //foreach (ListItem item in chkSeat.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterSeat += "seat = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //foreach (ListItem item in chkBore.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterBore += "Bore = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterPCD))
+        //{
+        //    sqlTextPCD += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize))
+        //{
+        //    sqlTextSize += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3);
+        //}
+
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
+        ////}
+
+        //if (!String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    sqlTextFinish += sqlFilterFinish.Substring(0, sqlFilterFinish.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
+        ////}
+
+        //if (!String.IsNullOrEmpty(sqlTextOffset))
+        //{
+        //    sqlTextOffset += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+        //if (!String.IsNullOrEmpty(sqlTextSeat))
+        //{
+        //    sqlTextSeat += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+
+        //if (!String.IsNullOrEmpty(sqlTextBore))
+        //{
+        //    sqlTextBore += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlTextBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterOffset + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterFinish + " and " + sqlTextBore;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+        //GridView1.DataSource = wheelsAll.DefaultView;
+        //GridView1.DataBind();
     }
     protected void chkSeat_SelectedIndexChanged(object sender, EventArgs e)
     {
-        DataTable wheelsAll = WheelsBLO.GetAllProducts();
 
-        String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";  
+        DataTable wheelsAll = WheelsBLO.GetAllProducts();
+        String sqlText = "";
+
+        //String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";
         String sqlFilterSize = "", sqlFilterPCD = "", sqlFilterFinish = "", sqlFilterOffset = "", sqlFilterSeat = "", sqlFilterBore = "";
         int index = 0;
         foreach (ListItem item in chkSize.Items)
@@ -1422,7 +1758,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterSize += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterSize += "size = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
         foreach (ListItem item in chkPCD.Items)
@@ -1441,7 +1777,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterFinish += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterFinish += "Finish = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
@@ -1452,7 +1788,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterOffset += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterOffset += "Offset = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
@@ -1463,7 +1799,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterSeat += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterSeat += "seat = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
@@ -1474,227 +1810,330 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterBore += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterBore += "Bore = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
-        if (!String.IsNullOrEmpty(sqlFilterPCD) )
+        if (!String.IsNullOrEmpty(sqlFilterPCD))
         {
-            sqlTextPCD += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3);
+            sqlText += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3) + " and ";
         }
 
         if (!String.IsNullOrEmpty(sqlFilterSize))
         {
-            sqlTextSize += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3);
-        }
-
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
+            sqlText += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3) + " and ";
         }
 
         if (!String.IsNullOrEmpty(sqlFilterFinish))
         {
-            sqlTextFinish += sqlFilterSize.Substring(0, sqlFilterFinish.Length - 3);
+            sqlText += sqlFilterFinish.Substring(0, sqlFilterFinish.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        if (!String.IsNullOrEmpty(sqlFilterOffset))
         {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + sqlTextPCD + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
+            sqlText += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlTextOffset))
+        if (!String.IsNullOrEmpty(sqlFilterSeat))
         {
-            sqlTextOffset += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3);
+            sqlText += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset))
+        if (!String.IsNullOrEmpty(sqlFilterBore))
         {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextPCD + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + sqlTextFinish + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + sqlTextPCD + sqlTextFinish + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextOffset;
+            sqlText += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlTextSeat))
-        {
-            sqlTextSeat += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3);
-        }
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + sqlTextFinish + sqlTextBore; 
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextFinish + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + sqlTextPCD + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + sqlTextPCD + sqlTextOffset + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + sqlTextSize + sqlTextOffset + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + sqlTextSize + sqlTextOffset + sqlTextPCD + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
-        }
-
-
-        if (!String.IsNullOrEmpty(sqlTextBore))
-        {
-            sqlTextBore += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3);
-        }
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlTextBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextFinish + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextSize + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextOffset + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize + sqlTextOffset + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize + sqlTextOffset + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextOffset + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextOffset + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterOffset + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextSize + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterSeat + " and " + sqlTextBore + sqlTextOffset + sqlTextFinish + sqlTextSize + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterFinish + " and " + sqlTextBore + sqlTextOffset + sqlTextSeat + sqlTextSize + sqlTextPCD;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat;
-        }
-
+        wheelsAll.DefaultView.RowFilter = sqlText.Substring(0, sqlText.Length - 5);
         GridView1.DataSource = wheelsAll.DefaultView;
         GridView1.DataBind();
+        //DataTable wheelsAll = WheelsBLO.GetAllProducts();
+
+        //String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";
+        //String sqlFilterSize = "", sqlFilterPCD = "", sqlFilterFinish = "", sqlFilterOffset = "", sqlFilterSeat = "", sqlFilterBore = "";
+        //int index = 0;
+        //foreach (ListItem item in chkSize.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterSize += "size = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+        //foreach (ListItem item in chkPCD.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+        //        sqlFilterPCD += "PCD = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+        //foreach (ListItem item in chkFinish.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterFinish += "Finish = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //foreach (ListItem item in chkOffset.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterOffset += "Offset = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //foreach (ListItem item in chkSeat.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterSeat += "seat = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //foreach (ListItem item in chkBore.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterBore += "Bore = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterPCD))
+        //{
+        //    sqlTextPCD += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize))
+        //{
+        //    sqlTextSize += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3);
+        //}
+
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
+        ////}
+
+        //if (!String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    sqlTextFinish += sqlFilterFinish.Substring(0, sqlFilterFinish.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
+        ////}
+
+        //if (!String.IsNullOrEmpty(sqlTextOffset))
+        //{
+        //    sqlTextOffset += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+        //if (!String.IsNullOrEmpty(sqlTextSeat))
+        //{
+        //    sqlTextSeat += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+
+        //if (!String.IsNullOrEmpty(sqlTextBore))
+        //{
+        //    sqlTextBore += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlTextBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterOffset + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterFinish + " and " + sqlTextBore;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+        //GridView1.DataSource = wheelsAll.DefaultView;
+        //GridView1.DataBind();
     }
     protected void chkBore_SelectedIndexChanged(object sender, EventArgs e)
     {
-        DataTable wheelsAll = WheelsBLO.GetAllProducts();
 
-        String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";  
+        DataTable wheelsAll = WheelsBLO.GetAllProducts();
+        String sqlText = "";
+
+        //String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";
         String sqlFilterSize = "", sqlFilterPCD = "", sqlFilterFinish = "", sqlFilterOffset = "", sqlFilterSeat = "", sqlFilterBore = "";
         int index = 0;
         foreach (ListItem item in chkSize.Items)
@@ -1704,7 +2143,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterSize += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterSize += "size = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
         foreach (ListItem item in chkPCD.Items)
@@ -1723,7 +2162,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterFinish += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterFinish += "Finish = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
@@ -1734,7 +2173,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterOffset += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterOffset += "Offset = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
@@ -1745,7 +2184,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterSeat += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterSeat += "seat = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
@@ -1756,220 +2195,321 @@ public partial class Products_wheelall : System.Web.UI.Page
             {
                 SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
 
-                sqlFilterBore += "size = " + "'" + item.Value.Trim() + "'" + " or ";
+                sqlFilterBore += "Bore = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
             }
         }
 
-        if (!String.IsNullOrEmpty(sqlFilterPCD) )
+        if (!String.IsNullOrEmpty(sqlFilterPCD))
         {
-            sqlTextPCD += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3);
+            sqlText += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3) + " and ";
         }
 
         if (!String.IsNullOrEmpty(sqlFilterSize))
         {
-            sqlTextSize += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3);
-        }
-
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
+            sqlText += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3) + " and ";
         }
 
         if (!String.IsNullOrEmpty(sqlFilterFinish))
         {
-            sqlTextFinish += sqlFilterSize.Substring(0, sqlFilterFinish.Length - 3);
+            sqlText += sqlFilterFinish.Substring(0, sqlFilterFinish.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        if (!String.IsNullOrEmpty(sqlFilterOffset))
         {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + sqlTextPCD + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
+            sqlText += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlTextOffset))
+        if (!String.IsNullOrEmpty(sqlFilterSeat))
         {
-            sqlTextOffset += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3);
+            sqlText += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset))
+        if (!String.IsNullOrEmpty(sqlFilterBore))
         {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextPCD + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + sqlTextFinish + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + sqlTextPCD + sqlTextFinish + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextOffset;
+            sqlText += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3) + " and ";
         }
 
-        if (!String.IsNullOrEmpty(sqlTextSeat))
-        {
-            sqlTextSeat += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3);
-        }
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + sqlTextFinish + sqlTextBore; 
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextFinish + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + sqlTextPCD + sqlTextSize + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + sqlTextPCD + sqlTextOffset + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + sqlTextSize + sqlTextOffset + sqlTextFinish + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + sqlTextSize + sqlTextOffset + sqlTextPCD + sqlTextBore;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
-        }
-
-
-        if (!String.IsNullOrEmpty(sqlTextBore))
-        {
-            sqlTextBore += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3);
-        }
-
-        if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlTextBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextFinish + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextSize + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextPCD + sqlTextOffset + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize + sqlTextOffset + sqlTextFinish;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore + sqlTextSize + sqlTextOffset + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextOffset + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextOffset + sqlTextSize;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterOffset + " and " + sqlTextBore + sqlTextSeat + sqlTextFinish + sqlTextSize + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterSeat + " and " + sqlTextBore + sqlTextOffset + sqlTextFinish + sqlTextSize + sqlTextPCD;
-        }
-        else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterBore))
-        {
-            wheelsAll.DefaultView.RowFilter = sqlFilterFinish + " and " + sqlTextBore + sqlTextOffset + sqlTextSeat + sqlTextSize + sqlTextPCD;
-        }
-        else
-        {
-            wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat;
-        }
-
+        wheelsAll.DefaultView.RowFilter = sqlText.Substring(0, sqlText.Length - 5);
         GridView1.DataSource = wheelsAll.DefaultView;
         GridView1.DataBind();
+        //DataTable wheelsAll = WheelsBLO.GetAllProducts();
+
+        //String sqlTextSize = "", sqlTextPCD = "", sqlTextFinish = "", sqlTextOffset = "", sqlTextSeat = "", sqlTextBore = "";
+        //String sqlFilterSize = "", sqlFilterPCD = "", sqlFilterFinish = "", sqlFilterOffset = "", sqlFilterSeat = "", sqlFilterBore = "";
+        //int index = 0;
+        //foreach (ListItem item in chkSize.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterSize += "size = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+        //foreach (ListItem item in chkPCD.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+        //        sqlFilterPCD += "PCD = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+        //foreach (ListItem item in chkFinish.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterFinish += "Finish = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //foreach (ListItem item in chkOffset.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterOffset += "Offset = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //foreach (ListItem item in chkSeat.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterSeat += "seat = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //foreach (ListItem item in chkBore.Items)
+        //{
+        //    index += 1;
+        //    if (item.Selected)
+        //    {
+        //        SqlParameter param = new SqlParameter(item.Value.Trim(), SqlDbType.UniqueIdentifier);
+
+        //        sqlFilterBore += "Bore = " + "'" + item.Text.ToString().Trim() + "'" + " or ";
+        //    }
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterPCD))
+        //{
+        //    sqlTextPCD += sqlFilterPCD.Substring(0, sqlFilterPCD.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize))
+        //{
+        //    sqlTextSize += sqlFilterSize.Substring(0, sqlFilterSize.Length - 3);
+        //}
+
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextSeat + sqlTextOffset + sqlTextBore + sqlTextFinish;
+        ////}
+
+        //if (!String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    sqlTextFinish += sqlFilterFinish.Substring(0, sqlFilterFinish.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextSeat + sqlTextOffset + sqlTextBore;
+        ////}
+
+        //if (!String.IsNullOrEmpty(sqlTextOffset))
+        //{
+        //    sqlTextOffset += sqlFilterOffset.Substring(0, sqlFilterOffset.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlTextOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+        //if (!String.IsNullOrEmpty(sqlTextSeat))
+        //{
+        //    sqlTextSeat += sqlFilterSeat.Substring(0, sqlFilterSeat.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+
+        //if (!String.IsNullOrEmpty(sqlTextBore))
+        //{
+        //    sqlTextBore += sqlFilterBore.Substring(0, sqlFilterBore.Length - 3);
+        //}
+
+        //if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlTextBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextFinish + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextOffset + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextFinish + " and " + sqlTextSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSize) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextSize + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterPCD) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlTextPCD + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterOffset) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterOffset + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterSeat) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterSeat + " and " + sqlTextBore;
+        //}
+        //else if (!String.IsNullOrEmpty(sqlFilterFinish) && !String.IsNullOrEmpty(sqlFilterBore))
+        //{
+        //    wheelsAll.DefaultView.RowFilter = sqlFilterFinish + " and " + sqlTextBore;
+        //}
+        ////else
+        ////{
+        ////    wheelsAll.DefaultView.RowFilter = sqlTextPCD + sqlTextSize + sqlTextFinish + sqlFilterOffset + sqlTextSeat + sqlTextBore;
+        ////}
+
+        //GridView1.DataSource = wheelsAll.DefaultView;
+        //GridView1.DataBind();
     }
 }
