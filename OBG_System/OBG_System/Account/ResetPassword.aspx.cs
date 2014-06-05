@@ -55,7 +55,7 @@ public partial class Account_ResetPassword : System.Web.UI.Page
         string password = NewPassword.Text.ToString().Trim();
 
         UserBLO.ResetPassword(email, password);
-        Response.Write("<script>alert('Your password has been reset！');window.location.href='../login.aspx';</script>");
+        Response.Write("<script>alert('Your password has been reset！');window.location.href='../Account/login.aspx';</script>");
 
     }
 }

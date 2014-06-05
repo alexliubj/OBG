@@ -87,8 +87,8 @@ public partial class Default2 : System.Web.UI.Page
     ///<returns></returns>
     public bool SendMail(string ToEmail, string securityKey)
     {
-        string Email = "noreply@centennialsoft.ca ";
-        string password = "obgtest";
+        string Email = "alexliu0506@126.com";
+        string password = "5631247";
         Encoding EnCode = Encoding.UTF8;
         System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
         Message.From = new MailAddress(Email, "OBG Master", EnCode);
@@ -98,26 +98,28 @@ public partial class Default2 : System.Web.UI.Page
  
         StringBuilder MailContent = new StringBuilder();
         MailContent.Append("Dear Customer：<br/>");
-        MailContent.Append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;");
+        MailContent.Append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ");
         MailContent.Append(DateTime.Now.ToLongTimeString());
-        MailContent.Append("通过<a href='#'>新郑网购</a>管理中心审请找回密码。");
-        MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;为了安全起见，请用户点击以下链接重设个人密码：");
-        string url = "http://obg.techbester.com/Account/ResetPassword.aspx?securityKey=" + securityKey + "&email=" + ToEmail;
+        MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have requested forget password at <a href='#'>OBG Order System</a>.");
+        MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For security purpose，please click the link below to reset your password：");
+
+        string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + ResolveUrl("~/");
+        string url = host + "Account/ResetPassword.aspx?securityKey=" + securityKey + "&email=" + ToEmail;
         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='" + url + "'>" + url + "</a>");
+        MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you did not request a password reset you do not need to take any action.</p>");
         Message.Body = MailContent.ToString();
         Message.BodyEncoding = EnCode;
         Message.IsBodyHtml = true;
 
         try
         {
-            SmtpClient smtp = new SmtpClient("smtpout.secureserver.net", 80);
+            SmtpClient smtp = new SmtpClient("smtp.126.com", 25);
             smtp.Credentials = new NetworkCredential(Email, password);
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.Send(Message);
         }
         catch (Exception e)
         {
-            //this.RegisterClientScriptBlock("key", string.Format("alert('{0}');", e.Message));
             return false;
         }
         finally

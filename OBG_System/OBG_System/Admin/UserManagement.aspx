@@ -263,6 +263,14 @@
                                     <asp:RequiredFieldValidator ID="NewPasswordRequired" runat="server" ControlToValidate="Password"
                                         CssClass="failureNotification" ErrorMessage="Password is required." ToolTip="Password is required."
                                         ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator
+                                        ID="PasswordExpression" runat="SERVER"
+                                        ControlToValidate="Password"
+                                        CssClass="failureNotification"
+                                        ErrorMessage="Password should have at least one number, one letter with at least six characters."
+                                        ValidationExpression="^.*(?=.{6,})(?=.*\d)(?=.*[a-zA-Z]).*$"
+                                        ValidationGroup="RegisterUserValidationGroup">*
+                                    </asp:RegularExpressionValidator>
                                 </td>
                             </tr>
                             <tr>
@@ -282,7 +290,7 @@
                             <tr>
                                 <td>
                                     <asp:Button ID="BtnAdd" runat="server" Text="Add" OnClick="BtnAdd_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" />
-                                    <asp:Button ID="BtnSave" runat="server" OnClick="BtnSave_Click" Text="Save" Visible="true" />
+                                    <asp:Button ID="BtnSave" runat="server" OnClick="BtnSave_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" />
                                 </td>
                                 <td>
                                     <asp:Button ID="BtnCancle" runat="server" OnClick="BtnCancle_Click" Text="Cancle" Visible="true" />

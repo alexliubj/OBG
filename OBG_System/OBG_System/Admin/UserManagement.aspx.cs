@@ -44,6 +44,7 @@ public partial class Admin_Default : System.Web.UI.Page
     {
         int userID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
         UserBLO.RemoveUserById(userID);
+        userInformation.Visible = false;
         bind();
 
     }

@@ -42,7 +42,7 @@ namespace DataAccess
                                                            ,[Image2]
                                                            ,[Des2])
                                                      VALUES
-                                                           (@image1,
+                                                           (@image1
                                                            ,@des1
                                                            ,@image2
                                                            ,@des2)");

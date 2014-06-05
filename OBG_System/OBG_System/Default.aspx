@@ -10,12 +10,13 @@
             </center>
     </h1>
     <hr />
- <center>
+    <center>
        <asp:Image ID="Image1" runat="server"  Width="500" Height="400"/>
      </center>
-<hr />
+    <hr />
+    <hr />
     <center>
      <asp:Image ID="Image2" runat="server"   Width="500" Height="400" />
         </center>
-    
+
 </asp:Content>

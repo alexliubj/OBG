@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="Register" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
     CodeFile="Register.aspx.cs" Inherits="Account_Register" %>
+
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
@@ -130,6 +131,14 @@
                                     <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password"
                                         CssClass="failureNotification" ErrorMessage="Password is required." ToolTip="Password is required."
                                         ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                                    <asp:RegularExpressionValidator
+                                        ID="PasswordExpression" runat="SERVER"
+                                        ControlToValidate="Password"
+                                        CssClass="failureNotification"
+                                        ErrorMessage="Password should have at least one number, one letter with at least six characters."
+                                        ValidationExpression="^.*(?=.{6,})(?=.*\d)(?=.*[a-zA-Z]).*$" 
+                                        ValidationGroup="RegisterUserValidationGroup">*
+                                    </asp:RegularExpressionValidator>
                                 </asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow VerticalAlign="Top">
@@ -198,7 +207,7 @@
                                             ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
                                     </asp:TableCell>
                                 </asp:TableRow>
-                                <asp:TableRow VerticalAlign="Top"  Height="45">
+                                <asp:TableRow VerticalAlign="Top" Height="45">
                                     <asp:TableCell>
                                         <asp:Label ID="ShippingProLabel" runat="server" AssociatedControlID="ShippingPro" Style="white-space: nowrap">Province:</asp:Label>
                                     </asp:TableCell>
@@ -246,100 +255,100 @@
                             </asp:Table>
                         </fieldset>
                         <asp:Label ID="IsSameAddress" runat="server" Text="Billing Address is the same as shipping address?"></asp:Label>
-                                        <asp:CheckBox ID="checkBoxIsSameAddress" runat="server" OnCheckedChanged="CheckBoxIsSameAddress_Clicked" AutoPostBack="true" Checked="false"/>
+                        <asp:CheckBox ID="checkBoxIsSameAddress" runat="server" OnCheckedChanged="CheckBoxIsSameAddress_Clicked" AutoPostBack="true" Checked="false" />
                         <div id="billingAddressDiv" runat="server">
-                        <fieldset class="billingAddress">
-                            <legend>Billing Address</legend>                         
-                            <asp:Table runat="server">
-                                <asp:TableRow VerticalAlign="Top">
-                                    <asp:TableCell>
-                                        <asp:Label ID="BillingHouseNoLabel" runat="server" AssociatedControlID="BillingHouseNo" Style="white-space: nowrap">Apt/Suite Number:</asp:Label>
-                                    </asp:TableCell>
-                                    <asp:TableCell>
-                                        <asp:TextBox ID="BillingHouseNo" runat="server" CssClass="textEntry" Width="200"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="BillingHouseNo"
-                                            CssClass="failureNotification" ErrorMessage="Billing Apt/Suite Number is required." ToolTip="Billing Apt/Suite Number is required."
-                                            ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator
-                                            ID="RegularExpressionValidator1" runat="SERVER"
-                                            ControlToValidate="BillingHouseNo"
-                                            CssClass="failureNotification"
-                                            ErrorMessage="Enter a Number for shipping Apt/Suite Number."
-                                            ValidationExpression="\d+"
-                                            ValidationGroup="RegisterUserValidationGroup">*
-                                        </asp:RegularExpressionValidator>
-                                    </asp:TableCell>
-                                </asp:TableRow>
-                                <asp:TableRow VerticalAlign="Top">
-                                    <asp:TableCell>
-                                        <asp:Label ID="BillingStreetLabel" runat="server" AssociatedControlID="BillingStreet" Style="white-space: nowrap">Street:</asp:Label>
-                                    </asp:TableCell>
-                                    <asp:TableCell>
-                                        <asp:TextBox ID="BillingStreet" runat="server" CssClass="textEntry" Width="200"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="BillingStreet"
-                                            CssClass="failureNotification" ErrorMessage="Billing Street is required." ToolTip="Billing Street is required."
-                                            ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-                                    </asp:TableCell>
-                                </asp:TableRow>
-                                <asp:TableRow VerticalAlign="Top">
-                                    <asp:TableCell>
-                                        <asp:Label ID="BillingCityLabel" runat="server" AssociatedControlID="BillingCity" Style="white-space: nowrap">City:</asp:Label>
-                                    </asp:TableCell>
-                                    <asp:TableCell>
-                                        <asp:TextBox ID="BillingCity" runat="server" CssClass="textEntry" Width="200"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="BillingCity"
-                                            CssClass="failureNotification" ErrorMessage="Billing City is required." ToolTip="Billing City is required."
-                                            ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-                                    </asp:TableCell>
-                                </asp:TableRow>
-                                <asp:TableRow VerticalAlign="Top" Height="45">
-                                    <asp:TableCell>
-                                        <asp:Label ID="BillingProLabel" runat="server" AssociatedControlID="BillingPro" Style="white-space: nowrap">Province:</asp:Label>
-                                    </asp:TableCell>
-                                    <asp:TableCell>
-                                        <asp:DropDownList ID="BillingPro" runat="server">
-                                            <asp:ListItem Value="" Selected="true">Select Province</asp:ListItem>
-                                            <asp:ListItem Value="AB">Alberta</asp:ListItem>
-                                            <asp:ListItem Value="BC">British Columbia</asp:ListItem>
-                                            <asp:ListItem Value="MB">Manitoba</asp:ListItem>
-                                            <asp:ListItem Value="NB">New Brunswick</asp:ListItem>
-                                            <asp:ListItem Value="NL">Newfoundland and Labrador</asp:ListItem>
-                                            <asp:ListItem Value="NT">Northwest Territories</asp:ListItem>
-                                            <asp:ListItem Value="NS">Nova Scotia</asp:ListItem>
-                                            <asp:ListItem Value="NU">Nunavut</asp:ListItem>
-                                            <asp:ListItem Value="ON">Ontario</asp:ListItem>
-                                            <asp:ListItem Value="PE">Prince Edward Island</asp:ListItem>
-                                            <asp:ListItem Value="QC">Quebec</asp:ListItem>
-                                            <asp:ListItem Value="SK">Saskatchewan</asp:ListItem>
-                                            <asp:ListItem Value="YT">Yukon</asp:ListItem>
-                                        </asp:DropDownList>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="BillingPro"
-                                            CssClass="failureNotification" ErrorMessage="Billing Province is required." ToolTip="Billing Province is required."
-                                            ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-                                    </asp:TableCell>
-                                </asp:TableRow>
-                                <asp:TableRow VerticalAlign="Top">
-                                    <asp:TableCell>
-                                        <asp:Label ID="BillingPostCodeLabel" runat="server" AssociatedControlID="BillingPostCode" Style="white-space: nowrap">Post Code:</asp:Label>
-                                    </asp:TableCell>
-                                    <asp:TableCell>
-                                        <asp:TextBox ID="BillingPostCode" runat="server" CssClass="textEntry" Width="200"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="BillingPostCode"
-                                            CssClass="failureNotification" ErrorMessage="Billing Post Code is required." ToolTip="Billing Post Code is required."
-                                            ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator
-                                            ID="RegularExpressionValidator2" runat="SERVER"
-                                            ControlToValidate="BillingPostCode"
-                                            CssClass="failureNotification"
-                                            ErrorMessage="Enter a valid Post Code."
-                                            ValidationExpression="\d{5}((-)?\d{4})?|([A-Za-z]\d[A-Za-z]( )?\d[A-Za-z]\d)"
-                                            ValidationGroup="RegisterUserValidationGroup">*
-                                        </asp:RegularExpressionValidator>
-                                    </asp:TableCell>
-                                </asp:TableRow>
-                            </asp:Table>
-                        </fieldset>
-                            </div>
+                            <fieldset class="billingAddress">
+                                <legend>Billing Address</legend>
+                                <asp:Table runat="server">
+                                    <asp:TableRow VerticalAlign="Top">
+                                        <asp:TableCell>
+                                            <asp:Label ID="BillingHouseNoLabel" runat="server" AssociatedControlID="BillingHouseNo" Style="white-space: nowrap">Apt/Suite Number:</asp:Label>
+                                        </asp:TableCell>
+                                        <asp:TableCell>
+                                            <asp:TextBox ID="BillingHouseNo" runat="server" CssClass="textEntry" Width="200"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator10" runat="server" ControlToValidate="BillingHouseNo"
+                                                CssClass="failureNotification" ErrorMessage="Billing Apt/Suite Number is required." ToolTip="Billing Apt/Suite Number is required."
+                                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator
+                                                ID="RegularExpressionValidator1" runat="SERVER"
+                                                ControlToValidate="BillingHouseNo"
+                                                CssClass="failureNotification"
+                                                ErrorMessage="Enter a Number for shipping Apt/Suite Number."
+                                                ValidationExpression="\d+"
+                                                ValidationGroup="RegisterUserValidationGroup">*
+                                            </asp:RegularExpressionValidator>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow VerticalAlign="Top">
+                                        <asp:TableCell>
+                                            <asp:Label ID="BillingStreetLabel" runat="server" AssociatedControlID="BillingStreet" Style="white-space: nowrap">Street:</asp:Label>
+                                        </asp:TableCell>
+                                        <asp:TableCell>
+                                            <asp:TextBox ID="BillingStreet" runat="server" CssClass="textEntry" Width="200"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="BillingStreet"
+                                                CssClass="failureNotification" ErrorMessage="Billing Street is required." ToolTip="Billing Street is required."
+                                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow VerticalAlign="Top">
+                                        <asp:TableCell>
+                                            <asp:Label ID="BillingCityLabel" runat="server" AssociatedControlID="BillingCity" Style="white-space: nowrap">City:</asp:Label>
+                                        </asp:TableCell>
+                                        <asp:TableCell>
+                                            <asp:TextBox ID="BillingCity" runat="server" CssClass="textEntry" Width="200"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator12" runat="server" ControlToValidate="BillingCity"
+                                                CssClass="failureNotification" ErrorMessage="Billing City is required." ToolTip="Billing City is required."
+                                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow VerticalAlign="Top" Height="45">
+                                        <asp:TableCell>
+                                            <asp:Label ID="BillingProLabel" runat="server" AssociatedControlID="BillingPro" Style="white-space: nowrap">Province:</asp:Label>
+                                        </asp:TableCell>
+                                        <asp:TableCell>
+                                            <asp:DropDownList ID="BillingPro" runat="server">
+                                                <asp:ListItem Value="" Selected="true">Select Province</asp:ListItem>
+                                                <asp:ListItem Value="AB">Alberta</asp:ListItem>
+                                                <asp:ListItem Value="BC">British Columbia</asp:ListItem>
+                                                <asp:ListItem Value="MB">Manitoba</asp:ListItem>
+                                                <asp:ListItem Value="NB">New Brunswick</asp:ListItem>
+                                                <asp:ListItem Value="NL">Newfoundland and Labrador</asp:ListItem>
+                                                <asp:ListItem Value="NT">Northwest Territories</asp:ListItem>
+                                                <asp:ListItem Value="NS">Nova Scotia</asp:ListItem>
+                                                <asp:ListItem Value="NU">Nunavut</asp:ListItem>
+                                                <asp:ListItem Value="ON">Ontario</asp:ListItem>
+                                                <asp:ListItem Value="PE">Prince Edward Island</asp:ListItem>
+                                                <asp:ListItem Value="QC">Quebec</asp:ListItem>
+                                                <asp:ListItem Value="SK">Saskatchewan</asp:ListItem>
+                                                <asp:ListItem Value="YT">Yukon</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator13" runat="server" ControlToValidate="BillingPro"
+                                                CssClass="failureNotification" ErrorMessage="Billing Province is required." ToolTip="Billing Province is required."
+                                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                    <asp:TableRow VerticalAlign="Top">
+                                        <asp:TableCell>
+                                            <asp:Label ID="BillingPostCodeLabel" runat="server" AssociatedControlID="BillingPostCode" Style="white-space: nowrap">Post Code:</asp:Label>
+                                        </asp:TableCell>
+                                        <asp:TableCell>
+                                            <asp:TextBox ID="BillingPostCode" runat="server" CssClass="textEntry" Width="200"></asp:TextBox>
+                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator14" runat="server" ControlToValidate="BillingPostCode"
+                                                CssClass="failureNotification" ErrorMessage="Billing Post Code is required." ToolTip="Billing Post Code is required."
+                                                ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                                            <asp:RegularExpressionValidator
+                                                ID="RegularExpressionValidator2" runat="SERVER"
+                                                ControlToValidate="BillingPostCode"
+                                                CssClass="failureNotification"
+                                                ErrorMessage="Enter a valid Post Code."
+                                                ValidationExpression="\d{5}((-)?\d{4})?|([A-Za-z]\d[A-Za-z]( )?\d[A-Za-z]\d)"
+                                                ValidationGroup="RegisterUserValidationGroup">*
+                                            </asp:RegularExpressionValidator>
+                                        </asp:TableCell>
+                                    </asp:TableRow>
+                                </asp:Table>
+                            </fieldset>
+                        </div>
                     </fieldset>
                 </asp:TableCell>
             </asp:TableRow>
