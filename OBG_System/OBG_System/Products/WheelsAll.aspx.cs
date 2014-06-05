@@ -607,7 +607,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             if (String.IsNullOrEmpty(sqlFilterPCD)
               && String.IsNullOrEmpty(sqlFilterSize))
             {
-                sqlText += sqlFilterFinish;
+                sqlText += sorroundWithbrackets(sqlFilterFinish);
             }
             else
             {
@@ -630,9 +630,9 @@ public partial class Products_wheelall : System.Web.UI.Page
         {
             if (String.IsNullOrEmpty(sqlFilterPCD)
             && String.IsNullOrEmpty(sqlFilterSize) && String.IsNullOrEmpty(sqlFilterFinish)
-            && String.IsNullOrEmpty(sqlFilterSeat))
+            && String.IsNullOrEmpty(sqlFilterOffset))
             {
-                sqlText += sqlFilterSeat;
+                sqlText += sorroundWithbrackets(sqlFilterSeat);
             }
             else
             {
@@ -644,7 +644,7 @@ public partial class Products_wheelall : System.Web.UI.Page
         {
             if (String.IsNullOrEmpty(sqlFilterPCD)
             && String.IsNullOrEmpty(sqlFilterSize) && String.IsNullOrEmpty(sqlFilterFinish)
-            && String.IsNullOrEmpty(sqlFilterSeat) && String.IsNullOrEmpty(sqlFilterSeat))
+            && String.IsNullOrEmpty(sqlFilterOffset) && String.IsNullOrEmpty(sqlFilterSeat))
             {
                 sqlText += sorroundWithbrackets(sqlFilterBore);
             }
