@@ -19,14 +19,14 @@ namespace BusinessLogic
             return WheelsDAO.DeleteProductById(prodId);
         }
 
-        public static int UpdateProduct(Wheels prod)
+        public static int UpdateProduct(Wheels prod, List<Vehicle> vehicles)
         {
-            return WheelsDAO.UpdateProduct(prod);
+            return WheelsDAO.UpdateProduct(prod,vehicles);
         }
 
-        public static int AddNewProduct(Wheels prod)
+        public static int AddNewProduct(Wheels prod, List<Vehicle> vehicles)
         {
-            return WheelsDAO.AddNewProduct(prod);
+            return WheelsDAO.AddNewProduct(prod,vehicles);
         }
     }
 }
