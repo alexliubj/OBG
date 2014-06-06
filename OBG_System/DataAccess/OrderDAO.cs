@@ -124,7 +124,7 @@ namespace DataAccess
                                              new SqlParameter("@OrderId", order.OrderId)
                                     };
                     command.Parameters.AddRange(paras);
-                    newOrderId = Convert.ToInt32(db.ExecuteScalar(command));
+                    newOrderId = Convert.ToInt32(db.ExecuteScalar(command,t));
                     if (newOrderId > 0)
                     {
                         foreach (OrderLine line in listOrderLine)
@@ -142,7 +142,7 @@ namespace DataAccess
                 new SqlParameter("@OrderId", newOrderId),
                             new SqlParameter("@ProductType",line.ProductType)};
                             command.Parameters.AddRange(paras2);
-                            db.ExecuteNonQuery(command2);
+                            db.ExecuteNonQuery(command2,t);
                         }
                     }
                     t.Commit();

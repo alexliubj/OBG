@@ -16,22 +16,70 @@ namespace DataAccess
 
         public static DataTable GetAllProducts()
         {
-            DbCommand command = db.GetSqlStringCommond("SELECT ProductId,Image,Style,Brand,Size,PCD,Finish,Offset,SEAT,BORE,Weight,ONHand,Price,PartNO FROM Wheels");
+            DbCommand command = db.GetSqlStringCommond(@"SELECT ProductId,Image,Style,Brand,Size,PCD,
+                                                    Finish,Offset,SEAT,BORE,Weight,ONHand,Price,PartNO FROM Wheels");
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
+        }
+
+        public static DataTable GetAllWheelsVehiclesByWheelsId(int wheelsId)
+        {
+            DbCommand command = db.GetSqlStringCommond(@"select w.wheelsId, w.vehicleid,v.vehiclename
+                                    from WheelsVehicle w
+                                    inner join Vehicles v
+                                    on w.vehicleId = v.vehicleId
+                                    where w.wheelsId = @wheelsId");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@wheelsId", wheelsId) };
+            command.Parameters.AddRange(paras);
+            DataTable dt = db.ExecuteDataTable(command);
+
+            return dt;
+        }
+
+        public static DataTable GetAllWheelsVehicles()
+        {
+            DbCommand command = db.GetSqlStringCommond(@"select w.wheelsId, w.vehicleid,v.vehiclename
+                                    from WheelsVehicle w
+                                    inner join Vehicles v
+                                    on w.vehicleId = v.vehicleId");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
 
         public static int DeleteProductById(int prodId)
         {
-            DbCommand command = db.GetSqlStringCommond(@"delete from wheels where ProductId=@ProductId");
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@ProductId", prodId) };
-            command.Parameters.AddRange(paras);
-            return db.ExecuteNonQuery(command);
+            using (Trans t = new Trans())
+            {
+                try
+                {
+                    DbCommand command = db.GetSqlStringCommond(@"delete from wheels where ProductId=@ProductId");
+                    SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@ProductId", prodId) };
+                    command.Parameters.AddRange(paras);
+                    int ret = db.ExecuteNonQuery(command,t);
+
+                    DbCommand command2 = db.GetSqlStringCommond(@"delete from WheelsVehicle where wheelsId=@prodId");
+                    SqlParameter[] paras2 = new SqlParameter[] { new SqlParameter("@wheelsId", prodId) };
+                    command2.Parameters.AddRange(paras2);
+                    db.ExecuteNonQuery(command2,t);
+
+                    t.Commit();
+                    return ret;
+                }
+                catch
+                {
+                    t.RollBack();
+                    return -1;
+                }
+            }
         }
 
-        public static int UpdateProduct(Wheels prod)
+        public static int UpdateProduct(Wheels prod, List<Vehicle> listVehicles)
         {
-            DbCommand command = db.GetSqlStringCommond(@"UPDATE Wheels
+            using (Trans t = new Trans())
+            {
+                try
+                {
+                    DbCommand command = db.GetSqlStringCommond(@"UPDATE Wheels
                                SET [Image] = @Image
                                   ,[Style] = @Style
                                   ,[Brand] = @Brand
@@ -46,7 +94,7 @@ namespace DataAccess
                                   ,[Price] = @Price
                                   ,[PartNO] = @PartNO
                              WHERE productId = @productId");
-            SqlParameter[] paras = new SqlParameter[] { 
+                    SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@Image", prod.Image),
                 new SqlParameter("@Style",prod.Style),
                 new SqlParameter("@Brand",prod.Brand),
@@ -62,13 +110,51 @@ namespace DataAccess
                 new SqlParameter("@PartNO",prod.PartNO),
                 new SqlParameter("@productId",prod.ProductId)
             };
-            command.Parameters.AddRange(paras);
-            return db.ExecuteNonQuery(command);
+                    command.Parameters.AddRange(paras);
+                    int ret = db.ExecuteNonQuery(command);
+
+                    // remove all
+                    DbCommand command2 = db.GetSqlStringCommond(@"delete from WheelsVehicle where wheelsId=@prodId");
+                    SqlParameter[] paras2 = new SqlParameter[] { new SqlParameter("@wheelsId", prod.ProductId) };
+                    command2.Parameters.AddRange(paras2);
+                    db.ExecuteNonQuery(command2,t);
+
+                    //add all
+
+                    foreach (Vehicle veh in listVehicles)
+                    {
+                        DbCommand command3 = db.GetSqlStringCommond(@"INSERT INTO [WheelsVehicle]
+                                                   ([WheelsId]
+                                                   ,[VehicleId])
+                                             VALUES
+                                                   (@wheelsId,@veh
+                                                   )");
+                        SqlParameter[] paras3 = new SqlParameter[] { 
+                new SqlParameter("@veh", veh.VehicleId),new SqlParameter("@wheelsId", veh.WheelsId)};
+                        command3.Parameters.AddRange(paras3);
+                        db.ExecuteNonQuery(command3, t);
+                    }
+
+                    t.Commit();
+                    return ret;
+                }
+                catch
+                {
+                    t.RollBack();
+                    return -1;
+                }
+            }
         }
 
-        public static int AddNewProduct(Wheels prod)
+
+        public static int AddNewProduct(Wheels prod, List<Vehicle> listVehicles)
         {
-            DbCommand command = db.GetSqlStringCommond(@"
+            using (Trans t = new Trans())
+            {
+                try
+                {
+
+                    DbCommand command = db.GetSqlStringCommond(@"
                     INSERT INTO [Wheels]
                                ([Image]
                                ,[Style]
@@ -97,7 +183,7 @@ namespace DataAccess
                                @ONHand,
                                @Price,
                                @PartNO)");
-            SqlParameter[] paras = new SqlParameter[] { 
+                    SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@Image", prod.Image),
                 new SqlParameter("@Style",prod.Style),
                 new SqlParameter("@Brand",prod.Brand),
@@ -112,8 +198,36 @@ namespace DataAccess
                 new SqlParameter("@Price",prod.Price),
                  new SqlParameter("@PartNO",prod.PartNO)
             };
-            command.Parameters.AddRange(paras);
-            return db.ExecuteNonQuery(command);
+                    command.Parameters.AddRange(paras);
+                    //add relationship
+
+                    int newWeehlesId = Convert.ToInt32(db.ExecuteScalar(command, t));
+                    if (newWeehlesId > 0)
+                    {
+                        foreach (Vehicle veh in listVehicles)
+                        {
+                            DbCommand command2 = db.GetSqlStringCommond(@"INSERT INTO [WheelsVehicle]
+                                                   ([WheelsId]
+                                                   ,[VehicleId])
+                                             VALUES
+                                                   (newWeehlesId,@veh
+                                                   )");
+                            SqlParameter[] paras2 = new SqlParameter[] { 
+                new SqlParameter("@veh", veh.VehicleId)};
+                            command.Parameters.AddRange(paras2);
+                            db.ExecuteNonQuery(command2, t);
+                        }
+                    }
+
+                    t.Commit();
+                    return newWeehlesId;
+                }
+                catch
+                {
+                    t.RollBack();
+                    return -1;
+                }
+            }
         }
     }
 }

@@ -24,7 +24,10 @@ public partial class Admin_Default : System.Web.UI.Page
         string filenameWithTimeStamp = AppendTimeStamp(filename);
 
         HomeImage oldHomeImage = new HomeImage();
-        oldHomeImage = HomePageBLO.GetHomePageInformation();
+        if (HomePageBLO.GetHomePageInformation() != null)
+        {
+            oldHomeImage = HomePageBLO.GetHomePageInformation();
+        }
 
         HomeImage newHomeImage = new HomeImage();
         newHomeImage.Des2 = oldHomeImage.Des1;

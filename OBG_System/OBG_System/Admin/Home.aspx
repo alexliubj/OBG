@@ -14,6 +14,11 @@
         </Items>
     </asp:Menu>
     <asp:Table ID="insertNewImage" runat="server" Visible="false">
+                 <asp:TableHeaderRow>
+             <asp:TableHeaderCell>
+                 Instruction: Initial image first, if there is no image uploaded yet.
+             </asp:TableHeaderCell>
+         </asp:TableHeaderRow>
         <asp:TableRow>
             <asp:TableCell>
                 <asp:Label ID="ImageLabel" runat="server" AssociatedControlID="FileUploadControl">Image:</asp:Label>
@@ -86,11 +91,11 @@
     </asp:Table>
 
      <asp:Table ID="initialImage" runat="server" Visible="false">
-         <asp:TableRow>
-             <asp:TableCell>
-                             Instruction: Only need to inital image, when there is no news yet.
-                 </asp:TableCell>
-         </asp:TableRow>
+         <asp:TableHeaderRow>
+             <asp:TableHeaderCell>
+                 Instruction: Only need to inital image, when there is no news yet.
+             </asp:TableHeaderCell>
+         </asp:TableHeaderRow>
         <asp:TableRow>
             <asp:TableCell>
                 <asp:Label ID="lblInitialImage1" runat="server" AssociatedControlID="FileUpload1">Image1:</asp:Label>
