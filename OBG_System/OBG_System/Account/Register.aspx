@@ -10,10 +10,6 @@
         Use the form below to create a new account.
                    
     </p>
-    <p>
-        Passwords are required to be a minimum of <%= Membership.MinRequiredPasswordLength %> characters in length.
-                   
-    </p>
     <span class="failureNotification">
         <asp:Literal ID="ErrorMessage" runat="server"></asp:Literal>
     </span>

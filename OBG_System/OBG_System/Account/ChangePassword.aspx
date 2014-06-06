@@ -42,7 +42,7 @@
                             CssClass="failureNotification"
                             ErrorMessage="Password should have at least one number, one letter with at least six characters."
                             ValidationExpression="^.*(?=.{6,})(?=.*\d)(?=.*[a-zA-Z]).*$"
-                            ValidationGroup="RegisterUserValidationGroup">*
+                            ValidationGroup="ChangeUserPasswordValidationGroup">*
                         </asp:RegularExpressionValidator>
                     </p>
                     <p>
