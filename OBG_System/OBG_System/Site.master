@@ -20,7 +20,7 @@
             <div class="header">
                 <div class="title">
                     <h1>
-                        <img class="style1" src="<%= Page.ResolveUrl("~")%>Pictures/logo.png" />OBG Orderring System
+                        <img alt="shoppingcart" class="style1" src="<%= Page.ResolveUrl("~")%>Pictures/logo.png" />OBG Orderring System
                     </h1>
                 </div>
 
@@ -33,7 +33,7 @@
 
                 <div class="shoppingcart" align="right">
                     <a id="shoppingcart" runat="server" href="~/Account/ShoppingCart.aspx">
-                        <img id="Image1"
+                        <img alt="shoppingcart" id="Image1"
                             src="<%= Page.ResolveUrl("~")%>Pictures/shoppingcart.png" height="50px" width="85px" /></a>
                 </div>
                 <div class="clear hideSkiplink">
