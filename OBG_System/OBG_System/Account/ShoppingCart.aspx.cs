@@ -20,27 +20,117 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
     //protected System.Web.UI.WebControls.TextBox txtCount;
     //protected System.Web.UI.WebControls.TextBox CountTb;
     //string AddProID; 
+    public static string M_str_Count;
+    public float money = 0.0f;
     
     protected void Page_Load(object sender, EventArgs e)
     {
-        try
-        {
-            if (Session["login"] != "yes" || Session["username"] == null)
-            {
-                Response.Redirect("error.htm");
-            }
-        }
-        catch
-        {
-            Response.Redirect("error.htm");
-        } 
         if (!IsPostBack)
         {
-            //Gridview1_Bind();
-
+           
+            if (Session["UserID"] != null)
+            {
+                Bind();
+            }
+            else
+            {
+                RegisterStartupScript("", "<script>alert('Please login first！')</script>");
+            }
         }
     }
 
+    public void Bind()
+    {
+        if (Session["Cart"] != null)
+        {
+            DataTable dt = Session["Cart"] as DataTable;
+            dlShoppingCart.DataSource = dt;
+            dlShoppingCart.DataBind();
+            if (dt.Rows.Count == 0)
+            {
+                money = 0.0f;
+                M_str_Count = money.ToString();
+            }
+        }
+    }
+    protected void dlShoppingCart_ItemDataBound(object sender, DataListItemEventArgs e)
+    {
+        TextBox txtGoodsNum = (TextBox)e.Item.FindControl("txtGoodsNum");
+        Label lblprice = (Label)e.Item.FindControl("labGoodsPrice");
+        if (txtGoodsNum != null)
+        {
+            txtGoodsNum.Attributes["onkeyup"] = "value=value.replace(/[^\\d]/g,'')";
+            int num = Convert.ToInt32(txtGoodsNum.Text);
+            float price = Convert.ToSingle(lblprice.Text);
+            money += num * price;
+            M_str_Count = money.ToString();
+        }
+    }
+    //清空购物车
+    protected void lnkbtnClear_Click(object sender, EventArgs e)
+    {
+        if (Session["Cart"] != null)
+        {
+            DataTable dt = Session["Cart"] as DataTable;
+            dt.Rows.Clear(); ;
+            Session["Cart"] = dt;
+        }
+        Bind();
+    }
+    //清空购物车时的提示信息
+    protected void lnkbtnClear_Load(object sender, EventArgs e)
+    {
+        //lnkbtnClear.Attributes["onclick"] = "javascript:return confirm('你确定要清空购物车吗？')";
+    }
+    //继续购物
+    protected void lnkbtnContinue_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Default.aspx");
+    }
+    //删除购物车中的商品
+    protected void dlShoppingCart_DeleteCommand(object source, DataListCommandEventArgs e)
+    {
+        int ProId = Convert.ToInt32(e.CommandArgument.ToString());
+        if (Session["Cart"] != null)
+        {
+            DataTable dt = Session["Cart"] as DataTable;
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                int pId = Convert.ToInt32(dt.Rows[i]["ProId"].ToString());
+                if (ProId == pId)
+                {
+                    dt.Rows[i].Delete();
+                    break;
+                }
+            }
+            Session["Cart"] = dt;
+        }
+        Bind();
+    }
+    //更新购物车
+    protected void dlShoppingCart_ItemCommand(object source, DataListCommandEventArgs e)
+    {
+        if (e.CommandName == "updateNum")
+        {
+            TextBox txtGoodsNum = (TextBox)e.Item.FindControl("txtGoodsNum");
+            int ProId = Convert.ToInt32(e.CommandArgument.ToString());
+            if (Session["Cart"] != null)
+            {
+                DataTable dt = Session["Cart"] as DataTable;
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    int pId = Convert.ToInt32(dt.Rows[i]["ProId"].ToString());
+                    if (ProId == pId)
+                    {
+                        dt.Rows[i]["num"] = txtGoodsNum.Text;
+                        break;
+                    }
+                }
+                Session["Cart"] = dt;
+            }
+            Bind();
+        }
+    }
 
 
 
@@ -68,18 +158,19 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
     {
         Response.Redirect("~/Default.aspx");
     }
-    protected void ShoppingCartGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+    protected void ShoppingCartGridView_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
     {
+        //int rowindex = Convert.ToInt32(e.CommandArgument);
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             List<ShopingCart> shoppingcart = new List<ShopingCart>();
             ShopingCart sc = new ShopingCart();
             shoppingcart = (List<ShopingCart>)Session["Cart"];
-            for (int i = 0; i <= ShoppingCartGridView.Rows.Count; i++)
-            {
-                sc = shoppingcart[i];
-                ((Label)(e.Row.FindControl("ProductNameLable"))).Text = sc.ProductId.ToString();
-            }
+            //for (int i = 0; i <= dlShoppingCart.Rows.Count; i++)
+            //{
+            //    sc = shoppingcart[i];
+            //    ((Label)(e.Row.FindControl("ProductNameLable"))).Text = sc.ProductId.ToString();
+            //}
         }
     }
 }

@@ -14,7 +14,7 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <form id="Form2" runat="server">
+    <%--<form id="Form2" runat="server">
         <asp:GridView ID="ShoppingCartGridView" runat="server" AutoGenerateColumns="False" SkinID="ShoppingCart"
             Width="100%" DataKeyNames="ProductID" OnRowDataBound="ShoppingCartGridView_RowDataBound">
             <Columns>
@@ -24,9 +24,9 @@
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:BoundField DataField="AccountPrice" HeaderText="Price" />
-                <asp:BoundField DataField="Account" HeaderText="Discount" />
+                <asp:BoundField DataField="Account" HeaderText="Discount" />--%>
                 <%-- <asp:BoundField DataField="Date" HeaderText="Date" />--%>
-                <asp:TemplateField HeaderText="QTY">
+                <%--<asp:TemplateField HeaderText="QTY">
                     <ItemTemplate>
                         <asp:TextBox ID="txtCount" runat="server" Width="35px" Text='<%# Eval("Quantity") %>'></asp:TextBox>
                     </ItemTemplate>
@@ -48,50 +48,84 @@
                         ImageUrl="~/Pictures/checkoutButton.png" OnClick="IBTCheckout_Click" /></td>
             </tr>
         </table>
+    </form>--%>
+
+    
+
+    <form id="form3" runat="server">
+    <div>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" style="font-size: 10pt;
+            width: 637px;">
+            <tr>
+                <td style="vertical-align: top; text-align: center; background-image: url(Image/购物车/子页中间.jpg); width: 637px; height: 341px;">
+                    <asp:DataList ID="dlShoppingCart" runat="server"
+                        OnItemDataBound="dlShoppingCart_ItemDataBound"
+                        OnDeleteCommand="dlShoppingCart_DeleteCommand"
+                        OnItemCommand="dlShoppingCart_ItemCommand" CellPadding="4" ForeColor="#333333">
+                        <ItemTemplate>
+                            <table style="width: 368px; font-size: 10pt;" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td style="width: 88px; height: 26px;">
+                                        <asp:Label ID="labGoodName" runat="server" Text='<%# Eval("ProName") %>'></asp:Label></td>
+                                    <td style="width: 102px; height: 26px;">
+                                        <asp:Label ID="labGoodsPrice" runat="server" Text='<%# Eval("ProPrice") %>'></asp:Label></td>
+                                     <td style="width: 102px; height: 26px;">
+                                        <asp:Label ID="labDiscount" runat="server" Text='<%# Eval("Discount") %>' Width="33px"></asp:Label></td>
+                                    <td style="width: 50px; height: 26px;">
+                                        <asp:TextBox ID="txtGoodsNum" runat="server" Text='<%# Eval("num") %>' Width="33px"></asp:TextBox></td>
+                                    <td style="width: 76px; height: 26px">
+                                        <asp:LinkButton ID="lnkbtnUpdateCart" runat="server" CommandArgument='<%# Eval("ProId") %>'
+                                            CommandName="updateNum" ForeColor="Black">Update</asp:LinkButton></td>
+                                    <td style="height: 26px">
+                                        &nbsp;<asp:LinkButton ID="lnkbtnDel" runat="server" CommandArgument='<%# Eval("ProId") %>'
+                                            CommandName="delete" ForeColor="Black"  OnClientClick="return confirm('Do you want to delete？')">Delete</asp:LinkButton></td>
+                                </tr>
+                            </table>
+                        </ItemTemplate>
+                        <SelectedItemStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                        <HeaderTemplate><table style="width: 368px; font-size: 10pt;" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td style="width: 88px; height: 26px;">
+                                        Product Name</td>
+                                <td style="width: 102px; height: 26px;">
+                                        Price</td>   
+                                <td style="width: 102px; height: 26px;">
+                                        Discount</td>                               
+                                <td style="width: 50px; height: 26px;">
+                                        QTY</td>
+                                <td style="width: 76px; height: 26px">
+                                </td>
+                                <td style="height: 26px">
+                                    &nbsp;</td>
+                            </tr>
+                        </table>
+                        </HeaderTemplate>
+                        <FooterTemplate>
+                            <table style="width: 368px; font-size: 10pt;" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td align="left" colspan="4">
+                                        Total：<%=M_str_Count %>$</td>
+                                </tr>
+                            </table>
+                        </FooterTemplate>
+                        <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                        <AlternatingItemStyle BackColor="White" ForeColor="#284775" />
+                        <ItemStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                        <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                    </asp:DataList>
+                    <br />
+                    <%--<asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Update" />--%>
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 140px; text-align: right; background-image: url(Image/购物车/子页底.jpg); width: 637px;">
+                    &nbsp;</td>
+            </tr>
+        </table>
+   
+    </div>
     </form>
 
-    <form id="Form1" runat="server">
-        <table width="500" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td>
-                    <asp:DataGrid ID="ShoppingCartDlt" runat="server" Width="500" BackColor="white" BorderColor="black" ShowFooter="false" CellPadding="3" CellSpacing="0" Font-Name="Verdana" Font-Size="8pt" HeaderStyle-BackColor="#cecfd6" AutoGenerateColumns="false" MaintainState="true">
-                        <Columns>
-                            <asp:TemplateColumn HeaderText="删除">
-                                <ItemTemplate>
-                                    <center> 
-<asp:CheckBox id="chkProductID" runat="server" /> </center>
-                                </ItemTemplate>
-                            </asp:TemplateColumn>
-                            <asp:BoundColumn DataField="ProdID" HeaderText="ID" />
-                            <asp:BoundColumn DataField="ProName" HeaderText="商品名称" />
-                            <asp:BoundColumn DataField="UnitPrice" HeaderText="单价" />
-                            <asp:TemplateColumn HeaderText="数量">
-                                <ItemTemplate>
-                                    <asp:TextBox ID="CountTb" runat="server" Text='<%#DataBinder.Eval( Container.DataItem,"ProdCount" )%>'> </asp:TextBox>
-                                </ItemTemplate>
-                            </asp:TemplateColumn>
-                            <asp:BoundColumn DataField="TotalPrice" HeaderText="小计( 元 )" />
-                        </Columns>
-                    </asp:DataGrid></td>
-            </tr>
-        </table>
-        <br>
-        <table width="500" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-                <td>
-                    <asp:Button ID="update" runat="server" Text="更新我的购物车" CssClass="button2" /></td>
-                <td>
-                    <asp:Button ID="CheckOut" runat="server" Text="结算" CssClass="button5" />
-                    <input type="button" name="close2" value="继续购物" onclick="window.close();
-    return false;
-"
-                        class="button2"></td>
-                <td align="right">
-                    <br>
-                    <asp:Label ID="label" runat="server" Width="100px" Visible="True" ForeColor="#FF8080" Height="18px"></asp:Label></td>
-            </tr>
-        </table>
-    </form>
 
 </asp:Content>
 

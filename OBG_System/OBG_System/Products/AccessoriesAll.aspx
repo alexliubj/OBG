@@ -3,6 +3,32 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+
+    <div id="TiresFilter" runat="server" visible="true">
+
+        <fieldset class="AccInfo">
+            <legend>Choose your Accessory</legend>
+            <table>
+                <tr>
+                    <td class="style2">
+                        <asp:Label ID="NameLabel" runat="server">Product Name:</asp:Label>
+                    </td>
+                    <td>
+                        <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Name"
+                            DataValueField="Name" CssClass="CBLayout" ID="ChkName" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" OnSelectedIndexChanged="chk_SelectedIndexChanged" />
+                    </td>
+
+                </tr>
+
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server"
+                    ConnectionString="<%$ ConnectionStrings:OBG_Local %>"
+                    SelectCommand="SELECT distinct name FROM [Accessories]"></asp:SqlDataSource>
+            </table>
+        </fieldset>
+    </div>
+
+
+
     <asp:GridView ID="GridView6" runat="server" GridLines="None" AllowPaging="True" 
     AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" 
     ForeColor="#333333"

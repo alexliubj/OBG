@@ -105,4 +105,39 @@ public partial class Products_accAll : System.Web.UI.Page
 
         return newSortDirection;
     }
+
+    protected void chk_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        DataTable accAll = AccessoryBLO.GetAllAccessories();
+        String sqlText = string.Empty;
+        String sqlFilterName = string.Empty;
+        foreach (ListItem item in ChkName.Items)
+        {
+            if (item.Selected)
+            {
+                if (sqlFilterName != string.Empty)
+                {
+                    sqlFilterName += " or " + "Name = " + "'" + item.Text.ToString().Trim() + "'";
+                }
+                else
+                {
+                    sqlFilterName += "Name = " + "'" + item.Text.ToString().Trim() + "'";
+                }
+            }
+        }
+
+        if (!String.IsNullOrEmpty(sqlFilterName))
+        {
+            sqlText += sorroundWithbrackets(sqlFilterName);
+        }
+
+        accAll.DefaultView.RowFilter = sqlText;
+        GridView6.DataSource = accAll.DefaultView;
+        GridView6.DataBind();
+    }
+
+    private string sorroundWithbrackets(string orString)
+    {
+        return "(" + orString + ")";
+    }
 }
