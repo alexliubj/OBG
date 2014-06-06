@@ -7,6 +7,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System;
 using System.IO;
+using System.Collections.Generic;
 
 public partial class Admin_Default : System.Web.UI.Page
 {
@@ -162,7 +163,9 @@ public partial class Admin_Default : System.Web.UI.Page
         wheel.Weight = Weight.Text.ToString().Trim();
 
         int update = 0;
-        update = WheelsBLO.UpdateProduct(wheel);
+
+        List<Vehicle> listVehicle = new List<Vehicle>();
+        update = WheelsBLO.UpdateProduct(wheel, listVehicle);
 
 
         if (update == 1)
@@ -264,7 +267,8 @@ public partial class Admin_Default : System.Web.UI.Page
         wheel.Size = Size.Text.ToString().Trim();
         wheel.Style = Style.Text.ToString().Trim();
         wheel.Weight = Weight.Text.ToString().Trim();
-        int update = WheelsBLO.AddNewProduct(wheel);
+        List<Vehicle> vehicle = new List<Vehicle>();
+        int update = WheelsBLO.AddNewProduct(wheel, vehicle);
 
         if (update == 1)
         {

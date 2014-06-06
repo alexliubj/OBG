@@ -95,7 +95,7 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
     protected void AddBt_Click(object sender, EventArgs e)
     {
         Wheels wheels = new Wheels();
-        WheelsBLO.AddNewProduct(wheels);
+        //WheelsBLO.AddNewProduct(wheels);
         Response.Redirect("~/ShoppingCart.aspx?ProductId=" + strProductID + "&Num=1");
     }
 
