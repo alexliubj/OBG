@@ -150,27 +150,27 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
 
     }
 
-    protected void IBTCheckout_Click(object sender, ImageClickEventArgs e)
-    {
-       // Response.Redirect("~/ShoppingCart.aspx?ProductID=" + strProductID + "&Num=1");
-    }
-    protected void LBRepost_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("~/Default.aspx");
-    }
-    protected void ShoppingCartGridView_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
-    {
-        //int rowindex = Convert.ToInt32(e.CommandArgument);
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            List<ShopingCart> shoppingcart = new List<ShopingCart>();
-            ShopingCart sc = new ShopingCart();
-            shoppingcart = (List<ShopingCart>)Session["Cart"];
-            //for (int i = 0; i <= dlShoppingCart.Rows.Count; i++)
-            //{
-            //    sc = shoppingcart[i];
-            //    ((Label)(e.Row.FindControl("ProductNameLable"))).Text = sc.ProductId.ToString();
-            //}
-        }
-    }
+    //protected void IBTCheckout_Click(object sender, ImageClickEventArgs e)
+    //{
+    //   // Response.Redirect("~/ShoppingCart.aspx?ProductID=" + strProductID + "&Num=1");
+    //}
+    //protected void LBRepost_Click(object sender, EventArgs e)
+    //{
+    //    Response.Redirect("~/Default.aspx");
+    //}
+    //protected void ShoppingCartGridView_RowDataBound(object sender, System.Web.UI.WebControls.GridViewRowEventArgs e)
+    //{
+    //    //int rowindex = Convert.ToInt32(e.CommandArgument);
+    //    if (e.Row.RowType == DataControlRowType.DataRow)
+    //    {
+    //        List<ShopingCart> shoppingcart = new List<ShopingCart>();
+    //        ShopingCart sc = new ShopingCart();
+    //        shoppingcart = (List<ShopingCart>)Session["Cart"];
+    //        //for (int i = 0; i <= dlShoppingCart.Rows.Count; i++)
+    //        //{
+    //        //    sc = shoppingcart[i];
+    //        //    ((Label)(e.Row.FindControl("ProductNameLable"))).Text = sc.ProductId.ToString();
+    //        //}
+    //    }
+    //}
 }

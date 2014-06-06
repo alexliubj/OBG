@@ -20,7 +20,7 @@
             <div class="header">
                 <div class="title">
                     <h1>
-                        <img alt="shoppingcart" class="style1" src="<%= Page.ResolveUrl("~")%>Pictures/logo.png" />OBG Orderring System
+                        <img alt="shoppingcart" class="stylel" src="<%= Page.ResolveUrl("~")%>Pictures/logo.png" />OBG Orderring System
                     </h1>
                 </div>
 
