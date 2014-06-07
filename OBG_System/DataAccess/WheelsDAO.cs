@@ -57,7 +57,7 @@ namespace DataAccess
                     command.Parameters.AddRange(paras);
                     int ret = db.ExecuteNonQuery(command,t);
 
-                    DbCommand command2 = db.GetSqlStringCommond(@"delete from WheelsVehicle where wheelsId=@prodId");
+                    DbCommand command2 = db.GetSqlStringCommond(@"delete from WheelsVehicle where wheelsId=@wheelsId");
                     SqlParameter[] paras2 = new SqlParameter[] { new SqlParameter("@wheelsId", prodId) };
                     command2.Parameters.AddRange(paras2);
                     db.ExecuteNonQuery(command2,t);
@@ -114,7 +114,7 @@ namespace DataAccess
                     int ret = db.ExecuteNonQuery(command);
 
                     // remove all
-                    DbCommand command2 = db.GetSqlStringCommond(@"delete from WheelsVehicle where wheelsId=@prodId");
+                    DbCommand command2 = db.GetSqlStringCommond(@"delete from WheelsVehicle where wheelsId=@wheelsId");
                     SqlParameter[] paras2 = new SqlParameter[] { new SqlParameter("@wheelsId", prod.ProductId) };
                     command2.Parameters.AddRange(paras2);
                     db.ExecuteNonQuery(command2,t);
@@ -130,7 +130,7 @@ namespace DataAccess
                                                    (@wheelsId,@veh
                                                    )");
                         SqlParameter[] paras3 = new SqlParameter[] { 
-                new SqlParameter("@veh", veh.VehicleId),new SqlParameter("@wheelsId", veh.WheelsId)};
+                new SqlParameter("@veh", veh.VehicleId),new SqlParameter("@wheelsId", prod.ProductId)};
                         command3.Parameters.AddRange(paras3);
                         db.ExecuteNonQuery(command3, t);
                     }
@@ -182,7 +182,7 @@ namespace DataAccess
                                @Weight,
                                @ONHand,
                                @Price,
-                               @PartNO)");
+                               @PartNO); Select @@IDENTITY;");
                     SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@Image", prod.Image),
                 new SqlParameter("@Style",prod.Style),
@@ -210,15 +210,14 @@ namespace DataAccess
                                                    ([WheelsId]
                                                    ,[VehicleId])
                                              VALUES
-                                                   (newWeehlesId,@veh
+                                                   (@newWeehlesId,@veh
                                                    )");
-                            SqlParameter[] paras2 = new SqlParameter[] { 
+                            SqlParameter[] paras2 = new SqlParameter[] { new SqlParameter("@newWeehlesId", newWeehlesId),
                 new SqlParameter("@veh", veh.VehicleId)};
-                            command.Parameters.AddRange(paras2);
+                            command2.Parameters.AddRange(paras2);
                             db.ExecuteNonQuery(command2, t);
                         }
                     }
-
                     t.Commit();
                     return newWeehlesId;
                 }

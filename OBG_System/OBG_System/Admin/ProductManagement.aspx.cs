@@ -54,6 +54,7 @@ public partial class Admin_Default : System.Web.UI.Page
         int productID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
         WheelsBLO.DeleteProductById(productID);
         Gridview1_Bind();
+        wheelInformation.Visible = false;
     }
 
     protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -138,19 +139,10 @@ public partial class Admin_Default : System.Web.UI.Page
         }
         else
         {
-            //if (flag == true)
-            //{
-            //    filename = postedFile.FileName;
-            //    string imgPath = "~/Pictures/" + filename;
-            //    wheel.Image = imgPath;
-            //}
-            //else
-            //{
             DataTable wheelsTable = WheelsBLO.GetAllProducts();
             wheelsTable.PrimaryKey = new DataColumn[] { wheelsTable.Columns["ProductID"] };
             DataRow foundRow = wheelsTable.Rows.Find(productID);
-            wheel.Image = foundRow[1].ToString();
-            //}  
+            wheel.Image = foundRow[1].ToString(); 
         }
 
         wheel.Offset = Offset.Text.ToString().Trim();
@@ -165,8 +157,19 @@ public partial class Admin_Default : System.Web.UI.Page
         int update = 0;
 
         List<Vehicle> listVehicle = new List<Vehicle>();
-        update = WheelsBLO.UpdateProduct(wheel, listVehicle);
 
+        for (int i = 0; i < CheckBoxListVehicle.Items.Count; i++)
+        {
+            if (CheckBoxListVehicle.Items[i].Selected == true)
+            {
+                Vehicle vehicle = new Vehicle();
+                vehicle.VehicleId = int.Parse(CheckBoxListVehicle.Items[i].Value.ToString());
+                //vehicle.VehicleName = CheckBoxListVehicle.Items[i].Text.ToString();
+                listVehicle.Add(vehicle);
+            }
+        }
+
+        update = WheelsBLO.UpdateProduct(wheel, listVehicle);
 
         if (update == 1)
         {
@@ -174,10 +177,6 @@ public partial class Admin_Default : System.Web.UI.Page
             {
                 FileUploadControl.SaveAs(Server.MapPath("~/Pictures/") + filenameWithTimeStamp);
             }
-            //else if (flag == true)
-            //{
-            //    postedFile.SaveAs(Server.MapPath("~/Pictures/") + filename);
-            //}
             Gridview1_Bind();
             Image1.ImageUrl = ((Image)(GridView1.SelectedRow.Cells[0].FindControl("Image1"))).ImageUrl;
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
@@ -200,7 +199,10 @@ public partial class Admin_Default : System.Web.UI.Page
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
+        CheckBoxListVehicle.DataBind();
         int productID;
+        DataTable wheelsVehicles;
+        List<string> vehicleIDs = new List<string>();
         productID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
         Wheels wheel = new Wheels();
 
@@ -217,6 +219,31 @@ public partial class Admin_Default : System.Web.UI.Page
         Size.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label5"))).Text;
         Style.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label3"))).Text;
         Weight.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label11"))).Text;
+
+        wheelsVehicles = WheelsBLO.GetAllWheelsVehiclesByWheelsId(productID);
+
+        foreach (DataRow dtRow in wheelsVehicles.Rows)
+        {
+            vehicleIDs.Add(dtRow["vehicleID"].ToString());
+        }
+
+        //uncheck all
+        for (int i = 0; i < CheckBoxListVehicle.Items.Count; i++)
+        {
+            CheckBoxListVehicle.Items[i].Selected = false;
+        }
+
+        //check vehicle which contains in datatable wheelsVehicles
+        foreach (string vehicleID in vehicleIDs)
+        {
+            for (int i = 0; i < CheckBoxListVehicle.Items.Count; i++)
+            {
+                if (CheckBoxListVehicle.Items[i].Value == vehicleID)
+                {
+                    CheckBoxListVehicle.Items[i].Selected = true;
+                }
+            }
+        }
 
         wheelInformation.Visible = true;
 
@@ -239,6 +266,11 @@ public partial class Admin_Default : System.Web.UI.Page
         Size.Text = null;
         Style.Text = null;
         Weight.Text = null;
+        //uncheck all
+        for (int i = 0; i < CheckBoxListVehicle.Items.Count; i++)
+        {
+            CheckBoxListVehicle.Items[i].Selected = false;
+        }
 
         wheelInformation.Visible = true;
 
@@ -267,10 +299,22 @@ public partial class Admin_Default : System.Web.UI.Page
         wheel.Size = Size.Text.ToString().Trim();
         wheel.Style = Style.Text.ToString().Trim();
         wheel.Weight = Weight.Text.ToString().Trim();
-        List<Vehicle> vehicle = new List<Vehicle>();
-        int update = WheelsBLO.AddNewProduct(wheel, vehicle);
+        List<Vehicle> listVehicle = new List<Vehicle>();
 
-        if (update == 1)
+        for (int i = 0; i < CheckBoxListVehicle.Items.Count; i++)
+        {
+            if (CheckBoxListVehicle.Items[i].Selected == true)
+            {
+                Vehicle vehicle = new Vehicle();
+                vehicle.VehicleId = int.Parse(CheckBoxListVehicle.Items[i].Value.ToString());
+                //vehicle.VehicleName = CheckBoxListVehicle.Items[i].Text.ToString();
+                listVehicle.Add(vehicle);
+            }
+        }
+
+        int update = WheelsBLO.AddNewProduct(wheel, listVehicle);
+
+        if (update > 0)
         {
             if (FileUploadControl.HasFile)
             {
@@ -299,6 +343,11 @@ public partial class Admin_Default : System.Web.UI.Page
                         true);
         }
     }
+
+    protected void CheckBoxListVehicle_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
     #endregion
 
     #region ViewAllTires
@@ -326,6 +375,7 @@ public partial class Admin_Default : System.Web.UI.Page
         int TireID = Convert.ToInt32(GridView2.DataKeys[e.RowIndex].Value.ToString());
         TiresBLO.DeleteTire(TireID);
         GridView2_Bind();
+        DivTireInformation.Visible = false;
     }
 
     protected void GridView2_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -475,7 +525,7 @@ public partial class Admin_Default : System.Web.UI.Page
                 }
                 catch (Exception ex)
                 {
-                    
+
                 }
             }
             GridView2_Bind();
@@ -551,6 +601,7 @@ public partial class Admin_Default : System.Web.UI.Page
         int AccID = Convert.ToInt32(GridView3.DataKeys[e.RowIndex].Value.ToString());
         AccessoryBLO.DeleteOneAccessory(AccID);
         GridView3_Bind();
+        DivAccInformation.Visible = false;
     }
 
     protected void GridView3_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -846,6 +897,7 @@ public partial class Admin_Default : System.Web.UI.Page
             Path.GetExtension(fileName)
             );
     }
+
 
 
 

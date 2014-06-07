@@ -178,7 +178,17 @@
                             <asp:Button ID="btnPreviewImage" runat="server" Text="Preview" Visible="false" />
                         </td>
                     </tr>
-
+                     <tr>
+                        <td>
+                            <asp:Label ID="PartNoLabel" runat="server" AssociatedControlID="PartNo">Part NO.:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="PartNo" runat="server" CssClass="textEntry"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="PartNoRequired" runat="server" ControlToValidate="PartNo"
+                                CssClass="failureNotification" ErrorMessage="Part No. is required."
+                                ToolTip="Part No. is required." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <asp:Label ID="StyleLabel" runat="server" AssociatedControlID="Style">Style:</asp:Label>
@@ -314,15 +324,13 @@
                             </asp:RegularExpressionValidator>
                         </td>
                     </tr>
-                    <tr>
+                       <tr>
                         <td>
-                            <asp:Label ID="PartNoLabel" runat="server" AssociatedControlID="PartNo">Part NO.:</asp:Label>
+                            <asp:Label ID="VehicleLabel" runat="server" AssociatedControlID="CheckBoxListVehicle">Vehicles:</asp:Label>
                         </td>
                         <td>
-                            <asp:TextBox ID="PartNo" runat="server" CssClass="textEntry"></asp:TextBox>
-                            <asp:RequiredFieldValidator ID="PartNoRequired" runat="server" ControlToValidate="PartNo"
-                                CssClass="failureNotification" ErrorMessage="Part No. is required."
-                                ToolTip="Part No. is required." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+                            <asp:CheckBoxList ID="CheckBoxListVehicle" runat="server" DataSourceID="SqlDataSource1" DataTextField="VehicleName" DataValueField="VehicleId" RepeatDirection="Horizontal" RepeatColumns="5" OnSelectedIndexChanged="CheckBoxListVehicle_SelectedIndexChanged"></asp:CheckBoxList>
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:OBG_Local %>" SelectCommand="SELECT * FROM [Vehicles]"></asp:SqlDataSource>
                         </td>
                     </tr>
                     <tr>
