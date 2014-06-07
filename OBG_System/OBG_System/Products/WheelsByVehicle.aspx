@@ -26,18 +26,17 @@
                 <tr>
                     
                     <td>
-                         <asp:CheckBox ID="VehicleCheck1" runat="server" Text='All' /></td><td>
-                         <asp:CheckBox ID="VehicleCheck2" runat="server" Text='Ford' /></td><td>
-                         <asp:CheckBox ID="VehicleCheck3" runat="server" Text='BMW' /></td><td>
-                         <asp:CheckBox ID="VehicleCheck4" runat="server" Text='Benz' /></td><td>
-                         <asp:CheckBox ID="VehicleCheck5" runat="server" Text='Toyota' /></td><td>
-                         <asp:CheckBox ID="VehicleCheck6" runat="server" Text='Honda' /></td><td>
-                         <asp:CheckBox ID="VehicleCheck7" runat="server" Text='Hyundai' /></td><td>
-                         <asp:CheckBox ID="VehicleCheck8" runat="server" Text='Chevrolet' /></td><td>
-                         <asp:CheckBox ID="VehicleCheck9" runat="server" Text='Audi' /></td><td>
-                         <asp:CheckBox ID="VehicleCheck10" runat="server" Text='BUICK' /></td><td>
+                         <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="VehicleName"
+                            DataValueField="VehicleName"
+                            CssClass="CBLayout" ID="chkVehicle" runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="10">
+                        </asp:CheckBoxList>
                     </td>
-                
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server"
+                    ConnectionString="<%$ ConnectionStrings:OBG_Local %>"
+                    SelectCommand="select v.vehiclename
+                                    from Vehicle v
+                                    inner join （select w.vehicleid from wheelsvehicle w inner join wheels e on (w.wheelsid = e.productid)) wheelsid on 
+                                                   (wheelsid.vehiclename = v.vehiclename)"></asp:SqlDataSource>
                 </tr>
                
             </table>
