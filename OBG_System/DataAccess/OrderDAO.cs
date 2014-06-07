@@ -48,18 +48,20 @@ namespace DataAccess
                                                ([ProductId]
                                                ,[Qty]
                                                ,[DiscountRate]
-                                               ,[OrderId],[ProductType])
+                                               ,[OrderId],[ProductType],[ProductName])
                                          VALUES
                                                (@ProductId
                                                ,@Qty
                                                ,@DiscountRate
-                                               ,@OrderId,@ProductType)");
+                                               ,@OrderId,@ProductType,@ProductName)");
                             SqlParameter[] paras2 = new SqlParameter[] { 
                 new SqlParameter("@ProductId", line.OrderId),
                 new SqlParameter("@Qty", line.Qty),
             new SqlParameter("@DiscountRate", line.DiscountRate),
                 new SqlParameter("@OrderId", newOrderId),
-                    new SqlParameter("@ProductType",line.ProductType)};
+                    new SqlParameter("@ProductType",line.ProductType),
+                    new SqlParameter("@ProductName",line.ProductName)
+                            };
                             command.Parameters.AddRange(paras2);
                             db.ExecuteNonQuery(command2, t);
                         }
@@ -132,7 +134,8 @@ namespace DataAccess
                             DbCommand command2 = db.GetSqlStringCommond(@"UPDATE [OrderLine]
                                            SET [ProductId] = @ProductId
                                               ,[Qty] = @Qty
-                                              ,[DiscountRate] = @DiscountRate, [ProductType]=@ProductType
+                                              ,[DiscountRate] = @DiscountRate, [ProductType]=@ProductType,
+                                            [ProductName]=@ProductName
                                          WHERE OrderId=@OrderId
                                         ");
                             SqlParameter[] paras2 = new SqlParameter[] { 
@@ -140,7 +143,8 @@ namespace DataAccess
                 new SqlParameter("@Qty", line.Qty),
             new SqlParameter("@DiscountRate", line.DiscountRate),
                 new SqlParameter("@OrderId", newOrderId),
-                            new SqlParameter("@ProductType",line.ProductType)};
+                            new SqlParameter("@ProductType",line.ProductType),
+                            new SqlParameter("@ProductName",line.ProductName)};
                             command.Parameters.AddRange(paras2);
                             db.ExecuteNonQuery(command2,t);
                         }
@@ -187,9 +191,10 @@ namespace DataAccess
 //                                    + " on o.customerid = c.customerid";
         public static DataTable GetOrderLineByOrderId(int orderId)
         {
-            DbCommand command = db.GetSqlStringCommond(@"select o.orderId,o.OrderDate,o.status,o.UserId,o.PO
-                                                from [Order] o inner join OrderLine ol
-                                                on o.orderId = ol.OrderId and OrderId = @OrderId");
+            DbCommand command = db.GetSqlStringCommond(@"select ol.productId, ol.qty, ol.discountRate, 
+                                                   ol.orderId,ol.productType,ol.productName
+                                                 from [Order] o inner join OrderLine ol
+                                                 on o.orderId = ol.OrderId and ol.OrderId = @OrderId");
 
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@OrderId", orderId),

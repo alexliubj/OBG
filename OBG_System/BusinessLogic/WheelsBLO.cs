@@ -28,5 +28,10 @@ namespace BusinessLogic
         {
             return WheelsDAO.AddNewProduct(prod,vehicles);
         }
+
+        public static DataTable GetAllWheelsVehicles()
+        {
+            return WheelsDAO.GetAllWheelsVehicles();
+        }
     }
 }
