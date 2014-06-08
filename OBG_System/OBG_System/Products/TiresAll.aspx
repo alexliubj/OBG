@@ -21,7 +21,7 @@
                     </td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Brand"
-                            DataValueField="Brand" CssClass="CBLayout" ID="ChkBrand" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" OnSelectedIndexChanged="chk_SelectedIndexChanged" />
+                            DataValueField="Brand" CssClass="CBLayout" ID="ChkBrand" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chk_SelectedIndexChanged" />
                     </td>
 
                 </tr>

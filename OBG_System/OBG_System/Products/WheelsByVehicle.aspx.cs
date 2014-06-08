@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using System.Data;
 using OBGModel;
+using DataAccess;
 
 
 public partial class Products_viewByVehicle : System.Web.UI.Page
@@ -138,5 +139,42 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
         }
 
         return newSortDirection;
+    }
+
+    protected void chk_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        //int wheelsid; 
+        //DataTable wheelsVehicle = WheelsBLO.GetAllWheelsVehiclesByWheelsId(wheelsid);
+        String sqlText = string.Empty;
+        String sqlFilterVehicle = string.Empty;
+        //String sqlwheelvehicle = 
+        foreach (ListItem item in chkVehicle.Items)
+        {
+            if (item.Selected)
+            {
+                if (sqlFilterVehicle != string.Empty)
+                {
+                    sqlFilterVehicle += " or " +  "'" + item.Text.ToString().Trim() + "'";
+                }
+                else
+                {
+                    sqlFilterVehicle += "size = " + "'" + item.Text.ToString().Trim() + "'";
+                }
+            }
+        }
+
+
+        if (!String.IsNullOrEmpty(sqlFilterVehicle))
+        {
+            sqlText += sorroundWithbrackets(sqlFilterVehicle);
+        }
+        //wheelsVehicle.DefaultView.RowFilter = sqlText;
+        //GridView4.DataSource = wheelsVehicle.DefaultView;
+        GridView4.DataBind();
+    }
+
+    private string sorroundWithbrackets(string orString)
+    {
+        return "(" + orString + ")";
     }
 }
