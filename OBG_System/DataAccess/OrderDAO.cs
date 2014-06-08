@@ -84,14 +84,15 @@ namespace DataAccess
             {
                 try
                 {
-                    DbCommand command = db.GetSqlStringCommond(@"delete from order where orderId =@orderId");
+                    DbCommand command = db.GetSqlStringCommond(@"delete order where orderId = @orderId");
                     SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@orderId", orderId) };
                     command.Parameters.AddRange(paras);
+                    int ret = db.ExecuteNonQuery(command, t);
 
                     DbCommand command2 = db.GetSqlStringCommond(@"delete from orderline where orderId = @orderId;");
                     SqlParameter[] paras2 = new SqlParameter[] { new SqlParameter("@orderId", orderId) };
                     command2.Parameters.AddRange(paras2);
-                    int ret = db.ExecuteNonQuery(command, t);
+
                     db.ExecuteNonQuery(command2, t);
                     t.Commit();
                     return ret;
@@ -192,9 +193,9 @@ namespace DataAccess
         public static DataTable GetOrderLineByOrderId(int orderId)
         {
             DbCommand command = db.GetSqlStringCommond(@"select ol.productId, ol.qty, ol.discountRate, 
-                                                   ol.orderId,ol.productType,ol.productName
+                                                   ol.orderId,ol.productType,ol.productName,ol.partNo
                                                  from [Order] o inner join OrderLine ol
-                                                 on o.orderId = ol.OrderId and ol.OrderId = @OrderId");
+                                                 on o.orderId = ol.OrderId where ol.OrderId = @OrderId");
 
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@OrderId", orderId),

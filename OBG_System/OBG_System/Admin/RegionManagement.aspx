@@ -46,7 +46,7 @@
                 <asp:TemplateField HeaderText="Delete">
                     <ItemTemplate>
                         <asp:Button ID="deleteButton" runat="server" CommandName="Delete" Text="Delete"
-                            OnClientClick="return confirm('Are you sure you want to delete this user?');" />
+                            OnClientClick="return confirm('Are you sure you want to delete this Region?');" />
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
@@ -63,7 +63,7 @@
         </asp:GridView>
         <asp:Button ID="btnAddRegion" runat="server" Text="Add New Region" OnClick="btnAddRegion_Click" align="right" />
 
-        <div id="regionInformation" runat="server" visible="True">
+        <div id="regionInformation" runat="server" visible="false">
             <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification"
                 ValidationGroup="RegisterUserValidationGroup" />
             <fieldset class="regionInfo">

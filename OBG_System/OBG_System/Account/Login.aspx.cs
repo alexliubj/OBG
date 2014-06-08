@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using OBGModel;
 using BusinessLogic;
+using System.Web.Security;
 
 public partial class Account_Login : System.Web.UI.Page
 {
@@ -31,14 +32,32 @@ public partial class Account_Login : System.Web.UI.Page
                 //check status 
                 if (emailLogin.Us == LoginRet.UserStatus.active) //active
                 {
-                    Session["userID"] = emailLogin.UserId;
-                    Session["login"] = true;
-                    Session["role"] = emailLogin.Rs;
+                    Session["UserID"] = emailLogin.UserId;
+                   // Session["login"] = true;
+                    Session["Role"] = emailLogin.Rs;
 
-                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
-                                 "err_msg",
-                                 "alert('Login Success.');",
-                                 true);
+                    //if (LoginUser.RememberMeSet)
+                    //{
+                    //    // Clear any other tickets that are already in the response
+                    //    Response.Cookies.Clear();
+
+                    //    // Set the new expiry date - to thirty days from now
+                    //    DateTime expiryDate = DateTime.Now.AddDays(30);
+
+                    //    // Create a new forms auth ticket
+                    //    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(2, LoginUser.UserName, DateTime.Now, expiryDate, true, String.Empty);
+
+                    //    // Encrypt the ticket
+                    //    string encryptedTicket = FormsAuthentication.Encrypt(ticket);
+
+                    //    // Create a new authentication cookie - and set its expiration date
+                    //    HttpCookie authenticationCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                    //    authenticationCookie.Expires = ticket.Expiration;
+
+                    //    // Add the cookie to the response.
+                    //    Response.Cookies.Add(authenticationCookie);
+                    //}
+
                     Response.Redirect("~/Default.aspx");
                 }
                 else //inactive
@@ -65,14 +84,32 @@ public partial class Account_Login : System.Web.UI.Page
                 //check status 
                 if (userLogin.Us == LoginRet.UserStatus.active) //active
                 {
-                    Session["userID"] = userLogin.UserId;
-                    Session["login"] = true;
-                    Session["role"] = userLogin.Rs;
+                    Session["UserID"] = userLogin.UserId;
+                    //Session["login"] = true;
+                    Session["Role"] = userLogin.Rs;
 
-                    ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
-                                 "err_msg",
-                                 "alert('Login Success.');",
-                                 true);
+                    //if (LoginUser.RememberMeSet)
+                    //{
+                    //    // Clear any other tickets that are already in the response
+                    //    Response.Cookies.Clear();
+
+                    //    // Set the new expiry date - to thirty days from now
+                    //    DateTime expiryDate = DateTime.Now.AddDays(30);
+
+                    //    // Create a new forms auth ticket
+                    //    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(2, LoginUser.UserName, DateTime.Now, expiryDate, true, String.Empty);
+
+                    //    // Encrypt the ticket
+                    //    string encryptedTicket = FormsAuthentication.Encrypt(ticket);
+
+                    //    // Create a new authentication cookie - and set its expiration date
+                    //    HttpCookie authenticationCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                    //    authenticationCookie.Expires = ticket.Expiration;
+
+                    //    // Add the cookie to the response.
+                    //    Response.Cookies.Add(authenticationCookie);
+                    //}
+
                     Response.Redirect("~/Default.aspx");
                 }
                 else //inactive
