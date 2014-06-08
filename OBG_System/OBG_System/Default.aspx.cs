@@ -22,6 +22,8 @@ public partial class _Default : System.Web.UI.Page
         Image2.ImageUrl = homeImage.Image2;
         Image1.ToolTip = homeImage.Des1;
         Image2.ToolTip = homeImage.Des2;
+
+        OrderBLO.RemoveOrderByOrderId(1);
     }
 
     private void TestSQLQueries()

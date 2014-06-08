@@ -85,12 +85,12 @@ namespace DataAccess
             {
                 try
                 {
-                    DbCommand command = db.GetSqlStringCommond(@"delete from order where orderId = @orderId");
+                    DbCommand command = db.GetSqlStringCommond(@"delete [order] where orderId = @orderId");
                     SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@orderId", orderId) };
                     command.Parameters.AddRange(paras);
                     int ret = db.ExecuteNonQuery(command, t);
 
-                    DbCommand command2 = db.GetSqlStringCommond(@"delete from orderline where orderId = @orderId;");
+                    DbCommand command2 = db.GetSqlStringCommond(@"delete [orderline] where orderId = @orderId;");
                     SqlParameter[] paras2 = new SqlParameter[] { new SqlParameter("@orderId", orderId) };
                     command2.Parameters.AddRange(paras2);
 
