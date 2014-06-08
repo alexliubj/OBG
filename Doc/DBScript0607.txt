@@ -1,2 +1,2 @@
-alter table orderline add PartNO varchar(255) not null;
+alter table orderline add PartNO varchar(255) not null default ('0')
 alter table orderline add ProductName varchar(255);
