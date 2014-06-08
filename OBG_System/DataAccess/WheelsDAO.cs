@@ -22,6 +22,7 @@ namespace DataAccess
             return dt;
         }
 
+
         public static DataTable GetAllWheelsVehiclesByWheelsId(int wheelsId)
         {
             DbCommand command = db.GetSqlStringCommond(@"select w.wheelsId, w.vehicleid,v.vehiclename
@@ -34,6 +35,20 @@ namespace DataAccess
             DataTable dt = db.ExecuteDataTable(command);
 
             return dt;
+        }
+
+        public static DataTable GetProductIdByVehicle(int vehicleid)
+        {
+            
+                DbCommand command = db.GetSqlStringCommond(@"select w.wheelsId
+                                    from WheelsVehicle w
+                                    where w.vehicleid = @vehicleid");
+                SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@vehicleid", vehicleid) };
+                command.Parameters.AddRange(paras);
+                DataTable dt = db.ExecuteDataTable(command);
+
+                return dt;
+            
         }
 
         public static DataTable GetAllWheelsVehicles()

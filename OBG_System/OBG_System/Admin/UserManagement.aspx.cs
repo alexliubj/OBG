@@ -24,14 +24,14 @@ public partial class Admin_Default : System.Web.UI.Page
 
     protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
     {
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            e.Row.Attributes.Add("onmouseover", "currentcolor=this.style.backgroundColor;this.style.backgroundColor='#C0C0FF';this.style.cursor='hand';");
-            //当鼠标移走时还原该行的背景色
-            e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor=currentcolor");
-            //选择任意处都选择
-            e.Row.Attributes.Add("onClick", "javascript:__doPostBack('" + GridView1.ID + "','Select$" + e.Row.RowIndex + "');");
-        }
+        //if (e.Row.RowType == DataControlRowType.DataRow)
+        //{
+        //    e.Row.Attributes.Add("onmouseover", "currentcolor=this.style.backgroundColor;this.style.backgroundColor='#C0C0FF';this.style.cursor='hand';");
+        //    //当鼠标移走时还原该行的背景色
+        //    e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor=currentcolor");
+        //    //选择任意处都选择
+        //    e.Row.Attributes.Add("onClick", "javascript:__doPostBack('" + GridView1.ID + "','Select$" + e.Row.RowIndex + "');");
+        //}
     }
 
     protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
@@ -100,13 +100,13 @@ public partial class Admin_Default : System.Web.UI.Page
     //http://hi.baidu.com/utxqrqhkvhbgmwd/item/6f5562e5bd14f301570f1d07
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            e.Row.Attributes["OnClick"] = ClientScript.GetPostBackEventReference(e.Row.Parent.Parent, "Select$" + e.Row.RowIndex);
-            e.Row.Attributes.Add("onMouseOver", "t=this.style.backgroundColor;this.style.backgroundColor='#ebebce'");
-            e.Row.Attributes.Add("onMouseOut", " this.style.backgroundColor=t");
-            e.Row.Attributes.CssStyle.Add("cursor", "hand");
-        }
+        //if (e.Row.RowType == DataControlRowType.DataRow)
+        //{
+        //    e.Row.Attributes["OnClick"] = ClientScript.GetPostBackEventReference(e.Row.Parent.Parent, "Select$" + e.Row.RowIndex);
+        //    e.Row.Attributes.Add("onMouseOver", "t=this.style.backgroundColor;this.style.backgroundColor='#ebebce'");
+        //    e.Row.Attributes.Add("onMouseOut", " this.style.backgroundColor=t");
+        //    e.Row.Attributes.CssStyle.Add("cursor", "hand");
+        //}
 
         //if (e.Row.RowType == DataControlRowType.DataRow)
         //{

@@ -143,38 +143,50 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
 
     protected void chk_SelectedIndexChanged(object sender, EventArgs e)
     {
-        //int wheelsid; 
-        //DataTable wheelsVehicle = WheelsBLO.GetAllWheelsVehiclesByWheelsId(wheelsid);
+        int vehicleid = 0;
+        vehicleid = int.Parse(rdVehicle.SelectedValue);
+      
+        //Wheels wheels = new Wheels();
+        //int wheelsid = wheels.ProductId;
+        //List<Vehicle> vehicles = new List<Vehicle>();
+        DataTable wheel = WheelsBLO.GetAllProducts();
+        DataTable wheelsVehicle = WheelsBLO.GetProductIdByVehicle(vehicleid);
         String sqlText = string.Empty;
+        List<int> wheelsids = new List<int>();
+        
+        for(int i = 0; i< wheelsVehicle.Rows.Count; i++)
+        {
+
+            wheelsids.Add(Convert.ToInt32(wheelsVehicle.Rows[i]["wheelsid"]));
+
+        }
+       // int id=0;
+        List<int> distictWheels = (from id in wheelsids select id).Distinct().ToList();
         String sqlFilterVehicle = string.Empty;
         //String sqlwheelvehicle = 
-        foreach (ListItem item in chkVehicle.Items)
+        for (int i = 0; i < distictWheels.Count; i++)
         {
-            if (item.Selected)
+
+
+            if (sqlFilterVehicle != string.Empty)
             {
-                if (sqlFilterVehicle != string.Empty)
-                {
-                    sqlFilterVehicle += " or " +  "'" + item.Text.ToString().Trim() + "'";
-                }
-                else
-                {
-                    sqlFilterVehicle += "size = " + "'" + item.Text.ToString().Trim() + "'";
-                }
+                sqlFilterVehicle += " or productid = " + "'" + distictWheels[i] + "'";
             }
+            else
+            {
+                sqlFilterVehicle += "productid = " + "'" + distictWheels[i] + "'";
+            }
+            
         }
+        ////sqlText = WheelsBLO.GetAllWheelsVehiclesByWheelsId(wheels.ProductId);
+        
 
-
-        if (!String.IsNullOrEmpty(sqlFilterVehicle))
-        {
-            sqlText += sorroundWithbrackets(sqlFilterVehicle);
-        }
-        //wheelsVehicle.DefaultView.RowFilter = sqlText;
-        //GridView4.DataSource = wheelsVehicle.DefaultView;
+        ////if (!String.IsNullOrEmpty(sqlFilterVehicle))
+        ////{
+        ////    sqlText += sorroundWithbrackets(sqlFilterVehicle);
+        ////}
+        wheel.DefaultView.RowFilter = sqlFilterVehicle;
+        GridView4.DataSource = wheel.DefaultView;
         GridView4.DataBind();
-    }
-
-    private string sorroundWithbrackets(string orString)
-    {
-        return "(" + orString + ")";
     }
 }

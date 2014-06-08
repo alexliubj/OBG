@@ -39,9 +39,9 @@ namespace BusinessLogic
             return WheelsDAO.GetAllWheelsVehicles();
         }
 
-        public static DataTable GetAllWheelsVehicles()
+        public static DataTable GetProductIdByVehicle(int vehicleid)
         {
-            return WheelsDAO.GetAllWheelsVehicles();
+            return WheelsDAO.GetProductIdByVehicle(vehicleid);
         }
     }
 }

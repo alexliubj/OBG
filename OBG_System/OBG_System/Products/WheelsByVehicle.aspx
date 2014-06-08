@@ -26,17 +26,14 @@
                 <tr>
                     
                     <td>
-                         <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="VehicleName"
-                            DataValueField="VehicleName"
-                            CssClass="CBLayout" ID="chkVehicle" runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="10">
-                        </asp:CheckBoxList>
+                         <asp:RadioButtonList DataSourceID="SqlDataSource1" DataTextField="VehicleName"
+                            DataValueField="Vehicleid"
+                            CssClass="CBLayout" ID="rdVehicle" runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chk_SelectedIndexChanged">
+                        </asp:RadioButtonList>
                     </td>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server"
                     ConnectionString="<%$ ConnectionStrings:OBG_Local %>"
-                    SelectCommand="select v.vehiclename
-                                    from Vehicle v
-                                    inner join （select w.vehicleid from wheelsvehicle w inner join wheels e on (w.wheelsid = e.productid)) wheelsid on 
-                                                   (wheelsid.vehiclename = v.vehiclename)"></asp:SqlDataSource>
+                    SelectCommand="select * from [vehicles]"></asp:SqlDataSource>
                 </tr>
                
             </table>
