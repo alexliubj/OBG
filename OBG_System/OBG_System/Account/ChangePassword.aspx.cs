@@ -9,14 +9,14 @@ using BusinessLogic;
 
 public partial class Account_ChangePassword : System.Web.UI.Page
 {
-    int userID;
+    int userID = 0;
     User user = new User();
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        if (Session["userID"] != null)
+        if (Session["UserID"] != null)
         {
-            userID = (int)Session["userID"];
+            userID = (int)Session["UserID"];
         }
         else
         {

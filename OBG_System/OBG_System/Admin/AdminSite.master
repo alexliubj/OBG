@@ -14,7 +14,7 @@
         <div class="header">
             <div class="title">
                 <h1>
-                    <img class="style1" src="<%= Page.ResolveUrl("~")%>Pictures/logo.png" />OBG Management Page
+                    <img class="style1" alt="logo" src="<%= Page.ResolveUrl("~")%>pictures/logo.png" />obg management page
                 </h1>
             </div>
             <div class="clear hideSkiplink">
@@ -22,11 +22,13 @@
                     <Items>
                         <asp:MenuItem NavigateUrl="Home.aspx" Text="Home Page Management"/>
                         <asp:MenuItem NavigateUrl="DiscountManagement.aspx" Text="Discount Management"/>
-                        <asp:MenuItem NavigateUrl="PermissionManagement.aspx" Text="Permissions"/>
-                        <asp:MenuItem NavigateUrl="ProductManagement.aspx" Text="Products"/>
+                        <asp:MenuItem NavigateUrl="OrderManagement.aspx" Text="Order Management"/>
+                        <asp:MenuItem NavigateUrl="PermissionManagement.aspx" Text="Permission Management"/>
+                        <asp:MenuItem NavigateUrl="ProductManagement.aspx" Text="Product Management"/>
                         <asp:MenuItem NavigateUrl="RegionManagement.aspx" Text="Region Management"/>
                         <asp:MenuItem NavigateUrl="RoleManagement.aspx" Text="Role Management"/>
                         <asp:MenuItem NavigateUrl="UserManagement.aspx" Text="User Management"/>
+
                     </Items>
                 </asp:Menu>
             </div>
