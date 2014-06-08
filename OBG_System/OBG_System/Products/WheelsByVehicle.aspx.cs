@@ -145,10 +145,6 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
     {
         int vehicleid = 0;
         vehicleid = int.Parse(rdVehicle.SelectedValue);
-      
-        //Wheels wheels = new Wheels();
-        //int wheelsid = wheels.ProductId;
-        //List<Vehicle> vehicles = new List<Vehicle>();
         DataTable wheel = WheelsBLO.GetAllProducts();
         DataTable wheelsVehicle = WheelsBLO.GetProductIdByVehicle(vehicleid);
         String sqlText = string.Empty;
@@ -160,10 +156,8 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
             wheelsids.Add(Convert.ToInt32(wheelsVehicle.Rows[i]["wheelsid"]));
 
         }
-       // int id=0;
         List<int> distictWheels = (from id in wheelsids select id).Distinct().ToList();
         String sqlFilterVehicle = string.Empty;
-        //String sqlwheelvehicle = 
         for (int i = 0; i < distictWheels.Count; i++)
         {
 
@@ -178,13 +172,6 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
             }
             
         }
-        ////sqlText = WheelsBLO.GetAllWheelsVehiclesByWheelsId(wheels.ProductId);
-        
-
-        ////if (!String.IsNullOrEmpty(sqlFilterVehicle))
-        ////{
-        ////    sqlText += sorroundWithbrackets(sqlFilterVehicle);
-        ////}
         wheel.DefaultView.RowFilter = sqlFilterVehicle;
         GridView4.DataSource = wheel.DefaultView;
         GridView4.DataBind();

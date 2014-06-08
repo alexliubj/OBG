@@ -14,19 +14,20 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <%--<form id="Form2" runat="server">
-        <asp:GridView ID="ShoppingCartGridView" runat="server" AutoGenerateColumns="False" SkinID="ShoppingCart"
+    <div id="ShoppingCartTitle" runat="server" class="ContentHead"><h1>Shopping Cart</h1></div>
+        <asp:GridView ID="ShoppingCartGridView" runat="server" AutoGenerateColumns="False" ShowFooter="True" GridLines="Vertical" CellPadding="4" SkinID="ShoppingCart"
             Width="100%" DataKeyNames="ProductID" OnRowDataBound="ShoppingCartGridView_RowDataBound">
             <Columns>
-                <asp:TemplateField HeaderText="ProductName" SortExpression="ProductName">
+                <%--<asp:TemplateField HeaderText="ProductName" SortExpression="ProductName">
                     <ItemTemplate>
                         <asp:Label ID="ProductNameLable" runat="server" Text='<%# Eval("ProductName") %>'></asp:Label>
                     </ItemTemplate>
-                </asp:TemplateField>
-                <asp:BoundField DataField="AccountPrice" HeaderText="Price" />
-                <asp:BoundField DataField="Account" HeaderText="Discount" />--%>
-                <%-- <asp:BoundField DataField="Date" HeaderText="Date" />--%>
-                <%--<asp:TemplateField HeaderText="QTY">
+                </asp:TemplateField>--%>
+                <asp:BoundField DataField="ProductId" HeaderText="ID" SortExpression="productId" />
+                <asp:BoundField DataField="Product." HeaderText="Price" />
+                <asp:BoundField DataField="Account" HeaderText="Discount" />
+                 <asp:BoundField DataField="Date" HeaderText="Date" />
+                <asp:TemplateField HeaderText="QTY">
                     <ItemTemplate>
                         <asp:TextBox ID="txtCount" runat="server" Width="35px" Text='<%# Eval("Quantity") %>'></asp:TextBox>
                     </ItemTemplate>
@@ -34,6 +35,7 @@
                 <asp:ButtonField CommandName="delete" Text="Delete" />
             </Columns>
         </asp:GridView>
+    
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
             <tr>
                 <td class="style1">
@@ -48,12 +50,12 @@
                         ImageUrl="~/Pictures/checkoutButton.png" OnClick="IBTCheckout_Click" /></td>
             </tr>
         </table>
-    </form>--%>
+    
 
     
 
    
-    <div>
+    <%--<div>
         <table align="center" border="0" cellpadding="0" cellspacing="0" style="font-size: 10pt;
             width: 637px;">
             <tr>
@@ -115,15 +117,15 @@
                     </asp:DataList>
                     <br />
                     <%--<asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Update" />--%>
-                </td>
+               <%-- </td>
             </tr>
             <tr>
                 <td style="height: 140px; text-align: right; background-image: url(Image/购物车/子页底.jpg); width: 637px;">
                     &nbsp;</td>
             </tr>
-        </table>
+        </table>--%>
    
-    </div>
+    <%--</div>--%>
    
 
 
