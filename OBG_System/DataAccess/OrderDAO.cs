@@ -48,19 +48,20 @@ namespace DataAccess
                                                ([ProductId]
                                                ,[Qty]
                                                ,[DiscountRate]
-                                               ,[OrderId],[ProductType],[ProductName])
+                                               ,[OrderId],[ProductType],[ProductName],[PartNO])
                                          VALUES
                                                (@ProductId
                                                ,@Qty
                                                ,@DiscountRate
-                                               ,@OrderId,@ProductType,@ProductName)");
+                                               ,@OrderId,@ProductType,@ProductName,@PartNO)");
                             SqlParameter[] paras2 = new SqlParameter[] { 
                 new SqlParameter("@ProductId", line.OrderId),
                 new SqlParameter("@Qty", line.Qty),
             new SqlParameter("@DiscountRate", line.DiscountRate),
                 new SqlParameter("@OrderId", newOrderId),
                     new SqlParameter("@ProductType",line.ProductType),
-                    new SqlParameter("@ProductName",line.ProductName)
+                    new SqlParameter("@ProductName",line.ProductName),
+                    new SqlParameter("@PartNO",line.PartNO)
                             };
                             command.Parameters.AddRange(paras2);
                             db.ExecuteNonQuery(command2, t);
@@ -84,7 +85,7 @@ namespace DataAccess
             {
                 try
                 {
-                    DbCommand command = db.GetSqlStringCommond(@"delete order where orderId = @orderId");
+                    DbCommand command = db.GetSqlStringCommond(@"delete from order where orderId = @orderId");
                     SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@orderId", orderId) };
                     command.Parameters.AddRange(paras);
                     int ret = db.ExecuteNonQuery(command, t);
@@ -136,7 +137,7 @@ namespace DataAccess
                                            SET [ProductId] = @ProductId
                                               ,[Qty] = @Qty
                                               ,[DiscountRate] = @DiscountRate, [ProductType]=@ProductType,
-                                            [ProductName]=@ProductName
+                                            [ProductName]=@ProductName, [PartNO] = @PartNO 
                                          WHERE OrderId=@OrderId
                                         ");
                             SqlParameter[] paras2 = new SqlParameter[] { 
@@ -145,7 +146,8 @@ namespace DataAccess
             new SqlParameter("@DiscountRate", line.DiscountRate),
                 new SqlParameter("@OrderId", newOrderId),
                             new SqlParameter("@ProductType",line.ProductType),
-                            new SqlParameter("@ProductName",line.ProductName)};
+                            new SqlParameter("@ProductName",line.ProductName),
+                            new SqlParameter("PartNO",line.PartNO)};
                             command.Parameters.AddRange(paras2);
                             db.ExecuteNonQuery(command2,t);
                         }
