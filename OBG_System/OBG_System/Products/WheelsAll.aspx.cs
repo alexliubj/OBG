@@ -112,7 +112,7 @@ public partial class Products_wheelall : System.Web.UI.Page
         throw new NotImplementedException();
     }
 
-    protected void GridView1_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
+    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         if (e.CommandName == "MyButtonClick")
         {            

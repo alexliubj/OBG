@@ -15,9 +15,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div id="ShoppingCartTitle" runat="server" class="ContentHead"><h1>Shopping Cart</h1></div>
-     <a href="Default.aspx">< Back to Products</a>
-        <asp:GridView ID="ShoppingCartGridView" runat="server"  EmptyDataText="There is nothing in your shopping cart." AutoGenerateColumns="False" ShowFooter="True" GridLines="Vertical" CellPadding="4" SkinID="ShoppingCart"
-            Width="100%" DataKeyNames="ProductID" OnRowDataBound="ShoppingCartGridView_EditingBound">
+     <a href="~/Default.aspx">< Back to Products</a>
+        <asp:GridView ID="ShoppingCartGridView" runat="server" Visible="true"  EmptyDataText="There is nothing in your shopping cart." AutoGenerateColumns="False" ShowFooter="True" GridLines="Vertical" CellPadding="4" SkinID="ShoppingCart"
+            Width="100%" DataKeyNames="ProductID" >
             <Columns>
                 <%--<asp:TemplateField HeaderText="ProductName" SortExpression="ProductName">
                     <ItemTemplate>
@@ -52,6 +52,8 @@
                 <asp:ButtonField CommandName="delete" Text="Delete" />
             </Columns>
         </asp:GridView>
+
+    
     <div>
         <p></p>
         <strong>
