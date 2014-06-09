@@ -41,7 +41,7 @@
                     </td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource2" DataTextField="Size"
-                            DataValueField="Size" CssClass="CBLayout" ID="ChkSize" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" OnSelectedIndexChanged="chk_SelectedIndexChanged" />
+                            DataValueField="Size" CssClass="CBLayout" ID="ChkSize" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chk_SelectedIndexChanged" />
 
 
 
@@ -57,7 +57,7 @@
                     </td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource3" DataTextField="Season"
-                            DataValueField="Season" CssClass="CBLayout" ID="ChkSeason" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" OnSelectedIndexChanged="chk_SelectedIndexChanged" />
+                            DataValueField="Season" CssClass="CBLayout" ID="ChkSeason" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chk_SelectedIndexChanged" />
                     </td>
 
                 </tr>
@@ -177,7 +177,7 @@
             </asp:TemplateField>--%>
             <asp:TemplateField HeaderText="ADD" SortExpression="ADD">
                 <ItemTemplate>
-                    <asp:ImageButton ID="AddBt" runat="server" ImageUrl="../Pictures/images.jpg" OnClick="AddBt_Click"></asp:ImageButton>
+                    <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg" OnClick="AddBt_Click"></asp:ImageButton>
                 </ItemTemplate>
             </asp:TemplateField>
 
