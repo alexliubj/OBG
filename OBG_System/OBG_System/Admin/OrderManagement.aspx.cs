@@ -13,9 +13,19 @@ using System.IO;
 public partial class Admin_Default : System.Web.UI.Page
 {
     private DataSet orderDataSet;
+    int adminID = 0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["AdminID"] != null)
+        {
+            adminID = (int)Session["AdminID"];
+        }
+        else
+        {
+            Response.Redirect("~/Admin/Login.aspx");
+        }
+
         if (!IsPostBack)
         {
             GridView1_Bind();
@@ -33,6 +43,47 @@ public partial class Admin_Default : System.Web.UI.Page
         GridView1.DataSource = orderDataSet;
         GridView1.DataKeyNames = new string[] { "OrderId" };
         GridView1.DataBind();
+
+        for (int i = 0; i < GridView1.Rows.Count; i++)
+        {
+            string status = ((Label)(GridView1.Rows[i].Cells[3].FindControl("Label5"))).Text.ToString().Trim();
+            string statusLabel = "";
+
+            switch (status)
+            {
+                case "0":
+                    statusLabel = "Incomplete";
+                    break;
+                case "1":
+                    statusLabel = "Pending";
+                    break;
+                case "2":
+                    statusLabel = "Processed";
+                    break;
+                case "3":
+                    statusLabel = "Partially Shipped";
+                    break;
+                case "4":
+                    statusLabel = "Shipping";
+                    break;
+                case "5":
+                    statusLabel = "Shipped";
+                    break;
+                case "6":
+                    statusLabel = "Partially Returned";
+                    break;
+                case "7":
+                    statusLabel = "Returned";
+                    break;
+                case "8":
+                    statusLabel = "Canceled";
+                    break;
+                default:
+                    statusLabel = "Unknown";
+                    break;
+            }
+            ((Label)(GridView1.Rows[i].Cells[3].FindControl("Label5"))).Text = statusLabel;
+        }
     }
 
     protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
@@ -62,8 +113,17 @@ public partial class Admin_Default : System.Web.UI.Page
     }
 
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
+    { 
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            DropDownList ddlSelectOrderStatus = (e.Row.FindControl("ddlSelectOrderStatus") as DropDownList);
 
+            string status = (e.Row.FindControl("lblSelectStatus") as Label).Text;
+
+            ddlSelectOrderStatus.Items.Insert(0, new ListItem("Please select"));
+
+            ddlSelectOrderStatus.Items.FindByValue(status).Selected = true;
+        }
     }
 
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -97,6 +157,35 @@ public partial class Admin_Default : System.Web.UI.Page
         divOrderDetail.Visible = true;
     }
 
+    protected void ddlSelectOrderStatus_Change(object sender, EventArgs e)
+    {
+        DropDownList ddl = (DropDownList)sender;
+        GridViewRow gdv = (GridViewRow)ddl.NamingContainer;
+        int index = gdv.RowIndex;
+
+        if (((DropDownList)(GridView1.Rows[index].FindControl("ddlSelectOrderStatus"))).SelectedValue.ToString() != "Please select")
+        {
+            int orderID, status;
+
+            orderID = int.Parse((((Label)(GridView1.Rows[index].FindControl("LabelOrderID"))).Text));
+
+            status = int.Parse((((DropDownList)(GridView1.Rows[index].FindControl("ddlSelectOrderStatus"))).SelectedValue.ToString()));
+
+            int update = 0;
+            update = OrderBLO.UpdateOrderStatus(orderID, status);
+            if (update > 0)
+            {
+                GridView1_Bind();
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                                       "err_msg",
+                                       "alert('Changing status failed.');",
+                                       true);
+            }
+        }
+    }
     #endregion
 
     #region OrderDetail

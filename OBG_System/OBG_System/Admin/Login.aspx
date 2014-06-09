@@ -3,13 +3,11 @@
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
-    <h2>Log In
+    <h2>Admin Log In
     </h2>
     <p>
-        Please enter your username/email and password.
-
+        Please enter your username and password.
     </p>
-
     <asp:Login ID="LoginAdmin" runat="server" EnableViewState="false" RenderOuterTable="false">
         <LayoutTemplate>
             <asp:Panel ID="p" runat="server" DefaultButton="LoginButton">
@@ -22,7 +20,7 @@
                     <fieldset class="login">
                         <legend>Account Information</legend>
                         <p>
-                            <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">Username/Email:</asp:Label>
+                            <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">Username:</asp:Label>
                             <asp:TextBox ID="UserName" runat="server" CssClass="textEntry"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName"
                                 CssClass="failureNotification" ErrorMessage="User Name is required." ToolTip="User Name is required."
@@ -38,6 +36,7 @@
                         <p>
                             <asp:CheckBox ID="RememberMe" runat="server" />
                             <asp:Label ID="RememberMeLabel" runat="server" AssociatedControlID="RememberMe" CssClass="inline">Keep me logged in</asp:Label>
+                            <asp:Button ID="LoginButton" runat="server" CommandName="Login" Text="Log In" ValidationGroup="LoginUserValidationGroup" OnClick="LoginButton_Click" />
                         </p>
                     </fieldset>
                 </div>

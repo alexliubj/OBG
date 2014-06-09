@@ -1,0 +1,66 @@
+INSERT INTO Vehicles
+VALUES ('Acura');
+INSERT INTO Vehicles
+VALUES ('Audi');
+INSERT INTO Vehicles
+VALUES ('BMW');
+INSERT INTO Vehicles
+VALUES ('Buick');
+INSERT INTO Vehicles
+VALUES ('Cadillac');
+INSERT INTO Vehicles
+VALUES ('Chevy');
+INSERT INTO Vehicles
+VALUES ('Chrysler');
+INSERT INTO Vehicles
+VALUES ('Dodge');
+INSERT INTO Vehicles
+VALUES ('Honda');
+INSERT INTO Vehicles
+VALUES ('Hyundai');
+INSERT INTO Vehicles
+VALUES ('Infiniti');
+INSERT INTO Vehicles
+VALUES ('Jaguar');
+INSERT INTO Vehicles
+VALUES ('Jeep');
+INSERT INTO Vehicles
+VALUES ('Kia');
+INSERT INTO Vehicles
+VALUES ('Land Rover');
+INSERT INTO Vehicles
+VALUES ('Lexus');
+INSERT INTO Vehicles
+VALUES ('Lincoln');
+INSERT INTO Vehicles
+VALUES ('Mazda');
+INSERT INTO Vehicles
+VALUES ('Mercedes');
+INSERT INTO Vehicles
+VALUES ('Mini');
+INSERT INTO Vehicles
+VALUES ('Mitsubishi');
+INSERT INTO Vehicles
+VALUES ('Nissan');
+INSERT INTO Vehicles
+VALUES ('Pontiac');
+INSERT INTO Vehicles
+VALUES ('Porsche');
+INSERT INTO Vehicles
+VALUES ('Saab');
+INSERT INTO Vehicles
+VALUES ('Saturn');
+INSERT INTO Vehicles
+VALUES ('Scion');
+INSERT INTO Vehicles
+VALUES ('Subaru');
+INSERT INTO Vehicles
+VALUES ('Suzuki');
+INSERT INTO Vehicles
+VALUES ('Tesla');
+INSERT INTO Vehicles
+VALUES ('Toyota');
+INSERT INTO Vehicles
+VALUES ('Volkswagen');
+INSERT INTO Vehicles
+VALUES ('Volvo');

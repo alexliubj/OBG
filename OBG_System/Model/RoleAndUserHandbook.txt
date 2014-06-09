@@ -12,13 +12,19 @@
 			}
 			 enum OrderStatus
 			{
-				created,
-				shipped,
-				finished,
+			  Incomplete, 0
+			  Pending, 1
+			  Processed, 2
+			  PartiallyShipped, 3
+			  Shipping, 4
+			  Shipped, 5
+			  PartiallyReturned, 6
+			  Returned, 7
+			  Canceled 8     
 			};
 			enum ProductType
 			{
-				wheels,
-				tires,
-				accs,
+				wheels, 0
+				tires, 1
+				accs 2
 			}

@@ -13,9 +13,19 @@ public partial class Admin_Default : System.Web.UI.Page
 {
     DataSet rolesDataSet;
     DataSet userRolesDataSet;
+    int adminID = 0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["AdminID"] != null)
+        {
+            adminID = (int)Session["AdminID"];
+        }
+        else
+        {
+            Response.Redirect("~/Admin/Login.aspx");
+        }
+
         if (!Page.IsPostBack)
         {
             Gridview1_Bind();
