@@ -20,12 +20,12 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             user = UserBLO.GetUserInfoWithUserId(userID);
             userName = user.UserName;
             btnLogin.Text = "Log Out";
-            lblWelcome.Text = "Welcome, " + userName + "!";
+            lblWelcome.Text = "Welcome back, " + userName + "!";
         }
         else
         {
             btnLogin.Text = "Log In";
-            lblWelcome.Text = "Welcom, please ";
+            lblWelcome.Text = "Welcome, please ";
         }
         MenuItem ms = NavigationMenu.FindItem(Page.Header.Title);
         if (ms != null)

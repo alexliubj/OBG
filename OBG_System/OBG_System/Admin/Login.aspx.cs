@@ -11,10 +11,15 @@ using System.Web.Security;
 public partial class Admin_Default : System.Web.UI.Page
 {
     User newUser = new User();
+    int adminID = 0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Session["AdminID"] != null)
+        {
+            adminID = (int)Session["AdminID"];
+            Response.Redirect("~/Admin/Home.aspx");
+        }
     }
 
     protected void LoginButton_Click(object sender, EventArgs e)
@@ -82,7 +87,7 @@ public partial class Admin_Default : System.Web.UI.Page
             //check status 
             if (userLogin.Us == LoginRet.UserStatus.active) //active
             {
-                Session["UserID"] = userLogin.UserId;
+                Session["AdminID"] = userLogin.UserId;
                 //Session["login"] = true;
                 Session["Role"] = userLogin.Rs;
 
@@ -108,7 +113,7 @@ public partial class Admin_Default : System.Web.UI.Page
                     Response.Cookies.Add(authenticationCookie);
                 }
 
-                Response.Redirect("~/Home.aspx");
+                Response.Redirect("~/Admin/Home.aspx");
             }
             else //inactive
             {

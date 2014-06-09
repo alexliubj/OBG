@@ -13,9 +13,19 @@ using System.Text.RegularExpressions;
 public partial class Admin_Default : System.Web.UI.Page
 {
     private DataSet disDataSet;
+    int adminID = 0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["AdminID"] != null)
+        {
+            adminID = (int)Session["AdminID"];
+        }
+        else
+        {
+            Response.Redirect("~/Admin/Login.aspx");
+        }
+
         if (!IsPostBack)
         {
             Gridview1_Bind();

@@ -14,9 +14,16 @@
         <div class="header">
             <div class="title">
                 <h1>
-                    <img class="style1" alt="logo" src="<%= Page.ResolveUrl("~")%>pictures/logo.png" />obg management page
+                    <img class="style1" alt="logo" src="<%= Page.ResolveUrl("~")%>pictures/logo.png" />obg management system
                 </h1>
             </div>
+
+             <div class="loginDisplay">
+                    <asp:Label ID="lblWelcome" runat="server" Text="Welcome!"></asp:Label>
+                    <asp:Button ID="btnLogin" runat="server" Text="Error" OnClick="btnLogin_Click" />
+
+                </div>
+
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="true" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>

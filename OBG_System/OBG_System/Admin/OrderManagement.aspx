@@ -11,11 +11,13 @@
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="OrderID" HeaderText="Order ID" InsertVisible="False" ReadOnly="True" SortExpression="OrderID" />
+
                 <asp:TemplateField HeaderText="UserID" SortExpression="UserID">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("UserID") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
+                        <asp:Label ID="LabelOrderID" runat="server"  Visible="false" Text='<%# Bind("OrderID") %>'></asp:Label>
                         <asp:Label ID="Label3" runat="server" Text='<%# Bind("UserID") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
@@ -48,6 +50,22 @@
                     <ItemTemplate>
                         <asp:Button ID="deleteButton" runat="server" CommandName="Delete" Text="Delete"
                             OnClientClick="return confirm('Are you sure you want to delete this order?');" />
+                    </ItemTemplate>
+                </asp:TemplateField>
+                 <asp:TemplateField HeaderText="Change Order Status">
+                    <ItemTemplate>
+                        <asp:Label ID="lblSelectStatus" runat="server" Text='<%# Eval("Status") %>' Visible="false" />
+                        <asp:DropDownList ID="ddlSelectOrderStatus" runat="server" OnSelectedIndexChanged="ddlSelectOrderStatus_Change" AutoPostBack="true">
+                            <asp:ListItem Text="Incomplete" Value="0"></asp:ListItem>
+                             <asp:ListItem Text="Pending" Value="1"></asp:ListItem>
+                             <asp:ListItem Text="Processed" Value="2"></asp:ListItem>
+                             <asp:ListItem Text="Partially Shipped" Value="3"></asp:ListItem>
+                             <asp:ListItem Text="Shipping" Value="4"></asp:ListItem>
+                             <asp:ListItem Text="Shipped" Value="5"></asp:ListItem>
+                             <asp:ListItem Text="Partially Returned" Value="6"></asp:ListItem>
+                             <asp:ListItem Text="Returned" Value="7"></asp:ListItem>
+                             <asp:ListItem Text="Canceled" Value="8"></asp:ListItem>
+                        </asp:DropDownList>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

@@ -15,13 +15,19 @@ public partial class Admin_Default : System.Web.UI.Page
     private DataSet tiresDataSet;
     private DataSet accessoriesDataSet;
     //private HttpPostedFile postedFile = null;
-
-
-
+    int adminID = 0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        //FileUploadControl.Attributes.Add("onchange", "FileUploadControl_onchange(this);");
+        if (Session["AdminID"] != null)
+        {
+            adminID = (int)Session["AdminID"];
+        }
+        else
+        {
+            Response.Redirect("~/Admin/Login.aspx");
+        }
+
         if (!IsPostBack)
         {
             Gridview1_Bind();
