@@ -89,8 +89,8 @@ public partial class Products_tireall : System.Web.UI.Page
             double price;
             tID = Convert.ToInt32(GridView2.DataKeys[rowindex].Value.ToString());
             qty = Convert.ToInt32(((TextBox)GridView2.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("PriceLabel")).Text);
-            sc.ProductId = tID;
+            price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("PricingLabel")).Text);
+            sc.TireId = tID;
             sc.Qty = qty;
             sc.Pricing = price;
             shoppingcart.Add(sc);

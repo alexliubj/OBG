@@ -38,6 +38,15 @@ namespace OBGModel
             get { return productId; }
             set { productId = value; }
         }
+
+        private string image;
+
+        public string Image
+        {
+            get { return image; }
+            set { image = value; }
+        }
+
         private int qty;
 
         public int Qty

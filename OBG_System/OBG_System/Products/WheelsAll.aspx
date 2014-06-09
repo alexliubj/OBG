@@ -54,7 +54,7 @@
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Size"
                             DataValueField="Size"
-                            CssClass="CBLayout" ID="chkSize" runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
+                            CssClass="CBLayout" ID="chkSize" runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
                     </td>
                 </tr>
@@ -83,7 +83,7 @@
                     <td class="auto-style5">PCD:</td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource2" DataTextField="PCD"
-                            DataValueField="PCD" CssClass="CBLayout" ID="chkPCD" runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
+                            DataValueField="PCD" CssClass="CBLayout" ID="chkPCD" runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
                     </td>
                 </tr>
@@ -92,7 +92,7 @@
                     <td class="auto-style3">Finish:</td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource3" DataTextField="Finish"
-                            DataValueField="Finish" CssClass="CBLayout" ID="chkFinish" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
+                            DataValueField="Finish" CssClass="CBLayout" ID="chkFinish" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
                     </td>
                 </tr>
@@ -101,7 +101,7 @@
                     <td class="auto-style5">Offset:</td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource4" DataTextField="Offset"
-                            DataValueField="Offset" CssClass="CBLayout" ID="chkOffset" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
+                            DataValueField="Offset" CssClass="CBLayout" ID="chkOffset" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
                     </td>
                 </tr>
@@ -110,7 +110,7 @@
                     <td class="auto-style5">Seat:</td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource5" DataTextField="Seat"
-                            DataValueField="Seat" CssClass="CBLayout" ID="chkSeat" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
+                            DataValueField="Seat" CssClass="CBLayout" ID="chkSeat" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
                     </td>
                 </tr>
@@ -119,7 +119,7 @@
                     <td class="auto-style5">Bore:</td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource6" DataTextField="Bore"
-                            DataValueField="Bore" CssClass="CBLayout" ID="chkBore" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
+                            DataValueField="Bore" CssClass="CBLayout" ID="chkBore" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
                     </td>
                 </tr>

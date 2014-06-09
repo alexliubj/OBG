@@ -15,28 +15,53 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div id="ShoppingCartTitle" runat="server" class="ContentHead"><h1>Shopping Cart</h1></div>
-        <asp:GridView ID="ShoppingCartGridView" runat="server" AutoGenerateColumns="False" ShowFooter="True" GridLines="Vertical" CellPadding="4" SkinID="ShoppingCart"
-            Width="100%" DataKeyNames="ProductID" OnRowDataBound="ShoppingCartGridView_RowDataBound">
+     <a href="Default.aspx">< Back to Products</a>
+        <asp:GridView ID="ShoppingCartGridView" runat="server"  EmptyDataText="There is nothing in your shopping cart." AutoGenerateColumns="False" ShowFooter="True" GridLines="Vertical" CellPadding="4" SkinID="ShoppingCart"
+            Width="100%" DataKeyNames="ProductID" OnRowDataBound="ShoppingCartGridView_EditingBound">
             <Columns>
                 <%--<asp:TemplateField HeaderText="ProductName" SortExpression="ProductName">
                     <ItemTemplate>
                         <asp:Label ID="ProductNameLable" runat="server" Text='<%# Eval("ProductName") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>--%>
-                <asp:BoundField DataField="ProductId" HeaderText="ID" SortExpression="productId" />
-                <asp:BoundField DataField="Product." HeaderText="Price" />
-                <asp:BoundField DataField="Account" HeaderText="Discount" />
-                 <asp:BoundField DataField="Date" HeaderText="Date" />
+                <asp:TemplateField HeaderText="ProductID" SortExpression="ProductID">
+                <ItemTemplate>
+                    <asp:Label ID="idLabel" runat="server" Text='<%# Bind("ProductID") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+                <asp:TemplateField HeaderText="Image" SortExpression="Image">
+                <ItemTemplate>
+                    <asp:Label ID="imageLabel" runat="server" Text='<%# Bind("Image") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+                <asp:TemplateField HeaderText="Price" SortExpression="ProductID">
+                <ItemTemplate>
+                    <asp:Label ID="PriceLabel" runat="server" Text='<%# Bind("Price") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
                 <asp:TemplateField HeaderText="QTY">
                     <ItemTemplate>
                         <asp:TextBox ID="txtCount" runat="server" Width="35px" Text='<%# Eval("Quantity") %>'></asp:TextBox>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <%--<asp:TemplateField HeaderText="Item Total">            
+                <ItemTemplate>
+                    <%#: String.Format("{0:c}", ((Convert.ToDouble(Item.Quantity)) *  Convert.ToDouble(Item.Product.UnitPrice)))%>
+                </ItemTemplate>        
+        </asp:TemplateField> --%>
                 <asp:ButtonField CommandName="delete" Text="Delete" />
             </Columns>
         </asp:GridView>
-    
-        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <div>
+        <p></p>
+        <strong>
+            <asp:Label ID="LabelTotalText" runat="server" Text="Order Total: "></asp:Label>
+            <asp:Label ID="Label1" runat="server" EnableViewState="false"></asp:Label>
+        </strong> 
+        <asp:ImageButton ID="ImageButton1" runat="server" ImageAlign="Right"
+                        ImageUrl="~/Pictures/checkoutButton.png" OnClick="IBTCheckout_Click" />
+    </div>
+        <%--<table border="0" cellpadding="0" cellspacing="0" width="100%">
             <tr>
                 <td class="style1">
                     <strong>Total：</strong></td>
@@ -49,7 +74,7 @@
                     <asp:ImageButton ID="IBTCheckout" runat="server"
                         ImageUrl="~/Pictures/checkoutButton.png" OnClick="IBTCheckout_Click" /></td>
             </tr>
-        </table>
+        </table>--%>
     
 
     

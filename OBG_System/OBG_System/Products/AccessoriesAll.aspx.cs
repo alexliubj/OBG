@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
 using BusinessLogic;
+using OBGModel;
 
 public partial class Products_accAll : System.Web.UI.Page
 {
@@ -139,5 +140,30 @@ public partial class Products_accAll : System.Web.UI.Page
     private string sorroundWithbrackets(string orString)
     {
         return "(" + orString + ")";
+    }
+
+    protected void GridView1_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "MyButtonClick")
+        {
+            //Get rowindex            
+            int rowindex = Convert.ToInt32(e.CommandArgument);
+            //Get Row           
+            GridViewRow gvr = GridView6.Rows[rowindex];
+
+
+            List<ShopingCart> shoppingcart = new List<ShopingCart>();
+            ShopingCart sc = new ShopingCart();
+            int pID, qty;
+            double price;
+            pID = Convert.ToInt32(GridView6.DataKeys[rowindex].Value.ToString());
+            qty = Convert.ToInt32(((TextBox)GridView6.Rows[rowindex].FindControl("QTYTextBox")).Text);
+            price = Convert.ToDouble(((Label)GridView6.Rows[rowindex].FindControl("PriceLabel")).Text);
+            sc.AccId = pID;
+            sc.Qty = qty;
+            sc.Pricing = price;
+            shoppingcart.Add(sc);
+            Session["Cart"] = shoppingcart;
+        }
     }
 }
