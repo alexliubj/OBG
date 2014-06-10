@@ -3,7 +3,53 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
+        <style type="text/css">
+.myButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) );
+	background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
+	background-color:#3d94f6;
+	-webkit-border-top-left-radius:15px;
+	-moz-border-radius-topleft:15px;
+	border-top-left-radius:15px;
+	-webkit-border-top-right-radius:15px;
+	-moz-border-radius-topright:15px;
+	border-top-right-radius:15px;
+	-webkit-border-bottom-right-radius:15px;
+	-moz-border-radius-bottomright:15px;
+	border-bottom-right-radius:15px;
+	-webkit-border-bottom-left-radius:15px;
+	-moz-border-radius-bottomleft:15px;
+	border-bottom-left-radius:15px;
+	text-indent:0;
+	border:1px solid #337fed;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:auto;
+	line-height:25px;
+	width:auto;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 0px 0px #1570cd;
+}
+.myButton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
+	background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');
+	background-color:#1e62d0;
+}.myButton:active {
+	position:relative;
+	top:1px;
+}</style>
     Instruction: Only two images could be saved at a moment, inserting a new image will replace the older one.
+    <div>
      <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification"
             ValidationGroup="RegisterUserValidationGroup" />
     <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" OnMenuItemClick="NavigationMenu_MenuItemClick">
@@ -40,10 +86,10 @@
         </asp:TableRow>
         <asp:TableFooterRow>
             <asp:TableCell>
-                <asp:Button ID="BtnSave" runat="server" OnClick="BtnSave_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup"/>
+                <asp:Button ID="BtnSave" runat="server" OnClick="BtnSave_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton" />
             </asp:TableCell>
             <asp:TableCell>
-                <asp:Button ID="BtnCancle" runat="server" OnClick="BtnCancle_Click" Text="Cancle" Visible="true" />
+                <asp:Button ID="BtnCancle" runat="server" OnClick="BtnCancle_Click" Text="Cancle" Visible="true" CssClass="myButton"/>
             </asp:TableCell>
         </asp:TableFooterRow>
     </asp:Table>
@@ -136,12 +182,13 @@
         </asp:TableRow>
         <asp:TableFooterRow>
             <asp:TableCell>
-                <asp:Button ID="BtnInitialSave" runat="server" OnClick="BtnInitialSave_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup"/>
+                <asp:Button ID="BtnInitialSave" runat="server" OnClick="BtnInitialSave_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton"/>
             </asp:TableCell>
             <asp:TableCell>
-                <asp:Button ID="BtnInitialCancle" runat="server" OnClick="BtnInitialCancle_Click" Text="Cancle" Visible="true" />
+                <asp:Button ID="BtnInitialCancle" runat="server" OnClick="BtnInitialCancle_Click" Text="Cancle" Visible="true" CssClass="myButton"/>
             </asp:TableCell>
         </asp:TableFooterRow>
     </asp:Table>
+        </div>
 </asp:Content>
 

@@ -5,6 +5,51 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
+        <style type="text/css">
+.myButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #3d94f6), color-stop(1, #1e62d0) );
+	background:-moz-linear-gradient( center top, #3d94f6 5%, #1e62d0 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
+	background-color:#3d94f6;
+	-webkit-border-top-left-radius:15px;
+	-moz-border-radius-topleft:15px;
+	border-top-left-radius:15px;
+	-webkit-border-top-right-radius:15px;
+	-moz-border-radius-topright:15px;
+	border-top-right-radius:15px;
+	-webkit-border-bottom-right-radius:15px;
+	-moz-border-radius-bottomright:15px;
+	border-bottom-right-radius:15px;
+	-webkit-border-bottom-left-radius:15px;
+	-moz-border-radius-bottomleft:15px;
+	border-bottom-left-radius:15px;
+	text-indent:0;
+	border:1px solid #337fed;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+	font-style:normal;
+	height:auto;
+	line-height:25px;
+	width:auto;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 0px 0px #1570cd;
+}
+.myButton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
+	background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');
+	background-color:#1e62d0;
+}.myButton:active {
+	position:relative;
+	top:1px;
+}</style>
     <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" OnMenuItemClick="NavigationMenu_MenuItemClick">
         <Items>
             <asp:MenuItem Text="Wheels"></asp:MenuItem>
@@ -131,12 +176,12 @@
                         <asp:Label ID="Label14" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" />
+                <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button"  ControlStyle-CssClass="myButton"/>
                 <%--  <asp:CommandField HeaderText="Edit" ShowEditButton="True" ButtonType="Button" />--%>
                 <asp:TemplateField HeaderText="Delete">
                     <ItemTemplate>
                         <asp:Button ID="deleteButton" runat="server" CommandName="Delete" Text="Delete"
-                            OnClientClick="return confirm('Are you sure you want to delete this wheel?');" />
+                            OnClientClick="return confirm('Are you sure you want to delete this wheel?');" CssClass="myButton"/>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
@@ -153,7 +198,7 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-        <asp:Button ID="btnAddWheel" runat="server" OnClick="Button1_Click" Text="Add new Wheel" />
+        <asp:Button ID="btnAddWheel" runat="server" OnClick="Button1_Click" Text="Add new Wheel" CssClass="myButton"/>
 
         <div id="wheelInformation" runat="server" visible="false">
             <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification"
@@ -335,11 +380,11 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="BtnAdd" runat="server" Text="Add" OnClick="BtnAdd_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" />
-                            <asp:Button ID="BtnSave" runat="server" OnClick="BtnSave_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" />
+                            <asp:Button ID="BtnAdd" runat="server" Text="Add" OnClick="BtnAdd_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton"/>
+                            <asp:Button ID="BtnSave" runat="server" OnClick="BtnSave_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton"/>
                         </td>
                         <td>
-                            <asp:Button ID="BtnCancle" runat="server" OnClick="BtnCancle_Click" Text="Cancle" Visible="true" />
+                            <asp:Button ID="BtnCancle" runat="server" OnClick="BtnCancle_Click" Text="Cancle" Visible="true" CssClass="myButton"/>
                         </td>
                     </tr>
                 </table>
@@ -409,12 +454,12 @@
                     </ItemTemplate>
                 </asp:TemplateField>
 
-                <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" />
+                <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button"  ControlStyle-CssClass="myButton"/>
                 <%--  <asp:CommandField HeaderText="Edit" ShowEditButton="True" ButtonType="Button" />--%>
                 <asp:TemplateField HeaderText="Delete">
                     <ItemTemplate>
                         <asp:Button ID="deleteButton" runat="server" CommandName="Delete" Text="Delete"
-                            OnClientClick="return confirm('Are you sure you want to delete this tire?');" />
+                            OnClientClick="return confirm('Are you sure you want to delete this tire?');" CssClass="myButton"/>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
@@ -431,7 +476,7 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-        <asp:Button ID="BtnAddNewTire" runat="server" OnClick="BtnAddNewTire_Click" Text="Add new Tire" />
+        <asp:Button ID="BtnAddNewTire" runat="server" OnClick="BtnAddNewTire_Click" Text="Add new Tire" CssClass="myButton"/>
         <div id="DivTireInformation" runat="server" visible="false">
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="failureNotification"
                 ValidationGroup="RegisterUserValidationGroup" />
@@ -527,11 +572,11 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="BtnAddTire" runat="server" Text="Add" OnClick="BtnAddTire_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" />
-                            <asp:Button ID="BtnSaveTire" runat="server" OnClick="BtnSaveTire_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" />
+                            <asp:Button ID="BtnAddTire" runat="server" Text="Add" OnClick="BtnAddTire_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton"/>
+                            <asp:Button ID="BtnSaveTire" runat="server" OnClick="BtnSaveTire_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton"/>
                         </td>
                         <td>
-                            <asp:Button ID="BtnCancelTire" runat="server" OnClick="BtnCancelTire_Click" Text="Cancle" Visible="true" />
+                            <asp:Button ID="BtnCancelTire" runat="server" OnClick="BtnCancelTire_Click" Text="Cancle" Visible="true" CssClass="myButton"/>
                         </td>
                     </tr>
                 </table>
@@ -592,12 +637,12 @@
                         <asp:Label ID="Label7" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" />
+                <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button"  ControlStyle-CssClass="myButton"/>
                 <%-- <asp:CommandField HeaderText="Edit" ShowEditButton="True" ButtonType="Button" />--%>
                 <asp:TemplateField HeaderText="Delete">
                     <ItemTemplate>
                         <asp:Button ID="deleteButton" runat="server" CommandName="Delete" Text="Delete"
-                            OnClientClick="return confirm('Are you sure you want to delete this accessory?');" />
+                            OnClientClick="return confirm('Are you sure you want to delete this accessory?');" CssClass="myButton"/>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
@@ -615,7 +660,7 @@
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
 
-        <asp:Button ID="BtnAddNewAcc" runat="server" OnClick="BtnAddNewAcc_Click" Text="Add new Accessory" />
+        <asp:Button ID="BtnAddNewAcc" runat="server" OnClick="BtnAddNewAcc_Click" Text="Add new Accessory" CssClass="myButton"/>
         <div id="DivAccInformation" runat="server" visible="false">
             <asp:ValidationSummary ID="ValidationSummary2" runat="server" CssClass="failureNotification"
                 ValidationGroup="RegisterUserValidationGroup" />
@@ -699,11 +744,11 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="BtnAddAcc" runat="server" Text="Add" OnClick="BtnAddAcc_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" />
-                            <asp:Button ID="BtnSaveAcc" runat="server" OnClick="BtnSaveAcc_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" />
+                            <asp:Button ID="BtnAddAcc" runat="server" Text="Add" OnClick="BtnAddAcc_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton"/>
+                            <asp:Button ID="BtnSaveAcc" runat="server" OnClick="BtnSaveAcc_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton"/>
                         </td>
                         <td>
-                            <asp:Button ID="BtnCancelAcc" runat="server" OnClick="BtnCancelAcc_Click" Text="Cancle" Visible="true" />
+                            <asp:Button ID="BtnCancelAcc" runat="server" OnClick="BtnCancelAcc_Click" Text="Cancle" Visible="true" CssClass="myButton"/>
                         </td>
                     </tr>
                 </table>
