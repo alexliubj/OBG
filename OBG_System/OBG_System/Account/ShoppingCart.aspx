@@ -17,14 +17,14 @@
     <div id="ShoppingCartTitle" runat="server" class="ContentHead"><h1>Shopping Cart</h1></div>
      <a href="~/Default.aspx">< Back to Products</a>
         <asp:GridView ID="ShoppingCartGridView" runat="server" Visible="true"  EmptyDataText="There is nothing in your shopping cart." AutoGenerateColumns="False" ShowFooter="True" GridLines="Vertical" CellPadding="4" SkinID="ShoppingCart"
-            Width="100%" DataKeyNames="ProductID" >
+            Width="100%" DataKeyNames="ProductId">
             <Columns>
                 <%--<asp:TemplateField HeaderText="ProductName" SortExpression="ProductName">
                     <ItemTemplate>
                         <asp:Label ID="ProductNameLable" runat="server" Text='<%# Eval("ProductName") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>--%>
-                <asp:TemplateField HeaderText="ProductID" SortExpression="ProductID">
+                <asp:TemplateField HeaderText="ProductID" SortExpression="ProductID" Visible="false">
                 <ItemTemplate>
                     <asp:Label ID="idLabel" runat="server" Text='<%# Bind("ProductID") %>'></asp:Label>
                 </ItemTemplate>
@@ -32,6 +32,11 @@
                 <asp:TemplateField HeaderText="Image" SortExpression="Image">
                 <ItemTemplate>
                     <asp:Label ID="imageLabel" runat="server" Text='<%# Bind("Image") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+                <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
+                <ItemTemplate>
+                    <asp:Label ID="PartNoLabel" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
                 <asp:TemplateField HeaderText="Price" SortExpression="ProductID">

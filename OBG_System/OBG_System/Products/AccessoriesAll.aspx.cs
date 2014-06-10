@@ -11,8 +11,17 @@ using OBGModel;
 public partial class Products_accAll : System.Web.UI.Page
 {
     private DataSet AccDataSet;
+    int userID = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["UserID"] != null)
+        {
+            userID = (int)Session["UserID"];
+        }
+        else
+        {
+            Response.Redirect("~/Account/Login.aspx");
+        }
         if (!IsPostBack)
         {
             GridView6_Bind();
@@ -158,7 +167,7 @@ public partial class Products_accAll : System.Web.UI.Page
             double price;
             pID = Convert.ToInt32(GridView6.DataKeys[rowindex].Value.ToString());
             qty = Convert.ToInt32(((TextBox)GridView6.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView6.Rows[rowindex].FindControl("PriceLabel")).Text);
+            price = Convert.ToDouble(((Label)GridView6.Rows[rowindex].FindControl("PricingLabel")).Text);
             sc.AccId = pID;
             sc.Qty = qty;
             sc.Pricing = price;

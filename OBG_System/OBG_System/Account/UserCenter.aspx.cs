@@ -19,7 +19,7 @@ public partial class Default2 : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("~/Default.aspx");
+            Response.Redirect("~/Account/Login.aspx");
         }
 
         if (!IsPostBack)

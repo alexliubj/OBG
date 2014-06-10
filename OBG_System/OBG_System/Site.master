@@ -52,7 +52,7 @@
                                 <asp:MenuItem NavigateUrl="~/Products/AccessoriesAll.aspx" Text="View All Accessories"></asp:MenuItem>
                             </asp:MenuItem>
                             <asp:MenuItem NavigateUrl="Account/UserCenter.aspx" Text="User Center"></asp:MenuItem>
-
+                            <asp:MenuItem NavigateUrl="Account/UserOrderHistory.aspx" Text="Order History"></asp:MenuItem>
                         </Items>
                     </asp:Menu>
                 </div>

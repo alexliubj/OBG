@@ -61,5 +61,12 @@ namespace OBGModel
             get { return pricing; }
             set { pricing = value; }
         }
+
+        private string partNo;
+        public string PartNo
+        {
+            get { return partNo; }
+            set { partNo = value; }
+        }
     }
 }

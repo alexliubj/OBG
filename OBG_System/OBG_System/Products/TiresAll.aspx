@@ -74,108 +74,59 @@
         OnRowEditing="GridView2_RowEditing"
         OnRowUpdating="GridView2_RowUpdating"
         OnRowCancelingEdit="GridView2_RowCancelingEdit"
+        OnRowCommand="GridView1_RowCommand"
         OnRowDataBound="GridView2_RowDataBound"
         AllowSorting="true" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
-            <%--<asp:BoundField DataField="TireId" HeaderText="Tire ID" InsertVisible="False" ReadOnly="True" SortExpression="TireId" />
-            <asp:TemplateField HeaderText="Choose">
-
-             <ItemTemplate>
-
-            <asp:CheckBox id="cbxId" runat="Server" />
-
-            </ItemTemplate>
-
-    </asp:TemplateField>--%>
-            <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
-                <%--<EditItemTemplate>
-                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>
-                </EditItemTemplate>--%>
+           
+            <asp:TemplateField HeaderText="PartNo" ItemStyle-HorizontalAlign="Center" SortExpression="PartNo">
+      
                 <ItemTemplate>
                     <asp:Label ID="PNLabel" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <%--<asp:TemplateField HeaderText="Image" SortExpression="Image">
-                <%--<EditItemTemplate>
-                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("Image") %>'></asp:TextBox>
-                </EditItemTemplate>--%>
-            <%--<ItemTemplate>
-                   <asp:Image ID="ImageLable" runat="server" ImageUrl='<%# Eval("Image") %>' ></asp:Image>
-                </ItemTemplate>
-            </asp:TemplateField>--%>
-            <asp:TemplateField HeaderText="Brand" SortExpression="Brand">
-                <%--<EditItemTemplate>
-                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>
-                </EditItemTemplate>--%>
+  
+            <asp:TemplateField HeaderText="Brand" ItemStyle-HorizontalAlign="Center" SortExpression="Brand">
+       
                 <ItemTemplate>
                     <asp:Label ID="BrandLabel" runat="server" Text='<%# Bind("Brand") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Image" SortExpression="Image">
-                <%--<EditItemTemplate>
-                    <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>
-                </EditItemTemplate>--%>
+            <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Center" SortExpression="Image">
+   
                 <ItemTemplate>
                     <asp:Image class="Imagehub" ID="Image1" runat="server" ImageUrl='<%# Eval("image") %>' onclick="DisplayImageInNewWidnow();"></asp:Image>
                 </ItemTemplate>
             </asp:TemplateField>
 
-            <asp:TemplateField HeaderText="Size" SortExpression="Size">
-                <%--<EditItemTemplate>
-                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Size") %>'></asp:TextBox>
-                </EditItemTemplate>--%>
+            <asp:TemplateField HeaderText="Size" ItemStyle-HorizontalAlign="Center" SortExpression="Size">
+              
                 <ItemTemplate>
                     <asp:Label ID="SizeLabel" runat="server" Text='<%# Bind("Size") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <%-- <asp:TemplateField HeaderText="Width" SortExpression="rimWith">--%>
-            <%--<EditItemTemplate>
-                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("rimWith") %>'></asp:TextBox>
-                </EditItemTemplate>--%>
-            <%--<ItemTemplate>
-                    <asp:Label ID="WidthLabel" runat="server" Text='<%# Bind("rimWith") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField HeaderText="Height" SortExpression="rimHeight">--%>
-            <%--<EditItemTemplate>
-                    <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("rimHeight") %>'></asp:TextBox>
-                </EditItemTemplate>--%>
-            <%--<ItemTemplate>
-                    <asp:Label ID="HeightLabel" runat="server" Text='<%# Bind("rimHeight") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>--%>
-            <asp:TemplateField HeaderText="Pricing" SortExpression="Pricing">
-                <%-- <EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Pricing") %>'></asp:TextBox>
-                </EditItemTemplate>--%>
+   
+            <asp:TemplateField HeaderText="Pricing" ItemStyle-HorizontalAlign="Center" SortExpression="Pricing">
+         
                 <ItemTemplate>
                     <asp:Label ID="PricingLabel" runat="server" Text='<%# Bind("Pricing") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Season" SortExpression="Season">
-                <%--<EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Season") %>'></asp:TextBox>
-                </EditItemTemplate>--%>
+            <asp:TemplateField HeaderText="Season" ItemStyle-HorizontalAlign="Center" SortExpression="Season">
+           
                 <ItemTemplate>
                     <asp:Label ID="SeasonLabel" runat="server" Text='<%# Bind("Season") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="QTY" SortExpression="QTY">
+            <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
                 <ItemTemplate>
                     <asp:TextBox ID="QTYTextBox" runat="server" Text="1"></asp:TextBox>
                 </ItemTemplate>
 
             </asp:TemplateField>
-            <%--<asp:TemplateField HeaderText="CategoryId" SortExpression="CategoryId">
-                <EditItemTemplate>
-                    <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CategoryId") %>'></asp:TextBox>
-                </EditItemTemplate>
-                <ItemTemplate>
-                    <asp:Label ID="Label1" runat="server" Text='<%# Bind("CategoryId") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>--%>
-            <asp:TemplateField HeaderText="ADD" SortExpression="ADD">
+
+            <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center" SortExpression="ADD">
                 <ItemTemplate>
                     <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg" OnClick="AddBt_Click"></asp:ImageButton>
                 </ItemTemplate>

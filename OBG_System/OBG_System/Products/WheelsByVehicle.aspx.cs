@@ -14,8 +14,17 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
 {
     string strProductID = "";
     private DataSet wheelsDataSet;
+    int userID = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["UserID"] != null)
+        {
+            userID = (int)Session["UserID"];
+        }
+        else
+        {
+            Response.Redirect("~/Account/Login.aspx");
+        }
         if (!IsPostBack)
         {
             Gridview4_Bind();

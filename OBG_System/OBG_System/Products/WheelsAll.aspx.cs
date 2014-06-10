@@ -17,8 +17,17 @@ public partial class Products_wheelall : System.Web.UI.Page
     private DataSet wheelsDataSet;
     //private DataSet tiresDataSet;
     //private DataSet accessoriesDataSet;
+    int userID = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["UserID"] != null)
+        {
+            userID = (int)Session["UserID"];
+        }
+        else
+        {
+            Response.Redirect("~/Account/Login.aspx");
+        }
         if (!IsPostBack)
         {
             Gridview1_Bind();
@@ -125,12 +134,15 @@ public partial class Products_wheelall : System.Web.UI.Page
             ShopingCart sc = new ShopingCart();
             int pID, qty;
             double price;
+            string partNo;
             pID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
+            partNo = ((Label)GridView1.Rows[rowindex].FindControl("PNLabel")).Text;
             qty = Convert.ToInt32(((TextBox)GridView1.Rows[rowindex].FindControl("QTYTextBox")).Text);
             price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text);
             sc.ProductId = pID;
             sc.Qty = qty;
             sc.Pricing = price;
+            sc.PartNo = partNo;
             shoppingcart.Add(sc);
             Session["Cart"] = shoppingcart;
         }

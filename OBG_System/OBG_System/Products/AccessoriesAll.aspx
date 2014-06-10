@@ -32,43 +32,43 @@
     <asp:GridView ID="GridView6" runat="server" GridLines="None" AllowPaging="True" 
     AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" 
     ForeColor="#333333"
-        AllowSorting="true"  OnPageIndexChanging="GridView6_PageIndexChanging" OnSorting="GridView6_Sorting">
+        AllowSorting="true" OnRowCommand="GridView1_RowCommand"  OnPageIndexChanging="GridView6_PageIndexChanging" OnSorting="GridView6_Sorting">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:BoundField DataField="AccId" HeaderText="Acc ID" InsertVisible="False" ReadOnly="True" SortExpression="AccId" visible="false"/>
 
-            <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
+            <asp:TemplateField HeaderText="PartNo" ItemStyle-HorizontalAlign="Center" SortExpression="PartNo">
                 <ItemTemplate>
                     <asp:Label ID="PNLabel" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-             <asp:TemplateField HeaderText="Name" SortExpression="Name">
+             <asp:TemplateField HeaderText="Name" ItemStyle-HorizontalAlign="Center" SortExpression="Name">
                 <ItemTemplate>
                     <asp:Label ID="NameLabel" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Image" SortExpression="Image">
+            <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Center" SortExpression="Image">
                 <ItemTemplate>
                     <asp:Image class="Imagehub" ID="Image1" runat="server" ImageUrl='<%# Eval("Image") %>'  onclick="DisplayImageInNewWidnow();"></asp:Image>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Des" SortExpression="Des">
+            <asp:TemplateField HeaderText="Des" ItemStyle-HorizontalAlign="Center" SortExpression="Des">
                 <ItemTemplate>
                     <asp:Label ID="DesLabel" runat="server" Text='<%# Bind("Des") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Pricing" SortExpression="Pricing">
+            <asp:TemplateField HeaderText="Pricing" ItemStyle-HorizontalAlign="Center" SortExpression="Pricing">
                 <ItemTemplate>
                     <asp:Label ID="PricingLabel" runat="server" Text='<%# Bind("Pricing") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="QTY" SortExpression="QTY">
+            <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
                 <ItemTemplate>
                     <asp:TextBox ID="QTYTextBox" runat="server" Text="1"></asp:TextBox>
                 </ItemTemplate>
                 
             </asp:TemplateField>  
-            <asp:TemplateField HeaderText="ADD" SortExpression="ADD">
+            <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center" SortExpression="ADD">
                 <ItemTemplate>
                     <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
                 </ItemTemplate>

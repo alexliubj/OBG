@@ -12,8 +12,17 @@ public partial class Products_tireall : System.Web.UI.Page
 {
     string strProductID = "";
     private DataSet tiresDataSet;
+    public static int userID;
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["UserID"] != null)
+        {
+            userID = (int)Session["UserID"];
+        }
+        else
+        {
+            Response.Redirect("~/Account/Login.aspx");
+        }
         if (!IsPostBack)
         {
             GridView2_Bind();
@@ -81,8 +90,6 @@ public partial class Products_tireall : System.Web.UI.Page
             int rowindex = Convert.ToInt32(e.CommandArgument);
             //Get Row           
             GridViewRow gvr = GridView2.Rows[rowindex];
-
-
             List<ShopingCart> shoppingcart = new List<ShopingCart>();
             ShopingCart sc = new ShopingCart();
             int tID, qty;
