@@ -106,5 +106,14 @@ namespace OBGModel
             get { return partNO; }
             set { partNO = value; }
         }
+
+        private string des;
+
+        public string Des
+        {
+            get { return des; }
+            set { des = value; }
+        }
+
     }
 }
