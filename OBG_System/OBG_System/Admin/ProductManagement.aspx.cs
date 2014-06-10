@@ -159,6 +159,7 @@ public partial class Admin_Default : System.Web.UI.Page
         wheel.Size = Size.Text.ToString().Trim();
         wheel.Style = Style.Text.ToString().Trim();
         wheel.Weight = Weight.Text.ToString().Trim();
+        wheel.Des = Des.Text.ToString().Trim();
 
         int update = 0;
 
@@ -225,6 +226,7 @@ public partial class Admin_Default : System.Web.UI.Page
         Size.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label5"))).Text;
         Style.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label3"))).Text;
         Weight.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label11"))).Text;
+        Des.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label15"))).Text;
 
         wheelsVehicles = WheelsBLO.GetAllWheelsVehiclesByWheelsId(productID);
 
@@ -272,6 +274,7 @@ public partial class Admin_Default : System.Web.UI.Page
         Size.Text = null;
         Style.Text = null;
         Weight.Text = null;
+        Des.Text = null;
         //uncheck all
         for (int i = 0; i < CheckBoxListVehicle.Items.Count; i++)
         {
@@ -305,6 +308,8 @@ public partial class Admin_Default : System.Web.UI.Page
         wheel.Size = Size.Text.ToString().Trim();
         wheel.Style = Style.Text.ToString().Trim();
         wheel.Weight = Weight.Text.ToString().Trim();
+        wheel.Des = Des.Text.ToString().Trim();
+
         List<Vehicle> listVehicle = new List<Vehicle>();
 
         for (int i = 0; i < CheckBoxListVehicle.Items.Count; i++)
@@ -904,7 +909,55 @@ public partial class Admin_Default : System.Web.UI.Page
             );
     }
 
+    protected void dropDownRecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridView1.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
 
+        GridView1.PageIndex = 0;
+        Gridview1_Bind();
+    }
 
+    protected void GridView1_PreRender(object sender, EventArgs e)
+    {
+        var pagerRow = (sender as GridView).BottomPagerRow;
+        if (pagerRow != null)
+        {
+            pagerRow.Visible = true;
+        }
+    }
+
+    protected void dropDownRecordsPerPage2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridView2.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
+
+        GridView2.PageIndex = 0;
+        GridView2_Bind();
+    }
+
+    protected void GridView2_PreRender(object sender, EventArgs e)
+    {
+        var pagerRow = (sender as GridView).BottomPagerRow;
+        if (pagerRow != null)
+        {
+            pagerRow.Visible = true;
+        }
+    }
+
+    protected void dropDownRecordsPerPage3_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridView3.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
+
+        GridView3.PageIndex = 0;
+        GridView3_Bind();
+    }
+
+    protected void GridView3_PreRender(object sender, EventArgs e)
+    {
+        var pagerRow = (sender as GridView).BottomPagerRow;
+        if (pagerRow != null)
+        {
+            pagerRow.Visible = true;
+        }
+    }
 
 }

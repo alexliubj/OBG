@@ -105,6 +105,7 @@ public partial class Admin_Default : System.Web.UI.Page
                 ((Button)GridView1.Rows[i].Cells[7].FindControl("activeButton")).Text = "Inactive";
             }
         }
+        GridView1.PreRender += new EventHandler(GridView1_PreRender);
     }
 
     //http://hi.baidu.com/utxqrqhkvhbgmwd/item/6f5562e5bd14f301570f1d07
@@ -400,6 +401,7 @@ public partial class Admin_Default : System.Web.UI.Page
         bind();
     }
 
+
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
     {
         DataTable dataTable = UserBLO.GetAllUsers();
@@ -444,5 +446,22 @@ public partial class Admin_Default : System.Web.UI.Page
         }
 
         return newSortDirection;
+    }
+
+    protected void dropDownRecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridView1.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
+
+        GridView1.PageIndex = 0;
+        bind();
+    }
+
+    protected void GridView1_PreRender(object sender, EventArgs e)
+    {
+        var pagerRow = (sender as GridView).BottomPagerRow;
+        if (pagerRow != null)
+        {
+            pagerRow.Visible = true;
+        }
     }
 }

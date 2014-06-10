@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Discount Management" Language="C#" MasterPageFile="~/Admin/AdminSite.master" AutoEventWireup="true" CodeFile="DiscountManagement.aspx.cs" Inherits="Admin_Default" %>
+﻿<%@ Page Title="Discount Management" Language="C#" MasterPageFile="~/Admin/AdminSite.master" AutoEventWireup="true" CodeFile="DiscountManagement.aspx.cs" Inherits="Admin_Default" ErrorPage="~/mycustompage.aspx"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
@@ -30,7 +30,7 @@
 	color:#ffffff;
 	font-family:Arial;
 	font-size:15px;
-	font-weight:bold;
+	font-weight:500;
 	font-style:normal;
 	height:auto;
 	line-height:25px;
@@ -50,6 +50,16 @@
 }</style>
       <%--<asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification"
             ValidationGroup="RegisterUserValidationGroup" />--%>
+        <asp:Label ID="Label2" runat="server" Text="Per Page:"></asp:Label>
+    <asp:DropDownList ID="dropDownRecordsPerPage" runat="server"
+        AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage_SelectedIndexChanged" AppendDataBoundItems="true"
+        Style="text-align: right;">
+        <asp:ListItem Value="5" Text="5" />
+        <asp:ListItem Value="10" Text="10" Selected="True" />
+        <asp:ListItem Value="25" Text="25" />
+        <asp:ListItem Value="50" Text="50" />
+        <asp:ListItem Value="100" Text="100" />
+    </asp:DropDownList>
     <asp:GridView ID="GridView1" runat="server" GridLines="None" AllowPaging="True"  AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="RoleId" ForeColor="#333333" 
         OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
         OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDataBound="GridView1_RowDataBound"  OnRowCommand="GridView1_OnRowCommand1" 

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Region Management" Language="C#" MasterPageFile="~/Admin/AdminSite.master" AutoEventWireup="true" CodeFile="RegionManagement.aspx.cs" Inherits="Admin_Default" %>
+﻿<%@ Page Title="Region Management" Language="C#" MasterPageFile="~/Admin/AdminSite.master" AutoEventWireup="true" CodeFile="RegionManagement.aspx.cs" Inherits="Admin_Default" ErrorPage="~/mycustompage.aspx"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
@@ -30,7 +30,7 @@
 	color:#ffffff;
 	font-family:Arial;
 	font-size:15px;
-	font-weight:bold;
+	font-weight:500;
 	font-style:normal;
 	height:auto;
 	line-height:25px;
@@ -54,7 +54,17 @@
             <asp:MenuItem Text="Assign Region to User"></asp:MenuItem>
         </Items>
     </asp:Menu>
-    <div id="regionManagement" runat="server" visible="false">
+    <div id="regionManagement" runat="server" visible="true">
+        <asp:Label ID="Label2" runat="server" Text="Per Page:"></asp:Label>
+    <asp:DropDownList ID="dropDownRecordsPerPage" runat="server"
+        AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage_SelectedIndexChanged" AppendDataBoundItems="true"
+        Style="text-align: right;">
+        <asp:ListItem Value="5" Text="5" />
+        <asp:ListItem Value="10" Text="10" Selected="True" />
+        <asp:ListItem Value="25" Text="25" />
+        <asp:ListItem Value="50" Text="50" />
+        <asp:ListItem Value="100" Text="100" />
+    </asp:DropDownList>
         <asp:GridView ID="GridView1" runat="server" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="RegionId" ForeColor="#333333"
             GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
             OnRowDeleting="GridView1_RowDeleting"
@@ -106,7 +116,8 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-        <asp:Button ID="btnAddRegion" runat="server" Text="Add New Region" OnClick="btnAddRegion_Click" align="right" CssClass="myButton"/>
+            <br />
+        <asp:Button ID="btnAddRegion" runat="server" Text="Add New Region" OnClick="btnAddRegion_Click"  CssClass="myButton"/>
 
         <div id="regionInformation" runat="server" visible="false">
             <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification"
@@ -164,6 +175,16 @@
     </div>
 
     <div id="regionUserManagement" runat="server" visible="false">
+          <asp:Label ID="Label1" runat="server" Text="Per Page:"></asp:Label>
+    <asp:DropDownList ID="dropDownRecordsPerPage2" runat="server"
+        AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage2_SelectedIndexChanged" AppendDataBoundItems="true"
+        Style="text-align: right;">
+        <asp:ListItem Value="5" Text="5" />
+        <asp:ListItem Value="10" Text="10" Selected="True" />
+        <asp:ListItem Value="25" Text="25" />
+        <asp:ListItem Value="50" Text="50" />
+        <asp:ListItem Value="100" Text="100" />
+    </asp:DropDownList>
          <asp:GridView ID="GridView2" runat="server" GridLines="None" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="UserID" ForeColor="#333333" OnSelectedIndexChanged="GridView2_SelectedIndexChanged" OnRowDataBound="GridView2_RowDataBound" OnPageIndexChanging="GridView2_PageIndexChanging" OnSorting="GridView2_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>

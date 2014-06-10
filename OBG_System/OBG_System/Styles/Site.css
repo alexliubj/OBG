@@ -209,14 +209,39 @@ legend {
 }
 
 input.textEntry {
-    width: 320px;
-    border: 1px solid #ccc;
+    /*width: 3200px;
+    border: 1px solid #ccc;*/
+     border-top: solid 1px #8e8e8e; 
+    border-right: solid 1px #d1d1d1; 
+    border-left: solid 1px #d1d1d1; 
+    border-bottom: solid 1px #e4e4e4; 
+    height: 25px; 
+    width: 275px; 
 }
 
+input.textEntry:focus {  
+    border-color: #4488cc; 
+    border-style: solid; 
+    border-width: 2px; 
+    outline: 0; 
+	} 
+
 input.passwordEntry {
-    width: 320px;
-    border: 1px solid #ccc;
+    /*width: 320px;
+    border: 1px solid #ccc;*/
+      border-top: solid 1px #8e8e8e; 
+    border-right: solid 1px #d1d1d1; 
+    border-left: solid 1px #d1d1d1; 
+    border-bottom: solid 1px #e4e4e4; 
+    height: 25px; 
+    width: 275px; 
 }
+input.passwordEntry:focus {  
+    border-color: #4488cc; 
+    border-style: solid; 
+    border-width: 2px; 
+    outline: 0; 
+	} 
 
 div.accountInfo {
     width: 42%;

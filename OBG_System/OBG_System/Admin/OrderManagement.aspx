@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Order Management" Language="C#" MasterPageFile="~/Admin/AdminSite.master" AutoEventWireup="true" CodeFile="OrderManagement.aspx.cs" Inherits="Admin_Default" %>
+﻿<%@ Page Title="Order Management" Language="C#" MasterPageFile="~/Admin/AdminSite.master" AutoEventWireup="true" CodeFile="OrderManagement.aspx.cs" Inherits="Admin_Default" ErrorPage="~/mycustompage.aspx"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
@@ -30,7 +30,7 @@
 	color:#ffffff;
 	font-family:Arial;
 	font-size:15px;
-	font-weight:bold;
+	font-weight:500;
 	font-style:normal;
 	height:auto;
 	line-height:25px;
@@ -50,6 +50,16 @@
 }</style>
 
     <div id="divOrder" runat="server" visible="true">
+          <asp:Label ID="Label2" runat="server" Text="Per Page:"></asp:Label>
+    <asp:DropDownList ID="dropDownRecordsPerPage" runat="server"
+        AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage_SelectedIndexChanged" AppendDataBoundItems="true"
+        Style="text-align: right;">
+        <asp:ListItem Value="5" Text="5" />
+        <asp:ListItem Value="10" Text="10" Selected="True" />
+        <asp:ListItem Value="25" Text="25" />
+        <asp:ListItem Value="50" Text="50" />
+        <asp:ListItem Value="100" Text="100" />
+    </asp:DropDownList>
         <asp:GridView ID="GridView1" runat="server" GridLines="None" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderID" ForeColor="#333333" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
             OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
             OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDataBound="GridView1_RowDataBound" Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">

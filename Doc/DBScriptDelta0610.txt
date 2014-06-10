@@ -1,0 +1,5 @@
+alter table Wheels add [des] varchar(4096)
+alter table Accessories
+alter column [des] varchar(4096);
+alter table Tires
+alter column [des] varchar(4096);

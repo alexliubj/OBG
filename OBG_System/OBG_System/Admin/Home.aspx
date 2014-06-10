@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Home Page Management" Language="C#" MasterPageFile="~/Admin/AdminSite.master" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="Admin_Default" %>
+﻿<%@ Page Title="Home Page Management" Language="C#" MasterPageFile="~/Admin/AdminSite.master" AutoEventWireup="true" CodeFile="Home.aspx.cs" Inherits="Admin_Default" ErrorPage="~/mycustompage.aspx"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
@@ -30,7 +30,7 @@
 	color:#ffffff;
 	font-family:Arial;
 	font-size:15px;
-	font-weight:bold;
+	font-weight:500;
 	font-style:normal;
 	height:auto;
 	line-height:25px;
@@ -47,7 +47,26 @@
 }.myButton:active {
 	position:relative;
 	top:1px;
-}</style>
+}
+
+.myTextbox {  
+    border-top: solid 1px #8e8e8e; 
+    border-right: solid 1px #d1d1d1; 
+    border-left: solid 1px #d1d1d1; 
+    border-bottom: solid 1px #e4e4e4; 
+    height: 25px; 
+    width: 275px; 
+  } 
+ 
+.myTextbox:focus {  
+    border-color: #4488cc; 
+    border-style: solid; 
+    border-width: 2px; 
+    outline: 0; 
+	} 
+   
+
+        </style>
     Instruction: Only two images could be saved at a moment, inserting a new image will replace the older one.
     <div>
      <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification"
@@ -93,7 +112,7 @@
             </asp:TableCell>
         </asp:TableFooterRow>
     </asp:Table>
-    <asp:Table ID="viewCurrentImage" runat="server" Visible="false">
+    <asp:Table ID="viewCurrentImage" runat="server" Visible="true">
         <asp:TableRow>
             <asp:TableCell>
                 <asp:Label ID="lblImage1" runat="server" AssociatedControlID="Image1">Image 1:</asp:Label>

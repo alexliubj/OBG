@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="Products" Language="C#" MasterPageFile="~/Admin/AdminSite.master"
-    AutoEventWireup="true" CodeFile="ProductManagement.aspx.cs" Inherits="Admin_Default" %>
+    AutoEventWireup="true" CodeFile="ProductManagement.aspx.cs" Inherits="Admin_Default" ErrorPage="~/mycustompage.aspx"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
@@ -32,7 +32,7 @@
 	color:#ffffff;
 	font-family:Arial;
 	font-size:15px;
-	font-weight:bold;
+	font-weight:500;
 	font-style:normal;
 	height:auto;
 	line-height:25px;
@@ -57,7 +57,17 @@
             <asp:MenuItem Text="Accessories"></asp:MenuItem>
         </Items>
     </asp:Menu>
-    <div id="divWheel" runat="server" visible="false">
+    <div id="divWheel" runat="server" visible="true">
+                <asp:Label ID="Label2" runat="server" Text="Per Page:"></asp:Label>
+    <asp:DropDownList ID="dropDownRecordsPerPage" runat="server"
+        AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage_SelectedIndexChanged" AppendDataBoundItems="true"
+        Style="text-align: right;">
+        <asp:ListItem Value="5" Text="5" />
+        <asp:ListItem Value="10" Text="10" Selected="True" />
+        <asp:ListItem Value="25" Text="25" />
+        <asp:ListItem Value="50" Text="50" />
+        <asp:ListItem Value="100" Text="100" />
+    </asp:DropDownList>
         <asp:GridView ID="GridView1" runat="server" GridLines="None" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ProductId" ForeColor="#333333" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
             OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
             OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDataBound="GridView1_RowDataBound" Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">
@@ -176,6 +186,14 @@
                         <asp:Label ID="Label14" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
+                  <asp:TemplateField HeaderText="Description" SortExpression="Des" Visible="false">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox15" runat="server" Text='<%# Bind("Des") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label15" runat="server" Text='<%# Bind("Des") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button"  ControlStyle-CssClass="myButton"/>
                 <%--  <asp:CommandField HeaderText="Edit" ShowEditButton="True" ButtonType="Button" />--%>
                 <asp:TemplateField HeaderText="Delete">
@@ -198,6 +216,7 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
+            <br />
         <asp:Button ID="btnAddWheel" runat="server" OnClick="Button1_Click" Text="Add new Wheel" CssClass="myButton"/>
 
         <div id="wheelInformation" runat="server" visible="false">
@@ -352,6 +371,18 @@
                     </tr>
                     <tr>
                         <td>
+                            <asp:Label ID="DesLabel" runat="server" AssociatedControlID="Des">Description:</asp:Label>
+                        </td>
+                        <td>
+                            <asp:TextBox ID="Des" runat="server" CssClass="textEntry"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator18" runat="server" ControlToValidate="Des"
+                                CssClass="failureNotification" ErrorMessage="Description is required."
+                                ToolTip="Description is required." ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             <asp:Label ID="PriceLabel" runat="server" AssociatedControlID="Price">Price:</asp:Label>
                         </td>
                         <td>
@@ -393,6 +424,16 @@
     </div>
 
     <div id="divTire" runat="server" visible="false">
+        <asp:Label ID="Label1" runat="server" Text="Per Page:"></asp:Label>
+    <asp:DropDownList ID="dropDownRecordsPerPage2" runat="server"
+        AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage2_SelectedIndexChanged" AppendDataBoundItems="true"
+        Style="text-align: right;">
+        <asp:ListItem Value="5" Text="5" />
+        <asp:ListItem Value="10" Text="10" Selected="True" />
+        <asp:ListItem Value="25" Text="25" />
+        <asp:ListItem Value="50" Text="50" />
+        <asp:ListItem Value="100" Text="100" />
+    </asp:DropDownList>
         <asp:GridView ID="GridView2" runat="server" GridLines="None" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="TireId" ForeColor="#333333" OnSelectedIndexChanged="GridView2_SelectedIndexChanged"
             OnRowDeleting="GridView2_RowDeleting" OnRowEditing="GridView2_RowEditing"
             OnRowUpdating="GridView2_RowUpdating" OnRowCancelingEdit="GridView2_RowCancelingEdit" OnRowDataBound="GridView2_RowDataBound" Visible="true" OnPageIndexChanging="GridView2_PageIndexChanging" OnSorting="GridView2_Sorting">
@@ -476,6 +517,7 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
+            <br />
         <asp:Button ID="BtnAddNewTire" runat="server" OnClick="BtnAddNewTire_Click" Text="Add new Tire" CssClass="myButton"/>
         <div id="DivTireInformation" runat="server" visible="false">
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="failureNotification"
@@ -586,6 +628,16 @@
 
 
     <div id="divAcc" runat="server" visible="false">
+        <asp:Label ID="Label16" runat="server" Text="Per Page:"></asp:Label>
+    <asp:DropDownList ID="dropDownRecordsPerPage3" runat="server"
+        AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage3_SelectedIndexChanged" AppendDataBoundItems="true"
+        Style="text-align: right;">
+        <asp:ListItem Value="5" Text="5" />
+        <asp:ListItem Value="10" Text="10" Selected="True" />
+        <asp:ListItem Value="25" Text="25" />
+        <asp:ListItem Value="50" Text="50" />
+        <asp:ListItem Value="100" Text="100" />
+    </asp:DropDownList>
         <asp:GridView ID="GridView3" runat="server" GridLines="None" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" ForeColor="#333333" OnSelectedIndexChanged="GridView3_SelectedIndexChanged"
             OnRowDeleting="GridView3_RowDeleting" OnRowEditing="GridView3_RowEditing"
             OnRowUpdating="GridView3_RowUpdating" OnRowCancelingEdit="GridView3_RowCancelingEdit" OnRowDataBound="GridView3_RowDataBound" Visible="true" OnPageIndexChanging="GridView3_PageIndexChanging" OnSorting="GridView3_Sorting">
@@ -659,7 +711,7 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-
+            <br />
         <asp:Button ID="BtnAddNewAcc" runat="server" OnClick="BtnAddNewAcc_Click" Text="Add new Accessory" CssClass="myButton"/>
         <div id="DivAccInformation" runat="server" visible="false">
             <asp:ValidationSummary ID="ValidationSummary2" runat="server" CssClass="failureNotification"

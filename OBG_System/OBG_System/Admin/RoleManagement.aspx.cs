@@ -336,4 +336,38 @@ public partial class Admin_Default : System.Web.UI.Page
 
         return newSortDirection;
     }
+
+    protected void dropDownRecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridView1.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
+
+        GridView1.PageIndex = 0;
+        Gridview1_Bind();
+    }
+
+    protected void GridView1_PreRender(object sender, EventArgs e)
+    {
+        var pagerRow = (sender as GridView).BottomPagerRow;
+        if (pagerRow != null)
+        {
+            pagerRow.Visible = true;
+        }
+    }
+
+    protected void dropDownRecordsPerPage2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridView2.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
+
+        GridView2.PageIndex = 0;
+        Gridview2_Bind();
+    }
+
+    protected void GridView2_PreRender(object sender, EventArgs e)
+    {
+        var pagerRow = (sender as GridView).BottomPagerRow;
+        if (pagerRow != null)
+        {
+            pagerRow.Visible = true;
+        }
+    }
 }

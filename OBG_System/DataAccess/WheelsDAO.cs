@@ -17,7 +17,7 @@ namespace DataAccess
         public static DataTable GetAllProducts()
         {
             DbCommand command = db.GetSqlStringCommond(@"SELECT ProductId,Image,Style,Brand,Size,PCD,
-                                                    Finish,Offset,SEAT,BORE,Weight,ONHand,Price,PartNO FROM Wheels");
+                                                    Finish,Offset,SEAT,BORE,Weight,ONHand,Price,PartNO,[des] FROM Wheels");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
@@ -108,6 +108,7 @@ namespace DataAccess
                                   ,[ONHand] = @ONHand
                                   ,[Price] = @Price
                                   ,[PartNO] = @PartNO
+                                    ,[des] = @des
                              WHERE productId = @productId");
                     SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@Image", prod.Image),
@@ -123,7 +124,8 @@ namespace DataAccess
                 new SqlParameter("@ONHand",prod.Onhand),
                 new SqlParameter("@Price",prod.Price),
                 new SqlParameter("@PartNO",prod.PartNO),
-                new SqlParameter("@productId",prod.ProductId)
+                new SqlParameter("@productId",prod.ProductId),
+                new SqlParameter("@des",prod.Des)
             };
                     command.Parameters.AddRange(paras);
                     int ret = db.ExecuteNonQuery(command);
@@ -183,7 +185,8 @@ namespace DataAccess
                                ,[Weight]
                                ,[ONHand]
                                ,[Price]
-                               ,[PartNO])
+                               ,[PartNO]
+                                ,[des])
                          VALUES
                                (@Image,
                                @Style,
@@ -197,7 +200,8 @@ namespace DataAccess
                                @Weight,
                                @ONHand,
                                @Price,
-                               @PartNO); Select @@IDENTITY;");
+                               @PartNO,
+                                @des); Select @@IDENTITY;");
                     SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@Image", prod.Image),
                 new SqlParameter("@Style",prod.Style),
@@ -211,7 +215,8 @@ namespace DataAccess
                 new SqlParameter("@Weight",prod.Weight),
                 new SqlParameter("@ONHand",prod.Onhand),
                 new SqlParameter("@Price",prod.Price),
-                 new SqlParameter("@PartNO",prod.PartNO)
+                 new SqlParameter("@PartNO",prod.PartNO),
+                 new SqlParameter("@des",prod.Des)
             };
                     command.Parameters.AddRange(paras);
                     //add relationship

@@ -113,7 +113,7 @@ public partial class Admin_Default : System.Web.UI.Page
     }
 
     protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
-    { 
+    {
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             DropDownList ddlSelectOrderStatus = (e.Row.FindControl("ddlSelectOrderStatus") as DropDownList);
@@ -201,7 +201,7 @@ public partial class Admin_Default : System.Web.UI.Page
 
     //protected void GridView2_Sorting(object sender, GridViewSortEventArgs e)
     //{
-        
+
     //    //DataTable dataTable = ;
 
     //    if (dataTable != null)
@@ -238,5 +238,22 @@ public partial class Admin_Default : System.Web.UI.Page
         }
 
         return newSortDirection;
+    }
+
+    protected void dropDownRecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridView1.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
+
+        GridView1.PageIndex = 0;
+        GridView1_Bind();
+    }
+
+    protected void GridView1_PreRender(object sender, EventArgs e)
+    {
+        var pagerRow = (sender as GridView).BottomPagerRow;
+        if (pagerRow != null)
+        {
+            pagerRow.Visible = true;
+        }
     }
 }
