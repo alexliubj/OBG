@@ -90,7 +90,7 @@
 
                 <div class="companyInfo" >
                     <p>Address: 245 West Beaver Creek Rd, Richmond Hill, ON, L4B 1L1. </p>
-                    <p>Phone: 647-361-8553, 647-361-8556. Fax: 647-361-8554</p>
+                    <p>Phone: 647-361-8553, 647-361-8556.&nbsp;&nbsp; Fax: 647-361-8554</p>
                 </div>
                 <div class="clear hideSkiplink">
                     <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="true" IncludeStyleBlock="false" Orientation="Horizontal">
@@ -120,6 +120,10 @@
             </div>
         </div>
         <div class="footer">
+            <div  >
+                    Address: 245 West Beaver Creek Rd, Richmond Hill, ON, L4B 1L1. &nbsp;&nbsp;
+                    Phone: 647-361-8553, 647-361-8556. &nbsp;&nbsp;Fax: 647-361-8554
+                </div>
         </div>
     </form>
 </body>

@@ -140,4 +140,21 @@ public partial class Admin_Default : System.Web.UI.Page
 
         return newSortDirection;
     }
+
+    protected void dropDownRecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridView1.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
+
+        GridView1.PageIndex = 0;
+        Gridview1_Bind();
+    }
+
+    protected void GridView1_PreRender(object sender, EventArgs e)
+    {
+        var pagerRow = (sender as GridView).BottomPagerRow;
+        if (pagerRow != null)
+        {
+            pagerRow.Visible = true;
+        }
+    }
 }

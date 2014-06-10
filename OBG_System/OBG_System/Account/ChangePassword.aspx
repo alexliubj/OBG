@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="Change Password" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true"
-    CodeFile="ChangePassword.aspx.cs" Inherits="Account_ChangePassword" %>
+    CodeFile="ChangePassword.aspx.cs" Inherits="Account_ChangePassword" ErrorPage="~/mycustompage.aspx"%>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>
@@ -31,7 +31,7 @@
 	color:#ffffff;
 	font-family:Arial;
 	font-size:15px;
-	font-weight:bold;
+	font-weight:500;
 	font-style:normal;
 	height:auto;
 	line-height:25px;
@@ -53,9 +53,6 @@
     </h2>
     <p>
         Use the form below to change your password.
-    </p>
-    <p>
-        New passwords are required to be a minimum of <%= Membership.MinRequiredPasswordLength %> characters in length.
     </p>
     <asp:ChangePassword ID="ChangeUserPassword" runat="server" CancelDestinationPageUrl="~/" EnableViewState="false" RenderOuterTable="false"
         SuccessPageUrl="ChangePasswordSuccess.aspx">
@@ -102,7 +99,7 @@
                     </p>
                 </fieldset>
                 <p class="submitButton">
-                    <asp:Button ID="CancelPushButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"  CssClass="myButton"/>
+                    <asp:Button ID="CancelPushButton" runat="server" CausesValidation="False" CommandName="Cancel" Text="Cancel"  CssClass="myButton" OnClick="CancelPushButton_Click"/>
                     <asp:Button ID="ChangePasswordPushButton" runat="server" CommandName="ChangePassword" Text="Change Password"
                         ValidationGroup="ChangeUserPasswordValidationGroup" OnClick="ChangePasswordPushButton_Click" CssClass="myButton"/>
                 </p>

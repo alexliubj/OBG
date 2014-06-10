@@ -43,4 +43,8 @@ public partial class Account_ChangePassword : System.Web.UI.Page
         }
 
     }
+    protected void CancelPushButton_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Account/UserCenter.aspx");
+    }
 }
