@@ -155,7 +155,7 @@ div.menu {
             padding: 4px 20px;
             text-decoration: none;
             white-space: nowrap;
-            font-weight:900;
+            font-weight: 900;
         }
 
             div.menu ul li a:visited {
@@ -284,11 +284,11 @@ div.accountInfo {
     height: 500px;
     width: 450px;
 }
-CBLayout
-{
-    vertical-align:middle;
+
+CBLayout {
+    vertical-align: middle;
 }
-.label
-{
-    color:blue;
+
+.label {
+    color: blue;
 }
