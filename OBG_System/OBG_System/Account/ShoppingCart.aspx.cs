@@ -42,17 +42,17 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
 
     public void Bind()
     {
-        //if (Session["Cart"] != null)
-        //{
-        //    DataTable dt = Session["Cart"] as DataTable;
-        //    dlShoppingCart.DataSource = dt;
-        //    dlShoppingCart.DataBind();
-        //    if (dt.Rows.Count == 0)
-        //    {
-        //        money = 0.0f;
-        //        M_str_Count = money.ToString();
-        //    }
-        //}
+        if (Session["Cart"] != null)
+        {
+            DataTable dt = Session["Cart"] as DataTable;
+            ShoppingCartGridView.DataSource = dt;
+            ShoppingCartGridView.DataBind();
+            //if (dt.Rows.Count == 0)
+            //{
+            //    money = 0.0f;
+            //    M_str_Count = money.ToString();
+            //}
+        }
     }
     //protected void dlShoppingCart_ItemDataBound(object sender, DataListItemEventArgs e)
     //{
@@ -140,6 +140,7 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
 
     public void Gridview1_Bind()
     {
+
     }
     protected void ShoppingCartGridView_EditingBound(object sender, GridViewRowEventArgs e)
     {
