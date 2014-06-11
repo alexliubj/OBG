@@ -49,7 +49,7 @@
 	top:1px;
 }</style>
     <div class="accountInfo" id="changePasswordDiv" runat="server" visible="false">
-        <%--            <span class="failureNotification">
+                <%--    <span class="failureNotification">
                 <asp:Literal ID="FailureText" runat="server"></asp:Literal>
             </span>--%>
         <asp:ValidationSummary ID="ChangeUserPasswordValidationSummary" runat="server" CssClass="failureNotification"

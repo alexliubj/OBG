@@ -36,27 +36,27 @@ public partial class Account_Login : System.Web.UI.Page
                    // Session["login"] = true;
                     Session["Role"] = emailLogin.Rs;
 
-                    //if (LoginUser.RememberMeSet)
-                    //{
-                    //    // Clear any other tickets that are already in the response
-                    //    Response.Cookies.Clear();
+                    if (LoginUser.RememberMeSet)
+                    {
+                        // Clear any other tickets that are already in the response
+                        Response.Cookies.Clear();
 
-                    //    // Set the new expiry date - to thirty days from now
-                    //    DateTime expiryDate = DateTime.Now.AddDays(30);
+                        // Set the new expiry date - to thirty days from now
+                        DateTime expiryDate = DateTime.Now.AddDays(30);
 
-                    //    // Create a new forms auth ticket
-                    //    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(2, LoginUser.UserName, DateTime.Now, expiryDate, true, String.Empty);
+                        // Create a new forms auth ticket
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(2, LoginUser.UserName, DateTime.Now, expiryDate, true, String.Empty);
 
-                    //    // Encrypt the ticket
-                    //    string encryptedTicket = FormsAuthentication.Encrypt(ticket);
+                        // Encrypt the ticket
+                        string encryptedTicket = FormsAuthentication.Encrypt(ticket);
 
-                    //    // Create a new authentication cookie - and set its expiration date
-                    //    HttpCookie authenticationCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                    //    authenticationCookie.Expires = ticket.Expiration;
+                        // Create a new authentication cookie - and set its expiration date
+                        HttpCookie authenticationCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                        authenticationCookie.Expires = ticket.Expiration;
 
-                    //    // Add the cookie to the response.
-                    //    Response.Cookies.Add(authenticationCookie);
-                    //}
+                        // Add the cookie to the response.
+                        Response.Cookies.Add(authenticationCookie);
+                    }
 
                     Response.Redirect("~/Default.aspx");
                 }
@@ -88,27 +88,27 @@ public partial class Account_Login : System.Web.UI.Page
                     //Session["login"] = true;
                     Session["Role"] = userLogin.Rs;
 
-                    //if (LoginUser.RememberMeSet)
-                    //{
-                    //    // Clear any other tickets that are already in the response
-                    //    Response.Cookies.Clear();
+                    if (LoginUser.RememberMeSet)
+                    {
+                        // Clear any other tickets that are already in the response
+                        Response.Cookies.Clear();
 
-                    //    // Set the new expiry date - to thirty days from now
-                    //    DateTime expiryDate = DateTime.Now.AddDays(30);
+                        // Set the new expiry date - to thirty days from now
+                        DateTime expiryDate = DateTime.Now.AddDays(30);
 
-                    //    // Create a new forms auth ticket
-                    //    FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(2, LoginUser.UserName, DateTime.Now, expiryDate, true, String.Empty);
+                        // Create a new forms auth ticket
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(2, LoginUser.UserName, DateTime.Now, expiryDate, true, String.Empty);
 
-                    //    // Encrypt the ticket
-                    //    string encryptedTicket = FormsAuthentication.Encrypt(ticket);
+                        // Encrypt the ticket
+                        string encryptedTicket = FormsAuthentication.Encrypt(ticket);
 
-                    //    // Create a new authentication cookie - and set its expiration date
-                    //    HttpCookie authenticationCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
-                    //    authenticationCookie.Expires = ticket.Expiration;
+                        // Create a new authentication cookie - and set its expiration date
+                        HttpCookie authenticationCookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptedTicket);
+                        authenticationCookie.Expires = ticket.Expiration;
 
-                    //    // Add the cookie to the response.
-                    //    Response.Cookies.Add(authenticationCookie);
-                    //}
+                        // Add the cookie to the response.
+                        Response.Cookies.Add(authenticationCookie);
+                    }
 
                     Response.Redirect("~/Default.aspx");
                 }

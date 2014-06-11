@@ -57,7 +57,6 @@
     <asp:DropDownList ID="dropDownRecordsPerPage" runat="server"
         AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage_SelectedIndexChanged" AppendDataBoundItems="true"
         Style="text-align: right;">
-        <asp:ListItem Value="2" Text="2" />
         <asp:ListItem Value="5" Text="5" />
         <asp:ListItem Value="10" Text="10" Selected="True" />
         <asp:ListItem Value="25" Text="25" />
@@ -70,8 +69,7 @@
         OnRowUpdating="GridView1_RowUpdating"
         OnRowDataBound="GridView1_RowDataBound"
         OnRowCreated="GridView1_RowCreated"
-        OnRowCommand="GridView1_RowCommand"
-        OnPreRender="GridView1_PreRender">
+        OnRowCommand="GridView1_RowCommand">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:BoundField DataField="UserId" HeaderText="UserId" InsertVisible="False" ReadOnly="True" SortExpression="UserId" />
