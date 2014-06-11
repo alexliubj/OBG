@@ -5,40 +5,28 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-    <script runat="server">
-
-        // Set the field label background color if the user name is not found.
-        void PasswordRecovery1_UserLookupError(object sender, System.EventArgs e)
-        {
-            PasswordRecovery1.LabelStyle.ForeColor = System.Drawing.Color.Red;
-        }
-
-        // Reset the field label background color.
-        void PasswordRecovery1_Load(object sender, System.EventArgs e)
-        {
-            PasswordRecovery1.LabelStyle.ForeColor = System.Drawing.Color.Black;
-        }
-        
-        void PasswordRecovery1_SendingMail(object sender, MailMessageEventArgs e)
-        {
-            e.Message.IsBodyHtml = false;
-            e.Message.Subject = "New password on Web site.";
-        }
-    </script>
-    <asp:PasswordRecovery ID="PasswordRecovery1" runat="server" BorderStyle="Solid" BorderWidth="1px" BackColor="#F7F7DE"
-        Font-Size="10pt" Font-Names="Verdana" BorderColor="#CCCC99" HelpPageText="Need help?" HelpPageUrl="recoveryHelp.aspx" OnUserLookupError="PasswordRecovery1_UserLookupError" OnLoad="PasswordRecovery1_Load"
-        maildefinition-from="neo.wu2@gmail.com"
-         onsendingmail="PasswordRecovery1_SendingMail" UserNameInstructionText="Enter your email to receive your password." UserNameLabelText="Email Address:" UserNameRequiredErrorMessage="Email Address is required." OnVerifyingUser="PasswordRecovery1_VerifyingUser">
-        <SuccessTemplate>
-            <table border="0" style="font-size: 10pt;">
-                <tr>
-                    <td>Your password has been sent to you.</td>
-                </tr>
-            </table>
-        </SuccessTemplate>
- 
-        <TitleTextStyle Font-Bold="True" ForeColor="White" BackColor="#6B696B"></TitleTextStyle>
-    </asp:PasswordRecovery>
-
+     <asp:Panel ID="p" runat="server" DefaultButton="BtnSubmit">
+                <span class="failureNotification">
+                    <asp:Literal ID="FailureText" runat="server"></asp:Literal>
+                </span>
+                <asp:ValidationSummary ID="LoginUserValidationSummary" runat="server" CssClass="failureNotification"
+                    ValidationGroup="LoginUserValidationGroup" />
+                <div id="accountInfo" class="accountInfo">
+                    <fieldset class="login">
+                        <legend>Enter your email to receive your password.</legend>
+                        <p>
+                            <asp:Label ID="EmailAddressLabel" runat="server" AssociatedControlID="EmailAddress">Email Address:</asp:Label>
+                            <asp:TextBox ID="EmailAddress" runat="server" CssClass="textEntry"></asp:TextBox>
+                            <asp:RequiredFieldValidator ID="EmailAddressRequired" runat="server" ControlToValidate="EmailAddress"
+                                CssClass="failureNotification" ErrorMessage="Email Address is required." ToolTip="Email Address is required."
+                                ValidationGroup="LoginUserValidationGroup">*</asp:RequiredFieldValidator>
+                        </p>
+                    <br />
+                    <p class="submitButton">
+                        <asp:Button ID="BtnSubmit" runat="server" CommandName="Submit" Text="Submit" ValidationGroup="LoginUserValidationGroup" OnClick="BtnSubmit_Click"  CssClass="myButton"/>
+                    </p>
+                        </fieldset>
+                </div>
+            </asp:Panel>
 </asp:Content>
 

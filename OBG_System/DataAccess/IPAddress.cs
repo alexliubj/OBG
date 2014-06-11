@@ -24,7 +24,7 @@ namespace DataAccess
             {
                 while (reader.Read())
                 {
-                    lastIPAddress = reader.GetString(0);
+                    lastIPAddress = reader.GetString(1);
                 }
             }
             return lastIPAddress;
@@ -52,7 +52,7 @@ namespace DataAccess
             else // insert
             {
                 DbCommand command2 = db.GetSqlStringCommond(@"
-                            insert into [UserLastIP] values (@userId,@userIP)");
+                            insert into [IPAddress] ([UserID], [UserLastIP]) values (@userId,@userIP)");
                 SqlParameter[] paras2 = new SqlParameter[] { 
                 new SqlParameter("@userIP", ipAddress),
                 new SqlParameter("@userId", userId)};

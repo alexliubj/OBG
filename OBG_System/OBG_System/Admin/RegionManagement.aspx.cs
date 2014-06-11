@@ -198,10 +198,10 @@ public partial class Admin_Default : System.Web.UI.Page
             regionUserManagement.Visible = true;
         }
 
-        MenuItem ms = NavigationMenu.FindItem(e.Item.Text);
-        if (ms != null)
+        //MenuItem ms = NavigationMenu.FindItem(e.Item.Text);
+        if (e.Item != null)
         {
-            ms.Selectable = false;
+            e.Item.Selectable = false;
         }
     }
 

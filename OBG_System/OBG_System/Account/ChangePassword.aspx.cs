@@ -26,14 +26,16 @@ public partial class Account_ChangePassword : System.Web.UI.Page
     }
     protected void ChangePasswordPushButton_Click(object sender, EventArgs e)
     {
-        String newPassword = ChangeUserPassword.NewPassword;
-        String oldPassword = ChangeUserPassword.CurrentPassword;
+        String newPassword = NewPassword.Text.ToString().Trim();
+        String oldPassword = CurrentPassword.Text.ToString().Trim();
+
         int resetPassword = UserBLO.UpdatePassword(oldPassword, newPassword, userID);
 
         if (resetPassword == 1)
         {
             Response.Redirect("~/Account/ChangePasswordSuccess.aspx");
         }
+
         else
         {
             ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
@@ -41,7 +43,6 @@ public partial class Account_ChangePassword : System.Web.UI.Page
                         "alert('Sorry, reset password failed.');",
                         true);
         }
-
     }
     protected void CancelPushButton_Click(object sender, EventArgs e)
     {

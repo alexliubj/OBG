@@ -8,6 +8,7 @@ using OBGModel;
 using BusinessLogic;
 using System.Data;
 using System.Data.SqlClient;
+using DataAccess;
 
 public partial class Admin_Default : System.Web.UI.Page
 {
@@ -24,7 +25,7 @@ public partial class Admin_Default : System.Web.UI.Page
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
-
+        divIPInfo.Visible = false;
         if (!IsPostBack)
         {
             bind();
@@ -105,7 +106,7 @@ public partial class Admin_Default : System.Web.UI.Page
                 ((Button)GridView1.Rows[i].Cells[7].FindControl("activeButton")).Text = "Inactive";
             }
         }
-        GridView1.PreRender += new EventHandler(GridView1_PreRender);
+        //GridView1.PreRender += new EventHandler(GridView1_PreRender);
     }
 
     //http://hi.baidu.com/utxqrqhkvhbgmwd/item/6f5562e5bd14f301570f1d07
@@ -305,6 +306,20 @@ public partial class Admin_Default : System.Web.UI.Page
                 UserBLO.AdminActiveUserStatus(userID, 0);
             }
             bind();
+        }
+
+        if (e.CommandName == "ViewIP")
+        {
+            int rowindex = Convert.ToInt32(e.CommandArgument);
+
+            int userID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
+
+            string lastIPAddress = "";
+            lastIPAddress = IPAddress.GetLastIPAddress(userID);
+
+            divIPInfo.Visible = true;
+            txtUserID.Text = userID.ToString();
+            txtLastIP.Text = lastIPAddress;
         }
     }
 

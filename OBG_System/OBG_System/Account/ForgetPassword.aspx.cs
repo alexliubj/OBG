@@ -17,36 +17,21 @@ public partial class Default2 : System.Web.UI.Page
     {
 
     }
-    //protected void PasswordRecovery1_VerifyingUser(object sender, LoginCancelEventArgs e)
-    //{
-    //    ////need getUserNamebyEmail
-    //    ////PasswordRecovery1.UserName = Membership.GetUserNameByEmail(PasswordRecovery1.UserName);
-    //    //if (PasswordRecovery1.UserName == null || PasswordRecovery1.UserName.Length == 0)
-    //    //{
-    //    //    PasswordRecovery1.UserNameInstructionText = "The Entered Email Address is wrong, this address is not registered yet.";
-    //    //    e.Cancel = true;
-    //    //}
 
-    //}
-
-    protected void PasswordRecovery1_SendingMail(object sender, MailMessageEventArgs e)
+    protected void BtnSubmit_Click(object sender, EventArgs e)
     {
-        e.Cancel = true;
-    }
 
-    protected void PasswordRecovery1_VerifyingUser(object sender, LoginCancelEventArgs e)
-    {
-        if (ValidationUtility.IsEmailAddress(PasswordRecovery1.UserName))
+        if (ValidationUtility.IsEmailAddress(EmailAddress.Text.ToString().Trim()))
         {
-            string email = PasswordRecovery1.UserName.ToString().Trim();
+            string email = EmailAddress.Text.ToString().Trim();
             int userID = 0;
             string securityKey = "";
 
             userID = UserBLO.GetUserIDByEmail(email);
             if (userID <= 0)
             {
-                PasswordRecovery1.UserName = " ";
-                PasswordRecovery1.UserNameFailureText = "The Entered Email Address is wrong, this address is not registered yet.";
+                EmailAddress.Text = " ";
+                FailureText.Text = "The Entered Email Address is wrong, this address is not registered yet.";
             }
             else
             {
@@ -55,25 +40,25 @@ public partial class Default2 : System.Web.UI.Page
                 {
                     if (SendMail(email, securityKey))
                     {
-                        PasswordRecovery1.UserNameFailureText = "Request has been recieved, please login your email to finish the process";
+                        FailureText.Text = "Request has been recieved, please login your email to finish the process";
                     }
                     else
                     {
-                        PasswordRecovery1.UserName = " ";
-                        PasswordRecovery1.UserNameFailureText = "Sending email failed";
+                        EmailAddress.Text = " ";
+                        FailureText.Text = "Sending email failed";
                     }
                 }
                 else
                 {
-                    PasswordRecovery1.UserName = " ";
-                    PasswordRecovery1.UserNameFailureText = "Password reset request failed";
+                    EmailAddress.Text = " ";
+                    FailureText.Text = "Password reset request failed";
                 }
             }
         }
         else
         {
-            PasswordRecovery1.UserName = " ";
-            PasswordRecovery1.UserNameFailureText = "Please enter a valid e-mail";
+            EmailAddress.Text = " ";
+            FailureText.Text = "Please enter a valid e-mail";
         }
     }
 

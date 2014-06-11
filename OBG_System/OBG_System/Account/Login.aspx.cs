@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using OBGModel;
 using BusinessLogic;
 using System.Web.Security;
+using DataAccess;
 
 public partial class Account_Login : System.Web.UI.Page
 {
@@ -19,9 +20,9 @@ public partial class Account_Login : System.Web.UI.Page
 
     protected void LoginButton_Click(object sender, EventArgs e)
     {
-        string account = LoginUser.UserName;
+        string account = UserName.Text.ToString().Trim();
 
-        newUser.Userpwd = LoginUser.Password;
+        newUser.Userpwd = Password.Text.ToString().Trim();
 
         if (ValidationUtility.IsEmailAddress(account))
         {
@@ -36,7 +37,10 @@ public partial class Account_Login : System.Web.UI.Page
                    // Session["login"] = true;
                     Session["Role"] = emailLogin.Rs;
 
-                    if (LoginUser.RememberMeSet)
+                    string IP = IPUtility.GetIPAddress();
+                    IPAddress.UpdateIpAddress(IP, emailLogin.UserId);
+
+                    if (RememberMe.Checked == true)
                     {
                         // Clear any other tickets that are already in the response
                         Response.Cookies.Clear();
@@ -45,7 +49,7 @@ public partial class Account_Login : System.Web.UI.Page
                         DateTime expiryDate = DateTime.Now.AddDays(30);
 
                         // Create a new forms auth ticket
-                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(2, LoginUser.UserName, DateTime.Now, expiryDate, true, String.Empty);
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(2, account, DateTime.Now, expiryDate, true, String.Empty);
 
                         // Encrypt the ticket
                         string encryptedTicket = FormsAuthentication.Encrypt(ticket);
@@ -88,7 +92,10 @@ public partial class Account_Login : System.Web.UI.Page
                     //Session["login"] = true;
                     Session["Role"] = userLogin.Rs;
 
-                    if (LoginUser.RememberMeSet)
+                    string IP = IPUtility.GetIPAddress();
+                    IPAddress.UpdateIpAddress(IP, userLogin.UserId);
+
+                    if (RememberMe.Checked == true)
                     {
                         // Clear any other tickets that are already in the response
                         Response.Cookies.Clear();
@@ -97,7 +104,7 @@ public partial class Account_Login : System.Web.UI.Page
                         DateTime expiryDate = DateTime.Now.AddDays(30);
 
                         // Create a new forms auth ticket
-                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(2, LoginUser.UserName, DateTime.Now, expiryDate, true, String.Empty);
+                        FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(2, account, DateTime.Now, expiryDate, true, String.Empty);
 
                         // Encrypt the ticket
                         string encryptedTicket = FormsAuthentication.Encrypt(ticket);

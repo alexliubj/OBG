@@ -32,6 +32,24 @@ public partial class SiteMaster : System.Web.UI.MasterPage
         {
             ms.Selectable = false;
         }
+        else
+        {
+            if (Page.Header.Title.Contains("Wheels"))
+            {
+                ms = NavigationMenu.FindItem("Wheels");
+                ms.Selectable = false;
+            }
+            else if (Page.Header.Title.Contains("Tires"))
+            {
+                ms = NavigationMenu.FindItem("Tires");
+                ms.Selectable = false;
+            }
+            else if (Page.Header.Title.Contains("Accessories"))
+            {
+                ms = NavigationMenu.FindItem("Accessories");
+                ms.Selectable = false;
+            }
+        }
     }
     protected void btnLogin_Click(object sender, EventArgs e)
     {
