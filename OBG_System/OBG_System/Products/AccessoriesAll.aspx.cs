@@ -160,17 +160,31 @@ public partial class Products_accAll : System.Web.UI.Page
             //Get Row           
             GridViewRow gvr = GridView6.Rows[rowindex];
 
+            List<ShopingCart> shoppingcart;
+            if (Session["Cart"] == null)
+            {
+                shoppingcart = new List<ShopingCart>();
 
-            List<ShopingCart> shoppingcart = new List<ShopingCart>();
+            }
+            else
+            {
+                shoppingcart = (List<ShopingCart>)Session["Cart"];
+            }
             ShopingCart sc = new ShopingCart();
             int pID, qty;
             double price;
+            string partNo;
+            string image;
             pID = Convert.ToInt32(GridView6.DataKeys[rowindex].Value.ToString());
+            partNo = ((Label)GridView6.Rows[rowindex].FindControl("PNLabel")).Text;
+            image = ((Image)GridView6.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView6.Rows[rowindex].FindControl("QTYTextBox")).Text);
             price = Convert.ToDouble(((Label)GridView6.Rows[rowindex].FindControl("PricingLabel")).Text);
             sc.AccId = pID;
             sc.Qty = qty;
             sc.Pricing = price;
+            sc.PartNo = partNo;
+            sc.Image = image;
             shoppingcart.Add(sc);
             Session["Cart"] = shoppingcart;
         }

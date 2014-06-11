@@ -129,22 +129,35 @@ public partial class Products_wheelall : System.Web.UI.Page
             int rowindex = Convert.ToInt32(e.CommandArgument);
             //Get Row           
             GridViewRow gvr = GridView1.Rows[rowindex];
-
-            List<ShopingCart> shoppingcart = new List<ShopingCart>();
-            ShopingCart sc = new ShopingCart();
-            int pID, qty;
-            double price;
-            string partNo;
-            pID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
-            partNo = ((Label)GridView1.Rows[rowindex].FindControl("PNLabel")).Text;
-            qty = Convert.ToInt32(((TextBox)GridView1.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text);
-            sc.ProductId = pID;
-            sc.Qty = qty;
-            sc.Pricing = price;
-            sc.PartNo = partNo;
-            shoppingcart.Add(sc);
-            Session["Cart"] = shoppingcart;
+            List<ShopingCart> shoppingcart;
+            
+            if (Session["Cart"] == null)
+            {
+                shoppingcart = new List<ShopingCart>();
+                
+            }
+            else
+            {
+                shoppingcart = (List<ShopingCart>)Session["Cart"];
+            }
+                ShopingCart sc = new ShopingCart();
+                int pID, qty;
+                double price;
+                string partNo;
+                string image;
+                pID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
+                partNo = ((Label)GridView1.Rows[rowindex].FindControl("PNLabel")).Text;
+                image = ((Image)GridView1.Rows[rowindex].FindControl("Image1")).ImageUrl;
+                qty = Convert.ToInt32(((TextBox)GridView1.Rows[rowindex].FindControl("QTYTextBox")).Text);
+                price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text);
+                sc.ProductId = pID;
+                sc.Qty = qty;
+                sc.Pricing = price;
+                sc.PartNo = partNo;
+                sc.Image = image;
+                shoppingcart.Add(sc);
+                Session["Cart"] = shoppingcart;
+            
         }
     }
 

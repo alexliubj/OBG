@@ -40,7 +40,7 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
         }
         shoppingcart = (List<ShopingCart>)Session["Cart"];
         
-        shoppingcarttb.Clear();
+        //shoppingcarttb.Clear();
         shoppingcarttb.Columns.Add("ProductId");
         //shoppingcarttb.Columns.Add("TireId");
        // shoppingcarttb.Columns.Add("AccId");
@@ -49,32 +49,42 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
         shoppingcarttb.Columns.Add("Image");
         shoppingcarttb.Columns.Add("Quantity");
         shoppingcarttb.Columns.Add("Price");
-
-        for (int i = 0; i < shoppingcart.Count; i++)
+        shoppingcarttb.Columns.Add("itemTotal");
+        if ((List<ShopingCart>)Session["Cart"] == null)
         {
-            sc = shoppingcart[i];
-            DataRow scRow = shoppingcarttb.NewRow();
-            if (sc.ProductId != 0)
-            {
-                scRow["ProductId"] = sc.ProductId.ToString();
-                scRow["ProductType"] = "0";
-            }
-            if (sc.TireId != 0)
-            {
-                scRow["ProductId"] = sc.TireId.ToString();
-                scRow["ProductType"] = "1";
-            }
-            if (sc.AccId != 0)
-            {
-                scRow["ProductId"] = sc.AccId.ToString();
-                scRow["ProductType"] = "2";
-            }
-            scRow["Image"] = sc.Image;
-            scRow["PartNo"] = sc.PartNo.ToString();
-            scRow["Price"] = sc.Pricing.ToString();
-            scRow["Quantity"] = sc.Qty.ToString();
+            Response.Write("~/Account/ShoppingCart.aspx");
+        }
 
+        else
+        {
 
+            for (int i = 0; i < shoppingcart.Count; i++)
+            {
+                sc = shoppingcart[i];
+                DataRow scRow = shoppingcarttb.NewRow();
+                if (sc.ProductId != 0)
+                {
+                    scRow["ProductId"] = sc.ProductId.ToString();
+                    scRow["ProductType"] = "0";
+                }
+                if (sc.TireId != 0)
+                {
+                    scRow["ProductId"] = sc.TireId.ToString();
+                    scRow["ProductType"] = "1";
+                }
+                if (sc.AccId != 0)
+                {
+                    scRow["ProductId"] = sc.AccId.ToString();
+                    scRow["ProductType"] = "2";
+                }
+                scRow["Image"] = sc.Image;
+                scRow["PartNo"] = sc.PartNo.ToString();
+                scRow["Price"] = sc.Pricing.ToString();
+                scRow["Quantity"] = sc.Qty.ToString();
+                scRow["itemTotal"] = sc.Pricing * sc.Qty;
+                shoppingcarttb.Rows.Add(scRow);
+
+            }
         }
 
         if (!IsPostBack)
@@ -107,6 +117,14 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
 
     public void ShoppingCartGridView_DataBind()
     {
+        //foreach (DataRow dr in shoppingcarttb.Rows)
+        //{
+        //    for(int i=0;i<shoppingcarttb.Columns.Count;i++)
+        //    {
+        //        Response.Write(dr[i].ToString());
+        //    }
+        //}
+       
 
         ShoppingCartGridView.DataSource = shoppingcarttb;
         ShoppingCartGridView.DataKeyNames = new string[] { "ProductId" };
@@ -119,6 +137,41 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
         
         
 
+    }
+
+    protected void GridView1_RowDeleting(object sender, GridViewCommandEventArgs  e)
+    {
+        //wheelInformation.Visible = false;
+
+        int ProId = Convert.ToInt32(e.CommandArgument.ToString());
+        if (Session["Cart"] != null)
+        {
+            //DataTable dt = Session["GoodsCart"] as DataTable;
+            for (int i = 0; i < shoppingcarttb.Rows.Count; i++)
+            {
+                int pId = Convert.ToInt32(shoppingcarttb.Rows[i]["ProductId"].ToString());
+                if (ProId == pId)
+                {
+                    //shoppingcarttb.Rows[i].d;
+                }
+            }
+            Session["GoodsCart"] = shoppingcarttb;
+        }
+        ShoppingCartGridView_DataBind();
+    }
+
+    protected void ShoppingCart_ItemDataBound(object sender, GridViewCommandEventArgs e)
+    {
+        int rowindex = Convert.ToInt32(e.CommandArgument);
+        //用来实现数量文本框中只能输入数字
+        int txtQty = Convert.ToInt32(((TextBox)ShoppingCartGridView.Rows[rowindex].FindControl("txtCount")).Text);
+        float lblPrice = Convert.ToSingle(((Label)ShoppingCartGridView.Rows[rowindex].FindControl("PriceLabel")).Text);
+        if (txtQty != null)
+        {
+           // txtQty.Attributes["onkeyup"] = "value=value.replace(/[^\\d]/g,'')";
+            money += txtQty * lblPrice;
+            M_str_Count = money.ToString();
+        }
     }
 
     protected void IBTCheckout_Click(object sender, ImageClickEventArgs e)
