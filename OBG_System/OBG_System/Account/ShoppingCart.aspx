@@ -16,9 +16,13 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div id="ShoppingCartTitle" runat="server" class="ContentHead"><h1>Shopping Cart</h1></div>
      <a href="~/Default.aspx">< Back to Products</a>
-        <asp:GridView ID="ShoppingCartGridView" runat="server" Visible="true"  EmptyDataText="There is nothing in your shopping cart." AutoGenerateColumns="False" ShowFooter="True" GridLines="Vertical" CellPadding="4" SkinID="ShoppingCart"
-            Width="100%" DataKeyNames="ProductId">
+    <br/>
+        <asp:GridView ID="ShoppingCartGridView" runat="server" Visible="true"  ForeColor="#333333" EmptyDataText="There is nothing in your shopping cart." AutoGenerateColumns="False" ShowFooter="True"  CellPadding="4" SkinID="ShoppingCart"
+             DataKeyNames="ProductId" OnRowCommand="GridView1_RowDeleting" OnItemDataBound="ShoppingCart_ItemDataBound" >
+            <AlternatingRowStyle BackColor="White" />
             <Columns>
+
+                 <asp:BoundField DataField="ProductId" HeaderText="Product ID" InsertVisible="False" ReadOnly="True" SortExpression="ProductId" Visible="False" />
                 <%--<asp:TemplateField HeaderText="ProductName" SortExpression="ProductName">
                     <ItemTemplate>
                         <asp:Label ID="ProductNameLable" runat="server" Text='<%# Eval("ProductName") %>'></asp:Label>
@@ -31,7 +35,7 @@
             </asp:TemplateField>
                 <asp:TemplateField HeaderText="Image" SortExpression="Image">
                 <ItemTemplate>
-                    <asp:Label ID="imageLabel" runat="server" Text='<%# Bind("Image") %>'></asp:Label>
+                    <asp:Image ID="imageLabel" class="Imagehub" runat="server" ImageUrl ='<%# Eval("Image") %>'></asp:Image>
                 </ItemTemplate>
             </asp:TemplateField>
                 <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
@@ -49,13 +53,33 @@
                         <asp:TextBox ID="txtCount" runat="server" Width="35px" Text='<%# Eval("Quantity") %>'></asp:TextBox>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField HeaderText="Item Price" SortExpression="ProductID">
+                <ItemTemplate>
+                    <asp:Label ID="ItemPrice" runat="server" Text='<%# Eval("itemTotal") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
                 <%--<asp:TemplateField HeaderText="Item Total">            
                 <ItemTemplate>
                     <%#: String.Format("{0:c}", ((Convert.ToDouble(Item.Quantity)) *  Convert.ToDouble(Item.Product.UnitPrice)))%>
                 </ItemTemplate>        
         </asp:TemplateField> --%>
-                <asp:ButtonField CommandName="delete" Text="Delete" />
+               <asp:TemplateField HeaderText="Delete">
+                    <ItemTemplate>
+                        <asp:Button ID="deleteButton" runat="server"  CommandName="Delete" Text="Delete"
+                            OnClientClick="return confirm('Are you sure you want to delete this?');" CssClass="myButton"/>
+                    </ItemTemplate>
+                </asp:TemplateField>
             </Columns>
+            <EditRowStyle BackColor="#2461BF" />
+        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+        <RowStyle BackColor="#EFF3FB" />
+        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+        <SortedAscendingCellStyle BackColor="#F5F7FB" />
+        <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+        <SortedDescendingCellStyle BackColor="#E9EBEF" />
+        <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
 
     

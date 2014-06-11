@@ -77,9 +77,9 @@ public partial class Products_tireall : System.Web.UI.Page
     }
     protected void AddBt_Click(object sender, EventArgs e)
     {
-        Tire tire = new Tire();
-        TiresBLO.CreateNewTire(tire);
-        Response.Redirect("~/ShoppingCart.aspx?ProductId=" + strProductID + "&Num=1");
+        //Tire tire = new Tire();
+        //TiresBLO.CreateNewTire(tire);
+        //Response.Redirect("~/ShoppingCart.aspx?ProductId=" + strProductID + "&Num=1");
     }
 
     protected void GridView1_RowCommand(object sender, System.Web.UI.WebControls.GridViewCommandEventArgs e)
@@ -90,14 +90,30 @@ public partial class Products_tireall : System.Web.UI.Page
             int rowindex = Convert.ToInt32(e.CommandArgument);
             //Get Row           
             GridViewRow gvr = GridView2.Rows[rowindex];
-            List<ShopingCart> shoppingcart = new List<ShopingCart>();
+            List<ShopingCart> shoppingcart;
+            if (Session["Cart"] == null)
+            {
+                shoppingcart = new List<ShopingCart>();
+
+            }
+            else
+            {
+                shoppingcart = (List<ShopingCart>)Session["Cart"];
+            }
+            
             ShopingCart sc = new ShopingCart();
             int tID, qty;
             double price;
+            string image;
+            string partNo;
             tID = Convert.ToInt32(GridView2.DataKeys[rowindex].Value.ToString());
+            partNo = ((Label)GridView2.Rows[rowindex].FindControl("PNLabel")).Text;
+            image = ((Image)GridView2.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView2.Rows[rowindex].FindControl("QTYTextBox")).Text);
             price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("PricingLabel")).Text);
             sc.TireId = tID;
+            sc.Image = image;
+            sc.PartNo = partNo;
             sc.Qty = qty;
             sc.Pricing = price;
             shoppingcart.Add(sc);
