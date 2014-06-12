@@ -100,6 +100,14 @@
                 </ItemTemplate>
                  
             </asp:TemplateField>
+                <asp:TemplateField HeaderText="PartNo" ItemStyle-HorizontalAlign="Center" SortExpression="PartNo">
+                <%--<EditItemTemplate>
+                    <asp:TextBox ID="StyleTextBox" runat="server" Text='<%# Bind("Style") %>'></asp:TextBox>
+                </EditItemTemplate>--%>
+                <ItemTemplate>
+                    <asp:Label ID="PNLabel" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField HeaderText="Style" ItemStyle-HorizontalAlign="Center" SortExpression="Style">
 
                 <ItemTemplate>
@@ -174,7 +182,7 @@
             </asp:TemplateField>
                   <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center" SortExpression="ADD">
             <ItemTemplate>
-            <asp:ImageButton ID="AddBt" runat="server" ImageUrl="../Pictures/images.jpg" OnClick="AddBt_Click"></asp:ImageButton>
+            <asp:ImageButton ID="AddBt" runat="server" ImageUrl="../Pictures/images.jpg"  CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>'></asp:ImageButton>
             </ItemTemplate>
             </asp:TemplateField>
 

@@ -46,6 +46,47 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
         GridView4.DataKeyNames = new string[] { "ProductId" };
         GridView4.DataBind();
     }
+
+    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "MyButtonClick")
+        {
+            //Get rowindex            
+            int rowindex = Convert.ToInt32(e.CommandArgument);
+            //Get Row           
+            GridViewRow gvr = GridView4.Rows[rowindex];
+            List<ShopingCart> shoppingcart;
+
+            if (Session["Cart"] == null)
+            {
+                shoppingcart = new List<ShopingCart>();
+
+            }
+            else
+            {
+                shoppingcart = (List<ShopingCart>)Session["Cart"];
+            }
+            ShopingCart sc = new ShopingCart();
+            int pID, qty;
+            double price;
+            string partNo;
+            string image;
+            pID = Convert.ToInt32(GridView4.DataKeys[rowindex].Value.ToString());
+            partNo = ((Label)GridView4.Rows[rowindex].FindControl("PNLabel")).Text;
+            image = ((Image)GridView4.Rows[rowindex].FindControl("ImageLable")).ImageUrl;
+            qty = Convert.ToInt32(((TextBox)GridView4.Rows[rowindex].FindControl("QTYTextBox")).Text);
+            price = Convert.ToDouble(((Label)GridView4.Rows[rowindex].FindControl("PriceLabel")).Text);
+            sc.ProductId = pID;
+            sc.Qty = qty;
+            sc.Pricing = price;
+            sc.PartNo = partNo;
+            sc.Image = image;
+            shoppingcart.Add(sc);
+            Session["Cart"] = shoppingcart;
+
+        }
+    }
+
     protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
     {
         GridView4.EditIndex = e.NewEditIndex;
