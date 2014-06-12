@@ -8,6 +8,7 @@ using DataAccess;
 using BusinessLogic;
 using OBGModel;
 using System.Data;
+using System.Drawing;
 
 public partial class Account_ShoppingCart : System.Web.UI.Page
 {
@@ -21,6 +22,7 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
     //protected System.Web.UI.WebControls.TextBox txtCount;
     //protected System.Web.UI.WebControls.TextBox CountTb;
     //string AddProID; 
+    private Int32 Total = 0;
     public static string M_str_Count;
     public float money = 0.0f;
     public static int userID;
@@ -174,9 +176,113 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
         }
     }
 
-    protected void IBTCheckout_Click(object sender, ImageClickEventArgs e)
+    protected void checkout_DataBound(object sender, GridViewRowEventArgs e)
     {
+        //int rowindex = Convert.ToInt32(e.CommandArgument);
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            //GridView行的加亮显示功能
+            e.Row.Attributes.Add("onmouseover", "b=this.style.backgroundColor;this.style.backgroundColor='#E1ECEE'");
+            e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor=b");
+
+            //给+号图片和-号图片添加客户端click事件
+            //用JavaScript实现数量的+1和-1
+            TextBox tb = (TextBox)e.Row.FindControl("txtCount");
+            //((HtmlImage)ShoppingCartGridView.Rows[rowindex].FindControl("imgReduce")).Attributes.Add("onclick", "Reduce(" + tb.ClientID + ")");
+            //((HtmlImage)ShoppingCartGridView.Rows[rowindex].FindControl("imgPlus")).Attributes.Add("onclick", "Plus(" + tb.ClientID + ")");
+
+            //根据商品单价和数量计算购物车中商品的总金额
+            DataRowView drv = (DataRowView)e.Row.DataItem;
+            //Total += Double.Parse(drv["Price"].ToString())* Int32.Parse(tb.Text);
+            //}
+            if (e.Row.RowType == DataControlRowType.Footer)
+            {
+                //将总金额显示在金额一列对应的Footer单元格
+                e.Row.Cells[1].Text = "Total：";
+                e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Right;
+                e.Row.Cells[2].Text = Total.ToString("c2");
+                e.Row.Cells[2].ForeColor = Color.Red;
+            }
+            //int rowindex = Convert.ToInt32(e.CommandArgument);
+            ////Get Row           
+            //GridViewRow gvr = ShoppingCartGridView.Rows[rowindex];
+            //List<ShopingCart> shoppingcart;
+
+            //shoppingcart = (List<ShopingCart>)Session["CheckOut"];
+
+            //ShopingCart sc = new ShopingCart();
+            //int pID, qty;
+            //double price;
+            //string partNo;
+            //string image;
+            //pID = Convert.ToInt32(ShoppingCartGridView.DataKeys[rowindex].Value.ToString());
+            //partNo = ((Label)ShoppingCartGridView.Rows[rowindex].FindControl("PartNoLabel")).Text;
+            //image = ((Image)ShoppingCartGridView.Rows[rowindex].FindControl("imageLabel")).ImageUrl;
+            //qty = Convert.ToInt32(((TextBox)ShoppingCartGridView.Rows[rowindex].FindControl("txtCount")).Text);
+            //price = Convert.ToDouble(((Label)ShoppingCartGridView.Rows[rowindex].FindControl("PriceLabel")).Text);
+            //sc.ProductId = pID;
+            //sc.Qty = qty;
+            //sc.Pricing = price;
+            //sc.PartNo = partNo;
+            //sc.Image = image;
+            //shoppingcart.Add(sc);
+            //Session["CheckOut"] = shoppingcart;
+        }
+    }
+
+    protected void IBTCheckout_Click(object sender, EventArgs e)
+    {
+
+        Response.Redirect("~/Account/CheckOut.aspx");
+        Order order = new Order();
+        OrderLine orderLine = new OrderLine();
+        List<OrderLine> listOrder = new List<OrderLine>();
+        //ShopingCart checkOut = new ShopingCart();
+        order.UserId = userID;
+        order.OrderId = int.Parse(ShoppingCartGridView.SelectedRow.Cells[0].Text);
+        order.OrderDate = DateTime.Now.ToLocalTime();
+        //orderLine.ProductId = int.Parse(ShoppingCartGridView.SelectedRow.Cells[1].Text);
+        //orderLine.Qty = int.Parse(ShoppingCartGridView.SelectedRow.Cells[5].Text);
+
+        int pID, qty;
+        double price;
+        string partNo;
+        string image;
+        pID = int.Parse(ShoppingCartGridView.SelectedRow.Cells[1].Text);
+        partNo = ShoppingCartGridView.SelectedRow.Cells[3].Text;
+        image = ShoppingCartGridView.SelectedRow.Cells[2].Text;
+        qty = int.Parse(ShoppingCartGridView.SelectedRow.Cells[5].Text);
+        price = double.Parse(ShoppingCartGridView.SelectedRow.Cells[4].Text);
+        orderLine.ProductId = pID;
+        orderLine.Qty = qty;
+        //orderLine.Pricing = price;
+        //orderLine.PartNo = partNo;
+        //orderLine.Image = image;
+        listOrder.Add(orderLine);
+        //orderLine.ProductType = 
+        int checkout;
+        checkout = OrderBLO.AddNewOrder(order, listOrder);
+        //if (e.CommandName == "MyButtonClick")
+        //{
+            //Get rowindex            
+           
+
+        //}
+
         // Response.Redirect("~/ShoppingCart.aspx?ProductID=" + strProductID + "&Num=1");
+    }
+
+    protected void gvCart_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        //点击删除时从DataTable中删除对应的数据行
+        if (Session["Cart"] != null)
+        {
+            shoppingcarttb = (DataTable)Session["Cart"];
+            shoppingcarttb.Rows.RemoveAt(e.RowIndex);
+            shoppingcarttb.AcceptChanges();
+            Session["Cart"] = shoppingcarttb;
+            Response.Redirect("ShoppingCart.aspx");
+        }
     }
     //protected void LBRepost_Click(object sender, EventArgs e)
     //{

@@ -12,6 +12,9 @@ public partial class Default2 : System.Web.UI.Page
 {
     private DataSet orderDataSet;
     int userID = 0;
+    ShopingCart sc = new ShopingCart();
+    List<ShopingCart> shoppingcart = new List<ShopingCart>();
+    DataTable checkoutTB = new DataTable();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["userID"] != null)
@@ -23,6 +26,49 @@ public partial class Default2 : System.Web.UI.Page
             Response.Redirect("~/Account/Login.aspx");
         }
 
+        shoppingcart = (List<ShopingCart>)Session["Cart"];
+        checkoutTB.Columns.Add("ProductId");
+        checkoutTB.Columns.Add("ProductType");
+        checkoutTB.Columns.Add("PartNo");
+        checkoutTB.Columns.Add("Image");
+        checkoutTB.Columns.Add("qty");
+        checkoutTB.Columns.Add("Price");
+        if ((List<ShopingCart>)Session["Cart"] == null)
+        {
+            Response.Write("~/Account/ShoppingCart.aspx");
+        }
+
+        else
+        {
+
+            for (int i = 0; i < shoppingcart.Count; i++)
+            {
+                sc = shoppingcart[i];
+                DataRow checkoutRow = checkoutTB.NewRow();
+                if (sc.ProductId != 0)
+                {
+                    checkoutRow["ProductId"] = sc.ProductId.ToString();
+                    checkoutRow["ProductType"] = "0";
+                }
+                if (sc.TireId != 0)
+                {
+                    checkoutRow["ProductId"] = sc.TireId.ToString();
+                    checkoutRow["ProductType"] = "1";
+                }
+                if (sc.AccId != 0)
+                {
+                    checkoutRow["ProductId"] = sc.AccId.ToString();
+                    checkoutRow["ProductType"] = "2";
+                }
+                checkoutRow["Image"] = sc.Image;
+                checkoutRow["PartNo"] = sc.PartNo.ToString();
+                checkoutRow["Price"] = sc.Pricing.ToString();
+                checkoutRow["qty"] = sc.Qty.ToString();
+                checkoutTB.Rows.Add(checkoutRow);
+
+            }
+        }
+
         if (!IsPostBack)
         {
             GridView1_Bind();
@@ -30,55 +76,9 @@ public partial class Default2 : System.Web.UI.Page
     }
     public void GridView1_Bind()
     {
-
-        DataTable orderTable = OrderBLO.GetAllOrderByUserId(userID);
-        orderDataSet = new DataSet();
-        orderDataSet.Tables.Add(orderTable);
-
-        CKGridView.DataSource = orderDataSet;
-        CKGridView.DataKeyNames = new string[] { "OrderId" };
-        CKGridView.DataBind();
-
-        for (int i = 0; i < CKGridView.Rows.Count; i++)
-        {
-            string status = ((Label)(CKGridView.Rows[i].Cells[3].FindControl("Label5"))).Text.ToString().Trim();
-            string statusLabel = "";
-
-            switch (status)
-            {
-                case "0":
-                    statusLabel = "Incomplete";
-                    break;
-                case "1":
-                    statusLabel = "Pending";
-                    break;
-                case "2":
-                    statusLabel = "Processed";
-                    break;
-                case "3":
-                    statusLabel = "Partially Shipped";
-                    break;
-                case "4":
-                    statusLabel = "Shipping";
-                    break;
-                case "5":
-                    statusLabel = "Shipped";
-                    break;
-                case "6":
-                    statusLabel = "Partially Returned";
-                    break;
-                case "7":
-                    statusLabel = "Returned";
-                    break;
-                case "8":
-                    statusLabel = "Canceled";
-                    break;
-                default:
-                    statusLabel = "Unknown";
-                    break;
-            }
-            ((Label)(CKGridView.Rows[i].Cells[3].FindControl("Label5"))).Text = statusLabel;
-        }
+        CKGridView.DataSource = checkoutTB;
+        CKGridView.DataKeyNames = new string[] { "ProductId" };
+        CKGridView.DataBind(); 
     }
 
     protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
