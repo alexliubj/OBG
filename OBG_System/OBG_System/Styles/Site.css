@@ -135,7 +135,7 @@ div.hideSkiplink {
     width: 100%;
 }
 
-div.menu {
+/*div.menu {
     padding: 4px 0px 4px 8px;
 }
 
@@ -181,7 +181,48 @@ div.menu {
                 text-decoration: none;
             }
 
-    div.menu
+    div.menu*/
+
+div.menu ul {
+
+    list-style: none;
+        margin: 0px;
+        padding: 0px;
+        width: auto;
+}
+div.menu li {
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+div.menu li a {
+      background-color: white;
+            border: 1px #4e667d solid;
+            color: #3070d4;
+            display: block;
+            line-height: 1.35em;
+            padding: 4px 20px;
+            text-decoration: none;
+            white-space: nowrap;
+            font-weight: 900;
+}
+div.menu li a:hover { 
+   background-color: #bfcbd6;
+                color: #465c71;
+                text-decoration: none;
+}
+div.menu ul li a:visited {
+                background-color: #3070d4;
+                border: 1px #4e667d solid;
+                color: White;
+                display: block;
+                line-height: 1.35em;
+                padding: 4px 20px;
+                text-decoration: none;
+                white-space: nowrap;
+            }
+
     /* FORM ELEMENTS   
 ----------------------------------------------------------*/
     fieldset {
@@ -344,7 +385,7 @@ CBLayout {
 	display:inline-block;
 	color:#ffffff;
 	font-family:Arial;
-	font-size:15px;
+	font-size:12px;
 	font-weight:500;
 	font-style:normal;
 	height:auto;

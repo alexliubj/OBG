@@ -28,6 +28,9 @@ public partial class Admin_Default : System.Web.UI.Page
 
         if (!Page.IsPostBack)
         {
+            MenuItem ms = NavigationMenu.FindItem("Role Management");
+            ms.Selectable = false;
+
             Gridview1_Bind();
             Gridview2_Bind();
         }
@@ -183,6 +186,10 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
+        if (GridView1.SelectedIndex > -1)
+        {
+            GridView1.SelectedIndex = -1;
+        }
         Gridview1_Bind();
     }
 
@@ -280,6 +287,10 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView2.PageIndex = e.NewPageIndex;
+        if (GridView2.SelectedIndex > -1)
+        {
+            GridView2.SelectedIndex = -1;
+        }
         Gridview2_Bind();
     }
 

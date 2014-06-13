@@ -27,10 +27,14 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             lblWelcome.Text = "Welcome, please ";
         }
 
-        MenuItem ms = NavigationMenu.FindItem(Page.Header.Title);
-        if (ms != null)
+        foreach (MenuItem item in NavigationMenu.Items)
         {
-            ms.Selectable = false;
+            if (Request.Url.AbsoluteUri.ToLower().Contains(item.Value))
+            {
+
+                item.Selectable = false;
+            }
+
         }
     }
 

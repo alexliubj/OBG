@@ -23,6 +23,16 @@ public partial class Products_wheelall : System.Web.UI.Page
         if (Session["UserID"] != null)
         {
             userID = (int)Session["UserID"];
+
+            if (Session["Permissions"] != null)
+            {
+                int wheelPermission = ((List<int>)(Session["Permissions"]))[0];
+                if (wheelPermission == 0)
+                {
+                    Response.Write("<script language='javascript'>alert('Your account does not have permission to access this page');</script>");
+                    Server.Transfer("~/Account/UserCenter.aspx", true);
+                }
+            }
         }
         else
         {
@@ -124,40 +134,40 @@ public partial class Products_wheelall : System.Web.UI.Page
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         if (e.CommandName == "MyButtonClick")
-        {            
+        {
             //Get rowindex            
             int rowindex = Convert.ToInt32(e.CommandArgument);
             //Get Row           
             GridViewRow gvr = GridView1.Rows[rowindex];
             List<ShopingCart> shoppingcart;
-            
+
             if (Session["Cart"] == null)
             {
                 shoppingcart = new List<ShopingCart>();
-                
+
             }
             else
             {
                 shoppingcart = (List<ShopingCart>)Session["Cart"];
             }
-                ShopingCart sc = new ShopingCart();
-                int pID, qty;
-                double price;
-                string partNo;
-                string image;
-                pID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
-                partNo = ((Label)GridView1.Rows[rowindex].FindControl("PNLabel")).Text;
-                image = ((Image)GridView1.Rows[rowindex].FindControl("Image1")).ImageUrl;
-                qty = Convert.ToInt32(((TextBox)GridView1.Rows[rowindex].FindControl("QTYTextBox")).Text);
-                price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text);
-                sc.ProductId = pID;
-                sc.Qty = qty;
-                sc.Pricing = price;
-                sc.PartNo = partNo;
-                sc.Image = image;
-                shoppingcart.Add(sc);
-                Session["Cart"] = shoppingcart;
-            
+            ShopingCart sc = new ShopingCart();
+            int pID, qty;
+            double price;
+            string partNo;
+            string image;
+            pID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
+            partNo = ((Label)GridView1.Rows[rowindex].FindControl("PNLabel")).Text;
+            image = ((Image)GridView1.Rows[rowindex].FindControl("Image1")).ImageUrl;
+            qty = Convert.ToInt32(((TextBox)GridView1.Rows[rowindex].FindControl("QTYTextBox")).Text);
+            price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text);
+            sc.ProductId = pID;
+            sc.Qty = qty;
+            sc.Pricing = price;
+            sc.PartNo = partNo;
+            sc.Image = image;
+            shoppingcart.Add(sc);
+            Session["Cart"] = shoppingcart;
+
         }
     }
 
@@ -182,7 +192,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             GridView1.DataSource = dataView;
             GridView1.DataBind();
         }
-        
+
     }
 
     private string ConvertSortDirectionToSql(SortDirection sortDirection)
@@ -202,12 +212,12 @@ public partial class Products_wheelall : System.Web.UI.Page
 
         return newSortDirection;
     }
- 
+
     protected void chkPCD_SelectedIndexChanged(object sender, EventArgs e)
     {
         DataTable wheelsAll = WheelsBLO.GetAllProducts();
         String sqlText = string.Empty;
-        String sqlFilterSize = string.Empty,sqlFilterPCD = string.Empty, sqlFilterFinish = string.Empty,
+        String sqlFilterSize = string.Empty, sqlFilterPCD = string.Empty, sqlFilterFinish = string.Empty,
             sqlFilterOffset = string.Empty, sqlFilterSeat = string.Empty, sqlFilterBore = string.Empty;
         foreach (ListItem item in chkSize.Items)
         {
@@ -375,5 +385,5 @@ public partial class Products_wheelall : System.Web.UI.Page
     {
         return "(" + orString + ")";
     }
-    
+
 }

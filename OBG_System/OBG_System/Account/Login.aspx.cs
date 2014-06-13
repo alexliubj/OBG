@@ -36,9 +36,11 @@ public partial class Account_Login : System.Web.UI.Page
                     Session["UserID"] = emailLogin.UserId;
                    // Session["login"] = true;
                     Session["Role"] = emailLogin.Rs;
+                    Session["Permissions"] = PermissionBLO.GetPermissionByUserID(emailLogin.UserId);
 
                     string IP = IPUtility.GetIPAddress();
                     IPAddress.UpdateIpAddress(IP, emailLogin.UserId);
+                    IPAddress.UpdateLoginTimes(emailLogin.UserId);
 
                     if (RememberMe.Checked == true)
                     {
@@ -92,8 +94,11 @@ public partial class Account_Login : System.Web.UI.Page
                     //Session["login"] = true;
                     Session["Role"] = userLogin.Rs;
 
+                    Session["Permissions"] = PermissionBLO.GetPermissionByUserID(userLogin.UserId);
+
                     string IP = IPUtility.GetIPAddress();
                     IPAddress.UpdateIpAddress(IP, userLogin.UserId);
+                    IPAddress.UpdateLoginTimes(userLogin.UserId);
 
                     if (RememberMe.Checked == true)
                     {

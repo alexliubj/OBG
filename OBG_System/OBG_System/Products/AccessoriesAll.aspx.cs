@@ -17,9 +17,19 @@ public partial class Products_accAll : System.Web.UI.Page
         if (Session["UserID"] != null)
         {
             userID = (int)Session["UserID"];
+            if (Session["Permissions"] != null)
+            {
+                int accPermission = ((List<int>)(Session["Permissions"]))[2];
+                if (accPermission == 0)
+                {
+                    Response.Write("<script language='javascript'>alert('Your account does not have permission to access this page');</script>");
+                    Server.Transfer("~/Account/UserCenter.aspx", true);
+                }
+            }
         }
         else
         {
+
             Response.Redirect("~/Account/Login.aspx");
         }
         if (!IsPostBack)

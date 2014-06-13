@@ -18,6 +18,15 @@ public partial class Products_tireall : System.Web.UI.Page
         if (Session["UserID"] != null)
         {
             userID = (int)Session["UserID"];
+            if (Session["Permissions"] != null)
+            {
+                int tirePermission = ((List<int>)(Session["Permissions"]))[1];
+                if (tirePermission == 0)
+                {
+                    Response.Write("<script language='javascript'>alert('Your account does not have permission to access this page');</script>");
+                    Server.Transfer("~/Account/UserCenter.aspx", true);
+                }
+            }
         }
         else
         {

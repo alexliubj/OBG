@@ -315,11 +315,15 @@ public partial class Admin_Default : System.Web.UI.Page
             int userID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
 
             string lastIPAddress = "";
+            int loginTimes = 0;
+
             lastIPAddress = IPAddress.GetLastIPAddress(userID);
+            loginTimes = IPAddress.GetLoginTimes(userID);
 
             divIPInfo.Visible = true;
             txtUserID.Text = userID.ToString();
             txtLastIP.Text = lastIPAddress;
+            txtLoginTimes.Text = loginTimes.ToString();
         }
     }
 
@@ -413,6 +417,10 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
+        if (GridView1.SelectedIndex > -1)
+        {
+            GridView1.SelectedIndex = -1;
+        }
         bind();
     }
 

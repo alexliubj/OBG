@@ -19,6 +19,8 @@ public partial class Admin_Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        MenuItem ms = new MenuItem();
+
         if (Session["AdminID"] != null)
         {
             adminID = (int)Session["AdminID"];
@@ -30,6 +32,9 @@ public partial class Admin_Default : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+            ms = NavigationMenu.FindItem("Wheels");
+            ms.Selectable = false;
+
             Gridview1_Bind();
             GridView2_Bind();
             GridView3_Bind();
@@ -102,6 +107,10 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
+        if (GridView1.SelectedIndex > -1)
+        {
+            GridView1.SelectedIndex = -1;
+        }
         Gridview1_Bind();
     }
 
@@ -428,6 +437,10 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView2.PageIndex = e.NewPageIndex;
+        if (GridView2.SelectedIndex > -1)
+        {
+            GridView2.SelectedIndex = -1;
+        }
         GridView2_Bind();
     }
 
@@ -635,6 +648,10 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void GridView3_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView3.PageIndex = e.NewPageIndex;
+        if (GridView3.SelectedIndex > -1)
+        {
+            GridView3.SelectedIndex = -1;
+        }
         GridView3_Bind();
     }
 

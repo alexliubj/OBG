@@ -119,6 +119,24 @@ namespace DataAccess
                     command3.Parameters.AddRange(paras3);
                     db.ExecuteNonQuery(command3, t);
 
+                    DbCommand command4 = db.GetSqlStringCommond(@"INSERT INTO [Permission]
+                                                   ([UserId]
+                                                   ,[WheelPermission]
+                                                   ,[TirePermission]
+                                                   ,[AccPermission])
+                                             VALUES
+                                                   (@UserId
+                                                   ,@WheelPermission
+                                                   ,@TirePermission
+                                                   ,@AccPermission)");
+                    SqlParameter[] paras4 = new SqlParameter[] {
+                        new SqlParameter("@UserId", ret) ,
+                        new SqlParameter("@WheelPermission",1),
+                        new SqlParameter("@TirePermission",1),
+                        new SqlParameter("@AccPermission",1),};
+                    command4.Parameters.AddRange(paras4);
+                    db.ExecuteNonQuery(command4, t);
+
                     t.Commit();
                     return ret;
                 }

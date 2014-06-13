@@ -148,4 +148,8 @@ public partial class Default2 : System.Web.UI.Page
     {
         Response.Redirect("~/Account/ChangePassword.aspx");
     }
+    protected void BtnOrderHistory_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Account/UserOrderHistory.aspx");
+    }
 }

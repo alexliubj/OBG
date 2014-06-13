@@ -1,0 +1,10 @@
+alter table IPAddress add [LoginTimes] int default 0;
+
+drop table [ProductPermission];
+create table Permission
+(
+UserId int, 
+WheelPermission int,
+TirePermission int,
+AccPermission int
+);

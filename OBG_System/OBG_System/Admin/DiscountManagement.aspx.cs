@@ -106,6 +106,14 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
+        if (GridView1.EditIndex > -1)
+        {
+            GridView1.EditIndex = -1;
+        }
+        if (GridView1.SelectedIndex > -1)
+        {
+            GridView1.SelectedIndex = -1;
+        }
         Gridview1_Bind();
     }
 

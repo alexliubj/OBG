@@ -115,6 +115,11 @@
                                     <asp:Button ID="BtnCancle" runat="server" OnClick="BtnCancle_Click" Text="Cancle" Visible="False"  CssClass="myButton"/>
                                 </asp:TableCell>
                             </asp:TableRow>
+                            <asp:TableRow VerticalAlign="Top">
+                                <asp:TableCell>
+                                    <asp:Button  ID="BtnOrderHistory" runat="server"  Visible="True"  CssClass="myButton"  OnClick="BtnOrderHistory_Click" Text="Order History"></asp:Button>
+                                </asp:TableCell>
+                            </asp:TableRow>
                         </asp:Table>
                     </fieldset>
                 </asp:TableCell>
