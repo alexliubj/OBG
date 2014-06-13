@@ -27,27 +27,13 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             btnLogin.Text = "Log In";
             lblWelcome.Text = "Welcome, please ";
         }
-        MenuItem ms = NavigationMenu.FindItem(Page.Header.Title);
-        if (ms != null)
+
+        foreach (MenuItem item in NavigationMenu.Items)
         {
-            ms.Selectable = false;
-        }
-        else
-        {
-            if (Page.Header.Title.Contains("Wheels"))
+            if (Request.Url.AbsoluteUri.ToLower().Contains(item.Value))
             {
-                ms = NavigationMenu.FindItem("Wheels");
-                ms.Selectable = false;
-            }
-            else if (Page.Header.Title.Contains("Tires"))
-            {
-                ms = NavigationMenu.FindItem("Tires");
-                ms.Selectable = false;
-            }
-            else if (Page.Header.Title.Contains("Accessories"))
-            {
-                ms = NavigationMenu.FindItem("Accessories");
-                ms.Selectable = false;
+
+                item.Selectable = false;
             }
         }
     }

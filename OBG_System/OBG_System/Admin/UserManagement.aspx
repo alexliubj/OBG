@@ -14,6 +14,7 @@
         <asp:ListItem Value="50" Text="50" />
         <asp:ListItem Value="100" Text="100" />
     </asp:DropDownList>
+    
     <asp:GridView ID="GridView1" runat="server" AllowSorting="true" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="UserId" ForeColor="#333333"
         GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting"
         OnRowDeleting="GridView1_RowDeleting"

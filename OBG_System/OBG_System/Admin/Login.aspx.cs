@@ -43,6 +43,7 @@ public partial class Admin_Default : System.Web.UI.Page
 
                 string IP = IPUtility.GetIPAddress();
                 IPAddress.UpdateIpAddress(IP, userLogin.UserId);
+                IPAddress.UpdateLoginTimes(userLogin.UserId);
 
                 if (RememberMe.Checked == true)
                 {

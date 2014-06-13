@@ -4,22 +4,27 @@ using System.Linq;
 using System.Text;
 using OBGModel;
 using DataAccess;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 
 namespace BusinessLogic
 {
     public static class PermissionBLO
     {
-        public static bool AddPermission(int prodId, int roleId)
+        public static DataTable GetPermissions()
         {
-            return PermissionDAO.AddPermission(prodId, roleId);
+            return PermissionDAO.GetPermissions();
         }
-        public static bool DeletePermission(int prodId, int roleId)
+
+        public static int UpdatePermission(int userId, List<int> permissions)
         {
-            return PermissionDAO.DeletePermission(prodId, roleId);
+            return PermissionDAO.UpdatePermission(userId, permissions);
         }
-        public static List<Role> GetPermissionByProductId(int prodId)
+
+        public static List<int> GetPermissionByUserID(int userId)
         {
-            return PermissionDAO.GetPermissionByProductId(prodId);
+            return PermissionDAO.GetPermissionByUserID(userId);
         }
     }
 }

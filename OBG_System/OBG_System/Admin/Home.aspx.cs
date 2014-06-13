@@ -27,6 +27,9 @@ public partial class Admin_Default : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+            MenuItem ms = NavigationMenu.FindItem("View Current Image");
+            ms.Selectable = false;
+
             Bind();
         }
     }
@@ -129,7 +132,7 @@ public partial class Admin_Default : System.Web.UI.Page
         {
             ms.Selectable = false;
         }
-
+  
     }
 
     public static string AppendTimeStamp(string fileName)

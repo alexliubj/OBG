@@ -20,6 +20,15 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
         if (Session["UserID"] != null)
         {
             userID = (int)Session["UserID"];
+            if (Session["Permissions"] != null)
+            {
+                int wheelPermission = ((List<int>)(Session["Permissions"]))[0];
+                if (wheelPermission == 0)
+                {
+                    Response.Write("<script language='javascript'>alert('Your account does not have permission to access this page');</script>");
+                    Server.Transfer("~/Account/UserCenter.aspx", true);
+                }
+            }
         }
         else
         {

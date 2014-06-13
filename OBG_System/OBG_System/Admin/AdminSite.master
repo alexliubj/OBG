@@ -27,14 +27,14 @@
             <div class="clear hideSkiplink">
                 <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="true" IncludeStyleBlock="false" Orientation="Horizontal">
                     <Items>
-                        <asp:MenuItem NavigateUrl="Home.aspx" Text="Home Page Management"/>
-                        <asp:MenuItem NavigateUrl="DiscountManagement.aspx" Text="Discount Management"/>
-                        <asp:MenuItem NavigateUrl="OrderManagement.aspx" Text="Order Management"/>
-                        <asp:MenuItem NavigateUrl="PermissionManagement.aspx" Text="Permission Management"/>
-                        <asp:MenuItem NavigateUrl="ProductManagement.aspx" Text="Product Management"/>
-                        <asp:MenuItem NavigateUrl="RegionManagement.aspx" Text="Region Management"/>
-                        <asp:MenuItem NavigateUrl="RoleManagement.aspx" Text="Role Management"/>
-                        <asp:MenuItem NavigateUrl="UserManagement.aspx" Text="User Management"/>
+                        <asp:MenuItem NavigateUrl="Home.aspx" Text="Home Page" Value="home"/>
+                        <asp:MenuItem NavigateUrl="DiscountManagement.aspx" Text="Discount" Value="discount"/>
+                        <asp:MenuItem NavigateUrl="OrderManagement.aspx" Text="Order" Value="order"/>
+                        <asp:MenuItem NavigateUrl="PermissionManagement.aspx" Text="Permission" Value="permission"/>
+                        <asp:MenuItem NavigateUrl="ProductManagement.aspx" Text="Product" Value="product"/>
+                        <asp:MenuItem NavigateUrl="RegionManagement.aspx" Text="Region" Value="region"/>
+                        <asp:MenuItem NavigateUrl="RoleManagement.aspx" Text="Role" Value="role"/>
+                        <asp:MenuItem NavigateUrl="UserManagement.aspx" Text="User" Value="user"/>
 
                     </Items>
                 </asp:Menu>

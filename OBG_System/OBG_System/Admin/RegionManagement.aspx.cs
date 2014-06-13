@@ -28,6 +28,8 @@ public partial class Admin_Default : System.Web.UI.Page
 
         if (!IsPostBack)
         {
+            MenuItem ms = NavigationMenu.FindItem("Region Management");
+            ms.Selectable = false;
             bind();
             Gridview2_Bind();
         }
@@ -149,6 +151,10 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView1.PageIndex = e.NewPageIndex;
+        if (GridView1.SelectedIndex > -1)
+        {
+            GridView1.SelectedIndex = -1;
+        }
         bind();
     }
 
@@ -285,6 +291,10 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void GridView2_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         GridView2.PageIndex = e.NewPageIndex;
+        if (GridView2.SelectedIndex > -1)
+        {
+            GridView2.SelectedIndex = -1;
+        }
         Gridview2_Bind();
     }
 

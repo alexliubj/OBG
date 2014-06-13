@@ -44,22 +44,21 @@
                     <p>Phone: 647-361-8553, 647-361-8556.&nbsp;&nbsp; Fax: 647-361-8554</p>
                 </div>
                 <div class="clear hideSkiplink">
-                    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="true" IncludeStyleBlock="false" Orientation="Horizontal">
+                    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
                         <Items>
-                            <asp:MenuItem NavigateUrl="Default.aspx" Text="Home"></asp:MenuItem>
-                            <asp:MenuItem Text="Wheels">
-                                <asp:MenuItem NavigateUrl="~/Products/WheelsAll.aspx" Text="View All Wheels"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="Default.aspx" Text="Home" Value="default"></asp:MenuItem>
+                            <asp:MenuItem Text="Wheels" Value="wheels">
+                                <asp:MenuItem NavigateUrl="~/Products/WheelsAll.aspx" Text="View All Wheels" ></asp:MenuItem>
                                 <asp:MenuItem NavigateUrl="~/Products/WheelsByVehicle.aspx" Text="View Wheels By Vehicle"></asp:MenuItem>
                             </asp:MenuItem>
-                            <asp:MenuItem Text="Tires">
+                            <asp:MenuItem Text="Tires" Value="tires">
                                 <asp:MenuItem NavigateUrl="~/Products/TiresAll.aspx" Text="View All Tires"></asp:MenuItem>
                                 <asp:MenuItem NavigateUrl="~/Products/TiresByVehicle.aspx" Text="View Tires By Vehicle"></asp:MenuItem>
                             </asp:MenuItem>
-                            <asp:MenuItem Text="Accessories">
+                            <asp:MenuItem Text="Accessories" Value="accessories">
                                 <asp:MenuItem NavigateUrl="~/Products/AccessoriesAll.aspx" Text="View All Accessories"></asp:MenuItem>
                             </asp:MenuItem>
-                            <asp:MenuItem NavigateUrl="Account/UserCenter.aspx" Text="User Center"></asp:MenuItem>
-                            <asp:MenuItem NavigateUrl="Account/UserOrderHistory.aspx" Text="Order History"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="Account/UserCenter.aspx" Text="User Center" Value="usercenter"></asp:MenuItem>
                         </Items>
                     </asp:Menu>
                 </div>
