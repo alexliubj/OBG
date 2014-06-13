@@ -12,8 +12,10 @@ public partial class Default2 : System.Web.UI.Page
 {
     private DataSet orderDataSet;
     int userID = 0;
+    OrderLine orderLine = new OrderLine();
     ShopingCart sc = new ShopingCart();
     List<ShopingCart> shoppingcart = new List<ShopingCart>();
+    //List<OrderLine> orderline = new List<OrderLine>();
     DataTable checkoutTB = new DataTable();
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -27,12 +29,14 @@ public partial class Default2 : System.Web.UI.Page
         }
 
         shoppingcart = (List<ShopingCart>)Session["Cart"];
+        checkoutTB.Columns.Add("OrderId");
         checkoutTB.Columns.Add("ProductId");
         checkoutTB.Columns.Add("ProductType");
         checkoutTB.Columns.Add("PartNo");
         checkoutTB.Columns.Add("Image");
         checkoutTB.Columns.Add("qty");
         checkoutTB.Columns.Add("Price");
+        checkoutTB.Columns.Add("itemTotal");
         if ((List<ShopingCart>)Session["Cart"] == null)
         {
             Response.Write("~/Account/ShoppingCart.aspx");
@@ -60,13 +64,22 @@ public partial class Default2 : System.Web.UI.Page
                     checkoutRow["ProductId"] = sc.AccId.ToString();
                     checkoutRow["ProductType"] = "2";
                 }
+                //checkoutRow["OrderId"] = sc.or
                 checkoutRow["Image"] = sc.Image;
                 checkoutRow["PartNo"] = sc.PartNo.ToString();
                 checkoutRow["Price"] = sc.Pricing.ToString();
                 checkoutRow["qty"] = sc.Qty.ToString();
+                checkoutRow["itemTotal"] = sc.Pricing * sc.Qty;
                 checkoutTB.Rows.Add(checkoutRow);
-
+                totalPrice();
             }
+            // for (int i = 0; i < orderline.Count; i++)
+            //{
+            //     DataRow checkoutRow = checkoutTB.NewRow();
+            //    orderLine = orderline[i];
+            //    checkoutRow["OrderId"] = orderLine.OrderId.ToString();
+            //    checkoutTB.Rows.Add(checkoutRow);
+            //}
         }
 
         if (!IsPostBack)
@@ -81,119 +94,17 @@ public partial class Default2 : System.Web.UI.Page
         CKGridView.DataBind(); 
     }
 
-    protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)
+    protected void totalPrice()
     {
-        CKGridView.EditIndex = e.NewEditIndex;
-        GridView1_Bind();
-
-    }
-
-    protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
-    {
-        int orderID = Convert.ToInt32(CKGridView.DataKeys[e.RowIndex].Value.ToString());
-        OrderBLO.RemoveOrderByOrderId(orderID);
-        GridView1_Bind();
-    }
-
-    protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
-    {
-        CKGridView.EditIndex = -1;
-        GridView1_Bind();
-    }
-
-    protected void GridView1_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-    {
-        CKGridView.EditIndex = -1;
-        GridView1_Bind();
-    }
-
-    protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
-    { 
-        if (e.Row.RowType == DataControlRowType.DataRow)
+        decimal total = 0;
+        foreach (DataRow row in checkoutTB.Rows)
         {
-            DropDownList ddlSelectOrderStatus = (e.Row.FindControl("ddlSelectOrderStatus") as DropDownList);
-
-            string status = (e.Row.FindControl("lblSelectStatus") as Label).Text;
-
-            ddlSelectOrderStatus.Items.Insert(0, new ListItem("Please select"));
-
-            ddlSelectOrderStatus.Items.FindByValue(status).Selected = true;
+            total += decimal.Parse(row["Price"].ToString()) * int.Parse(row["qty"].ToString());
         }
+        LabelTotalPrice.Text = string.Format("{0:n2}", total);
+       // CKGridView.DataSource = checkoutTB;
+        //CKGridView.DataBind();
     }
-
-    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
-    {
-        CKGridView.PageIndex = e.NewPageIndex;
-        GridView1_Bind();
-    }
-
-    protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
-    {
-        DataTable dataTable = OrderBLO.GetAllOrder();
-
-        if (dataTable != null)
-        {
-            DataView dataView = new DataView(dataTable);
-            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
-
-            CKGridView.DataSource = dataView;
-            CKGridView.DataBind();
-        }
-    }
-
-    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        int orderID;
-
-        orderID = int.Parse(CKGridView.SelectedRow.Cells[0].Text);
-
-        GridView2_Bind(orderID);
-
-        //divOrderDetail.Visible = true;
-    }
-
-    protected void ddlSelectOrderStatus_Change(object sender, EventArgs e)
-    {
-        DropDownList ddl = (DropDownList)sender;
-        GridViewRow gdv = (GridViewRow)ddl.NamingContainer;
-        int index = gdv.RowIndex;
-
-        if (((DropDownList)(CKGridView.Rows[index].FindControl("ddlSelectOrderStatus"))).SelectedValue.ToString() != "Please select")
-        {
-            int orderID, status;
-
-            orderID = int.Parse((((Label)(CKGridView.Rows[index].FindControl("LabelOrderID"))).Text));
-
-            status = int.Parse((((DropDownList)(CKGridView.Rows[index].FindControl("ddlSelectOrderStatus"))).SelectedValue.ToString()));
-
-            int update = 0;
-            update = OrderBLO.UpdateOrderStatus(orderID, status);
-            if (update > 0)
-            {
-                GridView1_Bind();
-            }
-            else
-            {
-                ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
-                                       "err_msg",
-                                       "alert('Changing status failed.');",
-                                       true);
-            }
-        }
-    }
-
-
-    #region OrderDetail
-    public void GridView2_Bind(int orderID)
-    {
-
-        DataTable orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
-
-        CKGridView.DataSource = orderDetailTable;
-        CKGridView.DataKeyNames = new string[] { "OrderId" };
-        CKGridView.DataBind();
-    }
-
     //protected void GridView2_Sorting(object sender, GridViewSortEventArgs e)
     //{
         
@@ -214,7 +125,6 @@ public partial class Default2 : System.Web.UI.Page
         CKGridView.PageIndex = e.NewPageIndex;
     }
 
-    #endregion
 
 
     private string ConvertSortDirectionToSql(SortDirection sortDirection)
@@ -237,19 +147,31 @@ public partial class Default2 : System.Web.UI.Page
 
     protected void BtnConfirm_Click(object sender, EventArgs e)
     {
-        Order OrderSaved = new Order();
-        OrderLine orderLine = new OrderLine();
-        //int userID;
-        //int orderId;
-        //userID = int.Parse(CKGridView.SelectedRow.Cells[0].Text);
-        OrderSaved.UserId = int.Parse(CKGridView.SelectedRow.Cells[0].Text);
-        OrderSaved.OrderId = int.Parse(CKGridView.SelectedRow.Cells[1].Text);
-        orderLine.ProductId = int.Parse(CKGridView.SelectedRow.Cells[2].Text);
-        orderLine.PartNO = CKGridView.SelectedRow.Cells[3].Text;
-        orderLine.ProductName = CKGridView.SelectedRow.Cells[4].Text;
-        orderLine.ProductType = int.Parse(CKGridView.SelectedRow.Cells[5].Text);
-        orderLine.Qty = int.Parse(CKGridView.SelectedRow.Cells[6].Text);
-        orderLine.DiscountRate = int.Parse(CKGridView.SelectedRow.Cells[7].Text);
+        Order order = new Order();
+        OrderLine line = new OrderLine();
+        List<OrderLine> orderline = new List<OrderLine>();
+        int userId, orderId;
+        userId = userID;
+        //orderId = int.Parse(CKGridView.SelectedRow.Cells[0].Text);
+        //order.OrderId = orderId;
+        order.OrderDate = DateTime.Now.ToLocalTime();
+        order.PO = txtPO.Text.ToString().Trim();
+        int productID = int.Parse(CKGridView.SelectedRow.Cells[1].Text);
+        line.ProductId = productID;
+        //line.OrderId = orderId;
+        line.Qty = int.Parse(CKGridView.SelectedRow.Cells[5].Text);
+        orderline.Add(line);
+            //line = orderline[i];
+            //DataRow checkoutRow = checkoutTB.NewRow();
+            //checkoutRow["ProductId"] = line.ProductId.ToString();
+            //checkoutRow["ProductType"] = "0";
 
+            //checkoutRow["qty"] = line.Qty.ToString();
+            //checkoutTB.Rows.Add(checkoutRow);
+
+  
+    //    }
+        int ordersave = OrderBLO.AddNewOrder(order, orderline);
+        Response.Write("~/Account/ShoppingCart.aspx");
     }
 }

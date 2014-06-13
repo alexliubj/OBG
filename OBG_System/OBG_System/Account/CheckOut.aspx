@@ -7,9 +7,9 @@
                 Visible="true" OnPageIndexChanging="CKGridView_PageIndexChanging">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
-                    <asp:BoundField DataField="OrderID" HeaderText="Order ID" InsertVisible="False" ReadOnly="True" SortExpression="OrderID" Visible="false" />
-                    <asp:BoundField DataField="UserID" HeaderText="User ID" InsertVisible="False" ReadOnly="True" SortExpression="UserID" Visible="false" />
-                    <asp:TemplateField HeaderText="ProductID" SortExpression="ProductID">
+                    <asp:BoundField DataField="OrderID" HeaderText="Order ID" InsertVisible="False" SortExpression="OrderID" Visible="true" />
+                   <%-- <asp:BoundField DataField="UserID" HeaderText="User ID" InsertVisible="False" ReadOnly="True" SortExpression="UserID" Visible="false" />--%>
+                    <asp:TemplateField HeaderText="ProductID" Visible="true" SortExpression="ProductID">
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("ProductID") %>'></asp:TextBox>
                         </EditItemTemplate>
@@ -54,6 +54,17 @@
                             <asp:Label ID="Label6" runat="server" Text='<%# Bind("qty") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Price" SortExpression="ProductID">
+                <ItemTemplate>
+                    <asp:Label ID="Price" runat="server" Text='<%# Convert.ToDouble(Eval("Price")).ToString("c2") %>'></asp:Label>
+                   
+                </ItemTemplate>
+            </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Item Price" SortExpression="ProductID">
+                <ItemTemplate>
+                    <asp:Label ID="ItemPrice" runat="server" Text='<%# Convert.ToDouble(Eval("itemTotal")).ToString("c2") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
                     <%--<asp:TemplateField HeaderText="DiscountRate" SortExpression="DiscountRate">
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox7" runat="server" Text='<%# string.Format("{0:0.###}", Eval("DiscountRate")) %>'></asp:TextBox>
@@ -76,6 +87,34 @@
                 <SortedDescendingCellStyle BackColor="#E9EBEF" />
                 <SortedDescendingHeaderStyle BackColor="#4870BE" />
             </asp:GridView>
-    <asp:Button ID="confirmBt" runat="server" Text="Confirm" OnClick="BtnConfirm_Click" />
+    <asp:Label ID="LabelTotalText" runat="server"  align="Right" Text="Order Total: "></asp:Label>
+    <asp:Label ID="LabelTotalPrice" Visible="true" align="Right" runat="server" ForeColor="#FF8080" ></asp:Label>
+    <table>
+        <tr>
+            <td>
+                     <asp:Label ID="lbPO" runat="server" AssociatedControlID="txtPO">PO:</asp:Label>                         
+                     <asp:TextBox ID="txtPO" runat="server" CssClass="textEntry" ></asp:TextBox>
+                </td>
+            <td>
+                </td>
+            <td>
+                </td>
+            <td>
+                </td>
+            <td>
+                </td>
+            <td>
+                </td>
+            <td>
+                </td>
+            <td>
+                </td>
+            <td>
+                </td>
+            <td>
+    <asp:Button ID="confirmBt" runat="server" align="Right" Text="Confirm" ControlStyle-CssClass="myButton" OnClick="BtnConfirm_Click" />
+                </td>
+            </tr>
+        </table>
 </asp:Content>
 

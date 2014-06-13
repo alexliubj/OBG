@@ -22,7 +22,7 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
     //protected System.Web.UI.WebControls.TextBox txtCount;
     //protected System.Web.UI.WebControls.TextBox CountTb;
     //string AddProID; 
-    private Int32 Total = 0;
+    private Double Total = 0;
     public static string M_str_Count;
     public float money = 0.0f;
     public static int userID;
@@ -85,7 +85,7 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
                 scRow["Quantity"] = sc.Qty.ToString();
                 scRow["itemTotal"] = sc.Pricing * sc.Qty;
                 shoppingcarttb.Rows.Add(scRow);
-
+                totalPrice();
             }
         }
 
@@ -134,6 +134,18 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
             //ShoppingCartGridView.Rows.Count = shoppingcart.Count;
            
     }
+
+    protected void totalPrice()
+    {
+        decimal total = 0;
+        foreach (DataRow row in shoppingcarttb.Rows)
+        {
+            total += decimal.Parse(row["Price"].ToString()) * int.Parse(row["Quantity"].ToString());
+        }
+        LabelTotalPrice.Text = string.Format("{0:n2}", total);
+        ShoppingCartGridView.DataSource = shoppingcarttb;
+        ShoppingCartGridView.DataBind();
+    }
     protected void ShoppingCartGridView_EditingBound(object sender, GridViewRowEventArgs e)
     {
         
@@ -162,72 +174,52 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
         ShoppingCartGridView_DataBind();
     }
 
-    protected void ShoppingCart_ItemDataBound(object sender, GridViewCommandEventArgs e)
-    {
-        int rowindex = Convert.ToInt32(e.CommandArgument);
-        //用来实现数量文本框中只能输入数字
-        int txtQty = Convert.ToInt32(((TextBox)ShoppingCartGridView.Rows[rowindex].FindControl("txtCount")).Text);
-        float lblPrice = Convert.ToSingle(((Label)ShoppingCartGridView.Rows[rowindex].FindControl("PriceLabel")).Text);
-        if (txtQty != null)
-        {
-           // txtQty.Attributes["onkeyup"] = "value=value.replace(/[^\\d]/g,'')";
-            money += txtQty * lblPrice;
-            M_str_Count = money.ToString();
-        }
-    }
+    //protected void ShoppingCart_ItemDataBound(object sender, GridViewCommandEventArgs e)
+    //{
+    //    int rowindex = Convert.ToInt32(e.CommandArgument);
+    //    //用来实现数量文本框中只能输入数字
+    //    int txtQty = Convert.ToInt32(((TextBox)ShoppingCartGridView.Rows[rowindex].FindControl("txtCount")).Text);
+    //    float lblPrice = Convert.ToSingle(((Label)ShoppingCartGridView.Rows[rowindex].FindControl("PriceLabel")).Text);
+    //    if (txtQty != null)
+    //    {
+    //       // txtQty.Attributes["onkeyup"] = "value=value.replace(/[^\\d]/g,'')";
+    //        money += txtQty * lblPrice;
+    //        M_str_Count = money.ToString();
+    //    }
+    //}
 
-    protected void checkout_DataBound(object sender, GridViewRowEventArgs e)
+    protected void checkout_DataBound(object sender, GridViewCommandEventArgs e)
     {
         //int rowindex = Convert.ToInt32(e.CommandArgument);
-        if (e.Row.RowType == DataControlRowType.DataRow)
-        {
-            //GridView行的加亮显示功能
-            e.Row.Attributes.Add("onmouseover", "b=this.style.backgroundColor;this.style.backgroundColor='#E1ECEE'");
-            e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor=b");
+        //double totalPrice = 0;
+        //totalPrice = totalPrice + double.Parse(((Label)ShoppingCartGridView.Rows[rowindex].FindControl("PNLabel")).Text);
+        //LabelTotalPrice.Text = totalPrice.ToString();
+        //int rowindex = Convert.ToInt32(e.CommandArgument);
+        //if (e.Row.RowType == DataControlRowType.DataRow)
+        //{
+        //    e.Row.Attributes.Add("onmouseover", "b=this.style.backgroundColor;this.style.backgroundColor='#E1ECEE'");
+        //    e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor=b");
+        //    Label total = (Label)e.Row.FindControl("ItemPrice");
+        //    double totalprice=0;
+        //    //totalprice += total
+        //    TextBox tb = (TextBox)e.Row.FindControl("txtCount");
+        //    //((HtmlImage)ShoppingCartGridView.Rows[rowindex].FindControl("imgReduce")).Attributes.Add("onclick", "Reduce(" + tb.ClientID + ")");
+        //    //((HtmlImage)ShoppingCartGridView.Rows[rowindex].FindControl("imgPlus")).Attributes.Add("onclick", "Plus(" + tb.ClientID + ")");
 
-            //给+号图片和-号图片添加客户端click事件
-            //用JavaScript实现数量的+1和-1
-            TextBox tb = (TextBox)e.Row.FindControl("txtCount");
-            //((HtmlImage)ShoppingCartGridView.Rows[rowindex].FindControl("imgReduce")).Attributes.Add("onclick", "Reduce(" + tb.ClientID + ")");
-            //((HtmlImage)ShoppingCartGridView.Rows[rowindex].FindControl("imgPlus")).Attributes.Add("onclick", "Plus(" + tb.ClientID + ")");
+        //    DataRowView drv = (DataRowView)e.Row.DataItem;
+        //    Total += Double.Parse(drv["Price"].ToString())* Int32.Parse(tb.Text);
+        //    //Total += float.Parse((Label)e.Row.FindControl("Price")) * int.Parse((TextBox)e.Row.FindControl("txtCount"));
+        //    //}
+        //    if (e.Row.RowType == DataControlRowType.Footer)
+        //    {
 
-            //根据商品单价和数量计算购物车中商品的总金额
-            DataRowView drv = (DataRowView)e.Row.DataItem;
-            //Total += Double.Parse(drv["Price"].ToString())* Int32.Parse(tb.Text);
-            //}
-            if (e.Row.RowType == DataControlRowType.Footer)
-            {
-                //将总金额显示在金额一列对应的Footer单元格
-                e.Row.Cells[1].Text = "Total：";
-                e.Row.Cells[1].HorizontalAlign = HorizontalAlign.Right;
-                e.Row.Cells[2].Text = Total.ToString("c2");
-                e.Row.Cells[2].ForeColor = Color.Red;
-            }
-            //int rowindex = Convert.ToInt32(e.CommandArgument);
-            ////Get Row           
-            //GridViewRow gvr = ShoppingCartGridView.Rows[rowindex];
-            //List<ShopingCart> shoppingcart;
-
-            //shoppingcart = (List<ShopingCart>)Session["CheckOut"];
-
-            //ShopingCart sc = new ShopingCart();
-            //int pID, qty;
-            //double price;
-            //string partNo;
-            //string image;
-            //pID = Convert.ToInt32(ShoppingCartGridView.DataKeys[rowindex].Value.ToString());
-            //partNo = ((Label)ShoppingCartGridView.Rows[rowindex].FindControl("PartNoLabel")).Text;
-            //image = ((Image)ShoppingCartGridView.Rows[rowindex].FindControl("imageLabel")).ImageUrl;
-            //qty = Convert.ToInt32(((TextBox)ShoppingCartGridView.Rows[rowindex].FindControl("txtCount")).Text);
-            //price = Convert.ToDouble(((Label)ShoppingCartGridView.Rows[rowindex].FindControl("PriceLabel")).Text);
-            //sc.ProductId = pID;
-            //sc.Qty = qty;
-            //sc.Pricing = price;
-            //sc.PartNo = partNo;
-            //sc.Image = image;
-            //shoppingcart.Add(sc);
-            //Session["CheckOut"] = shoppingcart;
-        }
+        //        e.Row.Cells[3].Text = "Total：";
+        //        e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Right;
+        //        e.Row.Cells[4].Text = Total.ToString("c2");
+        //        e.Row.Cells[4].ForeColor = Color.Red;
+        //    }
+            
+        //}
     }
 
     protected void IBTCheckout_Click(object sender, EventArgs e)
@@ -277,10 +269,10 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
         //点击删除时从DataTable中删除对应的数据行
         if (Session["Cart"] != null)
         {
-            shoppingcarttb = (DataTable)Session["Cart"];
-            shoppingcarttb.Rows.RemoveAt(e.RowIndex);
-            shoppingcarttb.AcceptChanges();
-            Session["Cart"] = shoppingcarttb;
+            shoppingcart = (List<ShopingCart>)Session["Cart"];
+            shoppingcart.RemoveAt(e.RowIndex);
+            //shoppingcart.AcceptChanges();
+            Session["Cart"] = shoppingcart;
             Response.Redirect("ShoppingCart.aspx");
         }
     }

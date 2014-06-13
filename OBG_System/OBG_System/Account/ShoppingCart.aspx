@@ -33,16 +33,11 @@
     <a href="~/Default.aspx">< Back to Products</a>
     <br />
     <asp:GridView ID="ShoppingCartGridView" runat="server" Visible="true" ForeColor="#333333" EmptyDataText="There is nothing in your shopping cart." AutoGenerateColumns="False" ShowFooter="True" CellPadding="4" SkinID="ShoppingCart"
-        DataKeyNames="ProductId" OnRowCommand="ShoppingCart_ItemDataBound" OnRowDataBound="checkout_DataBound" OnRowDeleting="gvCart_RowDeleting">
+        DataKeyNames="ProductId"  OnRowCommand="checkout_DataBound" OnRowDeleting="gvCart_RowDeleting">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
 
             <asp:BoundField DataField="OrderId" HeaderText="OrderId" InsertVisible="False" ReadOnly="True" SortExpression="OrderId" Visible="False" />
-            <%--<asp:TemplateField HeaderText="ProductName" SortExpression="ProductName">
-                    <ItemTemplate>
-                        <asp:Label ID="ProductNameLable" runat="server" Text='<%# Eval("ProductName") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>--%>
             <asp:TemplateField HeaderText="ProductID" SortExpression="ProductID" Visible="false">
                 <ItemTemplate>
                     <asp:Label ID="idLabel" runat="server" Text='<%# Bind("ProductID") %>'></asp:Label>
@@ -58,9 +53,10 @@
                     <asp:Label ID="PartNoLabel" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Price" SortExpression="ProductID">
+            <asp:TemplateField HeaderText="Item Price" SortExpression="ProductID">
                 <ItemTemplate>
-                    <%# Convert.ToDouble(Eval("Price")).ToString("c2") %>
+                    <asp:Label ID="Price" runat="server" Text='<%# Convert.ToDouble(Eval("Price")).ToString("c2") %>'></asp:Label>
+                   
                 </ItemTemplate>
             </asp:TemplateField>
 
@@ -70,9 +66,9 @@
                     <asp:TextBox ID="txtCount" runat="server" Width="35px" Text='<%# Eval("Quantity") %>' onkeyup="CheckValue(this)"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Item Price" SortExpression="ProductID">
+            <asp:TemplateField HeaderText="Price" SortExpression="ProductID">
                 <ItemTemplate>
-                    <asp:Label ID="ItemPrice" runat="server" Text='<%# Eval("itemTotal") %>'></asp:Label>
+                    <asp:Label ID="ItemPrice" runat="server" Text='<%# Convert.ToDouble(Eval("itemTotal")).ToString("c2") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <%--<asp:TemplateField HeaderText="Item Total">            
@@ -80,15 +76,15 @@
                     <%#: String.Format("{0:c}", ((Convert.ToDouble(Item.Quantity)) *  Convert.ToDouble(Item.Product.UnitPrice)))%>
                 </ItemTemplate>        
         </asp:TemplateField> --%>
-            <asp:CommandField HeaderText="删除" DeleteText="删除" ShowDeleteButton="true">
+            <asp:CommandField HeaderText="Delete" DeleteText="Delete" ShowDeleteButton="true">
                         <ItemStyle Width="30px" />
                     </asp:CommandField>
-            <asp:TemplateField HeaderText="Delete">
+            <%--<asp:TemplateField HeaderText="Delete">
                 <ItemTemplate>
                     <asp:Button ID="deleteButton" runat="server" CommandName="Delete" Text="Delete"
                         OnClientClick="return confirm('Are you sure you want to delete this?');" CssClass="myButton" />
                 </ItemTemplate>
-            </asp:TemplateField>
+            </asp:TemplateField>--%>
 
         </Columns>
 
@@ -104,7 +100,7 @@
         <SortedDescendingHeaderStyle BackColor="#4870BE" />
     </asp:GridView>
     <asp:Label ID="LabelTotalText" runat="server" Text="Order Total: "></asp:Label>
-    <asp:Label ID="Label1" runat="server" EnableViewState="false"></asp:Label>
+    <asp:Label ID="LabelTotalPrice" Visible="true" runat="server" ForeColor="#FF8080" ></asp:Label>
 
     <asp:ImageButton ID="ImageButton1" runat="server" ImageAlign="Right" 
         ImageUrl="~/Pictures/checkoutButton.png" OnClick="IBTCheckout_Click" />
