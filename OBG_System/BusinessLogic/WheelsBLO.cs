@@ -43,5 +43,10 @@ namespace BusinessLogic
         {
             return WheelsDAO.GetProductIdByVehicle(vehicleid);
         }
+
+        public static string GetDesByProductId(int productid)
+        {
+            return WheelsDAO.GetDesByProductId(productid);
+        }
     }
 }

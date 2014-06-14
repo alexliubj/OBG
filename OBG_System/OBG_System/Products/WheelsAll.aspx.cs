@@ -76,8 +76,7 @@ public partial class Products_wheelall : System.Web.UI.Page
 
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        int productID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
-        WheelsBLO.DeleteProductById(productID);
+        GridView1.EditIndex = -1;
         Gridview1_Bind();
     }
 
@@ -93,14 +92,17 @@ public partial class Products_wheelall : System.Web.UI.Page
         Gridview1_Bind();
     }
 
-    protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+    protected void GridView1_RowDataBound(object sender, GridViewDeleteEventArgs e)
     {
-
+        GridView1.EditIndex = -1;
+        Gridview1_Bind();
     }
 
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
 
+        //string des = WheelsBLO.GetDesByProductId(ProductId);
+        //Response.Write()
     }
 
     protected void AddBt_Click(object sender, EventArgs e)
@@ -169,6 +171,14 @@ public partial class Products_wheelall : System.Web.UI.Page
             Session["Cart"] = shoppingcart;
 
         }
+
+        //if (e.CommandName == "Description")
+        //{
+        //    int rowindex = Convert.ToInt32(e.CommandArgument);
+        //    int productID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
+        //    string des = WheelsBLO.GetDesByProductId(productID);
+        //    Response.Write(des);
+        //}
     }
 
 

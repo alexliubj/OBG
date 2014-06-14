@@ -27,7 +27,7 @@
     </div>
 
 
-    <asp:GridView ID="GridView4" runat="server"  GridLines="None" 
+    <asp:GridView ID="GridView4" runat="server"   GridLines="Both"  
         AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" 
         DataKeyNames="ProductId" ForeColor="#333333"  OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
          OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"

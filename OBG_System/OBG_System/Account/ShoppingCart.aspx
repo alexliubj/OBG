@@ -15,11 +15,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
      <script type="text/javascript">
-         //点击+号图，数量+1
          function Plus(obj) {
              obj.value = parseInt(obj.value) + 1;
          }
-         //数量-1
          function Reduce(obj) {
              if (obj.value > 1) {
                  obj.value = obj.value - 1;
@@ -32,28 +30,28 @@
     </div>
     <a href="~/Default.aspx">< Back to Products</a>
     <br />
-    <asp:GridView ID="ShoppingCartGridView" runat="server" Visible="true" ForeColor="#333333" EmptyDataText="There is nothing in your shopping cart." AutoGenerateColumns="False" ShowFooter="True" CellPadding="4" SkinID="ShoppingCart"
+    <asp:GridView ID="ShoppingCartGridView" GridLines="Both" runat="server" Visible="true" ForeColor="#333333" EmptyDataText="There is nothing in your shopping cart." AutoGenerateColumns="False" ShowFooter="True" CellPadding="4" SkinID="ShoppingCart"
         DataKeyNames="ProductId"  OnRowCommand="checkout_DataBound" OnRowDeleting="gvCart_RowDeleting">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
 
             <asp:BoundField DataField="OrderId" HeaderText="OrderId" InsertVisible="False" ReadOnly="True" SortExpression="OrderId" Visible="False" />
-            <asp:TemplateField HeaderText="ProductID" SortExpression="ProductID" Visible="false">
+            <asp:TemplateField HeaderText="ProductID" ItemStyle-HorizontalAlign="Center" SortExpression="ProductID" Visible="false">
                 <ItemTemplate>
                     <asp:Label ID="idLabel" runat="server" Text='<%# Bind("ProductID") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Image" SortExpression="Image">
+            <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Center" SortExpression="Image">
                 <ItemTemplate>
                     <asp:Image ID="imageLabel" class="Imagehub" runat="server" ImageUrl='<%# Eval("Image") %>'></asp:Image>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
+            <asp:TemplateField HeaderText="PartNo" ItemStyle-HorizontalAlign="Center" SortExpression="PartNo">
                 <ItemTemplate>
                     <asp:Label ID="PartNoLabel" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Item Price" SortExpression="ProductID">
+            <asp:TemplateField HeaderText="Item Price" ItemStyle-HorizontalAlign="Center" SortExpression="ProductID">
                 <ItemTemplate>
                     <asp:Label ID="Price" runat="server" Text='<%# Convert.ToDouble(Eval("Price")).ToString("c2") %>'></asp:Label>
                    
@@ -61,12 +59,12 @@
             </asp:TemplateField>
 
            
-            <asp:TemplateField HeaderText="QTY">
+            <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center">
                 <ItemTemplate>
                     <asp:TextBox ID="txtCount" runat="server" Width="35px" Text='<%# Eval("Quantity") %>' onkeyup="CheckValue(this)"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Price" SortExpression="ProductID">
+            <asp:TemplateField HeaderText="Price" ItemStyle-HorizontalAlign="Center" SortExpression="ProductID">
                 <ItemTemplate>
                     <asp:Label ID="ItemPrice" runat="server" Text='<%# Convert.ToDouble(Eval("itemTotal")).ToString("c2") %>'></asp:Label>
                 </ItemTemplate>

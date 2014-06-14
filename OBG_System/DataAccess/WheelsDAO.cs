@@ -22,6 +22,22 @@ namespace DataAccess
             return dt;
         }
 
+        public static string GetDesByProductId(int productid)
+        {
+            string des="";
+            DbCommand command = db.GetSqlStringCommond(@"SELECT [des] FROM Wheels where productid = @productid");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@productid", productid) };
+            command.Parameters.AddRange(paras);
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    des = reader.GetString(0);
+
+                }
+            }
+            return des;
+        }
 
         public static DataTable GetAllWheelsVehiclesByWheelsId(int wheelsId)
         {

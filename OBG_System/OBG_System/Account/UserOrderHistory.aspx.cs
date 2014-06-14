@@ -16,14 +16,19 @@ public partial class Default2 : System.Web.UI.Page
         userId = (int)Session["UserID"];
         if (!IsPostBack)
         {
-            //Gridview1_Bind();
-            DataListOrder.DataSource = OrderBLO.GetAllOrder();
-            DataListOrder.DataBind();
+            Gridview1_Bind();
+            //DataListOrder.DataSource = OrderBLO.GetAllOrder();
+            //DataListOrder.DataBind();
+
+            
+
             //lblTatil.Text = string.Format("{0:c}", OrderAccess.GetAllTatil());
         }
 
        
     }
+
+    
     public void Gridview1_Bind()
     {
 
@@ -31,15 +36,74 @@ public partial class Default2 : System.Web.UI.Page
         orderDataSet = new DataSet();
         orderDataSet.Tables.Add(order);
 
-        OrderGridView.DataSource = orderDataSet;
-        OrderGridView.DataKeyNames = new string[] { "OrderId" };
-        OrderGridView.DataBind();
+        GridView1.DataSource = orderDataSet;
+        GridView1.DataKeyNames = new string[] { "OrderId" };
+        GridView1.DataBind();
 
+        for (int i = 0; i < GridView1.Rows.Count; i++)
+        {
+            string status = ((Label)(GridView1.Rows[i].Cells[2].FindControl("Label5"))).Text.ToString().Trim();
+            string statusLabel = "";
 
+            switch (status)
+            {
+                case "0":
+                    statusLabel = "Incomplete";
+                    break;
+                case "1":
+                    statusLabel = "Pending";
+                    break;
+                case "2":
+                    statusLabel = "Processed";
+                    break;
+                case "3":
+                    statusLabel = "Partially Shipped";
+                    break;
+                case "4":
+                    statusLabel = "Shipping";
+                    break;
+                case "5":
+                    statusLabel = "Shipped";
+                    break;
+                case "6":
+                    statusLabel = "Partially Returned";
+                    break;
+                case "7":
+                    statusLabel = "Returned";
+                    break;
+                case "8":
+                    statusLabel = "Canceled";
+                    break;
+                default:
+                    statusLabel = "Unknown";
+                    break;
+            }
+            ((Label)(GridView1.Rows[i].Cells[2].FindControl("Label5"))).Text = statusLabel;
+        }
     }
-    protected void DataListOrder_ItemCommand(object source, DataListCommandEventArgs e)
+    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        OrderGridView.DataSource = OrderBLO.GetOrderLineByOrderId(int.Parse(e.CommandArgument.ToString())); 
+        int orderID;
+
+        orderID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
+
+        GridView2_Bind(orderID);
+
+        divOrderDetail.Visible = true;
+    }
+    //protected void DataListOrder_ItemCommand(object source, DataListCommandEventArgs e)
+    //{
+    //    OrderGridView.DataSource = OrderBLO.GetOrderLineByOrderId(int.Parse(e.CommandArgument.ToString())); 
+    //    OrderGridView.DataBind();
+    //    OrderGridView.Visible = true;
+    //}
+    public void GridView2_Bind(int orderID)
+    {
+
+        DataTable orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
+
+        OrderGridView.DataSource = orderDetailTable;
+        OrderGridView.DataKeyNames = new string[] { "OrderId" };
         OrderGridView.DataBind();
     }
 }

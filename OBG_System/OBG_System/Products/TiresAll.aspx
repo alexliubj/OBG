@@ -68,7 +68,7 @@
 
 
 
-    <asp:GridView ID="GridView2" runat="server" GridLines="None"
+    <asp:GridView ID="GridView2" runat="server" GridLines="Both"
         AllowPaging="True" AutoGenerateColumns="False" CellPadding="4"
         DataKeyNames="TireId" ForeColor="#333333" OnSelectedIndexChanged="GridView2_SelectedIndexChanged"
         OnRowEditing="GridView2_RowEditing"

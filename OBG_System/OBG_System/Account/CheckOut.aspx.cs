@@ -73,13 +73,7 @@ public partial class Default2 : System.Web.UI.Page
                 checkoutTB.Rows.Add(checkoutRow);
                 totalPrice();
             }
-            // for (int i = 0; i < orderline.Count; i++)
-            //{
-            //     DataRow checkoutRow = checkoutTB.NewRow();
-            //    orderLine = orderline[i];
-            //    checkoutRow["OrderId"] = orderLine.OrderId.ToString();
-            //    checkoutTB.Rows.Add(checkoutRow);
-            //}
+
         }
 
         if (!IsPostBack)
@@ -105,20 +99,6 @@ public partial class Default2 : System.Web.UI.Page
        // CKGridView.DataSource = checkoutTB;
         //CKGridView.DataBind();
     }
-    //protected void GridView2_Sorting(object sender, GridViewSortEventArgs e)
-    //{
-        
-    //    //DataTable dataTable = ;
-
-    //    if (dataTable != null)
-    //    {
-    //        DataView dataView = new DataView(dataTable);
-    //        dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
-
-    //        GridView2.DataSource = dataView;
-    //        GridView2.DataBind();
-    //    }
-    //}
 
     protected void CKGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
@@ -147,20 +127,29 @@ public partial class Default2 : System.Web.UI.Page
 
     protected void BtnConfirm_Click(object sender, EventArgs e)
     {
+        int orderId;
         Order order = new Order();
         OrderLine line = new OrderLine();
         List<OrderLine> orderline = new List<OrderLine>();
-        int userId, orderId;
-        userId = userID;
+        double rate = DiscountBLO.GetDiscountByUserId(userID);
         //orderId = int.Parse(CKGridView.SelectedRow.Cells[0].Text);
         //order.OrderId = orderId;
+        order.UserId = userID;
+        order.Status = 1;
         order.OrderDate = DateTime.Now.ToLocalTime();
         order.PO = txtPO.Text.ToString().Trim();
-        int productID = int.Parse(CKGridView.SelectedRow.Cells[1].Text);
-        line.ProductId = productID;
-        //line.OrderId = orderId;
-        line.Qty = int.Parse(CKGridView.SelectedRow.Cells[5].Text);
-        orderline.Add(line);
+        for (int i = 0; i < CKGridView.Rows.Count; i++)
+        {
+            
+            int productID = int.Parse(((Label)CKGridView.Rows[i].Cells[1].FindControl("Label3")).Text.ToString());
+            line.ProductId = productID;
+            //line.OrderId = orderId;
+            line.DiscountRate = (float)rate;
+            line.ProductType = 1;
+            line.Qty = int.Parse(((Label)CKGridView.Rows[i].Cells[5].FindControl("Label6")).Text.ToString());
+            orderline.Add(line);
+        }
+        
             //line = orderline[i];
             //DataRow checkoutRow = checkoutTB.NewRow();
             //checkoutRow["ProductId"] = line.ProductId.ToString();
@@ -172,6 +161,6 @@ public partial class Default2 : System.Web.UI.Page
   
     //    }
         int ordersave = OrderBLO.AddNewOrder(order, orderline);
-        Response.Write("~/Account/ShoppingCart.aspx");
+        Response.Redirect("~/Default.aspx");
     }
 }

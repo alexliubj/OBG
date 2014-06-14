@@ -134,7 +134,7 @@
         OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
         OnRowUpdating="GridView1_RowUpdating"
         OnRowCancelingEdit="GridView1_RowCancelingEdit"
-        OnRowDataBound="GridView1_RowDataBound"
+       
         OnRowCommand="GridView1_RowCommand"
         OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">
 
@@ -389,6 +389,12 @@
                 </ItemTemplate>
 
             </asp:TemplateField>
+
+            <asp:TemplateField HeaderText="Description">
+                    <ItemTemplate>                
+                        <asp:LinkButton ID="DesBt"  Width="30" runat="server" CommandName="Description" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' Text="Description" />         
+                    </ItemTemplate>   
+                </asp:TemplateField>
             <%-- <asp:TemplateField HeaderText="CategoryId" SortExpression="CategoryId">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CategoryId") %>'></asp:TextBox>
@@ -397,7 +403,7 @@
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("CategoryId") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>--%>
-            <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center" SortExpression="ADD">
+            <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center"  SortExpression="ADD">
                 <ItemTemplate>
                     <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
                 </ItemTemplate>

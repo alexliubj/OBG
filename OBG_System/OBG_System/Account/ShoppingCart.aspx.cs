@@ -230,6 +230,7 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
         OrderLine orderLine = new OrderLine();
         List<OrderLine> listOrder = new List<OrderLine>();
         //ShopingCart checkOut = new ShopingCart();
+        userID = 1;
         order.UserId = userID;
         order.OrderId = int.Parse(ShoppingCartGridView.SelectedRow.Cells[0].Text);
         order.OrderDate = DateTime.Now.ToLocalTime();

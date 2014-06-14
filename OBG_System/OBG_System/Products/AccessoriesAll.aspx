@@ -29,7 +29,7 @@
 
 
 
-    <asp:GridView ID="GridView6" runat="server" GridLines="None" AllowPaging="True" 
+    <asp:GridView ID="GridView6" runat="server" GridLines="Both" AllowPaging="True" 
     AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" 
     ForeColor="#333333"
         AllowSorting="true" OnRowCommand="GridView1_RowCommand"  OnPageIndexChanging="GridView6_PageIndexChanging" OnSorting="GridView6_Sorting">
