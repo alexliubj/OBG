@@ -21,6 +21,24 @@ namespace DataAccess
             return dt;
         }
 
+        public static double getDisccountByUserID(int userId)
+        {
+            double rate = 0;
+            DbCommand command = db.GetSqlStringCommond(@"select disrate from [discount] where userid = @userid");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@UserId", userId) };
+            command.Parameters.AddRange(paras);
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    rate = reader.GetDouble(0);
+
+                }
+            }
+            return rate;
+        }
+
+
         public static bool getDiscountExists(int userid)
         {
             DbCommand command = db.GetSqlStringCommond(@"

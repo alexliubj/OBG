@@ -28,5 +28,10 @@ namespace BusinessLogic
         {
             return DiscountDAO.DeleteDiscount(userId);
         }
+
+        public static double GetDiscountByUserId(int userId)
+        {
+            return DiscountDAO.getDisccountByUserID(userId);
+        }
     }
 }
