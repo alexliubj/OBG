@@ -1,6 +1,6 @@
 alter table IPAddress add [LoginTimes] int default 0;
 
-drop table [ProductPermission];
+drop table [dbo].[ProductPermission];
 create table Permission
 (
 UserId int, 
