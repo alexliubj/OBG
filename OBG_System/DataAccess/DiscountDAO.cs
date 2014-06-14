@@ -14,52 +14,55 @@ namespace DataAccess
         private static DbHelper db = new DbHelper();
         public static DataTable GetAllDiscount()
         {
-            DbCommand command = db.GetSqlStringCommond(@"select d.userid,d.disrate,u.username
+            DbCommand command = db.GetSqlStringCommond(@"select d.userid,d.wheelsRate,d.tiresRate,d.accRate,u.username
                                                         from [discount] d inner join [users] u
                                                         on d.userid = u.userid");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
 
-        public static double getDisccountByUserID(int userId)
+        public static bool getDiscountExists(int userid)
         {
-            double rate = 0;
-            DbCommand command = db.GetSqlStringCommond(@"select disrate from [discount] where userid = @userid");
-            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@UserId", userId)};
+            DbCommand command = db.GetSqlStringCommond(@"
+                            select count(*) from discount where userid=@userid");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
             command.Parameters.AddRange(paras);
-            using (DbDataReader reader = db.ExecuteReader(command))
+            if ((int)db.ExecuteScalar(command) > 0)
             {
-                while (reader.Read())
-                {
-                    rate = reader.GetDouble(0);
-                    
-                }
+                return true;
             }
-            return rate;
+            else
+            {
+                return false;
+            }
         }
 
-        public static int AddDiscount(int userId, float rate)
+        public static int AddDiscount(int userId, float wheelsRate, float tiresRate, float accRate)
         {
             DbCommand command = db.GetSqlStringCommond(@"INSERT INTO [Discount]
                                                    ([UserId]
-                                                   ,[DisRate])
+                                                   ,[wheelsRate],[tiresRate],[accRate])
                                              VALUES
                                                    (@UserId
-                                                   ,@DisRate)");
+                                                   ,@wheelsRate,@tiresRate,@accRate)");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@UserId", userId) ,
-            new SqlParameter("@DisRate",rate)};
+            new SqlParameter("@wheelsRate",wheelsRate),
+            new SqlParameter("@tiresRate",tiresRate),
+            new SqlParameter("@accRate",accRate)};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
 
-        public static int UpdateDiscount(int userId, float rate)
+        public static int UpdateDiscount(int userId, float wheelsRate, float tiresRate, float accRate)
         {
             DbCommand command = db.GetSqlStringCommond(@"UPDATE [Discount]
-                                                   SET [DisRate] = @rate
+                                                   SET [wheelsRate] = @wheelsRate, [tiresRate] = @tiresRate, [accRate] = @accRate
                                                  WHERE userId=@userId");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@userId", userId),
-            new SqlParameter("@rate", rate)};
+            new SqlParameter("@wheelsRate",wheelsRate),
+            new SqlParameter("@tiresRate",tiresRate),
+            new SqlParameter("@accRate",accRate)};
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }

@@ -44,7 +44,7 @@ public partial class Admin_Default : System.Web.UI.Page
     public void Gridview1_Bind()
     {
 
-        DataTable wheelsTable = WheelsBLO.GetAllProducts();
+        DataTable wheelsTable = WheelsBLO.GetAllProducts(1);
         wheelsDataSet = new DataSet();
         wheelsDataSet.Tables.Add(wheelsTable);
 
@@ -116,7 +116,7 @@ public partial class Admin_Default : System.Web.UI.Page
 
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
     {
-        DataTable dataTable = WheelsBLO.GetAllProducts();
+        DataTable dataTable = WheelsBLO.GetAllProducts(1);
 
         if (dataTable != null)
         {
@@ -154,7 +154,7 @@ public partial class Admin_Default : System.Web.UI.Page
         }
         else
         {
-            DataTable wheelsTable = WheelsBLO.GetAllProducts();
+            DataTable wheelsTable = WheelsBLO.GetAllProducts(1);
             wheelsTable.PrimaryKey = new DataColumn[] { wheelsTable.Columns["ProductID"] };
             DataRow foundRow = wheelsTable.Rows.Find(productID);
             wheel.Image = foundRow[1].ToString(); 

@@ -14,24 +14,19 @@ namespace BusinessLogic
             return DiscountDAO.GetAllDiscount();
         }
 
-        public static int AddDiscount(int roleId, float rate)
+        public static int AddDiscount(int roleId, float wheels, float tires, float acc)
         {
-            return DiscountDAO.AddDiscount(roleId,rate);
+            return DiscountDAO.AddDiscount(roleId,wheels,tires,acc);
         }
 
-        public static int UpdateDiscount(int roleId, float rate)
+        public static int UpdateDiscount(int roleId, float wheels, float tires, float acc)
         {
-            return DiscountDAO.UpdateDiscount(roleId, rate);
+            return DiscountDAO.UpdateDiscount(roleId, wheels, tires, acc);
         }
 
         public static int DeleteDiscount(int userId)
         {
             return DiscountDAO.DeleteDiscount(userId);
-        }
-
-        public static double GetDiscountByUserId(int userId)
-        {
-            return DiscountDAO.getDisccountByUserID(userId);
         }
     }
 }
