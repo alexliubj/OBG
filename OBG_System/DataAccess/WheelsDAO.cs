@@ -14,10 +14,25 @@ namespace DataAccess
 
         private static DbHelper db = new DbHelper();
 
-        public static DataTable GetAllProducts()
+        public static DataTable GetAllProducts(int userid)
         {
-            DbCommand command = db.GetSqlStringCommond(@"SELECT ProductId,Image,Style,Brand,Size,PCD,
-                                                    Finish,Offset,SEAT,BORE,Weight,ONHand,Price,PartNO,[des] FROM Wheels");
+            DbCommand command = db.GetSqlStringCommond(@"SELECT [ProductId]
+                                                      ,[Image]
+                                                      ,[Style]
+                                                      ,[Brand]
+                                                      ,[Size]
+                                                      ,[PCD]
+                                                      ,[Finish]
+                                                      ,[Offset]
+                                                      ,[SEAT]
+                                                      ,[BORE]
+                                                      ,[Weight]
+                                                      ,[ONHand]
+                                                      ,[Price]
+                                                      ,[PartNO]
+                                                      ,[des],d.wheelsrate,w.price*d.wheelsrate finalprice
+                                                  FROM [OBG_].[dbo].[Wheels] w ,[discount] d where d.userid =@userid");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }

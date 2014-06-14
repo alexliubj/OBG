@@ -47,7 +47,7 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
     private void Gridview4_Bind()
     {
 
-        DataTable wheelsAll = WheelsBLO.GetAllProducts();
+        DataTable wheelsAll = WheelsBLO.GetAllProducts(1);
         wheelsDataSet = new DataSet();
         wheelsDataSet.Tables.Add(wheelsAll);
 
@@ -169,7 +169,7 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
     {
         //DataTable dataTable = GridView1.DataSource as DataTable;
-        DataTable dataTable = WheelsBLO.GetAllProducts();
+        DataTable dataTable = WheelsBLO.GetAllProducts(1);
 
         if (dataTable != null)
         {
@@ -204,7 +204,7 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
     {
         int vehicleid = 0;
         vehicleid = int.Parse(rdVehicle.SelectedValue);
-        DataTable wheel = WheelsBLO.GetAllProducts();
+        DataTable wheel = WheelsBLO.GetAllProducts(1);
         DataTable wheelsVehicle = WheelsBLO.GetProductIdByVehicle(vehicleid);
         String sqlText = string.Empty;
         List<int> wheelsids = new List<int>();

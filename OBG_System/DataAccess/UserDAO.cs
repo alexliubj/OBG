@@ -107,15 +107,18 @@ namespace DataAccess
                     command2.Parameters.AddRange(paras2);
                     db.ExecuteNonQuery(command2, t);
 
+
                     DbCommand command3 = db.GetSqlStringCommond(@"INSERT INTO [Discount]
                                                    ([UserId]
-                                                   ,[DisRate])
+                                                   ,[wheelsRate],[tiresRate],[accRate])
                                              VALUES
                                                    (@UserId
-                                                   ,@DisRate)");
+                                                   ,@wheelsRate,@tiresRate,@accRate)");
                     SqlParameter[] paras3 = new SqlParameter[] {
                         new SqlParameter("@UserId", ret) ,
-            new SqlParameter("@DisRate",1.0f)};
+            new SqlParameter("@wheelsRate",1.0f),
+            new SqlParameter("@tiresRate",1.0f),
+            new SqlParameter("@accRate",1.0f)};
                     command3.Parameters.AddRange(paras3);
                     db.ExecuteNonQuery(command3, t);
 

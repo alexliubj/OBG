@@ -56,7 +56,7 @@ public partial class Products_wheelall : System.Web.UI.Page
     public void Gridview1_Bind()
     {
 
-        DataTable wheelsAll = WheelsBLO.GetAllProducts();
+        DataTable wheelsAll = WheelsBLO.GetAllProducts(1);
         wheelsDataSet = new DataSet();
         wheelsDataSet.Tables.Add(wheelsAll);
 
@@ -182,7 +182,7 @@ public partial class Products_wheelall : System.Web.UI.Page
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
     {
         //DataTable dataTable = GridView1.DataSource as DataTable;
-        DataTable dataTable = WheelsBLO.GetAllProducts();
+        DataTable dataTable = WheelsBLO.GetAllProducts(1);
 
         if (dataTable != null)
         {
@@ -215,7 +215,7 @@ public partial class Products_wheelall : System.Web.UI.Page
 
     protected void chkPCD_SelectedIndexChanged(object sender, EventArgs e)
     {
-        DataTable wheelsAll = WheelsBLO.GetAllProducts();
+        DataTable wheelsAll = WheelsBLO.GetAllProducts(1);
         String sqlText = string.Empty;
         String sqlFilterSize = string.Empty, sqlFilterPCD = string.Empty, sqlFilterFinish = string.Empty,
             sqlFilterOffset = string.Empty, sqlFilterSeat = string.Empty, sqlFilterBore = string.Empty;

@@ -70,7 +70,7 @@ public partial class Admin_Default : System.Web.UI.Page
         {
             discount.DiscountRate = (float)double.Parse(disrate);
 
-            DiscountBLO.UpdateDiscount(discount.UserId, discount.DiscountRate);
+          //  DiscountBLO.UpdateDiscount(discount.UserId, discount.DiscountRate);
 
             GridView1.EditIndex = -1;
             Gridview1_Bind();

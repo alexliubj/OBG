@@ -9,9 +9,16 @@ namespace BusinessLogic
 {
     public static class WheelsBLO
     {
-        public static DataTable GetAllProducts()
+        public static DataTable GetAllProducts(int userid)
         {
-            return WheelsDAO.GetAllProducts();
+            if (DiscountDAO.getDiscountExists(userid))
+            {
+                return WheelsDAO.GetAllProducts(userid);
+            }
+            else
+            {
+                return WheelsDAO.GetAllProducts(1);
+            }
         }
 
         public static int DeleteProductById(int prodId)

@@ -1,0 +1,4 @@
+alter table Discount drop column DisRate;
+alter table Discount add wheelsRate float not null default 1.0;
+alter table Discount add tiresRate float not null default 1.0;
+alter table Discount add accRate float not null default 1.0;
