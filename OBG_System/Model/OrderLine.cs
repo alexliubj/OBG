@@ -21,6 +21,7 @@ namespace OBGModel
             get { return qty; }
             set { qty = value; }
         }
+        //discountRate means price now
         private float discountRate;
 
         public float DiscountRate

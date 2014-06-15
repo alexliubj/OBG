@@ -95,7 +95,7 @@
             <br />
             <br />
             <p>Order Detail:</p>
-            <asp:GridView ID="GridView2" runat="server" GridLines="None" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderID" ForeColor="#333333"
+            <asp:GridView ID="GridView2" runat="server" GridLines="None" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderID" ForeColor="#333333"
                 Visible="true" OnPageIndexChanging="GridView2_PageIndexChanging">
                 <AlternatingRowStyle BackColor="White" />
                 <Columns>
@@ -140,12 +140,12 @@
                             <asp:Label ID="Label6" runat="server" Text='<%# Bind("qty") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="DiscountRate" SortExpression="DiscountRate">
+                    <asp:TemplateField HeaderText="Price" SortExpression="DiscountRate">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox7" runat="server" Text='<%# string.Format("{0:0.###}", Eval("DiscountRate")) %>'></asp:TextBox>
+                            <asp:TextBox ID="TextBox7" runat="server" Text='<%# string.Format("{0:0.##}", Eval("DiscountRate")) %>'></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label7" runat="server" Text='<%# string.Format("{0:0.### %}", Eval("DiscountRate")) %>'></asp:Label>
+                            <asp:Label ID="Label7" runat="server" Text='<%# string.Format("{0:0.##}", Eval("DiscountRate")) %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <%-- <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" />--%>
