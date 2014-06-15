@@ -33,6 +33,29 @@ namespace DataAccess
                                                       ,[des],d.wheelsrate,w.price*d.wheelsrate finalprice
                                                   FROM [OBG_].[dbo].[Wheels] w ,[discount] d where d.userid = @userid");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
+            command.Parameters.AddRange(paras);
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
+        }
+
+        public static DataTable GetAllProducts()
+        {
+            DbCommand command = db.GetSqlStringCommond(@"SELECT [ProductId]
+                                                      ,[Image]
+                                                      ,[Style]
+                                                      ,[Brand]
+                                                      ,[Size]
+                                                      ,[PCD]
+                                                      ,[Finish]
+                                                      ,[Offset]
+                                                      ,[SEAT]
+                                                      ,[BORE]
+                                                      ,[Weight]
+                                                      ,[ONHand]
+                                                      ,[Price]
+                                                      ,[PartNO]
+                                                      ,[des]
+                                                  FROM [OBG_].[dbo].[Wheels]");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
