@@ -13,6 +13,18 @@ namespace BusinessLogic
         public static DataTable GetAllTires()
         {
             return TiresDAO.GetAllTires();
+
+        }
+        public static DataTable GetAllTires(int userId)
+        {
+            if (DiscountDAO.getDiscountExists(userId))
+            {
+                return TiresDAO.GetAllTires(userId);
+            }
+            else
+            {
+                return TiresDAO.GetAllTires(1);
+            }
         }
 
         public static int CreateNewTire(Tire tire)
