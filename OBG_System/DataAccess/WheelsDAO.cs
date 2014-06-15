@@ -31,7 +31,7 @@ namespace DataAccess
                                                       ,[Price]
                                                       ,[PartNO]
                                                       ,[des],d.wheelsrate,w.price*d.wheelsrate finalprice
-                                                  FROM [OBG_].[dbo].[Wheels] w ,[discount] d where d.userid = @userid");
+                                                  FROM [Wheels] w ,[discount] d where d.userid = @userid");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
             command.Parameters.AddRange(paras);
             DataTable dt = db.ExecuteDataTable(command);
