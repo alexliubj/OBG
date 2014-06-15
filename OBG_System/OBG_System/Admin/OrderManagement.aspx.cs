@@ -201,6 +201,28 @@ public partial class Admin_Default : System.Web.UI.Page
         GridView2.DataSource = orderDetailTable;
         GridView2.DataKeyNames = new string[] { "OrderId" };
         GridView2.DataBind();
+        for (int i = 0; i < GridView2.Rows.Count; i++)
+        {
+            string productType = ((Label)(GridView2.Rows[i].Cells[3].FindControl("Label5"))).Text.ToString().Trim();
+            string productTypeLabel = "";
+
+            switch (productType)
+            {
+                case "1":
+                    productTypeLabel = "Wheel";
+                    break;
+                case "2":
+                    productTypeLabel = "Tire";
+                    break;
+                case "3":
+                    productTypeLabel = "Accessory";
+                    break;
+                default:
+                    productTypeLabel = "Unknown";
+                    break;
+            }
+            ((Label)(GridView2.Rows[i].Cells[3].FindControl("Label5"))).Text = productTypeLabel;
+        }
     }
 
     //protected void GridView2_Sorting(object sender, GridViewSortEventArgs e)
