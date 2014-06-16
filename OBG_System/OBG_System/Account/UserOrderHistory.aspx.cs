@@ -17,12 +17,7 @@ public partial class Default2 : System.Web.UI.Page
         if (!IsPostBack)
         {
             Gridview1_Bind();
-            //DataListOrder.DataSource = OrderBLO.GetAllOrder();
-            //DataListOrder.DataBind();
-
             
-
-            //lblTatil.Text = string.Format("{0:c}", OrderAccess.GetAllTatil());
         }
 
        

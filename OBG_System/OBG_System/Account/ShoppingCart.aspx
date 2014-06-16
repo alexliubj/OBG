@@ -97,8 +97,9 @@
         <SortedDescendingCellStyle BackColor="#E9EBEF" />
         <SortedDescendingHeaderStyle BackColor="#4870BE" />
     </asp:GridView>
-    <asp:Label ID="LabelTotalText" runat="server" Text="Order Total: "></asp:Label>
-    <asp:Label ID="LabelTotalPrice" Visible="true" runat="server" ForeColor="#FF8080" ></asp:Label>
+    <asp:LinkButton ID="LBUpdate" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="LBUpdate_Click">Update Quantity</asp:LinkButton>
+    <asp:Label ID="LabelTotalText" runat="server" Font-Bold="true" Font-Size="Large" Text="Order Total: "></asp:Label>
+    <asp:Label ID="LabelTotalPrice" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>
 
     <asp:ImageButton ID="ImageButton1" runat="server" ImageAlign="Right" 
         ImageUrl="~/Pictures/checkoutButton.png" OnClick="IBTCheckout_Click" />

@@ -12,16 +12,6 @@ using System.Drawing;
 
 public partial class Account_ShoppingCart : System.Web.UI.Page
 {
-    //public List<cartitem> items { get;private;set; };
-    //protected System.Web.UI.WebControls.DataGrid ShoppingCartDlt;
-    //protected System.Web.UI.WebControls.Button update;
-    //protected System.Web.UI.WebControls.Button CheckOut;
-    //protected System.Web.UI.HtmlControls.HtmlForm Form1;
-    //protected System.Web.UI.WebControls.Label label;
-    //protected System.Web.UI.WebControls.CheckBox chkProductID;
-    //protected System.Web.UI.WebControls.TextBox txtCount;
-    //protected System.Web.UI.WebControls.TextBox CountTb;
-    //string AddProID; 
     private Double Total = 0;
     public static string M_str_Count;
     public float money = 0.0f;
@@ -98,34 +88,9 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
         }
     }
 
-    //public void Bind()
-    //{
-    //    if (Session["Cart"] != null)
-    //    {
-    //        DataTable dt = Session["Cart"] as DataTable;
-    //        ShoppingCartGridView.DataSource = dt;
-    //        ShoppingCartGridView.DataBind();
-    //        //if (dt.Rows.Count == 0)
-    //        //{
-    //        //    money = 0.0f;
-    //        //    M_str_Count = money.ToString();
-    //        //}
-    //    }
-    //}
-
-
-
-
-
     public void ShoppingCartGridView_DataBind()
     {
-        //foreach (DataRow dr in shoppingcarttb.Rows)
-        //{
-        //    for(int i=0;i<shoppingcarttb.Columns.Count;i++)
-        //    {
-        //        Response.Write(dr[i].ToString());
-        //    }
-        //}
+      
        
 
         ShoppingCartGridView.DataSource = shoppingcarttb;
@@ -142,10 +107,28 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
         {
             total += decimal.Parse(row["Price"].ToString()) * int.Parse(row["Quantity"].ToString());
         }
-        LabelTotalPrice.Text = string.Format("{0:n2}", total);
+        LabelTotalPrice.Text = string.Format("${0:n2}", total);
         ShoppingCartGridView.DataSource = shoppingcarttb;
         ShoppingCartGridView.DataBind();
     }
+
+    protected void LBUpdate_Click(object sender, EventArgs e)
+    {
+        int rowCount;
+        rowCount = ShoppingCartGridView.Rows.Count;
+        GridViewRow ViewCart;
+        TextBox productQuatity;
+
+        for (int i = 0; i < rowCount; i++)
+        {
+            ViewCart = ShoppingCartGridView.Rows[i];
+            string strProductID = ShoppingCartGridView.DataKeys[i].Value.ToString();
+            productQuatity = (TextBox)ViewCart.FindControl("txtCount");
+            
+        }
+        totalPrice();
+    }
+
     protected void ShoppingCartGridView_EditingBound(object sender, GridViewRowEventArgs e)
     {
         
@@ -190,36 +173,7 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
 
     protected void checkout_DataBound(object sender, GridViewCommandEventArgs e)
     {
-        //int rowindex = Convert.ToInt32(e.CommandArgument);
-        //double totalPrice = 0;
-        //totalPrice = totalPrice + double.Parse(((Label)ShoppingCartGridView.Rows[rowindex].FindControl("PNLabel")).Text);
-        //LabelTotalPrice.Text = totalPrice.ToString();
-        //int rowindex = Convert.ToInt32(e.CommandArgument);
-        //if (e.Row.RowType == DataControlRowType.DataRow)
-        //{
-        //    e.Row.Attributes.Add("onmouseover", "b=this.style.backgroundColor;this.style.backgroundColor='#E1ECEE'");
-        //    e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor=b");
-        //    Label total = (Label)e.Row.FindControl("ItemPrice");
-        //    double totalprice=0;
-        //    //totalprice += total
-        //    TextBox tb = (TextBox)e.Row.FindControl("txtCount");
-        //    //((HtmlImage)ShoppingCartGridView.Rows[rowindex].FindControl("imgReduce")).Attributes.Add("onclick", "Reduce(" + tb.ClientID + ")");
-        //    //((HtmlImage)ShoppingCartGridView.Rows[rowindex].FindControl("imgPlus")).Attributes.Add("onclick", "Plus(" + tb.ClientID + ")");
-
-        //    DataRowView drv = (DataRowView)e.Row.DataItem;
-        //    Total += Double.Parse(drv["Price"].ToString())* Int32.Parse(tb.Text);
-        //    //Total += float.Parse((Label)e.Row.FindControl("Price")) * int.Parse((TextBox)e.Row.FindControl("txtCount"));
-        //    //}
-        //    if (e.Row.RowType == DataControlRowType.Footer)
-        //    {
-
-        //        e.Row.Cells[3].Text = "Total：";
-        //        e.Row.Cells[3].HorizontalAlign = HorizontalAlign.Right;
-        //        e.Row.Cells[4].Text = Total.ToString("c2");
-        //        e.Row.Cells[4].ForeColor = Color.Red;
-        //    }
-            
-        //}
+        
     }
 
     protected void IBTCheckout_Click(object sender, EventArgs e)
