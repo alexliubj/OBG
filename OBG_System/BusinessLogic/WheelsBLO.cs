@@ -21,6 +21,11 @@ namespace BusinessLogic
             }
         }
 
+        public static DataTable GetAllProducts()
+        {
+            return WheelsDAO.GetAllProducts();
+        }
+
         public static int DeleteProductById(int prodId)
         {
             return WheelsDAO.DeleteProductById(prodId);

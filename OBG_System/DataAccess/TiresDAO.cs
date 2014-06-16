@@ -26,6 +26,23 @@ namespace DataAccess
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
+        public static DataTable GetAllTires(int userId)
+        {
+            DbCommand command = db.GetSqlStringCommond(@"SELECT [tireId]
+                                                      ,[partNo]
+                                                      ,[image]
+                                                      ,[size]
+                                                      ,[pricing]
+                                                      ,[season]
+                                                      ,[brand]
+                                                      ,[des]
+                                                  ,d.tiresRate,t.pricing*d.tiresRate finalprice
+                                                  FROM dbo.[Tires] t ,[discount] d where d.userid=@userid");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userId) };
+            command.Parameters.AddRange(paras);
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
+        }
 
         public static int CreateNewTire(Tire tire)
         {

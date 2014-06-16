@@ -28,6 +28,23 @@ namespace DataAccess
             return dt;
         }
 
+        public static DataTable GetAllAccessories(int userId)
+        {
+            DbCommand command = db.GetSqlStringCommond(@"SELECT [partNo]
+                                              ,[accId]
+                                              ,[image]
+                                              ,[des]
+                                              ,[pricing]
+                                              ,[name]
+                                                ,[brand]
+                                                  ,d.accRate,t.pricing*d.accRate finalprice
+                                                  FROM dbo.[Accessories] t ,[discount] d where d.userid=1;");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userId) };
+            command.Parameters.AddRange(paras);
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
+        }
+
         public static int UpdateAccessory(Accessories acc)
         {
             DbCommand command = db.GetSqlStringCommond(@"UPDATE [Accessories]

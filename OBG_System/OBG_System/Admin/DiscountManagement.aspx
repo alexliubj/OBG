@@ -28,20 +28,28 @@
                     <asp:Label ID="Label2" runat="server" Text='<%# Bind("UserName") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Discount Rate" SortExpression="DisRate">
+            <asp:TemplateField HeaderText="Wheel Discount Rate" SortExpression="wheelsRate">
                 <EditItemTemplate>
-                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# string.Format("{0:0.###}", Eval("DisRate")) %>'></asp:TextBox>
-                  <%--   <asp:RegularExpressionValidator
-                                        ID="DisRateExpression" runat="SERVER"
-                                        ControlToValidate="TextBox3"
-                                        CssClass="failureNotification"
-                                        ErrorMessage="Enter a Number."
-                                        ValidationExpression="-?\d+(\.\d{1,x})?"
-                                        ValidationGroup="RegisterUserValidationGroup">*
-                                    </asp:RegularExpressionValidator>--%>
+                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# string.Format("{0:0.###}", Eval("wheelsRate")) %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label3" runat="server" Text='<%# string.Format("{0:0.### %}", Eval("DisRate")) %>'></asp:Label>
+                    <asp:Label ID="Label3" runat="server" Text='<%# string.Format("{0:0.### %}", Eval("wheelsRate")) %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+             <asp:TemplateField HeaderText="Tire Discount Rate" SortExpression="tiresRate">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox4" runat="server" Text='<%# string.Format("{0:0.###}", Eval("tiresRate")) %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label4" runat="server" Text='<%# string.Format("{0:0.### %}", Eval("tiresRate")) %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+             <asp:TemplateField HeaderText="Accessory Discount Rate" SortExpression="accRate">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox5" runat="server" Text='<%# string.Format("{0:0.###}", Eval("accRate")) %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="Label5" runat="server" Text='<%# string.Format("{0:0.### %}", Eval("accRate")) %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button"   ControlStyle-CssClass="myButton" />

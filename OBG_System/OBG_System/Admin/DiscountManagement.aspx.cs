@@ -63,14 +63,20 @@ public partial class Admin_Default : System.Web.UI.Page
         discount.UserId = userID;
         //discount.RoleName = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox2"))).Text.ToString().Trim();
         //discount.DiscountRate = (float)Convert.ToDouble(((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox3"))).Text.ToString().Trim());
-        string disrate = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox3"))).Text.ToString().Trim();
+        string wheelDisrate = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox3"))).Text.ToString().Trim();
+        string tireDisrate = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox4"))).Text.ToString().Trim();
+        string accDisrate = ((TextBox)(GridView1.Rows[e.RowIndex].Cells[0].FindControl("TextBox5"))).Text.ToString().Trim();
         //discount.DiscountRate = (float)double.Parse(disrate.Replace("%", "")) / 100;
-        Match mtch = Regex.Match(disrate, @"-?\d+(\.\d{1,x})?");
-        if (mtch.Success)
+        Match mtch1 = Regex.Match(wheelDisrate, @"-?\d+(\.\d{1,x})?");
+        Match mtch2 = Regex.Match(tireDisrate, @"-?\d+(\.\d{1,x})?");
+        Match mtch3 = Regex.Match(accDisrate, @"-?\d+(\.\d{1,x})?");
+        if (mtch1.Success && mtch2.Success && mtch3.Success)
         {
-            discount.DiscountRate = (float)double.Parse(disrate);
+            discount.WheelDisrate = (float)double.Parse(wheelDisrate);
+            discount.TireDisrate = (float)double.Parse(tireDisrate);
+            discount.AccDisrate = (float)double.Parse(accDisrate);
 
-          //  DiscountBLO.UpdateDiscount(discount.UserId, discount.DiscountRate);
+            DiscountBLO.UpdateDiscount(discount.UserId, discount.WheelDisrate, discount.TireDisrate, discount.AccDisrate);
 
             GridView1.EditIndex = -1;
             Gridview1_Bind();

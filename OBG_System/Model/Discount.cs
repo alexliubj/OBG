@@ -14,13 +14,27 @@ namespace OBGModel
             get { return userId; }
             set { userId = value; }
         }
-        private float discountRate;
+        private float wheelDisrate;
 
-        public float DiscountRate
+        public float WheelDisrate
         {
-            get { return discountRate; }
-            set { discountRate = value; }
+            get { return wheelDisrate; }
+            set { wheelDisrate = value; }
         }
 
+        private float tireDisrate;
+
+        public float TireDisrate
+        {
+            get { return tireDisrate; }
+            set { tireDisrate = value; }
+        }
+        private float accDisrate;
+
+        public float AccDisrate
+        {
+            get { return accDisrate; }
+            set { accDisrate = value; }
+        }
     }
 }

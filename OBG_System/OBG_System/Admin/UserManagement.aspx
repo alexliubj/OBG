@@ -14,15 +14,14 @@
         <asp:ListItem Value="50" Text="50" />
         <asp:ListItem Value="100" Text="100" />
     </asp:DropDownList>
-    
+
     <asp:GridView ID="GridView1" runat="server" AllowSorting="true" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="UserId" ForeColor="#333333"
         GridLines="None" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting"
         OnRowDeleting="GridView1_RowDeleting"
         OnRowUpdating="GridView1_RowUpdating"
         OnRowDataBound="GridView1_RowDataBound"
         OnRowCreated="GridView1_RowCreated"
-        OnRowCommand="GridView1_RowCommand"
-        >
+        OnRowCommand="GridView1_RowCommand">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:BoundField DataField="UserId" HeaderText="UserId" InsertVisible="False" ReadOnly="True" SortExpression="UserId" />
@@ -70,7 +69,7 @@
                     <asp:Label ID="Label1" runat="server" Text='<%# Bind("Phone") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-              <asp:TemplateField HeaderText="IP">
+            <asp:TemplateField HeaderText="IP">
                 <ItemTemplate>
                     <asp:Button ID="viewIPButton" runat="server" CommandName="ViewIP" Text="View IP Info"
                         CommandArgument='<%#((GridViewRow)Container).RowIndex%>' CssClass="myButton" />
@@ -120,44 +119,55 @@
 
     <div id="divIPInfo" runat="server" visible="false">
         <fieldset class="accountInfo">
-                            <legend>IP Address Information</legend>
-        <asp:Table runat="server">
-            <asp:TableRow>
-                <asp:TableCell>
-                     <asp:Label ID="lblUserID" runat="server" AssociatedControlID="txtUserID">User ID:</asp:Label>                         
-                </asp:TableCell>
-                <asp:TableCell>
-                     <asp:TextBox ID="txtUserID" runat="server" CssClass="textEntry" ReadOnly="true"></asp:TextBox>
-                </asp:TableCell>
-            </asp:TableRow>
-                        <asp:TableRow>
-                <asp:TableCell>
-                    <asp:Label ID="lblLastIP" runat="server" AssociatedControlID="txtLastIP">Last Login IP Address:</asp:Label> 
-                </asp:TableCell>
-                <asp:TableCell>
-                    <asp:TextBox ID="txtLastIP" runat="server" CssClass="textEntry" ReadOnly="true"></asp:TextBox>
-                </asp:TableCell>
-            </asp:TableRow>
-                        <asp:TableRow>
-                <asp:TableCell>
-                    <asp:Label ID="lblLoginTimes" runat="server" AssociatedControlID="txtLoginTimes">Total Login Times:</asp:Label> 
-                </asp:TableCell>
-                <asp:TableCell>
-                     <asp:TextBox ID="txtLoginTimes" runat="server" CssClass="textEntry" ReadOnly="true"></asp:TextBox>
-                </asp:TableCell>
-            </asp:TableRow>
-                        <asp:TableRow>
-                <asp:TableCell>
-                    <asp:Label ID="lblIPRegion" runat="server" AssociatedControlID="txtIPRegion">Region:</asp:Label> 
-                </asp:TableCell>
-                <asp:TableCell>
-                    <asp:TextBox ID="txtIPRegion" runat="server" CssClass="textEntry" ReadOnly="true"></asp:TextBox>
-                </asp:TableCell>
-            </asp:TableRow>
-        </asp:Table>
-            </fieldset>
+            <legend>IP Address Information</legend>
+            <asp:Table runat="server">
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Label ID="lblUserID" runat="server" AssociatedControlID="txtUserID">User ID:</asp:Label>
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:TextBox ID="txtUserID" runat="server" CssClass="textEntry" ReadOnly="true"></asp:TextBox>
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Label ID="lblLastIP" runat="server" AssociatedControlID="txtLastIP">Last Login IP Address:</asp:Label>
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:TextBox ID="txtLastIP" runat="server" CssClass="textEntry" ReadOnly="true"></asp:TextBox>
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Label ID="lblLoginTimes" runat="server" AssociatedControlID="txtLoginTimes">Total Login Times:</asp:Label>
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:TextBox ID="txtLoginTimes" runat="server" CssClass="textEntry" ReadOnly="true"></asp:TextBox>
+                    </asp:TableCell>
+                </asp:TableRow>
+                <asp:TableRow>
+                    <asp:TableCell>
+                        <asp:Label ID="lblIPRegion" runat="server" AssociatedControlID="gvLocation">IP Detail Info:</asp:Label>
+                    </asp:TableCell>
+                    <asp:TableCell>
+                        <asp:GridView ID="gvLocation" runat="server" AutoGenerateColumns="false">
+                            <Columns>
+                                <asp:BoundField DataField="IPAddress" HeaderText="IP Address" />
+                                <asp:BoundField DataField="CountryName" HeaderText="Country" />
+                                <asp:BoundField DataField="CityName" HeaderText="City" />
+                                <asp:BoundField DataField="RegionName" HeaderText="Region" />
+                                <asp:BoundField DataField="CountryCode" HeaderText="Country Code" />
+                                <asp:BoundField DataField="Latitude" HeaderText="Latitude" />
+                                <asp:BoundField DataField="Longitude" HeaderText="Latitude" />
+                                <asp:BoundField DataField="Timezone" HeaderText="Timezone" />
+                            </Columns>
+                        </asp:GridView>
+                    </asp:TableCell>
+                </asp:TableRow>
+            </asp:Table>
+        </fieldset>
     </div>
-           
+
     <div id="userInformation" runat="server" visible="false">
         <asp:Panel DefaultButton="BtnAdd" runat="server">
             <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification"

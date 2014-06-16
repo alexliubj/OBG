@@ -9,6 +9,9 @@ using BusinessLogic;
 using System.Data;
 using System.Data.SqlClient;
 using DataAccess;
+using System.Net;
+using System.Collections.Generic;
+using System.Web.Script.Serialization;
 
 public partial class Admin_Default : System.Web.UI.Page
 {
@@ -317,13 +320,30 @@ public partial class Admin_Default : System.Web.UI.Page
             string lastIPAddress = "";
             int loginTimes = 0;
 
-            lastIPAddress = IPAddress.GetLastIPAddress(userID);
-            loginTimes = IPAddress.GetLoginTimes(userID);
+            lastIPAddress =  DataAccess.IPAddress.GetLastIPAddress(userID);
+            loginTimes = DataAccess.IPAddress.GetLoginTimes(userID);
 
             divIPInfo.Visible = true;
             txtUserID.Text = userID.ToString();
             txtLastIP.Text = lastIPAddress;
             txtLoginTimes.Text = loginTimes.ToString();
+
+            //string ipAddress = Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+            //if (string.IsNullOrEmpty(ipAddress))
+            //{
+            //    ipAddress = Request.ServerVariables["REMOTE_ADDR"];
+            //}
+            string APIKey = "5298092e851e1fb1e56c9e061113d7748eb802dcc71299719bc1e277cd961a06";
+            string url = string.Format("http://api.ipinfodb.com/v3/ip-city/?key={0}&ip={1}&format=json", APIKey, lastIPAddress);
+            using (WebClient client = new WebClient())
+            {
+                string json = client.DownloadString(url);
+                Location location = new JavaScriptSerializer().Deserialize<Location>(json);
+                List<Location> locations = new List<Location>();
+                locations.Add(location);
+                gvLocation.DataSource = locations;
+                gvLocation.DataBind();
+            }
         }
     }
 
@@ -486,5 +506,18 @@ public partial class Admin_Default : System.Web.UI.Page
         {
             pagerRow.Visible = true;
         }
+    }
+
+    public class Location
+    {
+        public string IPAddress { get; set; }
+        public string CountryName { get; set; }
+        public string CountryCode { get; set; }
+        public string CityName { get; set; }
+        public string RegionName { get; set; }
+        public string ZipCode { get; set; }
+        public string Latitude { get; set; }
+        public string Longitude { get; set; }
+        public string TimeZone { get; set; }
     }
 }
