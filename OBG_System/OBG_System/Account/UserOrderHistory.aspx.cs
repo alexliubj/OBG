@@ -6,11 +6,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using OBGModel;
 
 public partial class Default2 : System.Web.UI.Page
 {
     private DataSet orderDataSet;
     int userId = 0;
+    Order order = new Order();
+    List<OrderLine> orderLine = new List<OrderLine>();
     protected void Page_Load(object sender, EventArgs e)
     {
         userId = (int)Session["UserID"];
@@ -101,4 +104,37 @@ public partial class Default2 : System.Web.UI.Page
         OrderGridView.DataKeyNames = new string[] { "OrderId" };
         OrderGridView.DataBind();
     }
+
+    protected void LBUpdate_Click(object sender, EventArgs e)
+    {
+        int rowCount;
+        rowCount = OrderGridView.Rows.Count;
+        GridViewRow ViewCart;
+        TextBox productQuatity;
+
+        for (int i = 0; i < rowCount; i++)
+        {
+            ViewCart = OrderGridView.Rows[i];
+            int strProductID = int.Parse(OrderGridView.DataKeys[i].Value.ToString());
+            productQuatity = (TextBox)ViewCart.FindControl("TextBox4");
+            OrderBLO.UpdateQtybyProid(strProductID, Convert.ToInt32(productQuatity.Text));
+
+                return;
+        }
+        Populacontorl();
+    }
+
+    protected void Populacontorl()
+    {
+        DataTable shopData = OrderBLO.GetAllOrderByUserId(userId);
+        decimal tatil = 0;
+        foreach (DataRow row in shopData.Rows)
+        {
+            tatil += decimal.Parse(row["DiscountRate"].ToString()) * decimal.Parse(row["Qty"].ToString());
+        }
+        lblTatil.Text = string.Format("{0:n2}", tatil);
+        OrderGridView.DataSource = shopData;
+        OrderGridView.DataBind();
+    }
+   
 }

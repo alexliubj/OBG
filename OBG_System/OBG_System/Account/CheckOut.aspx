@@ -30,14 +30,14 @@
                             <asp:Label ID="Label8" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <%--asp:TemplateField HeaderText="ProductName" SortExpression="ProductName">
+                    <asp:TemplateField HeaderText="ProductName" SortExpression="ProductName">
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("ProductName") %>'></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
                             <asp:Label ID="Label4" runat="server" Text='<%# Bind("ProductName") %>'></asp:Label>
                         </ItemTemplate>
-                    </asp:TemplateField>--%>
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="ProductType" ItemStyle-HorizontalAlign="Center" SortExpression="ProductType">
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("ProductType") %>'></asp:TextBox>

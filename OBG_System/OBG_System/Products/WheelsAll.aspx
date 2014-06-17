@@ -380,19 +380,19 @@
                     <asp:TextBox ID="PriceTextBox" runat="server" Text='<%# Bind("Price") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
                 <ItemTemplate>
-                    <asp:Label ID="PriceLabel" runat="server" Text='<%# Bind("Price") %>'></asp:Label>
+                    <asp:Label ID="PriceLabel" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
                 <ItemTemplate>
-                    <asp:TextBox ID="QTYTextBox" runat="server" Text="1"></asp:TextBox>
+                    <asp:TextBox ID="QTYTextBox" runat="server" Width="10" Text="1"></asp:TextBox>
                 </ItemTemplate>
 
             </asp:TemplateField>
 
             <asp:TemplateField HeaderText="Description">
                     <ItemTemplate>                
-                        <asp:LinkButton ID="DesBt"  Width="30" runat="server" CommandName="Description" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' Text="Description" />         
+                        <asp:LinkButton ID="DesBt"  Width="30" runat="server"  CommandName="Description" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' Text="Description" />         
                     </ItemTemplate>   
                 </asp:TemplateField>
             <%-- <asp:TemplateField HeaderText="CategoryId" SortExpression="CategoryId">

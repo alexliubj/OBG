@@ -106,6 +106,20 @@ namespace DataAccess
             }
         }
 
+        public static bool qtyUpdate(int productid, int proQty)
+        {
+            DbCommand command = db.GetSqlStringCommond(@"UPDATE [OBG_].[dbo].[OrderLine]
+                                   SET [Qty] = @proQty
+                                 WHERE productid = @productid");
+            SqlParameter[] paras = new SqlParameter[] { 
+               
+                new SqlParameter("@productid",productid),
+                new SqlParameter("@proQty",proQty)
+            };
+            command.Parameters.AddRange(paras);
+            return (db.ExecuteNonQuery(command) > 0) ? true : false;
+        }
+
         public static int ModifyOneOrder(Order order, List<OrderLine> listOrderLine)
         {
             int newOrderId = -1;

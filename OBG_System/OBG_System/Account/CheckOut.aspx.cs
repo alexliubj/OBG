@@ -32,6 +32,7 @@ public partial class Default2 : System.Web.UI.Page
         checkoutTB.Columns.Add("OrderId");
         checkoutTB.Columns.Add("ProductId");
         checkoutTB.Columns.Add("ProductType");
+        checkoutTB.Columns.Add("ProductName");
         checkoutTB.Columns.Add("PartNo");
         checkoutTB.Columns.Add("Image");
         checkoutTB.Columns.Add("qty");
@@ -53,16 +54,19 @@ public partial class Default2 : System.Web.UI.Page
                 {
                     checkoutRow["ProductId"] = sc.ProductId.ToString();
                     checkoutRow["ProductType"] = "0";
+                    checkoutRow["ProductName"] = " ";
                 }
                 if (sc.TireId != 0)
                 {
                     checkoutRow["ProductId"] = sc.TireId.ToString();
                     checkoutRow["ProductType"] = "1";
+                    checkoutRow["ProductName"] = " ";
                 }
                 if (sc.AccId != 0)
                 {
                     checkoutRow["ProductId"] = sc.AccId.ToString();
                     checkoutRow["ProductType"] = "2";
+                    checkoutRow["ProductName"] = sc.productName;
                 }
                 //checkoutRow["OrderId"] = sc.or
                 checkoutRow["Image"] = sc.Image;
@@ -131,7 +135,7 @@ public partial class Default2 : System.Web.UI.Page
         Order order = new Order();
         OrderLine line = new OrderLine();
         List<OrderLine> orderline = new List<OrderLine>();
-        double rate = DiscountBLO.GetDiscountByUserId(userID);
+        //double rate = ;
         //orderId = int.Parse(CKGridView.SelectedRow.Cells[0].Text);
         //order.OrderId = orderId;
         order.UserId = userID;
@@ -142,11 +146,14 @@ public partial class Default2 : System.Web.UI.Page
         {
             
             int productID = int.Parse(((Label)CKGridView.Rows[i].Cells[1].FindControl("Label3")).Text.ToString());
+            string partno = ((Label)CKGridView.Rows[i].Cells[3].FindControl("Label8")).Text.ToString();
             line.ProductId = productID;
             //line.OrderId = orderId;
-            line.DiscountRate = (float)rate;
-            line.ProductType = 1;
-            line.Qty = int.Parse(((Label)CKGridView.Rows[i].Cells[5].FindControl("Label6")).Text.ToString());
+            //line.DiscountRate = (float)rate;
+            line.DiscountRate = float.Parse(((Label)CKGridView.Rows[i].Cells[7].FindControl("Price")).Text.Substring(1).ToString());
+            line.ProductName = ((Label)CKGridView.Rows[i].Cells[4].FindControl("Label4")).Text.ToString();
+            line.ProductType = int.Parse(((Label)CKGridView.Rows[i].Cells[5].FindControl("Label5")).Text.ToString()) ;
+            line.Qty = int.Parse(((Label)CKGridView.Rows[i].Cells[6].FindControl("Label6")).Text.ToString());
             orderline.Add(line);
         }
         

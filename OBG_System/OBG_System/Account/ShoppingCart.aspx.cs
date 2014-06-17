@@ -42,6 +42,7 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
         shoppingcarttb.Columns.Add("Quantity");
         shoppingcarttb.Columns.Add("Price");
         shoppingcarttb.Columns.Add("itemTotal");
+        shoppingcarttb.Columns.Add("ProductName");
         if ((List<ShopingCart>)Session["Cart"] == null)
         {
             Response.Write("~/Account/ShoppingCart.aspx");
@@ -58,16 +59,19 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
                 {
                     scRow["ProductId"] = sc.ProductId.ToString();
                     scRow["ProductType"] = "0";
+                    scRow["ProductName"] = " ";
                 }
                 if (sc.TireId != 0)
                 {
                     scRow["ProductId"] = sc.TireId.ToString();
                     scRow["ProductType"] = "1";
+                    scRow["ProductName"] = " ";
                 }
                 if (sc.AccId != 0)
                 {
                     scRow["ProductId"] = sc.AccId.ToString();
                     scRow["ProductType"] = "2";
+                    scRow["ProductName"] = sc.productName;
                 }
                 scRow["Image"] = sc.Image;
                 scRow["PartNo"] = sc.PartNo.ToString();
