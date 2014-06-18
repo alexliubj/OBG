@@ -76,7 +76,12 @@
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="OrderID" HeaderText="Order ID" InsertVisible="False" ReadOnly="True" SortExpression="OrderID" Visible="true" />
-                <asp:BoundField DataField="UserID" HeaderText="User ID" InsertVisible="False" ReadOnly="True" SortExpression="UserID" Visible="false" />
+                <%--<asp:BoundField DataField="ProductId" HeaderText="ProductId" InsertVisible="False" ReadOnly="True" SortExpression="ProductId" Visible="true" />--%>
+                <asp:TemplateField HeaderText="ProductID" SortExpression="ProductID">
+                    <ItemTemplate>
+                        <asp:Label ID="LBProductID" runat="server" Text='<%# Bind("ProductId") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="PartNo" SortExpression="Status">
                     <ItemTemplate>
                         <asp:Label ID="Label5" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
@@ -135,11 +140,11 @@
                 <td>
             <asp:Label ID="lblTatil" runat="server" Style="font-weight: bold; color: #cc0033">0</asp:Label></td>
                 <td style="text-align: right">
-                    <asp:LinkButton ID="LBUpdate" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="LBUpdate_Click">Update</asp:LinkButton>
+                    <asp:LinkButton ID="LBUpdate" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="LBUpdate_Click">Confirm</asp:LinkButton>
                 </td>
-                <td style="text-align: right">
-                    <asp:LinkButton ID="LBConfirm" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="confirm_Click">Confirm</asp:LinkButton>
-                    </td>
+                <%--<td style="text-align: right">
+                    <asp:LinkButton ID="LBConfirm" runat="server" Font-Bold="True" Font-Size="11pt" >Confirm</asp:LinkButton>
+                    </td>--%>
             </tr>
         </table>
     </div>

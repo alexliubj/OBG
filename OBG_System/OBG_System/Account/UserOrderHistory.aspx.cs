@@ -14,6 +14,7 @@ public partial class Default2 : System.Web.UI.Page
     int userId = 0;
     Order order = new Order();
     List<OrderLine> orderLine = new List<OrderLine>();
+    int orderID = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         userId = (int)Session["UserID"];
@@ -81,7 +82,7 @@ public partial class Default2 : System.Web.UI.Page
     }
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        int orderID;
+        //int orderID;
 
         orderID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
 
@@ -99,14 +100,38 @@ public partial class Default2 : System.Web.UI.Page
     {
 
         DataTable orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
-
+       
         OrderGridView.DataSource = orderDetailTable;
         OrderGridView.DataKeyNames = new string[] { "OrderId" };
         OrderGridView.DataBind();
+        Populacontorl(orderID);
     }
+
+    //protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
+    //{
+    //    int orderID = 0;
+    //    orderID = Convert.ToInt32(OrderGridView.DataKeys[e.RowIndex].Value.ToString());
+    //    int rowCount;
+    //    rowCount = OrderGridView.Rows.Count;
+    //    GridViewRow ViewCart;
+    //    TextBox productQuatity;
+
+    //    for (int i = 0; i < rowCount; i++)
+    //    {
+    //        ViewCart = OrderGridView.Rows[i];
+    //        int strProductID = int.Parse(OrderGridView.SelectedRow.Cells[1].Text);
+    //        productQuatity = (TextBox)ViewCart.FindControl("TextBox4");
+    //        OrderBLO.UpdateQtybyProid(strProductID, Convert.ToInt32(productQuatity.Text));
+
+    //        return;
+    //    }
+    //    Populacontorl(orderID);
+    //}
 
     protected void LBUpdate_Click(object sender, EventArgs e)
     {
+        //int orderID = 0;
+        orderID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
         int rowCount;
         rowCount = OrderGridView.Rows.Count;
         GridViewRow ViewCart;
@@ -115,25 +140,27 @@ public partial class Default2 : System.Web.UI.Page
         for (int i = 0; i < rowCount; i++)
         {
             ViewCart = OrderGridView.Rows[i];
-            int strProductID = int.Parse(OrderGridView.DataKeys[i].Value.ToString());
+            //int strProductID = int.Parse(OrderGridView.SelectedRow.Cells[1].Text);
+            int strProductID = int.Parse(((Label)(OrderGridView.Rows[i].Cells[1].FindControl("LBProductID"))).Text.ToString());
             productQuatity = (TextBox)ViewCart.FindControl("TextBox4");
             OrderBLO.UpdateQtybyProid(strProductID, Convert.ToInt32(productQuatity.Text));
 
                 return;
         }
-        Populacontorl();
+        Populacontorl(orderID);
     }
 
-    protected void Populacontorl()
+    protected void Populacontorl(int orderID)
     {
-        DataTable shopData = OrderBLO.GetAllOrderByUserId(userId);
+        //orderID = int.Parse(OrderGridView.SelectedRow.Cells[0].Text);
+        DataTable orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
         decimal tatil = 0;
-        foreach (DataRow row in shopData.Rows)
+        foreach (DataRow row in orderDetailTable.Rows)
         {
-            tatil += decimal.Parse(row["DiscountRate"].ToString()) * decimal.Parse(row["Qty"].ToString());
+            tatil += decimal.Parse(row["DiscountRate"].ToString()) * int.Parse(row["Qty"].ToString());
         }
         lblTatil.Text = string.Format("{0:n2}", tatil);
-        OrderGridView.DataSource = shopData;
+        OrderGridView.DataSource = orderDetailTable;
         OrderGridView.DataBind();
     }
    
