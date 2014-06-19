@@ -55,7 +55,7 @@ namespace DataAccess
                                                ,@DiscountRate
                                                ,@OrderId,@ProductType,@ProductName,@PartNO)");
                             SqlParameter[] paras2 = new SqlParameter[] { 
-                new SqlParameter("@ProductId", line.OrderId),
+                new SqlParameter("@ProductId", line.ProductId),
                 new SqlParameter("@Qty", line.Qty),
             new SqlParameter("@DiscountRate", line.DiscountRate),
                 new SqlParameter("@OrderId", newOrderId),
@@ -63,7 +63,7 @@ namespace DataAccess
                     new SqlParameter("@ProductName",line.ProductName),
                     new SqlParameter("@PartNO",line.PartNO)
                             };
-                            command.Parameters.AddRange(paras2);
+                            command2.Parameters.AddRange(paras2);
                             db.ExecuteNonQuery(command2, t);
                         }
                     }
@@ -104,6 +104,20 @@ namespace DataAccess
                     return -1;
                 }
             }
+        }
+
+        public static bool qtyUpdate(int productid, int proQty)
+        {
+            DbCommand command = db.GetSqlStringCommond(@"UPDATE [OBG_].[dbo].[OrderLine]
+                                   SET [Qty] = @proQty
+                                 WHERE productid = @productid");
+            SqlParameter[] paras = new SqlParameter[] { 
+               
+                new SqlParameter("@productid",productid),
+                new SqlParameter("@proQty",proQty)
+            };
+            command.Parameters.AddRange(paras);
+            return (db.ExecuteNonQuery(command) > 0) ? true : false;
         }
 
         public static int ModifyOneOrder(Order order, List<OrderLine> listOrderLine)
@@ -224,5 +238,29 @@ namespace DataAccess
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
+
+        public static int DeleteProductById(int prodId)
+        {
+            using (Trans t = new Trans())
+            {
+                try
+                {
+                    DbCommand command = db.GetSqlStringCommond(@"delete [orderline] where productid = @productid");
+                    SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@productid", prodId) };
+                    command.Parameters.AddRange(paras);
+                    int ret = db.ExecuteNonQuery(command, t);
+
+                    //db.ExecuteNonQuery(command2, t);
+                    t.Commit();
+                    return ret;
+                }
+                catch
+                {
+                    t.RollBack();
+                    return -1;
+                }
+            }
+        }
+
     }
 }

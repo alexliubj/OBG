@@ -51,5 +51,15 @@ namespace BusinessLogic
         {
             return OrderDAO.GetAllOrderByUserId(userid);
         }
+
+        public static bool UpdateQtybyProid(int productid, int qty)
+        {
+            return OrderDAO.qtyUpdate(productid, qty);
+        }
+
+        public static int DeleteProductById(int productid)
+        {
+            return OrderDAO.DeleteProductById(productid);
+        }
     }
 }

@@ -185,18 +185,29 @@ public partial class Products_accAll : System.Web.UI.Page
             double price;
             string partNo;
             string image;
+            string name,des;
             pID = Convert.ToInt32(GridView6.DataKeys[rowindex].Value.ToString());
             partNo = ((Label)GridView6.Rows[rowindex].FindControl("PNLabel")).Text;
             image = ((Image)GridView6.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView6.Rows[rowindex].FindControl("QTYTextBox")).Text);
             price = Convert.ToDouble(((Label)GridView6.Rows[rowindex].FindControl("PricingLabel")).Text);
+            name = ((Label)GridView6.Rows[rowindex].FindControl("NameLabel")).Text;
             sc.AccId = pID;
             sc.Qty = qty;
             sc.Pricing = price;
             sc.PartNo = partNo;
             sc.Image = image;
+            sc.productName = name;
             shoppingcart.Add(sc);
             Session["Cart"] = shoppingcart;
         }
+    }
+
+    protected void dropDownRecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridView6.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
+
+        GridView6.PageIndex = 0;
+        GridView6_Bind();
     }
 }

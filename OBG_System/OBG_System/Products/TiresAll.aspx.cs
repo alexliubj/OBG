@@ -260,5 +260,11 @@ public partial class Products_tireall : System.Web.UI.Page
     {
         return "(" + orString + ")";
     }
+    protected void dropDownRecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridView2.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
 
+        GridView2.PageIndex = 0;
+        GridView2_Bind();
+    }
 }

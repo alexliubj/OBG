@@ -56,7 +56,7 @@ public partial class Products_wheelall : System.Web.UI.Page
     public void Gridview1_Bind()
     {
 
-        DataTable wheelsAll = WheelsBLO.GetAllProducts(1);
+        DataTable wheelsAll = WheelsBLO.GetAllProducts(userID);
         wheelsDataSet = new DataSet();
         wheelsDataSet.Tables.Add(wheelsAll);
 
@@ -107,21 +107,9 @@ public partial class Products_wheelall : System.Web.UI.Page
 
     protected void AddBt_Click(object sender, EventArgs e)
     {
-        ////Wheels wheel = new Wheels();
-        //List<ShopingCart> shoppingcart = new List<ShopingCart>();
-        //ShopingCart sc = new ShopingCart();
-        //int pID, qty;
-        //double price;
-        //pID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
-        //qty = int.Parse(GridView1.SelectedRow.Cells[13].Text);
-        //price = double.Parse(GridView1.SelectedRow.Cells[12].Text);
-        //sc.ProductId = pID;
-        //sc.Qty = qty;
-        //sc.Pricing = price;
-        //shoppingcart.Add(sc);
-        //Session["Cart"] = shoppingcart;
-
-
+        //int productId = int.Parse(GridView1.SelectedRow.Cells[0].Text);
+        //string des = WheelsBLO.GetDesByProductId(productId);
+        //Response.Write(des);
     }
     //private void Gridview1_Bind()
     //{
@@ -161,7 +149,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             partNo = ((Label)GridView1.Rows[rowindex].FindControl("PNLabel")).Text;
             image = ((Image)GridView1.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView1.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text);
+            price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text.Substring(1));
             sc.ProductId = pID;
             sc.Qty = qty;
             sc.Pricing = price;
@@ -172,13 +160,13 @@ public partial class Products_wheelall : System.Web.UI.Page
 
         }
 
-        //if (e.CommandName == "Description")
-        //{
-        //    int rowindex = Convert.ToInt32(e.CommandArgument);
-        //    int productID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
-        //    string des = WheelsBLO.GetDesByProductId(productID);
-        //    Response.Write(des);
-        //}
+        if (e.CommandName == "Description")
+        {
+            int rowindex = Convert.ToInt32(e.CommandArgument);
+            int productID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
+            string des = WheelsBLO.GetDesByProductId(productID);
+            Response.Write(des);
+        }
     }
 
 
@@ -394,6 +382,14 @@ public partial class Products_wheelall : System.Web.UI.Page
     private string sorroundWithbrackets(string orString)
     {
         return "(" + orString + ")";
+    }
+
+    protected void dropDownRecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridView1.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
+
+        GridView1.PageIndex = 0;
+        Gridview1_Bind();
     }
 
 }

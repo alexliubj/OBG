@@ -235,4 +235,11 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
         GridView4.DataSource = wheel.DefaultView;
         GridView4.DataBind();
     }
+    protected void dropDownRecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridView4.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
+
+        GridView4.PageIndex = 0;
+        Gridview4_Bind();
+    }
 }
