@@ -384,4 +384,12 @@ public partial class Products_wheelall : System.Web.UI.Page
         return "(" + orString + ")";
     }
 
+    protected void dropDownRecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridView1.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
+
+        GridView1.PageIndex = 0;
+        Gridview1_Bind();
+    }
+
 }

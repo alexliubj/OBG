@@ -67,8 +67,18 @@
     </div>
 
 
-
-    <asp:GridView ID="GridView2" runat="server" GridLines="Both"
+    <div id="divtire" runat="server" visible="true">
+                <asp:Label ID="Label2" runat="server" Text="Per Page:"></asp:Label>
+    <asp:DropDownList ID="dropDownRecordsPerPage" runat="server"
+        AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage_SelectedIndexChanged" AppendDataBoundItems="true"
+        Style="text-align: right;">
+        <asp:ListItem Value="5" Text="5" />
+        <asp:ListItem Value="10" Text="10" Selected="True" />
+        <asp:ListItem Value="25" Text="25" />
+        <asp:ListItem Value="50" Text="50" />
+        <asp:ListItem Value="100" Text="100" />
+    </asp:DropDownList>
+    <asp:GridView ID="GridView2" runat="server" GridLines="Both" align="center"
         AllowPaging="True" AutoGenerateColumns="False" CellPadding="4"
         DataKeyNames="TireId" ForeColor="#333333" OnSelectedIndexChanged="GridView2_SelectedIndexChanged"
         OnRowEditing="GridView2_RowEditing"
@@ -121,7 +131,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
                 <ItemTemplate>
-                    <asp:TextBox ID="QTYTextBox" runat="server" Text="1"></asp:TextBox>
+                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
                 </ItemTemplate>
 
             </asp:TemplateField>
@@ -148,5 +158,6 @@
         <SortedDescendingCellStyle BackColor="#E9EBEF" />
         <SortedDescendingHeaderStyle BackColor="#4870BE" />
     </asp:GridView>
+        </div>
 </asp:Content>
 

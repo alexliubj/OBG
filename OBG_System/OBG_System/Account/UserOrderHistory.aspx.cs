@@ -13,8 +13,10 @@ public partial class Default2 : System.Web.UI.Page
     private DataSet orderDataSet;
     int userId = 0;
     Order order = new Order();
-    List<OrderLine> orderLine = new List<OrderLine>();
+    List<OrderLine> orderine = new List<OrderLine>();
     int orderID = 0;
+    DataTable orderDetailTable;
+    string statusLabel = "";
     protected void Page_Load(object sender, EventArgs e)
     {
         userId = (int)Session["UserID"];
@@ -42,7 +44,7 @@ public partial class Default2 : System.Web.UI.Page
         for (int i = 0; i < GridView1.Rows.Count; i++)
         {
             string status = ((Label)(GridView1.Rows[i].Cells[2].FindControl("Label5"))).Text.ToString().Trim();
-            string statusLabel = "";
+            
 
             switch (status)
             {
@@ -51,6 +53,7 @@ public partial class Default2 : System.Web.UI.Page
                     break;
                 case "1":
                     statusLabel = "Pending";
+                    //updatebutton.Visible = true;
                     break;
                 case "2":
                     statusLabel = "Processed";
@@ -82,7 +85,6 @@ public partial class Default2 : System.Web.UI.Page
     }
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
-        //int orderID;
 
         orderID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
 
@@ -90,43 +92,24 @@ public partial class Default2 : System.Web.UI.Page
 
         divOrderDetail.Visible = true;
     }
-    //protected void DataListOrder_ItemCommand(object source, DataListCommandEventArgs e)
-    //{
-    //    OrderGridView.DataSource = OrderBLO.GetOrderLineByOrderId(int.Parse(e.CommandArgument.ToString())); 
-    //    OrderGridView.DataBind();
-    //    OrderGridView.Visible = true;
-    //}
+   
     public void GridView2_Bind(int orderID)
     {
 
-        DataTable orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
-       
+        orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
+        statusLabel = ((Label)(GridView1.SelectedRow.Cells[3].FindControl("Label5"))).Text;
+        if (statusLabel == "Pending")
+        {
+            updatebutton.Visible = true; 
+        }
+
         OrderGridView.DataSource = orderDetailTable;
         OrderGridView.DataKeyNames = new string[] { "OrderId" };
         OrderGridView.DataBind();
         Populacontorl(orderID);
     }
 
-    //protected void GridView1_RowUpdating(object sender, GridViewUpdateEventArgs e)
-    //{
-    //    int orderID = 0;
-    //    orderID = Convert.ToInt32(OrderGridView.DataKeys[e.RowIndex].Value.ToString());
-    //    int rowCount;
-    //    rowCount = OrderGridView.Rows.Count;
-    //    GridViewRow ViewCart;
-    //    TextBox productQuatity;
-
-    //    for (int i = 0; i < rowCount; i++)
-    //    {
-    //        ViewCart = OrderGridView.Rows[i];
-    //        int strProductID = int.Parse(OrderGridView.SelectedRow.Cells[1].Text);
-    //        productQuatity = (TextBox)ViewCart.FindControl("TextBox4");
-    //        OrderBLO.UpdateQtybyProid(strProductID, Convert.ToInt32(productQuatity.Text));
-
-    //        return;
-    //    }
-    //    Populacontorl(orderID);
-    //}
+   
 
     protected void LBUpdate_Click(object sender, EventArgs e)
     {
@@ -145,15 +128,16 @@ public partial class Default2 : System.Web.UI.Page
             productQuatity = (TextBox)ViewCart.FindControl("TextBox4");
             OrderBLO.UpdateQtybyProid(strProductID, Convert.ToInt32(productQuatity.Text));
 
-                return;
+             //   return;
         }
+
         Populacontorl(orderID);
     }
 
     protected void Populacontorl(int orderID)
     {
         //orderID = int.Parse(OrderGridView.SelectedRow.Cells[0].Text);
-        DataTable orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
+        orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
         decimal tatil = 0;
         foreach (DataRow row in orderDetailTable.Rows)
         {
@@ -163,5 +147,55 @@ public partial class Default2 : System.Web.UI.Page
         OrderGridView.DataSource = orderDetailTable;
         OrderGridView.DataBind();
     }
-   
+
+    protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
+    {
+        //wheelInformation.Visible = false;
+        //orderine = (List<OrderLine>)Session["orderline"];
+        //int ProId = Convert.ToInt32(((Label)(OrderGridView.Rows[i].Cells[1].FindControl("LBProductID"))).Text.ToString());
+        orderID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
+        orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
+
+        statusLabel = ((Label)(GridView1.SelectedRow.Cells[3].FindControl("Label5"))).Text;
+        if (statusLabel == "Pending")
+        {
+
+            if (orderDetailTable != null)
+            {
+                //DataTable dt = Session["GoodsCart"] as DataTable;
+                //for (int i = 0; i < orderDetailTable.Rows.Count; i++)
+                //{
+                int pId = Convert.ToInt32(((Label)(OrderGridView.Rows[e.RowIndex].Cells[1].FindControl("LBProductID"))).Text.ToString());
+                int orderConfirm = OrderBLO.DeleteProductById(pId);
+                GridView2_Bind(orderID);
+                // }
+                //Session["GoodsCart"] = orderDetailTable;
+            }
+        }
+        else
+        {
+            Response.Write("<script language='javascript'>alert('You cannot modify your order after pending');</script>");
+        }
+        //if (Session["orderline"] != null)
+        //{
+        //    orderine = (List<OrderLine>)Session["orderline"];
+        //    orderine.RemoveAt(e.RowIndex);
+        //    //shoppingcart.AcceptChanges();
+        //    Session["orderline"] = orderine;
+        //    Response.Redirect("ShoppingCart.aspx");
+        //}
+        //orderine.Add(orderDetailTable);
+        //OrderGridView.DataSource = orderDetailTable;
+        //OrderGridView.DataBind();
+        //int ProductID = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text.ToString());
+        //DataTable orderline = OrderBLO.ModifyOneOrder(order)
+        //OrderGridView.DataSource = orderline;
+        //GridView2_Bind(orderID);
+        //Populacontorl(orderID);
+    }
+
+    protected void Confirm_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Default.aspx");
+    }
 }

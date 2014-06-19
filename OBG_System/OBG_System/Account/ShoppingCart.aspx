@@ -28,9 +28,8 @@
     <div id="ShoppingCartTitle" runat="server" class="ContentHead">
         <h1>Shopping Cart</h1>
     </div>
-    <a href="~/Default.aspx">< Back to Products</a>
-    <br />
-    <asp:GridView ID="ShoppingCartGridView" GridLines="Both" runat="server" Visible="true" ForeColor="#333333" EmptyDataText="There is nothing in your shopping cart." AutoGenerateColumns="False" ShowFooter="True" CellPadding="4" SkinID="ShoppingCart"
+ <br/>
+    <asp:GridView ID="ShoppingCartGridView" GridLines="Both" align="center" runat="server" Visible="true" Width="70%" ForeColor="#333333" EmptyDataText="There is nothing in your shopping cart." AutoGenerateColumns="False" ShowFooter="True" CellPadding="4" SkinID="ShoppingCart"
         DataKeyNames="ProductId"  OnRowCommand="checkout_DataBound" OnRowDeleting="gvCart_RowDeleting">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
@@ -97,7 +96,8 @@
         <SortedDescendingCellStyle BackColor="#E9EBEF" />
         <SortedDescendingHeaderStyle BackColor="#4870BE" />
     </asp:GridView>
-    <asp:LinkButton ID="LBUpdate" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="LBUpdate_Click">Update Quantity</asp:LinkButton>
+    <br/>
+    <%--<asp:LinkButton ID="LBUpdate" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="LBUpdate_Click">Update Quantity</asp:LinkButton>--%>
     <asp:Label ID="LabelTotalText" runat="server" Font-Bold="true" Font-Size="Large" Text="Order Total: "></asp:Label>
     <asp:Label ID="LabelTotalPrice" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>
 

@@ -202,4 +202,12 @@ public partial class Products_accAll : System.Web.UI.Page
             Session["Cart"] = shoppingcart;
         }
     }
+
+    protected void dropDownRecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        GridView6.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
+
+        GridView6.PageIndex = 0;
+        GridView6_Bind();
+    }
 }

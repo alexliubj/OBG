@@ -1,13 +1,20 @@
 ﻿<%@ Page Title="Order History" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="UserOrderHistory.aspx.cs" Inherits="Default2" ErrorPage="~/mycustompage.aspx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
+    <style type="text/css">
+        .auto-style1
+        {
+            width: 91px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
 
     <br />
     <p>Your orders:</p>
-    <asp:GridView ID="GridView1" runat="server" GridLines="Both" AllowPaging="True" AllowSorting="true" Width="100%" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderID" ForeColor="#333333"
-        OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+    <div runat="server" align ="center">
+    <asp:GridView ID="GridView1" runat="server" GridLines="Both"  AllowPaging="True" AllowSorting="true" Width="80%" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderID" ForeColor="#333333"
+        OnSelectedIndexChanged="GridView1_SelectedIndexChanged" >
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:BoundField DataField="OrderID" HeaderText="Order ID" InsertVisible="true" ReadOnly="True" SortExpression="OrderID" />
@@ -45,7 +52,7 @@
                     <asp:Label ID="Label6" runat="server" Text='<%# Bind("PO") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:CommandField HeaderText="View Order Detail" ShowSelectButton="True" ButtonType="Button" SelectText="View Order Detail" ControlStyle-CssClass="myButton" />
+            <asp:CommandField HeaderText="View Order Detail" ShowSelectButton="True" ItemStyle-HorizontalAlign="Center" ButtonType="Button" SelectText="View Order Detail" ControlStyle-CssClass="myButton" />
 
         </Columns>
         <EditRowStyle BackColor="#2461BF" />
@@ -59,6 +66,7 @@
         <SortedDescendingCellStyle BackColor="#E9EBEF" />
         <SortedDescendingHeaderStyle BackColor="#4870BE" />
     </asp:GridView>
+        </div>
 
 
 
@@ -71,8 +79,9 @@
         <br />
         <br />
         <p>Order Detail:</p>
-        <asp:GridView ID="OrderGridView" runat="server" GridLines="None" AllowPaging="True" AllowSorting="true" Width="100%" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderId" ForeColor="#333333"
-            Visible="true">
+        <div id="Div1" runat="server" align ="center">
+        <asp:GridView ID="OrderGridView" runat="server" GridLines="Both" AllowPaging="True" AllowSorting="true" Width="80%" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderId" ForeColor="#333333"
+            Visible="true" OnRowDeleting="GridView1_RowDeleting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="OrderID" HeaderText="Order ID" InsertVisible="False" ReadOnly="True" SortExpression="OrderID" Visible="true" />
@@ -104,7 +113,9 @@
                     <ItemTemplate>
                         <asp:Label ID="Label6" runat="server" Text='<%# Bind("DiscountRate") %>'></asp:Label>
                     </ItemTemplate>
-                </asp:TemplateField>
+                </asp:TemplateField> 
+                <asp:CommandField HeaderText="Delete" ShowDeleteButton="True" Visible="true" ButtonType="Button" DeleteText="Delete" ControlStyle-CssClass="myButton" />
+ 
                 <%--<asp:LinkButton ID="LBsee" runat="server" CommandArgument='<%#Eval("OrderID") %>'>查看订单信息</asp:LinkButton>--%>
 
                 <%--<asp:TemplateField HeaderText="Detail">
@@ -135,16 +146,21 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
+            </div>
+        <br/>
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
             <tr>
+                <td class="auto-style1">
+                    Order Total:
+                    </td>
                 <td>
             <asp:Label ID="lblTatil" runat="server" Style="font-weight: bold; color: #cc0033">0</asp:Label></td>
                 <td style="text-align: right">
-                    <asp:LinkButton ID="LBUpdate" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="LBUpdate_Click">Confirm</asp:LinkButton>
+                <div id="updatebutton" runat="server" visible="false">   <asp:LinkButton ID="LBUpdate" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="LBUpdate_Click">Update</asp:LinkButton></div>
                 </td>
-                <%--<td style="text-align: right">
-                    <asp:LinkButton ID="LBConfirm" runat="server" Font-Bold="True" Font-Size="11pt" >Confirm</asp:LinkButton>
-                    </td>--%>
+                <td style="text-align: right">
+                    <asp:LinkButton ID="LBConfirm" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="Confirm_Click" >Confirm</asp:LinkButton>
+                    </td>
             </tr>
         </table>
     </div>
