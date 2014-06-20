@@ -160,12 +160,13 @@ public partial class Products_wheelall : System.Web.UI.Page
 
         }
 
-        if (e.CommandName == "Description")
+        if (e.CommandName == "DesClick")
         {
             int rowindex = Convert.ToInt32(e.CommandArgument);
             int productID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
             string des = WheelsBLO.GetDesByProductId(productID);
-            Response.Write(des);
+            divDes.Visible = true;
+            lblDes.Text = des;
         }
     }
 

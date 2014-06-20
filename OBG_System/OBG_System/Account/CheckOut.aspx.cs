@@ -95,11 +95,18 @@ public partial class Default2 : System.Web.UI.Page
     protected void totalPrice()
     {
         decimal total = 0;
+        decimal HST = 0;
+        decimal totalPrice = 0;
+        decimal hst = (Decimal)(0.13);
         foreach (DataRow row in checkoutTB.Rows)
         {
             total += decimal.Parse(row["Price"].ToString()) * int.Parse(row["qty"].ToString());
+            HST += decimal.Parse(row["Price"].ToString()) * int.Parse(row["qty"].ToString()) * hst;
+            totalPrice = total + HST;
         }
         LabelTotalPrice.Text = string.Format("{0:n2}", total);
+        Label1.Text = string.Format("${0:n2}", HST);
+        Label2.Text = string.Format("${0:n2}", totalPrice);
        // CKGridView.DataSource = checkoutTB;
         //CKGridView.DataBind();
     }
@@ -139,23 +146,23 @@ public partial class Default2 : System.Web.UI.Page
         {
             int orderId;
             Order order = new Order();
-            OrderLine line = new OrderLine();
+ 
             List<OrderLine> orderline = new List<OrderLine>();
             //double rate = ;
             //orderId = int.Parse(CKGridView.SelectedRow.Cells[0].Text);
             //order.OrderId = orderId;
             order.UserId = userID;
             order.Status = 1;
-            order.OrderDate = DateTime.Now.ToLocalTime();
+            order.OrderDate = DateTime.Today;
             order.PO = txtPO.Text.ToString().Trim();
             for (int i = 0; i < CKGridView.Rows.Count; i++)
             {
-
-                int productID = int.Parse(((Label)CKGridView.Rows[i].Cells[1].FindControl("Label3")).Text.ToString());
-                string partno = ((Label)CKGridView.Rows[i].Cells[3].FindControl("Label8")).Text.ToString();
-                line.ProductId = productID;
+                OrderLine line = new OrderLine();
+                //int orderID = int.Parse(((Label)CKGridView.Rows[i].Cells[0].FindControl("LabelOrder")).Text.ToString());
+                line.ProductId = int.Parse(((Label)CKGridView.Rows[i].Cells[1].FindControl("Label3")).Text.ToString());;
                 // line.PartNO = ((Label)CKGridView.Rows[i].Cells[3].FindControl("Label8")).Text.ToString();
-                line.PartNO = partno;
+                line.PartNO = ((Label)CKGridView.Rows[i].Cells[3].FindControl("Label8")).Text.ToString();;
+                //line.OrderId = orderID;
                 //line.OrderId = orderId;
                 //line.DiscountRate = (float)rate;
                 line.DiscountRate = float.Parse(((Label)CKGridView.Rows[i].Cells[7].FindControl("Price")).Text.Substring(1).ToString());
@@ -176,7 +183,15 @@ public partial class Default2 : System.Web.UI.Page
 
             //    }
             int ordersave = OrderBLO.AddNewOrder(order, orderline);
-            Response.Redirect("~/Default.aspx");
+            if (ordersave > 0)
+            {
+                Session.Remove("Cart");
+                Response.Redirect("~/Default.aspx");
+            }
+            else 
+            {
+                //fail
+            }
         }
         
     }

@@ -94,6 +94,14 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
             Session["Cart"] = shoppingcart;
 
         }
+        if (e.CommandName == "DesVClick")
+        {
+            int rowindex = Convert.ToInt32(e.CommandArgument);
+            int productID = Convert.ToInt32(GridView4.DataKeys[rowindex].Value.ToString());
+            string des = WheelsBLO.GetDesByProductId(productID);
+            divDes.Visible = true;
+            lblDes.Text = des;
+        }
     }
 
     protected void GridView1_RowEditing(object sender, GridViewEditEventArgs e)

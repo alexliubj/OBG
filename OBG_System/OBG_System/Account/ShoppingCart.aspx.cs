@@ -8,7 +8,6 @@ using DataAccess;
 using BusinessLogic;
 using OBGModel;
 using System.Data;
-using System.Drawing;
 
 public partial class Account_ShoppingCart : System.Web.UI.Page
 {
@@ -107,11 +106,18 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
     protected void totalPrice()
     {
         decimal total = 0;
+        decimal HST = 0;
+        decimal totalPrice = 0;
+        decimal hst = (Decimal)(0.13);
         foreach (DataRow row in shoppingcarttb.Rows)
         {
             total += decimal.Parse(row["Price"].ToString()) * int.Parse(row["Quantity"].ToString());
+            HST += decimal.Parse(row["Price"].ToString()) * int.Parse(row["Quantity"].ToString()) * hst;
+            totalPrice = total + HST;
         }
         LabelTotalPrice.Text = string.Format("${0:n2}", total);
+        Label1.Text = string.Format("${0:n2}", HST);
+        Label2.Text = string.Format("${0:n2}", totalPrice);
         ShoppingCartGridView.DataSource = shoppingcarttb;
         ShoppingCartGridView.DataBind();
     }
@@ -182,43 +188,84 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
 
     protected void IBTCheckout_Click(object sender, EventArgs e)
     {
+        //int rowindex = Convert.ToInt32(e.CommandArgument);
+        //Get Row           
+        //GridViewRow gvr = ShoppingCartGridView.Rows[rowindex];
+        //List<ShopingCart> shoppingcart;
 
-        Response.Redirect("~/Account/CheckOut.aspx");
-        Order order = new Order();
-        OrderLine orderLine = new OrderLine();
-        List<OrderLine> listOrder = new List<OrderLine>();
-        //ShopingCart checkOut = new ShopingCart();
-        userID = 1;
-        order.UserId = userID;
-        order.OrderId = int.Parse(ShoppingCartGridView.SelectedRow.Cells[0].Text);
-        order.OrderDate = DateTime.Now.ToLocalTime();
-        //orderLine.ProductId = int.Parse(ShoppingCartGridView.SelectedRow.Cells[1].Text);
-        //orderLine.Qty = int.Parse(ShoppingCartGridView.SelectedRow.Cells[5].Text);
-
-        int pID, qty;
-        double price;
-        string partNo;
-        string image;
-        pID = int.Parse(ShoppingCartGridView.SelectedRow.Cells[1].Text);
-        partNo = ShoppingCartGridView.SelectedRow.Cells[3].Text;
-        image = ShoppingCartGridView.SelectedRow.Cells[2].Text;
-        qty = int.Parse(ShoppingCartGridView.SelectedRow.Cells[5].Text);
-        price = double.Parse(ShoppingCartGridView.SelectedRow.Cells[4].Text);
-        orderLine.ProductId = pID;
-        orderLine.Qty = qty;
-        //orderLine.Pricing = price;
-        //orderLine.PartNo = partNo;
-        //orderLine.Image = image;
-        listOrder.Add(orderLine);
-        //orderLine.ProductType = 
-        int checkout;
-        checkout = OrderBLO.AddNewOrder(order, listOrder);
-        //if (e.CommandName == "MyButtonClick")
+        //if (Session["Cart"] == null)
         //{
-            //Get rowindex            
-           
+        //    shoppingcart = new List<ShopingCart>();
 
         //}
+        //else
+        //{
+        //    shoppingcart = (List<ShopingCart>)Session["Cart"];
+        //}
+        //ShopingCart sc = new ShopingCart();
+
+
+
+        //int pID, qty;
+        //double price;
+        //string partNo;
+        //string image;
+        //int rowCount;
+        //rowCount = ShoppingCartGridView.Rows.Count;
+        //for (int i = 0; i < rowCount; i++)
+        //{
+        //    pID = Convert.ToInt32(((Label)(ShoppingCartGridView.Rows[i].Cells[1].FindControl("idLabel"))).Text.ToString());
+        //    partNo = ((Label)(ShoppingCartGridView.Rows[i].Cells[3].FindControl("PartNoLabel"))).Text.ToString();
+        //    image = ((Image)(ShoppingCartGridView.Rows[i].Cells[2].FindControl("imageLabel"))).ImageUrl;
+        //    qty = Convert.ToInt32(((TextBox)(ShoppingCartGridView.Rows[i].Cells[5].FindControl("txtCount"))).Text.ToString());
+        //    price = Convert.ToDouble(((Label)(ShoppingCartGridView.Rows[i].Cells[4].FindControl("Price"))).Text.Substring(1));
+        //    sc.ProductId = pID;
+        //    sc.Qty = qty;
+        //    sc.Pricing = price;
+        //    sc.PartNo = partNo;
+        //    sc.Image = image;
+        //    shoppingcart.Add(sc);
+        //    Session["Cart"] = shoppingcart;
+
+
+
+            Response.Redirect("~/Account/CheckOut.aspx");
+            //Order order = new Order();
+            //OrderLine orderLine = new OrderLine();
+            //List<OrderLine> listOrder = new List<OrderLine>();
+            ////ShopingCart checkOut = new ShopingCart();
+            //userID = 1;
+            //order.UserId = userID;
+            //order.OrderId = int.Parse(ShoppingCartGridView.SelectedRow.Cells[0].Text);
+            //order.OrderDate = DateTime.Now.ToLocalTime();
+            ////orderLine.ProductId = int.Parse(ShoppingCartGridView.SelectedRow.Cells[1].Text);
+            ////orderLine.Qty = int.Parse(ShoppingCartGridView.SelectedRow.Cells[5].Text);
+
+            //int pID, qty;
+            //double price;
+            //string partNo;
+            //string image;
+            //pID = int.Parse(ShoppingCartGridView.SelectedRow.Cells[1].Text);
+            //partNo = ShoppingCartGridView.SelectedRow.Cells[3].Text;
+            //image = ShoppingCartGridView.SelectedRow.Cells[2].Text;
+            //qty = int.Parse(ShoppingCartGridView.SelectedRow.Cells[5].Text);
+            //price = double.Parse(ShoppingCartGridView.SelectedRow.Cells[4].Text);
+            //orderLine.ProductId = pID;
+            //orderLine.Qty = qty;
+            ////orderLine.Pricing = price;
+            ////orderLine.PartNo = partNo;
+            ////orderLine.Image = image;
+            //listOrder.Add(orderLine);
+            ////orderLine.ProductType = 
+            //int checkout;
+            //checkout = OrderBLO.AddNewOrder(order, listOrder);
+            //if (e.CommandName == "MyButtonClick")
+            //{
+            //Get rowindex            
+
+
+            //}
+       // }
 
         // Response.Redirect("~/ShoppingCart.aspx?ProductID=" + strProductID + "&Num=1");
     }

@@ -44,6 +44,7 @@
         OnRowUpdating="GridView1_RowUpdating" 
         OnRowCancelingEdit="GridView1_RowCancelingEdit" 
         OnRowDataBound="GridView1_RowDataBound"
+        OnRowCommand="GridView1_RowCommand"
         AllowSorting="true"  OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting"
         >
         
@@ -190,6 +191,23 @@
                 </ItemTemplate>
                 
             </asp:TemplateField>
+                <asp:TemplateField HeaderText="Description">
+                    <ItemTemplate>                
+                        <asp:LinkButton ID="DesBt"  Width="30" runat="server"  CommandName="DesVClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' Text="Description" />         
+                   <%--<div id="desDiv" style="display:none;z-index:2000;position:absolute;left:3px;top:23px;border:1px solid #06c;padding:0px;background:#fff;"><asp:Label ID="OnhandLabel" runat="server" Text='<%# Bind("des") %>'></asp:Label></div>
+                        <div style="background:#0184de;text-align:right;padding-right:3px;"><span style="width:12;border-width:0px;color:white;font-family:webdings; cursor:hand; left:-200;" onclick="hidden('desDiv')">r</span></div>
+                    <script type="text/javascript" language="javascript">
+                        function show(checkbox_list) {
+                            var checkbox_list = document.getElementById(checkbox_list);
+                            checkbox_list.style.display = "block";
+                        }
+                        function hidden(checkbox_list) {
+                            var checkbox_list = document.getElementById(checkbox_list);
+                            checkbox_list.style.display = "none";
+                        }
+</script>     --%>
+                    </ItemTemplate>   
+                </asp:TemplateField>
                   <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center" SortExpression="ADD">
             <ItemTemplate>
             <asp:ImageButton ID="AddBt" runat="server" ImageUrl="../Pictures/images.jpg"  CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>'></asp:ImageButton>
@@ -210,6 +228,11 @@
     <SortedDescendingHeaderStyle BackColor="#4870BE" />
     </asp:GridView>
         </div>
-
+    <div id="divDes" runat="server" visible="false">
+         <fieldset class="accountInfo">
+            <legend>Wheel Description</legend>
+         <asp:Label ID="lblDes" runat="server" ></asp:Label>
+             </fieldset>
+         </div>
 </asp:Content>
 

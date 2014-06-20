@@ -11,9 +11,16 @@
         Visible="true"  OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
-            <asp:BoundField DataField="OrderID" HeaderText="Order ID" InsertVisible="False" SortExpression="OrderID" Visible="true" />
+            <asp:TemplateField HeaderText="OrderID" ItemStyle-HorizontalAlign="Center" Visible="false" SortExpression="OrderID">
+                <EditItemTemplate>
+                    <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("OrderId") %>'></asp:TextBox>
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="LabelOrder" runat="server" Text='<%# Bind("OrderId") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
             <%-- <asp:BoundField DataField="UserID" HeaderText="User ID" InsertVisible="False" ReadOnly="True" SortExpression="UserID" Visible="false" />--%>
-            <asp:TemplateField HeaderText="ProductID" ItemStyle-HorizontalAlign="Center" Visible="true" SortExpression="ProductID">
+            <asp:TemplateField HeaderText="ProductID" ItemStyle-HorizontalAlign="Center" Visible="false" SortExpression="ProductID">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("ProductID") %>'></asp:TextBox>
                 </EditItemTemplate>
@@ -94,6 +101,12 @@
     <br />
     <asp:Label ID="LabelTotalText" runat="server" Font-Bold="true" Font-Size="Large" align="left" Text="Order Total: "></asp:Label>
     <asp:Label ID="LabelTotalPrice" Visible="true" Font-Bold="true" Font-Size="Large" align="left" runat="server" ForeColor="#FF8080"></asp:Label>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Label ID="lbHST" runat="server" Font-Bold="true" Font-Size="Large" Text="HST: "></asp:Label>
+    <asp:Label ID="Label1" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Label ID="Totalprice" runat="server" Font-Bold="true" Font-Size="Large" Text="Total Price: "></asp:Label>
+    <asp:Label ID="Label2" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>
     <br />
     <br />
     <asp:Label ID="lbPO" runat="server" AssociatedControlID="txtPO">PO:</asp:Label>

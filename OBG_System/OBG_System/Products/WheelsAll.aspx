@@ -54,7 +54,7 @@
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Size"
                             DataValueField="Size"
-                            CssClass="CBLayout" ID="chkSize" runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
+                            CssClass="CBLayout" ID="chkSize" runat="server"  AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
                     </td>
                 </tr>
@@ -83,20 +83,12 @@
                     <td class="auto-style5">PCD:</td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource2" DataTextField="PCD"
-                            DataValueField="PCD" CssClass="CBLayout" ID="chkPCD" runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
+                            DataValueField="PCD" CssClass="CBLayout" ID="chkPCD"  runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
                     </td>
                 </tr>
 
-                <tr>
-                    <td class="auto-style3">Finish:</td>
-                    <td>
-                        <asp:CheckBoxList DataSourceID="SqlDataSource3" DataTextField="Finish"
-                            DataValueField="Finish" CssClass="CBLayout" ID="chkFinish" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
-                        </asp:CheckBoxList>
-                    </td>
-                </tr>
-
+               
                 <tr>
                     <td class="auto-style5">Offset:</td>
                     <td>
@@ -120,6 +112,14 @@
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource6" DataTextField="Bore"
                             DataValueField="Bore" CssClass="CBLayout" ID="chkBore" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
+                        </asp:CheckBoxList>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="auto-style3">Finish:</td>
+                    <td>
+                        <asp:CheckBoxList DataSourceID="SqlDataSource3" DataTextField="Finish"
+                            DataValueField="Finish"  ID="chkFinish" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
                     </td>
                 </tr>
@@ -292,7 +292,36 @@
                         })
                     </script>
 
-
+<%--<style type="text/css">
+         .imgthumb
+         {
+              height:100px;
+             width:100px;
+          }
+         .imgdiv
+         {
+              background-color:White;
+           margin-left:auto;
+             margin-right:auto;
+              padding:10px;
+             border:solid 1px #c6cfe1;
+              height:500px;
+              width:450px;
+          }
+  </style>--%>
+   <%--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript">
+  </script>
+       <script type="text/javascript">
+                          $(function () {
+                                 $("img.imgthumb").click(function (e) {
+                                       var newImg = '<img src='
+                                                      + $(this).attr("src") + '></img>';
+                                      $('#ladiv')
+                                            .html($(newImg)
+                                            .animate({ height: '400', width: '300' }, 1500));
+                                       });
+                              });     
+                  </script>--%>
 
 
                 </ItemTemplate>
@@ -397,14 +426,26 @@
                 <ItemTemplate>
                     <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
                 </ItemTemplate>
-
             </asp:TemplateField>
 
             <asp:TemplateField HeaderText="Description">
                     <ItemTemplate>                
-                        <asp:LinkButton ID="DesBt"  Width="30" runat="server"  CommandName="Description" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' Text="Description" />         
+                        <asp:LinkButton ID="DesBt"  Width="30" runat="server"  CommandName="DesClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' Text="Description" />         
+                   <%--<div id="desDiv" style="display:none;z-index:2000;position:absolute;left:3px;top:23px;border:1px solid #06c;padding:0px;background:#fff;"><asp:Label ID="OnhandLabel" runat="server" Text='<%# Bind("des") %>'></asp:Label></div>
+                        <div style="background:#0184de;text-align:right;padding-right:3px;"><span style="width:12;border-width:0px;color:white;font-family:webdings; cursor:hand; left:-200;" onclick="hidden('desDiv')">r</span></div>
+                    <script type="text/javascript" language="javascript">
+                        function show(checkbox_list) {
+                            var checkbox_list = document.getElementById(checkbox_list);
+                            checkbox_list.style.display = "block";
+                        }
+                        function hidden(checkbox_list) {
+                            var checkbox_list = document.getElementById(checkbox_list);
+                            checkbox_list.style.display = "none";
+                        }
+</script>     --%>
                     </ItemTemplate>   
                 </asp:TemplateField>
+            
             <%-- <asp:TemplateField HeaderText="CategoryId" SortExpression="CategoryId">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("CategoryId") %>'></asp:TextBox>
@@ -440,6 +481,11 @@
         <SortedDescendingHeaderStyle BackColor="#4870BE" />
     </asp:GridView>
         </div>
-
+     <div id="divDes" runat="server" visible="false">
+         <fieldset class="accountInfo">
+            <legend>Wheel Description</legend>
+         <asp:Label ID="lblDes" runat="server" ></asp:Label>
+             </fieldset>
+         </div>
 </asp:Content>
 
