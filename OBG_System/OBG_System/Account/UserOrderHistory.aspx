@@ -14,7 +14,9 @@
     <p>Your orders:</p>
     <div runat="server" align ="center">
     <asp:GridView ID="GridView1" runat="server" GridLines="Both"  AllowPaging="True" AllowSorting="true" Width="80%" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderID" ForeColor="#333333"
-        OnSelectedIndexChanged="GridView1_SelectedIndexChanged" >
+        OnSelectedIndexChanged="GridView1_SelectedIndexChanged" 
+           OnPageIndexChanging="GridView1_PageIndexChanging"
+         OnSorting="GridView1_Sorting">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:BoundField DataField="OrderID" HeaderText="Order ID" InsertVisible="true" ReadOnly="True" SortExpression="OrderID" />
@@ -33,7 +35,7 @@
                     <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("OrderDate") %>'></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="Label4" runat="server" Text='<%# Bind("OrderDate") %>'></asp:Label>
+                    <asp:Label ID="Label4" runat="server" Text='<%# Eval("OrderDate","{0:MM/dd/yyyy}") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Status" ItemStyle-HorizontalAlign="Center" SortExpression="Status">
@@ -114,8 +116,13 @@
                         <asp:Label ID="Label6" runat="server" Text='<%# Bind("DiscountRate") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField> 
-                <asp:CommandField HeaderText="Delete" ShowDeleteButton="True" Visible="true" ButtonType="Button" DeleteText="Delete" ControlStyle-CssClass="myButton" />
- 
+                <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" Visible="true" ButtonType="Button" DeleteText="Delete" ControlStyle-CssClass="myButton" />--%>
+                <asp:TemplateField HeaderText="Delete">
+                <ItemTemplate>
+                    <asp:Button ID="deleteButton" runat="server" CommandName="Delete" Text="Delete"
+                        OnClientClick="return confirm('Are you sure you want to delete this order?');" CssClass="myButton" />
+                </ItemTemplate>
+            </asp:TemplateField>
                 <%--<asp:LinkButton ID="LBsee" runat="server" CommandArgument='<%#Eval("OrderID") %>'>查看订单信息</asp:LinkButton>--%>
 
                 <%--<asp:TemplateField HeaderText="Detail">

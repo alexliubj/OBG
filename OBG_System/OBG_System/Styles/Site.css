@@ -351,8 +351,15 @@ div.accountInfo {
     width: 450px;
 }
 
-CBLayout {
-    vertical-align: middle;
+.CBLayout tr {
+    height:20px;
+
+    /*vertical-align: middle;*/
+}
+.CBLayout td {
+    width:60px;
+
+    /*vertical-align: middle;*/
 }
 
 .label {

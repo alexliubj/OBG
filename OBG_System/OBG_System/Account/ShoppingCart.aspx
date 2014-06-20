@@ -14,17 +14,24 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-     <script type="text/javascript">
-         function Plus(obj) {
-             obj.value = parseInt(obj.value) + 1;
-         }
-         function Reduce(obj) {
-             if (obj.value > 1) {
-                 obj.value = obj.value - 1;
-             }
-         }
-
-    </script>
+     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script>
+    $(function () {
+        var t = $("#txtCount");
+        $("#add").click(function () {
+            t.val(parseInt(t.val()) + 1)
+            setTotal();
+        })
+        $("#min").click(function () {
+            t.val(parseInt(t.val()) - 1)
+            setTotal();
+        })
+        function setTotal() {
+            $("#total").html((parseInt(t.val()) * 3.95).toFixed(2));
+        }
+        setTotal();
+    })
+</script>
     <div id="ShoppingCartTitle" runat="server" class="ContentHead">
         <h1>Shopping Cart</h1>
     </div>
@@ -100,7 +107,13 @@
     <%--<asp:LinkButton ID="LBUpdate" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="LBUpdate_Click">Update Quantity</asp:LinkButton>--%>
     <asp:Label ID="LabelTotalText" runat="server" Font-Bold="true" Font-Size="Large" Text="Order Total: "></asp:Label>
     <asp:Label ID="LabelTotalPrice" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>
-
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Label ID="lbHST" runat="server" Font-Bold="true" Font-Size="Large" Text="HST: "></asp:Label>
+    <asp:Label ID="Label1" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Label ID="Totalprice" runat="server" Font-Bold="true" Font-Size="Large" Text="Total Price: "></asp:Label>
+    <asp:Label ID="Label2" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>
+        
     <asp:ImageButton ID="ImageButton1" runat="server" ImageAlign="Right" 
         ImageUrl="~/Pictures/checkoutButton.png" OnClick="IBTCheckout_Click" />
 

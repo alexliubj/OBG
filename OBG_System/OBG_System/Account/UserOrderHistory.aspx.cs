@@ -13,6 +13,7 @@ public partial class Default2 : System.Web.UI.Page
     private DataSet orderDataSet;
     int userId = 0;
     Order order = new Order();
+    OrderLine line = new OrderLine();
     List<OrderLine> orderine = new List<OrderLine>();
     int orderID = 0;
     DataTable orderDetailTable;
@@ -22,6 +23,19 @@ public partial class Default2 : System.Web.UI.Page
         userId = (int)Session["UserID"];
         if (!IsPostBack)
         {
+
+            for (int i = 0; i < OrderGridView.Rows.Count; i++)
+            {
+
+
+                line.ProductId = int.Parse(((Label)OrderGridView.Rows[i].Cells[1].FindControl("LBProductID")).Text.ToString()); ;
+                line.PartNO = ((Label)OrderGridView.Rows[i].Cells[3].FindControl("Label5")).Text.ToString(); ;
+                line.DiscountRate = float.Parse(((Label)OrderGridView.Rows[i].Cells[5].FindControl("Label6")).Text.Substring(1).ToString());
+                line.ProductName = ((Label)OrderGridView.Rows[i].Cells[3].FindControl("Label8")).Text.ToString();
+                line.Qty = int.Parse(((TextBox)OrderGridView.Rows[i].Cells[4].FindControl("TextBox4")).Text.ToString());
+                orderine.Add(line);
+            }
+
             Gridview1_Bind();
             
         }
@@ -150,9 +164,7 @@ public partial class Default2 : System.Web.UI.Page
 
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        //wheelInformation.Visible = false;
-        //orderine = (List<OrderLine>)Session["orderline"];
-        //int ProId = Convert.ToInt32(((Label)(OrderGridView.Rows[i].Cells[1].FindControl("LBProductID"))).Text.ToString());
+        
         orderID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
         orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
 
@@ -162,40 +174,64 @@ public partial class Default2 : System.Web.UI.Page
 
             if (orderDetailTable != null)
             {
-                //DataTable dt = Session["GoodsCart"] as DataTable;
-                //for (int i = 0; i < orderDetailTable.Rows.Count; i++)
-                //{
+                
                 int pId = Convert.ToInt32(((Label)(OrderGridView.Rows[e.RowIndex].Cells[1].FindControl("LBProductID"))).Text.ToString());
                 int orderConfirm = OrderBLO.DeleteProductById(pId);
                 GridView2_Bind(orderID);
-                // }
-                //Session["GoodsCart"] = orderDetailTable;
+               
             }
         }
         else
         {
             Response.Write("<script language='javascript'>alert('You cannot modify your order after pending');</script>");
         }
-        //if (Session["orderline"] != null)
-        //{
-        //    orderine = (List<OrderLine>)Session["orderline"];
-        //    orderine.RemoveAt(e.RowIndex);
-        //    //shoppingcart.AcceptChanges();
-        //    Session["orderline"] = orderine;
-        //    Response.Redirect("ShoppingCart.aspx");
-        //}
-        //orderine.Add(orderDetailTable);
-        //OrderGridView.DataSource = orderDetailTable;
-        //OrderGridView.DataBind();
-        //int ProductID = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text.ToString());
-        //DataTable orderline = OrderBLO.ModifyOneOrder(order)
-        //OrderGridView.DataSource = orderline;
-        //GridView2_Bind(orderID);
-        //Populacontorl(orderID);
+
     }
 
     protected void Confirm_Click(object sender, EventArgs e)
     {
+        
+
         Response.Redirect("~/Default.aspx");
+    }
+
+    protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
+    {
+        //DataTable dataTable = GridView1.DataSource as DataTable;
+        // DataTable dataTable = TiresBLO.GetAllTires();
+        DataTable order = OrderBLO.GetAllOrderByUserId(userId);
+        if (order != null)
+        {
+            DataView dataView = new DataView(order);
+            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+
+            GridView1.DataSource = dataView;
+            GridView1.DataBind();
+        }
+
+    }
+
+    private string ConvertSortDirectionToSql(SortDirection sortDirection)
+    {
+        string newSortDirection = String.Empty;
+
+        switch (sortDirection)
+        {
+            case SortDirection.Ascending:
+                newSortDirection = "ASC";
+                break;
+
+            case SortDirection.Descending:
+                newSortDirection = "DESC";
+                break;
+        }
+
+        return newSortDirection;
+    }
+    protected void GridView1_PageIndexChanging(object sender, GridViewPageEventArgs e)
+    {
+        GridView1.PageIndex = e.NewPageIndex;
+        //GridView1.DataBind();
+        Gridview1_Bind();
     }
 }
