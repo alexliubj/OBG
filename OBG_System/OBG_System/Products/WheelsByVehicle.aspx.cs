@@ -47,7 +47,7 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
     private void Gridview4_Bind()
     {
 
-        DataTable wheelsAll = WheelsBLO.GetAllProducts(1);
+        DataTable wheelsAll = WheelsBLO.GetAllProducts(userID);
         wheelsDataSet = new DataSet();
         wheelsDataSet.Tables.Add(wheelsAll);
 
@@ -84,7 +84,7 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
             partNo = ((Label)GridView4.Rows[rowindex].FindControl("PNLabel")).Text;
             image = ((Image)GridView4.Rows[rowindex].FindControl("ImageLable")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView4.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView4.Rows[rowindex].FindControl("PriceLabel")).Text);
+            price = Convert.ToDouble(((Label)GridView4.Rows[rowindex].FindControl("PriceLabel")).Text.Substring(1));
             sc.ProductId = pID;
             sc.Qty = qty;
             sc.Pricing = price;
@@ -177,7 +177,7 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
     {
         //DataTable dataTable = GridView1.DataSource as DataTable;
-        DataTable dataTable = WheelsBLO.GetAllProducts(1);
+        DataTable dataTable = WheelsBLO.GetAllProducts(userID);
 
         if (dataTable != null)
         {

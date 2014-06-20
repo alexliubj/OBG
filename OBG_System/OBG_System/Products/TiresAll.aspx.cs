@@ -119,7 +119,7 @@ public partial class Products_tireall : System.Web.UI.Page
             partNo = ((Label)GridView2.Rows[rowindex].FindControl("PNLabel")).Text;
             image = ((Image)GridView2.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView2.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("PricingLabel")).Text);
+            price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("PricingLabel")).Text.Substring(1));
             sc.TireId = tID;
             sc.Image = image;
             sc.PartNo = partNo;
@@ -140,7 +140,7 @@ public partial class Products_tireall : System.Web.UI.Page
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
     {
         //DataTable dataTable = GridView1.DataSource as DataTable;
-        DataTable dataTable = TiresBLO.GetAllTires();
+        DataTable dataTable = TiresBLO.GetAllTires(userID);
 
         if (dataTable != null)
         {

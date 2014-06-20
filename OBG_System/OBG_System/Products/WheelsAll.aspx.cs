@@ -181,7 +181,7 @@ public partial class Products_wheelall : System.Web.UI.Page
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
     {
         //DataTable dataTable = GridView1.DataSource as DataTable;
-        DataTable dataTable = WheelsBLO.GetAllProducts(1);
+        DataTable dataTable = WheelsBLO.GetAllProducts(userID);
 
         if (dataTable != null)
         {

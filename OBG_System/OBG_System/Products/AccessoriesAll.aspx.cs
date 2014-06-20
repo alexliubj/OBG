@@ -95,7 +95,7 @@ public partial class Products_accAll : System.Web.UI.Page
     protected void GridView6_Sorting(object sender, GridViewSortEventArgs e)
     {
         //DataTable dataTable = GridView1.DataSource as DataTable;
-        DataTable dataTable = AccessoryBLO.GetAllAccessories();
+        DataTable dataTable = AccessoryBLO.GetAllAccessories(userID);
 
         if (dataTable != null)
         {
@@ -190,7 +190,7 @@ public partial class Products_accAll : System.Web.UI.Page
             partNo = ((Label)GridView6.Rows[rowindex].FindControl("PNLabel")).Text;
             image = ((Image)GridView6.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView6.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView6.Rows[rowindex].FindControl("PricingLabel")).Text);
+            price = Convert.ToDouble(((Label)GridView6.Rows[rowindex].FindControl("PricingLabel")).Text.Substring(1));
             name = ((Label)GridView6.Rows[rowindex].FindControl("NameLabel")).Text;
             sc.AccId = pID;
             sc.Qty = qty;

@@ -282,7 +282,7 @@
                   <asp:TemplateField HeaderText="Price" ItemStyle-HorizontalAlign="Center" SortExpression="Price">
      
                 <ItemTemplate>
-                    <asp:Label ID="PriceLabel" runat="server" Text='<%# Bind("Price") %>'></asp:Label>
+                    <asp:Label ID="PriceLabel" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
              <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">

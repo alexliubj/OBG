@@ -113,7 +113,7 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Price" SortExpression="PO">
                     <ItemTemplate>
-                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("DiscountRate") %>'></asp:Label>
+                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("DiscountRate","{0:c}") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField> 
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" Visible="true" ButtonType="Button" DeleteText="Delete" ControlStyle-CssClass="myButton" />--%>
