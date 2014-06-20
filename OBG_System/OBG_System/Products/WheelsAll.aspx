@@ -211,7 +211,7 @@
                  src="Pictures/1.png" />
                 <img id="imgFull" alt="" src=""
                  style="display: none;
-                height: 400px;width: 490px" />
+                height: 420px;width: 490px" />
             </td>
         </tr>
         <tr>
