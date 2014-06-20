@@ -40,7 +40,7 @@ public partial class Products_tireall : System.Web.UI.Page
     public void GridView2_Bind()
     {
 
-        DataTable tiresTable = TiresBLO.GetAllTires();
+        DataTable tiresTable = TiresBLO.GetAllTires(userID);
         tiresDataSet = new DataSet();
         tiresDataSet.Tables.Add(tiresTable);
 

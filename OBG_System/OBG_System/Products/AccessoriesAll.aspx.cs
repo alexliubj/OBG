@@ -40,7 +40,7 @@ public partial class Products_accAll : System.Web.UI.Page
     public void GridView6_Bind()
     {
 
-        DataTable tiresTable = AccessoryBLO.GetAllAccessories();
+        DataTable tiresTable = AccessoryBLO.GetAllAccessories(userID);
         AccDataSet = new DataSet();
         AccDataSet.Tables.Add(tiresTable);
 
