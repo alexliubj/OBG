@@ -21,8 +21,23 @@ namespace DataAccess
                                                       ,[pricing]
                                                       ,[season]
                                                       ,[brand]
-                                                      ,[des]
+                                                      ,[des],[special]
                                                   FROM [Tires]");
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
+        }
+
+        public static DataTable GetSpecialAllTires()
+        {
+            DbCommand command = db.GetSqlStringCommond(@"SELECT [tireId]
+                                                      ,[partNo]
+                                                      ,[image]
+                                                      ,[size]
+                                                      ,[pricing]
+                                                      ,[season]
+                                                      ,[brand]
+                                                      ,[des],[special]
+                                                  FROM [Tires] where special != 1.0");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
@@ -51,7 +66,7 @@ namespace DataAccess
                                                        ,[image]
                                                        ,[size]                                                      
                                                        ,[pricing]
-                                                       ,[season],[brand],[des])
+                                                       ,[season],[brand],[des],[special])
                                                  VALUES
                                                        (@partNo
                                                        ,@image
@@ -59,7 +74,7 @@ namespace DataAccess
                                                        ,@pricing
                                                        ,@season
                                                        ,@brand
-                                                       ,@des)");
+                                                       ,@des,@special)");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@partNo", tire.PartNo),
                 new SqlParameter("@size",tire.Size),
@@ -69,7 +84,8 @@ namespace DataAccess
                 new SqlParameter("@pricing",tire.Pricing),
                 new SqlParameter("@season",tire.Season),
                 new SqlParameter("@des",tire.Des),
-                new SqlParameter("@brand",tire.Brand)
+                new SqlParameter("@brand",tire.Brand),
+                new SqlParameter("@special",tire.Special)
             };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
@@ -92,7 +108,7 @@ namespace DataAccess
                                       ,[pricing] = @pricing
                                       ,[season] = @season
                                       ,[brand] = @brand
-                                      ,[des] = @des
+                                      ,[des] = @des, [special]=@special
                                  WHERE tireId = @tireId");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@partNo", tire.PartNo),
@@ -103,7 +119,8 @@ namespace DataAccess
                 new SqlParameter("@pricing",tire.Pricing),
                 new SqlParameter("@season",tire.Season),
                 new SqlParameter("@tireId",tire.TireId),
-                new SqlParameter("@brand",tire.Brand)
+                new SqlParameter("@brand",tire.Brand),
+                new SqlParameter("@special",tire.Special)
             };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);

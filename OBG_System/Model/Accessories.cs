@@ -57,5 +57,11 @@ namespace OBGModel
             set { brand = value; }
         }
 
+        private float special;
+        public float Special
+        {
+            get { return special; }
+            set { special = value; }
+        }
     }
 }
