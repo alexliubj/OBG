@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System;
 using System.IO;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 public partial class Admin_Default : System.Web.UI.Page
 {
@@ -157,7 +158,7 @@ public partial class Admin_Default : System.Web.UI.Page
             DataTable wheelsTable = WheelsBLO.GetAllProducts();
             wheelsTable.PrimaryKey = new DataColumn[] { wheelsTable.Columns["ProductID"] };
             DataRow foundRow = wheelsTable.Rows.Find(productID);
-            wheel.Image = foundRow[1].ToString(); 
+            wheel.Image = foundRow[1].ToString();
         }
 
         wheel.Offset = Offset.Text.ToString().Trim();
@@ -169,6 +170,13 @@ public partial class Admin_Default : System.Web.UI.Page
         wheel.Style = Style.Text.ToString().Trim();
         wheel.Weight = Weight.Text.ToString().Trim();
         wheel.Des = Des.Text.ToString().Trim();
+
+        string special = Special.Text.ToString().Trim();
+        Match mtch = Regex.Match(special, @"^-*[0-9,\.]+$");
+        if (mtch.Success)
+        {
+            wheel.Special = (float)double.Parse(special);
+        }
 
         int update = 0;
 
@@ -237,6 +245,11 @@ public partial class Admin_Default : System.Web.UI.Page
         Weight.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label11"))).Text;
         Des.Text = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label15"))).Text;
 
+        string special = ((Label)(GridView1.SelectedRow.Cells[0].FindControl("Label16"))).Text;
+        double num = double.Parse(special.Replace("%", "")) / 100;
+        Special.Text = num.ToString();
+
+
         wheelsVehicles = WheelsBLO.GetAllWheelsVehiclesByWheelsId(productID);
 
         foreach (DataRow dtRow in wheelsVehicles.Rows)
@@ -284,6 +297,7 @@ public partial class Admin_Default : System.Web.UI.Page
         Style.Text = null;
         Weight.Text = null;
         Des.Text = null;
+        Special.Text = null;
         //uncheck all
         for (int i = 0; i < CheckBoxListVehicle.Items.Count; i++)
         {
@@ -318,6 +332,13 @@ public partial class Admin_Default : System.Web.UI.Page
         wheel.Style = Style.Text.ToString().Trim();
         wheel.Weight = Weight.Text.ToString().Trim();
         wheel.Des = Des.Text.ToString().Trim();
+
+        string special = Special.Text.ToString().Trim();
+        Match mtch = Regex.Match(special, @"^-*[0-9,\.]+$");
+        if (mtch.Success)
+        {
+            wheel.Special = (float)double.Parse(special);
+        }
 
         List<Vehicle> listVehicle = new List<Vehicle>();
 
@@ -477,6 +498,13 @@ public partial class Admin_Default : System.Web.UI.Page
         tire.Pricing = (float)double.Parse(TirePrice.Text.ToString().Trim());
         tire.Season = TireSeason.Text.ToString().Trim();
 
+        string special = TireSpecial.Text.ToString().Trim();
+        Match mtch = Regex.Match(special, @"^-*[0-9,\.]+$");
+        if (mtch.Success)
+        {
+            tire.Special = (float)double.Parse(special);
+        }
+
         if (TireFileUploadControl.HasFile)
         {
             filename = Path.GetFileName(TireFileUploadControl.FileName);
@@ -537,6 +565,13 @@ public partial class Admin_Default : System.Web.UI.Page
         tire.Brand = TireBrand.Text.ToString().Trim();
         tire.Des = TireDes.Text.ToString().Trim();
 
+        string special = TireSpecial.Text.ToString().Trim();
+        Match mtch = Regex.Match(special, @"^-*[0-9,\.]+$");
+        if (mtch.Success)
+        {
+            tire.Special = (float)double.Parse(special);
+        }
+
         int update = TiresBLO.CreateNewTire(tire);
 
         if (update == 1)
@@ -577,6 +612,11 @@ public partial class Admin_Default : System.Web.UI.Page
         TireBrand.Text = ((Label)(GridView2.SelectedRow.Cells[0].FindControl("Label6"))).Text;
         TireDes.Text = ((Label)(GridView2.SelectedRow.Cells[0].FindControl("Label7"))).Text;
 
+        string special = ((Label)(GridView2.SelectedRow.Cells[0].FindControl("Label8"))).Text;
+        double num = double.Parse(special.Replace("%", "")) / 100;
+        TireSpecial.Text = num.ToString();
+
+
         DivTireInformation.Visible = true;
 
         BtnAddTire.Visible = false;
@@ -592,6 +632,7 @@ public partial class Admin_Default : System.Web.UI.Page
         TireImage.ImageUrl = null;
         TireBrand.Text = null;
         TireDes.Text = null;
+        TireSpecial.Text = null;
 
         DivTireInformation.Visible = true;
 
@@ -687,6 +728,13 @@ public partial class Admin_Default : System.Web.UI.Page
         acc.Pricing = (float)double.Parse(AccPrice.Text.ToString().Trim());
         acc.Name = AccName.Text.ToString().Trim();
 
+        string special = AccSpecial.Text.ToString().Trim();
+        Match mtch = Regex.Match(special, @"^-*[0-9,\.]+$");
+        if (mtch.Success)
+        {
+            acc.Special = (float)double.Parse(special);
+        }
+
         if (AccFileUploadControl.HasFile)
         {
             filename = Path.GetFileName(AccFileUploadControl.FileName);
@@ -746,6 +794,13 @@ public partial class Admin_Default : System.Web.UI.Page
         acc.Brand = AccBrand.Text.ToString().Trim();
         acc.Des = AccDes.Text.ToString().Trim();
 
+        string special = AccSpecial.Text.ToString().Trim();
+        Match mtch = Regex.Match(special, @"^-*[0-9,\.]+$");
+        if (mtch.Success)
+        {
+            acc.Special = (float)double.Parse(special);
+        }
+
 
         int update = AccessoryBLO.CreateNewAccessory(acc);
 
@@ -786,6 +841,10 @@ public partial class Admin_Default : System.Web.UI.Page
         AccBrand.Text = ((Label)(GridView3.SelectedRow.Cells[0].FindControl("Label6"))).Text;
         AccDes.Text = ((Label)(GridView3.SelectedRow.Cells[0].FindControl("Label4"))).Text;
 
+        string special = ((Label)(GridView3.SelectedRow.Cells[0].FindControl("Label8"))).Text;
+        double num = double.Parse(special.Replace("%", "")) / 100;
+        AccSpecial.Text = num.ToString();
+
         DivAccInformation.Visible = true;
 
         BtnAddAcc.Visible = false;
@@ -800,6 +859,7 @@ public partial class Admin_Default : System.Web.UI.Page
         AccBrand.Text = null;
         AccImage.ImageUrl = null;
         AccDes.Text = null;
+        AccSpecial.Text = null;
 
         DivAccInformation.Visible = true;
 
