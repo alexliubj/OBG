@@ -114,6 +114,13 @@ namespace OBGModel
             get { return des; }
             set { des = value; }
         }
+        private float special;
+
+        public float Special
+        {
+            get { return special; }
+            set { special = value; }
+        }
 
     }
 }

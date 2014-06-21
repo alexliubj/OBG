@@ -49,6 +49,7 @@
     <Compile Include="IPUtility.cs" />
     <Compile Include="OrderBLO.cs" />
     <Compile Include="PermissionBLO.cs" />
+    <Compile Include="SpecialBLO.cs" />
     <Compile Include="TiresBLO.cs" />
     <Compile Include="ValidationUtility.cs" />
     <Compile Include="WheelsBLO.cs" />

@@ -38,6 +38,28 @@ namespace DataAccess
             return dt;
         }
 
+        public static DataTable GetAllSpecialProducts()
+        {
+            DbCommand command = db.GetSqlStringCommond(@"SELECT [ProductId]
+                                                      ,[Image]
+                                                      ,[Style]
+                                                      ,[Brand]
+                                                      ,[Size]
+                                                      ,[PCD]
+                                                      ,[Finish]
+                                                      ,[Offset]
+                                                      ,[SEAT]
+                                                      ,[BORE]
+                                                      ,[Weight]
+                                                      ,[ONHand]
+                                                      ,[Price]
+                                                      ,[PartNO]
+                                                      ,[des],[special]
+                                                  FROM [OBG_].[dbo].[Wheels] where special!=1.0");
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
+        }
+
         public static DataTable GetAllProducts()
         {
             DbCommand command = db.GetSqlStringCommond(@"SELECT [ProductId]
@@ -54,7 +76,7 @@ namespace DataAccess
                                                       ,[ONHand]
                                                       ,[Price]
                                                       ,[PartNO]
-                                                      ,[des]
+                                                      ,[des],[special]
                                                   FROM [OBG_].[dbo].[Wheels]");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
@@ -162,7 +184,7 @@ namespace DataAccess
                                   ,[ONHand] = @ONHand
                                   ,[Price] = @Price
                                   ,[PartNO] = @PartNO
-                                    ,[des] = @des
+                                    ,[des] = @des,[special]=@specail
                              WHERE productId = @productId");
                     SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@Image", prod.Image),
@@ -179,7 +201,8 @@ namespace DataAccess
                 new SqlParameter("@Price",prod.Price),
                 new SqlParameter("@PartNO",prod.PartNO),
                 new SqlParameter("@productId",prod.ProductId),
-                new SqlParameter("@des",prod.Des)
+                new SqlParameter("@des",prod.Des),
+                new SqlParameter("@specail",prod.Special)
             };
                     command.Parameters.AddRange(paras);
                     int ret = db.ExecuteNonQuery(command);
@@ -240,7 +263,7 @@ namespace DataAccess
                                ,[ONHand]
                                ,[Price]
                                ,[PartNO]
-                                ,[des])
+                                ,[des],[special])
                          VALUES
                                (@Image,
                                @Style,
@@ -255,7 +278,7 @@ namespace DataAccess
                                @ONHand,
                                @Price,
                                @PartNO,
-                                @des); Select @@IDENTITY;");
+                                @des,@special); Select @@IDENTITY;");
                     SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@Image", prod.Image),
                 new SqlParameter("@Style",prod.Style),
@@ -270,7 +293,8 @@ namespace DataAccess
                 new SqlParameter("@ONHand",prod.Onhand),
                 new SqlParameter("@Price",prod.Price),
                  new SqlParameter("@PartNO",prod.PartNO),
-                 new SqlParameter("@des",prod.Des)
+                 new SqlParameter("@des",prod.Des),
+                 new SqlParameter("@special",1.0)
             };
                     command.Parameters.AddRange(paras);
                     //add relationship
