@@ -80,7 +80,13 @@ namespace OBGModel
             set { des = value; }
         }
 
+        private float special;
 
+        public float Special
+        {
+            get { return special; }
+            set { special = value; }
+        }
 
     }
 }

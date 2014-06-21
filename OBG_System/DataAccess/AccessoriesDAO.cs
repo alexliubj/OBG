@@ -22,8 +22,23 @@ namespace DataAccess
                                               ,[des]
                                               ,[pricing]
                                               ,[name]
-                                                ,[brand]
+                                                ,[brand],[special]
                                           FROM [Accessories]");
+            DataTable dt = db.ExecuteDataTable(command);
+            return dt;
+        }
+
+        public static DataTable GetSpecialAllAccessories()
+        {
+            DbCommand command = db.GetSqlStringCommond(@"
+                                        SELECT [partNo]
+                                              ,[accId]
+                                              ,[image]
+                                              ,[des]
+                                              ,[pricing]
+                                              ,[name]
+                                                ,[brand],[special]
+                                          FROM [Accessories] where special!=1.0");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
@@ -53,7 +68,7 @@ namespace DataAccess
                                           ,[des] = @des
                                           ,[pricing] = @pricing
                                           ,[name] = @name
-                                          ,[brand] = @brand
+                                          ,[brand] = @brand,[special]=@special
                                      WHERE accId= @accId");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@partNo", acc.PartNo),
@@ -62,7 +77,8 @@ namespace DataAccess
                 new SqlParameter("@pricing",acc.Pricing),
                 new SqlParameter("@name",acc.Name),
                  new SqlParameter("@accId",acc.AccId),
-                 new SqlParameter("@brand",acc.Brand)
+                 new SqlParameter("@brand",acc.Brand),
+                 new SqlParameter("@special",acc.Special)
             };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
@@ -76,21 +92,22 @@ namespace DataAccess
                                                    ,[des]
                                                    ,[pricing]
                                                    ,[name]
-                                                   ,[brand])
+                                                   ,[brand],[special])
                                              VALUES
                                                    (@partNo
                                                    ,@image
                                                    ,@des
                                                    ,@pricing
                                                    ,@name
-                                                    ,@brand)");
+                                                    ,@brand,@special)");
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@partNo", acc.PartNo),
                 new SqlParameter("@image",acc.Img),
                 new SqlParameter("@des",acc.Des),
                 new SqlParameter("@pricing",acc.Pricing),
                 new SqlParameter("@name",acc.Name),
-                new SqlParameter("@brand",acc.Brand)
+                new SqlParameter("@brand",acc.Brand),
+                 new SqlParameter("@special",1.0)
             };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
