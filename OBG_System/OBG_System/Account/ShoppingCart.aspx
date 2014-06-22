@@ -67,7 +67,7 @@
            
             <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center">
                 <ItemTemplate>
-                    <asp:TextBox ID="txtCount" runat="server" Width="35px" Text='<%# Eval("Quantity") %>' onkeyup="CheckValue(this)"></asp:TextBox>
+                    <asp:TextBox ID="txtCount" runat="server" Width="35px" Text='<%# Bind("Quantity") %>'></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Price" ItemStyle-HorizontalAlign="Center" SortExpression="ProductID">
@@ -104,7 +104,7 @@
         <SortedDescendingHeaderStyle BackColor="#4870BE" />
     </asp:GridView>
     <br/>
-    <%--<asp:LinkButton ID="LBUpdate" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="LBUpdate_Click">Update Quantity</asp:LinkButton>--%>
+<%--    <asp:LinkButton ID="LBUpdate" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="LBUpdate_Click">Update Quantity</asp:LinkButton>--%>
     <asp:Label ID="LabelTotalText" runat="server" Font-Bold="true" Font-Size="Large" Text="Order Total: "></asp:Label>
     <asp:Label ID="LabelTotalPrice" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -116,7 +116,6 @@
         
     <asp:ImageButton ID="ImageButton1" runat="server" ImageAlign="Right" 
         ImageUrl="~/Pictures/checkoutButton.png" OnClick="IBTCheckout_Click" />
-
 
 
 
