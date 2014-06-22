@@ -128,7 +128,7 @@ public partial class Products_accAll : System.Web.UI.Page
 
     protected void chk_SelectedIndexChanged(object sender, EventArgs e)
     {
-        DataTable accAll = AccessoryBLO.GetAllAccessories();
+        DataTable accAll = AccessoryBLO.GetAllAccessories(userID);
         String sqlText = string.Empty;
         String sqlFilterName = string.Empty;
         foreach (ListItem item in ChkName.Items)
@@ -186,11 +186,13 @@ public partial class Products_accAll : System.Web.UI.Page
             string partNo;
             string image;
             string name,des;
+            float special;
+            special = (float)Convert.ToSingle(((Label)GridView6.Rows[rowindex].FindControl("LBSpecial1")).Text);
             pID = Convert.ToInt32(GridView6.DataKeys[rowindex].Value.ToString());
             partNo = ((Label)GridView6.Rows[rowindex].FindControl("PNLabel")).Text;
             image = ((Image)GridView6.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView6.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView6.Rows[rowindex].FindControl("PricingLabel")).Text.Substring(1));
+            price = Convert.ToDouble(((Label)GridView6.Rows[rowindex].FindControl("PricingLabel")).Text.Substring(1)) * special;
             name = ((Label)GridView6.Rows[rowindex].FindControl("NameLabel")).Text;
             sc.AccId = pID;
             sc.Qty = qty;

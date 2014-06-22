@@ -522,6 +522,14 @@
                     <asp:Label ID="PriceLabel" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
+             <asp:TemplateField HeaderText="Special" Visible="false" SortExpression="Special">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtSpecial1" Visible="false" runat="server" Text='<%# Bind("Special") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="LBSpecial1" runat="server"  Visible="false" ForeColor="Red" Font-Bold="true" Text='<%# Bind("Special") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
             <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
                 <ItemTemplate>
                     <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>

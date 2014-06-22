@@ -21,7 +21,7 @@
         <asp:ListItem Value="50" Text="50" />
         <asp:ListItem Value="100" Text="100" />
     </asp:DropDownList>
-        <asp:GridView ID="GridView1" runat="server" GridLines="Both" AllowPaging="True" Align="center" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ProductId" ForeColor="#333333" 
+        <asp:GridView ID="GridView1" runat="server" GridLines="Both" AllowPaging="True" Align="center" EmptyDataText="There is no wheels special now." AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ProductId" ForeColor="#333333" 
 Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="GridView1_RowCommand" OnSorting="GridView1_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
@@ -173,7 +173,7 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                         <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("Size") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("Size") %>'></asp:Label>
+                        <asp:Label ID="SizeLabel" runat="server" Text='<%# Bind("Size") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Pcd" SortExpression="Pcd">
@@ -232,12 +232,12 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                         <asp:Label ID="Label12" runat="server" Text='<%# Bind("Onhand") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Price" SortExpression="Price">
+                <asp:TemplateField HeaderText="Reg Price" SortExpression="Price">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox13" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Price")) %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label13" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Price")) %>'></asp:Label>
+                        <asp:Label ID="Label13" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 
@@ -254,12 +254,18 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                     <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
-                <asp:TemplateField HeaderText="Special" SortExpression="Special">
+                <asp:TemplateField HeaderText="Special" Visible="false" SortExpression="Special">
                     <EditItemTemplate>
                         <asp:TextBox ID="txtSpecial" runat="server" Text='<%# Bind("Special") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="LBSpecial" runat="server" ForeColor="Red" Font-Bold="true" Text='<%# Bind("Special") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Special Price" SortExpression="Pricing">
+                   
+                    <ItemTemplate>
+                        <asp:Label ID="Label5" runat="server" ForeColor="Red" Font-Bold="true"  Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                  <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center"  SortExpression="ADD">
@@ -295,7 +301,7 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
         <asp:ListItem Value="50" Text="50" />
         <asp:ListItem Value="100" Text="100" />
     </asp:DropDownList>
-        <asp:GridView ID="GridView2" runat="server" GridLines="Both" AllowPaging="True" Align="center" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="TireId" ForeColor="#333333" 
+        <asp:GridView ID="GridView2" runat="server" GridLines="Both" AllowPaging="True" Align="center" EmptyDataText="There is no wheels special now." AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="TireId" ForeColor="#333333" 
  Visible="true" OnPageIndexChanging="GridView2_PageIndexChanging" OnRowCommand="GridView1_RowCommand1" OnSorting="GridView2_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
@@ -438,7 +444,7 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Season") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("Season") %>'></asp:Label>
+                        <asp:Label ID="seasonLabel" runat="server" Text='<%# Bind("Season") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
@@ -446,12 +452,12 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                     <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
-               <asp:TemplateField HeaderText="Price" SortExpression="Pricing">
+               <asp:TemplateField HeaderText="Reg Price" SortExpression="Pricing">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label4" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:Label>
+                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <%--<asp:TemplateField HeaderText="Description" SortExpression="Des">
@@ -463,12 +469,20 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                     </ItemTemplate>
                 </asp:TemplateField>--%>
 
-                <asp:TemplateField HeaderText="Special" SortExpression="Special">
+                <asp:TemplateField HeaderText="Special" Visible="false" SortExpression="Special">
                     <EditItemTemplate>
                         <asp:TextBox ID="txtSpecial1" runat="server" Text='<%# Bind("Special") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="LBSpecial1" runat="server" ForeColor="Red" Font-Bold="true" Text='<%# Bind("Special") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Special Price" SortExpression="Pricing">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox5" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="specialprice" runat="server" ForeColor="Red" Font-Bold="true"  Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                  <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center"  SortExpression="ADD">
@@ -503,7 +517,7 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
         <asp:ListItem Value="50" Text="50" />
         <asp:ListItem Value="100" Text="100" />
     </asp:DropDownList>
-        <asp:GridView ID="GridView3" runat="server" GridLines="Both" AllowPaging="True" Align="center" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" ForeColor="#333333" 
+        <asp:GridView ID="GridView3" runat="server" GridLines="Both" AllowPaging="True" Align="center" EmptyDataText="There is no wheels special now." AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" ForeColor="#333333" 
  Visible="true" OnPageIndexChanging="GridView3_PageIndexChanging" OnRowCommand="GridView3_RowCommand" OnSorting="GridView3_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
@@ -653,21 +667,29 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                     <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
-                <asp:TemplateField HeaderText="Price" SortExpression="Pricing">
+                <asp:TemplateField HeaderText="Reg Price" SortExpression="Pricing">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox5" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="Label5" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:Label>
+                        <asp:Label ID="accLabel5" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                
-                <asp:TemplateField HeaderText="Special" SortExpression="Special">
+                <asp:TemplateField HeaderText="Special" Visible="false" SortExpression="Special">
                     <EditItemTemplate>
                         <asp:TextBox ID="txtSpecial" runat="server" Text='<%# Bind("Special") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="LBSpecial" runat="server" ForeColor="Red" Font-Bold="true" Text='<%# Bind("Special") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Special Price" SortExpression="Pricing">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox5" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="accl5" runat="server" ForeColor="Red" Font-Bold="true"  Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                  <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center"  SortExpression="ADD">

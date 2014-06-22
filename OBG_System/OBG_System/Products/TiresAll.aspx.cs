@@ -115,11 +115,13 @@ public partial class Products_tireall : System.Web.UI.Page
             double price;
             string image;
             string partNo;
+            float special;
+            special = (float)Convert.ToSingle(((Label)GridView2.Rows[rowindex].FindControl("LBSpecial1")).Text);
             tID = Convert.ToInt32(GridView2.DataKeys[rowindex].Value.ToString());
             partNo = ((Label)GridView2.Rows[rowindex].FindControl("PNLabel")).Text;
             image = ((Image)GridView2.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView2.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("PricingLabel")).Text.Substring(1));
+            price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("PricingLabel")).Text.Substring(1)) * special;
             sc.TireId = tID;
             sc.Image = image;
             sc.PartNo = partNo;
@@ -173,7 +175,7 @@ public partial class Products_tireall : System.Web.UI.Page
 
     protected void chk_SelectedIndexChanged(object sender, EventArgs e)
     {
-        DataTable tireAll = TiresBLO.GetAllTires();
+        DataTable tireAll = TiresBLO.GetAllTires(userID);
         String sqlText = string.Empty;
         String sqlFilterSize = string.Empty, sqlFilterBrand = string.Empty, sqlFilterSeason = string.Empty;
         foreach (ListItem item in ChkBrand.Items)

@@ -28,7 +28,7 @@ namespace DataAccess
             return dt;
         }
 
-        public static DataTable GetSpecialAllAccessories()
+        public static DataTable GetSpecialAllAccessories(int userid)
         {
             DbCommand command = db.GetSqlStringCommond(@"
                                         SELECT [partNo]
@@ -37,8 +37,10 @@ namespace DataAccess
                                               ,[des]
                                               ,[pricing]
                                               ,[name]
-                                                ,[brand],[special]
-                                          FROM [Accessories] where special!=1.0");
+                                                ,[brand],[special],d.accRate,t.pricing*d.accRate finalprice,t.pricing*d.accRate*t.special specialPrice
+                                          FROM [Accessories]t ,[discount] d where d.userid=@userid and special!=1.0");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
+            command.Parameters.AddRange(paras);
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
@@ -51,7 +53,7 @@ namespace DataAccess
                                               ,[des]
                                               ,[pricing]
                                               ,[name]
-                                                ,[brand]
+                                                ,[brand],[special]
                                                   ,d.accRate,t.pricing*d.accRate finalprice
                                                   FROM dbo.[Accessories] t ,[discount] d where d.userid=@userid;");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userId) };

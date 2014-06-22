@@ -145,11 +145,14 @@ public partial class Products_wheelall : System.Web.UI.Page
             double price;
             string partNo;
             string image;
+            float special;
             pID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
-            partNo = ((Label)GridView1.Rows[rowindex].FindControl("Label2")).Text;
+            partNo = ((Label)GridView1.Rows[rowindex].FindControl("PNLabel")).Text;
             image = ((Image)GridView1.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView1.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text.Substring(1));
+            special = (float)Convert.ToSingle(((Label)GridView1.Rows[rowindex].FindControl("LBSpecial1")).Text);
+            price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text.Substring(1)) * special;
+            
             sc.ProductId = pID;
             sc.Qty = qty;
             sc.Pricing = price;
@@ -214,7 +217,7 @@ public partial class Products_wheelall : System.Web.UI.Page
 
     protected void chkPCD_SelectedIndexChanged(object sender, EventArgs e)
     {
-        DataTable wheelsAll = WheelsBLO.GetAllProducts(1);
+        DataTable wheelsAll = WheelsBLO.GetAllProducts(userID);
         String sqlText = string.Empty;
         String sqlFilterSize = string.Empty, sqlFilterPCD = string.Empty, sqlFilterFinish = string.Empty,
             sqlFilterOffset = string.Empty, sqlFilterSeat = string.Empty, sqlFilterBore = string.Empty;

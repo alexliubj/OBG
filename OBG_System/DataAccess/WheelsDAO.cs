@@ -30,7 +30,7 @@ namespace DataAccess
                                                       ,[ONHand]
                                                       ,[Price]
                                                       ,[PartNO]
-                                                      ,[des],d.wheelsrate,w.price*d.wheelsrate finalprice
+                                                      ,[des],[special], d.wheelsrate,w.price*d.wheelsrate finalprice
                                                   FROM [OBG_].[dbo].[Wheels] w ,[discount] d where d.userid = @userid");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
             command.Parameters.AddRange(paras);
@@ -38,7 +38,7 @@ namespace DataAccess
             return dt;
         }
 
-        public static DataTable GetAllSpecialProducts()
+        public static DataTable GetAllSpecialProducts(int userid)
         {
             DbCommand command = db.GetSqlStringCommond(@"SELECT [ProductId]
                                                       ,[Image]
@@ -54,8 +54,10 @@ namespace DataAccess
                                                       ,[ONHand]
                                                       ,[Price]
                                                       ,[PartNO]
-                                                      ,[des],[special]
-                                                  FROM [OBG_].[dbo].[Wheels] where special <>1.0");
+                                                      ,[des],[special], d.wheelsrate,w.price*d.wheelsrate finalprice,w.price*d.wheelsrate*w.special specialPrice
+                                                  FROM [OBG_].[dbo].[Wheels] w,[discount] d where d.userid = @userid and w.special <>1.0");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
+            command.Parameters.AddRange(paras);
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }

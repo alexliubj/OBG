@@ -49,7 +49,7 @@ public partial class Account_Special : System.Web.UI.Page
     public void Gridview1_Bind()
     {
 
-        DataTable specialwheel = SpecialBLO.GetAllSpecialWheels();
+        DataTable specialwheel = SpecialBLO.GetAllSpecialWheels(userID);
         wheelsDataSet = new DataSet();
         wheelsDataSet.Tables.Add(specialwheel);
 
@@ -72,7 +72,7 @@ public partial class Account_Special : System.Web.UI.Page
 
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
     {
-        DataTable dataTable = SpecialBLO.GetAllSpecialWheels();
+        DataTable dataTable = SpecialBLO.GetAllSpecialWheels(userID);
 
         if (dataTable != null)
         {
@@ -87,7 +87,7 @@ public partial class Account_Special : System.Web.UI.Page
     public void GridView2_Bind()
     {
 
-        DataTable Specialtire = SpecialBLO.GetAllSpecialTires();
+        DataTable Specialtire = SpecialBLO.GetAllSpecialTires(userID);
         tiresDataSet = new DataSet();
         tiresDataSet.Tables.Add(Specialtire);
 
@@ -108,7 +108,7 @@ public partial class Account_Special : System.Web.UI.Page
 
     protected void GridView2_Sorting(object sender, GridViewSortEventArgs e)
     {
-        DataTable dataTable = SpecialBLO.GetAllSpecialTires();
+        DataTable dataTable = SpecialBLO.GetAllSpecialTires(userID);
 
         if (dataTable != null)
         {
@@ -123,7 +123,7 @@ public partial class Account_Special : System.Web.UI.Page
     public void GridView3_Bind()
     {
 
-        DataTable specialacc = SpecialBLO.GetAllSpecialAcces();
+        DataTable specialacc = SpecialBLO.GetAllSpecialAcces(userID);
         accessoriesDataSet = new DataSet();
         accessoriesDataSet.Tables.Add(specialacc);
 
@@ -143,7 +143,7 @@ public partial class Account_Special : System.Web.UI.Page
 
     protected void GridView3_Sorting(object sender, GridViewSortEventArgs e)
     {
-        DataTable dataTable = SpecialBLO.GetAllSpecialAcces();
+        DataTable dataTable = SpecialBLO.GetAllSpecialAcces(userID);
 
         if (dataTable != null)
         {
@@ -282,7 +282,7 @@ public partial class Account_Special : System.Web.UI.Page
             partNo = ((Label)GridView1.Rows[rowindex].FindControl("Label14")).Text;
             image = ((Image)GridView1.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView1.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("Label13")).Text) * special;
+            price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("Label13")).Text.Substring(1)) * special;
             sc.ProductId = pID;
             sc.Qty = qty;
             sc.Pricing = price;
@@ -324,7 +324,7 @@ public partial class Account_Special : System.Web.UI.Page
             partNo = ((Label)GridView2.Rows[rowindex].FindControl("Label2")).Text;
             image = ((Image)GridView2.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView2.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("Label4")).Text) * special;
+            price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("Label4")).Text.Substring(1)) * (1 - special);
             sc.TireId = tID;
             sc.Image = image;
             sc.PartNo = partNo;
@@ -365,7 +365,7 @@ public partial class Account_Special : System.Web.UI.Page
             partNo = ((Label)GridView3.Rows[rowindex].FindControl("Label2")).Text;
             image = ((Image)GridView3.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView3.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView3.Rows[rowindex].FindControl("Label5")).Text) * special;
+            price = Convert.ToDouble(((Label)GridView3.Rows[rowindex].FindControl("accLabel5")).Text.Substring(1)) * special;
             name = ((Label)GridView3.Rows[rowindex].FindControl("Label7")).Text;
             sc.AccId = pID;
             sc.Qty = qty;

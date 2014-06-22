@@ -27,7 +27,7 @@ namespace DataAccess
             return dt;
         }
 
-        public static DataTable GetSpecialAllTires()
+        public static DataTable GetSpecialAllTires(int userid)
         {
             DbCommand command = db.GetSqlStringCommond(@"SELECT [tireId]
                                                       ,[partNo]
@@ -36,8 +36,10 @@ namespace DataAccess
                                                       ,[pricing]
                                                       ,[season]
                                                       ,[brand]
-                                                      ,[des],[special]
-                                                  FROM [Tires] where special != 1.0");
+                                                      ,[des],[special],d.tiresRate,t.pricing*d.tiresRate finalprice, t.pricing*d.tiresRate*t.special specialPrice
+                                                  FROM [Tires] t,[discount] d where d.userid=@userid and special != 1.0");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
+            command.Parameters.AddRange(paras);
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
@@ -50,7 +52,7 @@ namespace DataAccess
                                                       ,[pricing]
                                                       ,[season]
                                                       ,[brand]
-                                                      ,[des]
+                                                      ,[des], [special]
                                                   ,d.tiresRate,t.pricing*d.tiresRate finalprice
                                                   FROM dbo.[Tires] t ,[discount] d where d.userid=@userid");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userId) };
