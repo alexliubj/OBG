@@ -122,22 +122,22 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
         ShoppingCartGridView.DataBind();
     }
 
-    protected void LBUpdate_Click(object sender, EventArgs e)
-    {
-        int rowCount;
-        rowCount = ShoppingCartGridView.Rows.Count;
-        GridViewRow ViewCart;
-        TextBox productQuatity;
+    //protected void LBUpdate_Click(object sender, EventArgs e)
+    //{
+    //    int rowCount;
+    //    rowCount = ShoppingCartGridView.Rows.Count;
+    //    GridViewRow ViewCart;
+    //    TextBox productQuatity;
 
-        for (int i = 0; i < rowCount; i++)
-        {
-            ViewCart = ShoppingCartGridView.Rows[i];
-            string strProductID = ShoppingCartGridView.DataKeys[i].Value.ToString();
-            productQuatity = (TextBox)ViewCart.FindControl("txtCount");
-            
-        }
-        totalPrice();
-    }
+    //    for (int i = 0; i < rowCount; i++)
+    //    {
+    //        ViewCart = ShoppingCartGridView.Rows[i];
+    //        string strProductID = ShoppingCartGridView.DataKeys[i].Value.ToString();
+    //        productQuatity = (TextBox)ViewCart.FindControl("txtCount");
+
+    //    }
+    //    totalPrice();
+    //}
 
     protected void ShoppingCartGridView_EditingBound(object sender, GridViewRowEventArgs e)
     {
@@ -206,26 +206,31 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
 
 
 
-        //int pID, qty;
-        //double price;
-        //string partNo;
-        //string image;
-        //int rowCount;
-        //rowCount = ShoppingCartGridView.Rows.Count;
-        //for (int i = 0; i < rowCount; i++)
-        //{
-        //    pID = Convert.ToInt32(((Label)(ShoppingCartGridView.Rows[i].Cells[1].FindControl("idLabel"))).Text.ToString());
-        //    partNo = ((Label)(ShoppingCartGridView.Rows[i].Cells[3].FindControl("PartNoLabel"))).Text.ToString();
-        //    image = ((Image)(ShoppingCartGridView.Rows[i].Cells[2].FindControl("imageLabel"))).ImageUrl;
-        //    qty = Convert.ToInt32(((TextBox)(ShoppingCartGridView.Rows[i].Cells[5].FindControl("txtCount"))).Text.ToString());
-        //    price = Convert.ToDouble(((Label)(ShoppingCartGridView.Rows[i].Cells[4].FindControl("Price"))).Text.Substring(1));
-        //    sc.ProductId = pID;
-        //    sc.Qty = qty;
-        //    sc.Pricing = price;
-        //    sc.PartNo = partNo;
-        //    sc.Image = image;
-        //    shoppingcart.Add(sc);
-        //    Session["Cart"] = shoppingcart;
+        int pID, qty;
+        double price;
+        string partNo;
+        string image;
+        int rowCount;
+        rowCount = ShoppingCartGridView.Rows.Count;
+        GridViewRow gvr;
+        List<ShopingCart> shoppingcart1 = new List<ShopingCart>();
+        for (int i = 0; i < rowCount; i++)
+        {
+            gvr = ShoppingCartGridView.Rows[i];
+            pID = Convert.ToInt32(((Label)(ShoppingCartGridView.Rows[i].Cells[1].FindControl("idLabel"))).Text.ToString());
+            partNo = ((Label)(ShoppingCartGridView.Rows[i].Cells[3].FindControl("PartNoLabel"))).Text.ToString();
+            image = ((Image)(ShoppingCartGridView.Rows[i].Cells[2].FindControl("imageLabel"))).ImageUrl;
+            qty = Convert.ToInt32(((TextBox)(gvr.FindControl("txtCount"))).Text.ToString());
+            price = Convert.ToDouble(((Label)(ShoppingCartGridView.Rows[i].Cells[4].FindControl("Price"))).Text.Substring(1));
+            sc.ProductId = pID;
+            sc.Qty = qty;
+            sc.Pricing = price;
+            sc.PartNo = partNo;
+            sc.Image = image;
+            shoppingcart1.Add(sc);
+        }
+            Session["Cart"] = shoppingcart1;
+
 
 
 
@@ -269,6 +274,7 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
 
         // Response.Redirect("~/ShoppingCart.aspx?ProductID=" + strProductID + "&Num=1");
     }
+
 
     protected void gvCart_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
