@@ -50,6 +50,7 @@
     <Compile Include="LoginRet.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="OrderLine.cs" />
+    <Compile Include="Special.cs" />
     <Compile Include="Tire.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="Wheels.cs" />

@@ -21,17 +21,127 @@
         <asp:ListItem Value="50" Text="50" />
         <asp:ListItem Value="100" Text="100" />
     </asp:DropDownList>
-        <asp:GridView ID="GridView1" runat="server" GridLines="Both" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ProductId" ForeColor="#333333" 
-Visible="false" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">
+        <asp:GridView ID="GridView1" runat="server" GridLines="Both" AllowPaging="True" Align="center" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ProductId" ForeColor="#333333" 
+Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="GridView1_RowCommand" OnSorting="GridView1_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:BoundField DataField="ProductId" HeaderText="Product ID" InsertVisible="False" ReadOnly="True" SortExpression="ProductId" />
+                <asp:BoundField DataField="ProductId" HeaderText="Product ID" Visible="false"  InsertVisible="False" ReadOnly="True" SortExpression="ProductId" />
                 <asp:TemplateField HeaderText="Image" SortExpression="Image">
                     <ItemTemplate>
-                        <asp:Image ID="Image1" runat="server" ImageUrl='<%# Bind("Image") %>' Width="50" Height="50" />
+                        <asp:ImageButton class="Imagehub" ID="Image1" runat="server" ImageUrl='<%# Eval("Image") %>' OnClientClick = "return LoadDiv(this.src);"></asp:ImageButton>
+                    <%--<div id="ladiv" style="position: absolute; visibility: hidden; overflow: hidden;"></div>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript">
+                    </script>--%>
+                    <style type="text/css">
+     body
+     {
+        margin:0;
+        padding:0;
+        height:100%;
+     }
+     .modal
+     {
+        display: none;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color:black;
+        z-index:100;
+        opacity: 0.8;
+        filter: alpha(opacity=60);
+        -moz-opacity:0.8;
+        min-height: 100%;
+     }
+     #divImage
+     {
+        display: none;
+        z-index: 1000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color:White;
+        height: 430px;
+        width: 500px;
+        padding: 30px;
+        border: solid 1px black;
+     }
+   </style>
+
+                    <div id="divBackground" class="modal">
+</div>
+<div id="divImage">
+    <table style="height: 100%; width: 100%">
+        <tr>
+            <td valign="middle" align="center">
+                <img id="imgLoader" alt=""
+                 src="Pictures/1.png" />
+                <img id="imgFull" alt="" src=""
+                 style="display: none;
+                height: 420px;width: 490px" />
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="bottom">
+                <input id="btnClose" type="button" value="close"
+                 onclick="HideDiv()"/>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+                    <script type="text/javascript">
+                        function LoadDiv(url) {
+                            var img = new Image();
+                            var bcgDiv = document.getElementById("divBackground");
+                            var imgDiv = document.getElementById("divImage");
+                            var imgFull = document.getElementById("imgFull");
+                            var imgLoader = document.getElementById("imgLoader");
+
+                            imgLoader.style.display = "block";
+                            img.onload = function () {
+                                imgFull.src = img.src;
+                                imgFull.style.display = "block";
+                                imgLoader.style.display = "none";
+                            };
+                            img.src = url;
+                            var width = document.body.clientWidth;
+                            if (document.body.clientHeight > document.body.scrollHeight) {
+                                bcgDiv.style.height = document.body.clientHeight + "px";
+                            }
+                            else {
+                                bcgDiv.style.height = document.body.scrollHeight + "px";
+                            }
+
+                            imgDiv.style.left = (width - 650) / 2 + "px";
+                            imgDiv.style.top = "20px";
+                            bcgDiv.style.width = "100%";
+
+                            bcgDiv.style.display = "block";
+                            imgDiv.style.display = "block";
+                            return false;
+                        }
+                        function HideDiv() {
+                            var bcgDiv = document.getElementById("divBackground");
+                            var imgDiv = document.getElementById("divImage");
+                            var imgFull = document.getElementById("imgFull");
+                            if (bcgDiv != null) {
+                                bcgDiv.style.display = "none";
+                                imgDiv.style.display = "none";
+                                imgFull.style.display = "none";
+                            }
+                        }
+</script>
                     </ItemTemplate>
                 </asp:TemplateField>
-
+                <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox14" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label14" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
                 <%-- <asp:ImageField HeaderText="Image" DataImageUrlField="Image" ControlStyle-Width="35" ControlStyle-Height="35">
                 </asp:ImageField>--%>
                 <%-- <asp:TemplateField HeaderText="Image" SortExpression="Image">
@@ -130,43 +240,46 @@ Visible="false" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="Gri
                         <asp:Label ID="Label13" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Price")) %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox14" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label14" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                  <asp:TemplateField HeaderText="Description" SortExpression="Des" Visible="false">
+                
+                  <%--<asp:TemplateField HeaderText="Description" SortExpression="Des" Visible="false">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox15" runat="server" Text='<%# Bind("Des") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label15" runat="server" Text='<%# Bind("Des") %>'></asp:Label>
                     </ItemTemplate>
-                </asp:TemplateField>
+                </asp:TemplateField>--%>
+                <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
+                <ItemTemplate>
+                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
+                </ItemTemplate>
+            </asp:TemplateField>
                 <asp:TemplateField HeaderText="Special" SortExpression="Special">
                     <EditItemTemplate>
                         <asp:TextBox ID="txtSpecial" runat="server" Text='<%# Bind("Special") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="LBSpecial" runat="server" Text='<%# Bind("Special") %>'></asp:Label>
+                        <asp:Label ID="LBSpecial" runat="server" ForeColor="Red" Font-Bold="true" Text='<%# Bind("Special") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
+                 <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center"  SortExpression="ADD">
+                <ItemTemplate>
+                    <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
+                </ItemTemplate>
+            </asp:TemplateField>
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
             </Columns>
 
             <EditRowStyle BackColor="#2461BF" />
-            <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
-            <RowStyle BackColor="#EFF3FB" />
-            <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
-            <SortedAscendingCellStyle BackColor="#F5F7FB" />
-            <SortedAscendingHeaderStyle BackColor="#6D95E1" />
-            <SortedDescendingCellStyle BackColor="#E9EBEF" />
-            <SortedDescendingHeaderStyle BackColor="#4870BE" />
+        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+        <RowStyle BackColor="#EFF3FB" />
+        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+        <SortedAscendingCellStyle BackColor="#F5F7FB" />
+        <SortedAscendingHeaderStyle BackColor="#6D95E1" />
+        <SortedDescendingCellStyle BackColor="#E9EBEF" />
+        <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
         </div>
 
@@ -182,8 +295,8 @@ Visible="false" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="Gri
         <asp:ListItem Value="50" Text="50" />
         <asp:ListItem Value="100" Text="100" />
     </asp:DropDownList>
-        <asp:GridView ID="GridView2" runat="server" GridLines="Both" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="TireId" ForeColor="#333333" 
- Visible="false" OnPageIndexChanging="GridView2_PageIndexChanging" OnSorting="GridView2_Sorting">
+        <asp:GridView ID="GridView2" runat="server" GridLines="Both" AllowPaging="True" Align="center" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="TireId" ForeColor="#333333" 
+ Visible="true" OnPageIndexChanging="GridView2_PageIndexChanging" OnRowCommand="GridView1_RowCommand1" OnSorting="GridView2_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="TireId" HeaderText="Tire ID" InsertVisible="False" ReadOnly="True" SortExpression="TireId" />
@@ -195,36 +308,6 @@ Visible="false" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="Gri
                         <asp:Label ID="Label2" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Size" SortExpression="Size">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Size") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("Size") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Image" SortExpression="Image">
-                    <ItemTemplate>
-                        <asp:Image ID="Image1" runat="server" ImageUrl='<%# Bind("Image") %>' Width="50" Height="50" />
-                    </ItemTemplate>
-                </asp:TemplateField>
-
-                <asp:TemplateField HeaderText="Price" SortExpression="Pricing">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label4" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Season" SortExpression="Season">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Season") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("Season") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Brand" SortExpression="Brand">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Brand") %>'></asp:TextBox>
@@ -233,23 +316,166 @@ Visible="false" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="Gri
                         <asp:Label ID="Label6" runat="server" Text='<%# Bind("Brand") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Description" SortExpression="Des">
+                <asp:TemplateField HeaderText="Image" SortExpression="Image">
+                    <ItemTemplate>
+                        <asp:ImageButton class="Imagehub" ID="Image1" runat="server" ImageUrl='<%# Eval("Image") %>' OnClientClick = "return LoadDiv(this.src);"></asp:ImageButton>
+                    <%--<div id="ladiv" style="position: absolute; visibility: hidden; overflow: hidden;"></div>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript">
+                    </script>--%>
+                    <style type="text/css">
+     body
+     {
+        margin:0;
+        padding:0;
+        height:100%;
+     }
+     .modal
+     {
+        display: none;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color:black;
+        z-index:100;
+        opacity: 0.8;
+        filter: alpha(opacity=60);
+        -moz-opacity:0.8;
+        min-height: 100%;
+     }
+     #divImage
+     {
+        display: none;
+        z-index: 1000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color:White;
+        height: 430px;
+        width: 500px;
+        padding: 30px;
+        border: solid 1px black;
+     }
+   </style>
+
+                    <div id="divBackground" class="modal">
+</div>
+<div id="divImage">
+    <table style="height: 100%; width: 100%">
+        <tr>
+            <td valign="middle" align="center">
+                <img id="imgLoader" alt=""
+                 src="Pictures/1.png" />
+                <img id="imgFull" alt="" src=""
+                 style="display: none;
+                height: 420px;width: 490px" />
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="bottom">
+                <input id="btnClose" type="button" value="close"
+                 onclick="HideDiv()"/>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+                    <script type="text/javascript">
+                        function LoadDiv(url) {
+                            var img = new Image();
+                            var bcgDiv = document.getElementById("divBackground");
+                            var imgDiv = document.getElementById("divImage");
+                            var imgFull = document.getElementById("imgFull");
+                            var imgLoader = document.getElementById("imgLoader");
+
+                            imgLoader.style.display = "block";
+                            img.onload = function () {
+                                imgFull.src = img.src;
+                                imgFull.style.display = "block";
+                                imgLoader.style.display = "none";
+                            };
+                            img.src = url;
+                            var width = document.body.clientWidth;
+                            if (document.body.clientHeight > document.body.scrollHeight) {
+                                bcgDiv.style.height = document.body.clientHeight + "px";
+                            }
+                            else {
+                                bcgDiv.style.height = document.body.scrollHeight + "px";
+                            }
+
+                            imgDiv.style.left = (width - 650) / 2 + "px";
+                            imgDiv.style.top = "20px";
+                            bcgDiv.style.width = "100%";
+
+                            bcgDiv.style.display = "block";
+                            imgDiv.style.display = "block";
+                            return false;
+                        }
+                        function HideDiv() {
+                            var bcgDiv = document.getElementById("divBackground");
+                            var imgDiv = document.getElementById("divImage");
+                            var imgFull = document.getElementById("imgFull");
+                            if (bcgDiv != null) {
+                                bcgDiv.style.display = "none";
+                                imgDiv.style.display = "none";
+                                imgFull.style.display = "none";
+                            }
+                        }
+</script>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                 <asp:TemplateField HeaderText="Size" SortExpression="Size">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Size") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label3" runat="server" Text='<%# Bind("Size") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                
+                <asp:TemplateField HeaderText="Season" SortExpression="Season">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Season") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label5" runat="server" Text='<%# Bind("Season") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
+                <ItemTemplate>
+                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
+                </ItemTemplate>
+            </asp:TemplateField>
+               <asp:TemplateField HeaderText="Price" SortExpression="Pricing">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label4" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <%--<asp:TemplateField HeaderText="Description" SortExpression="Des">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Des") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label7" runat="server" Text='<%# Bind("Des") %>'></asp:Label>
                     </ItemTemplate>
-                </asp:TemplateField>
+                </asp:TemplateField>--%>
 
                 <asp:TemplateField HeaderText="Special" SortExpression="Special">
                     <EditItemTemplate>
                         <asp:TextBox ID="txtSpecial1" runat="server" Text='<%# Bind("Special") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="LBSpecial1" runat="server" Text='<%# Bind("Special") %>'></asp:Label>
+                        <asp:Label ID="LBSpecial1" runat="server" ForeColor="Red" Font-Bold="true" Text='<%# Bind("Special") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
+                 <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center"  SortExpression="ADD">
+                <ItemTemplate>
+                    <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClickt" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
+                </ItemTemplate>
+            </asp:TemplateField>
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
             </Columns>
 
@@ -277,8 +503,8 @@ Visible="false" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="Gri
         <asp:ListItem Value="50" Text="50" />
         <asp:ListItem Value="100" Text="100" />
     </asp:DropDownList>
-        <asp:GridView ID="GridView3" runat="server" GridLines="Both" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" ForeColor="#333333" 
- Visible="false" OnPageIndexChanging="GridView3_PageIndexChanging" OnSorting="GridView3_Sorting">
+        <asp:GridView ID="GridView3" runat="server" GridLines="Both" AllowPaging="True" Align="center" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" ForeColor="#333333" 
+ Visible="true" OnPageIndexChanging="GridView3_PageIndexChanging" OnRowCommand="GridView3_RowCommand" OnSorting="GridView3_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="AccId" HeaderText="Acc ID" InsertVisible="False" ReadOnly="True" SortExpression="AccId" />
@@ -292,26 +518,113 @@ Visible="false" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="Gri
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Image" SortExpression="Image">
                     <ItemTemplate>
-                        <asp:Image ID="Image1" runat="server" ImageUrl='<%# Bind("Image") %>' Width="50" Height="50" />
+                        <asp:ImageButton class="Imagehub" ID="Image1" runat="server" ImageUrl='<%# Eval("Image") %>' OnClientClick = "return LoadDiv(this.src);"></asp:ImageButton>
+                    <%--<div id="ladiv" style="position: absolute; visibility: hidden; overflow: hidden;"></div>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript">
+                    </script>--%>
+                    <style type="text/css">
+     body
+     {
+        margin:0;
+        padding:0;
+        height:100%;
+     }
+     .modal
+     {
+        display: none;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        background-color:black;
+        z-index:100;
+        opacity: 0.8;
+        filter: alpha(opacity=60);
+        -moz-opacity:0.8;
+        min-height: 100%;
+     }
+     #divImage
+     {
+        display: none;
+        z-index: 1000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color:White;
+        height: 430px;
+        width: 500px;
+        padding: 30px;
+        border: solid 1px black;
+     }
+   </style>
+
+                    <div id="divBackground" class="modal">
+</div>
+<div id="divImage">
+    <table style="height: 100%; width: 100%">
+        <tr>
+            <td valign="middle" align="center">
+                <img id="imgLoader" alt=""
+                 src="Pictures/1.png" />
+                <img id="imgFull" alt="" src=""
+                 style="display: none;
+                height: 420px;width: 490px" />
+            </td>
+        </tr>
+        <tr>
+            <td align="center" valign="bottom">
+                <input id="btnClose" type="button" value="close"
+                 onclick="HideDiv()"/>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+                    <script type="text/javascript">
+                        function LoadDiv(url) {
+                            var img = new Image();
+                            var bcgDiv = document.getElementById("divBackground");
+                            var imgDiv = document.getElementById("divImage");
+                            var imgFull = document.getElementById("imgFull");
+                            var imgLoader = document.getElementById("imgLoader");
+
+                            imgLoader.style.display = "block";
+                            img.onload = function () {
+                                imgFull.src = img.src;
+                                imgFull.style.display = "block";
+                                imgLoader.style.display = "none";
+                            };
+                            img.src = url;
+                            var width = document.body.clientWidth;
+                            if (document.body.clientHeight > document.body.scrollHeight) {
+                                bcgDiv.style.height = document.body.clientHeight + "px";
+                            }
+                            else {
+                                bcgDiv.style.height = document.body.scrollHeight + "px";
+                            }
+
+                            imgDiv.style.left = (width - 650) / 2 + "px";
+                            imgDiv.style.top = "20px";
+                            bcgDiv.style.width = "100%";
+
+                            bcgDiv.style.display = "block";
+                            imgDiv.style.display = "block";
+                            return false;
+                        }
+                        function HideDiv() {
+                            var bcgDiv = document.getElementById("divBackground");
+                            var imgDiv = document.getElementById("divImage");
+                            var imgFull = document.getElementById("imgFull");
+                            if (bcgDiv != null) {
+                                bcgDiv.style.display = "none";
+                                imgDiv.style.display = "none";
+                                imgFull.style.display = "none";
+                            }
+                        }
+</script>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Description" SortExpression="Des">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Des") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("Des") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Price" SortExpression="Pricing">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox5" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label5" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Brand" SortExpression="Brand">
+                 <asp:TemplateField HeaderText="Brand" SortExpression="Brand">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Brand") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -327,14 +640,41 @@ Visible="false" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="Gri
                         <asp:Label ID="Label7" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField HeaderText="Description" SortExpression="Des">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Des") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label4" runat="server" Text='<%# Bind("Des") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
+                <ItemTemplate>
+                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
+                </ItemTemplate>
+            </asp:TemplateField>
+                <asp:TemplateField HeaderText="Price" SortExpression="Pricing">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox5" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label5" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+               
                 <asp:TemplateField HeaderText="Special" SortExpression="Special">
                     <EditItemTemplate>
                         <asp:TextBox ID="txtSpecial" runat="server" Text='<%# Bind("Special") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="LBSpecial" runat="server" Text='<%# Bind("Special") %>'></asp:Label>
+                        <asp:Label ID="LBSpecial" runat="server" ForeColor="Red" Font-Bold="true" Text='<%# Bind("Special") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
+                 <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center"  SortExpression="ADD">
+                <ItemTemplate>
+                    <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClicka" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
+                </ItemTemplate>
+            </asp:TemplateField>
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
             </Columns>
 

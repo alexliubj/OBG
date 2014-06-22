@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
+using OBGModel;
 
 public partial class Account_Special : System.Web.UI.Page
 {
@@ -251,4 +252,129 @@ public partial class Account_Special : System.Web.UI.Page
         }
     }
 
+    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "MyButtonClick")
+        {
+            //Get rowindex            
+            int rowindex = Convert.ToInt32(e.CommandArgument);
+            //Get Row           
+            GridViewRow gvr = GridView1.Rows[rowindex];
+            List<ShopingCart> shoppingcart;
+
+            if (Session["Cart"] == null)
+            {
+                shoppingcart = new List<ShopingCart>();
+
+            }
+            else
+            {
+                shoppingcart = (List<ShopingCart>)Session["Cart"];
+            }
+            ShopingCart sc = new ShopingCart();
+            int pID, qty;
+            double price;
+            string partNo;
+            string image;
+            float special;
+            special = (float)Convert.ToSingle(((Label)GridView3.Rows[rowindex].FindControl("LBSpecial")).Text);
+            pID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
+            partNo = ((Label)GridView1.Rows[rowindex].FindControl("Label14")).Text;
+            image = ((Image)GridView1.Rows[rowindex].FindControl("Image1")).ImageUrl;
+            qty = Convert.ToInt32(((TextBox)GridView1.Rows[rowindex].FindControl("QTYTextBox")).Text);
+            price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("Label13")).Text) * special;
+            sc.ProductId = pID;
+            sc.Qty = qty;
+            sc.Pricing = price;
+            sc.PartNo = partNo;
+            sc.Image = image;
+            shoppingcart.Add(sc);
+            Session["Cart"] = shoppingcart;
+
+        }
+    }
+
+    protected void GridView1_RowCommand1(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "MyButtonClickt")
+        {
+            //Get rowindex            
+            int rowindex = Convert.ToInt32(e.CommandArgument);
+            //Get Row           
+            GridViewRow gvr = GridView2.Rows[rowindex];
+            List<ShopingCart> shoppingcart;
+            if (Session["Cart"] == null)
+            {
+                shoppingcart = new List<ShopingCart>();
+
+            }
+            else
+            {
+                shoppingcart = (List<ShopingCart>)Session["Cart"];
+            }
+
+            ShopingCart sc = new ShopingCart();
+            int tID, qty;
+            double price;
+            string image;
+            string partNo;
+            float special;
+            special = (float)Convert.ToSingle(((Label)GridView3.Rows[rowindex].FindControl("LBSpecial")).Text);
+            tID = Convert.ToInt32(GridView2.DataKeys[rowindex].Value.ToString());
+            partNo = ((Label)GridView2.Rows[rowindex].FindControl("Label2")).Text;
+            image = ((Image)GridView2.Rows[rowindex].FindControl("Image1")).ImageUrl;
+            qty = Convert.ToInt32(((TextBox)GridView2.Rows[rowindex].FindControl("QTYTextBox")).Text);
+            price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("Label4")).Text) * special;
+            sc.TireId = tID;
+            sc.Image = image;
+            sc.PartNo = partNo;
+            sc.Qty = qty;
+            sc.Pricing = price;
+            shoppingcart.Add(sc);
+            Session["Cart"] = shoppingcart;
+        }
+    }
+    protected void GridView3_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        if (e.CommandName == "MyButtonClicka")
+        {
+            //Get rowindex            
+            int rowindex = Convert.ToInt32(e.CommandArgument);
+            //Get Row           
+            GridViewRow gvr = GridView3.Rows[rowindex];
+
+            List<ShopingCart> shoppingcart;
+            if (Session["Cart"] == null)
+            {
+                shoppingcart = new List<ShopingCart>();
+
+            }
+            else
+            {
+                shoppingcart = (List<ShopingCart>)Session["Cart"];
+            }
+            ShopingCart sc = new ShopingCart();
+            int pID, qty;
+            double price;
+            string partNo;
+            string image;
+            string name, des;
+            float special;
+            special = (float)Convert.ToSingle(((Label)GridView3.Rows[rowindex].FindControl("LBSpecial")).Text);
+            pID = Convert.ToInt32(GridView3.DataKeys[rowindex].Value.ToString());
+            partNo = ((Label)GridView3.Rows[rowindex].FindControl("Label2")).Text;
+            image = ((Image)GridView3.Rows[rowindex].FindControl("Image1")).ImageUrl;
+            qty = Convert.ToInt32(((TextBox)GridView3.Rows[rowindex].FindControl("QTYTextBox")).Text);
+            price = Convert.ToDouble(((Label)GridView3.Rows[rowindex].FindControl("Label5")).Text) * special;
+            name = ((Label)GridView3.Rows[rowindex].FindControl("Label7")).Text;
+            sc.AccId = pID;
+            sc.Qty = qty;
+            sc.Pricing = price;
+            sc.PartNo = partNo;
+            sc.Image = image;
+            sc.productName = name;
+            shoppingcart.Add(sc);
+            Session["Cart"] = shoppingcart;
+        }
+    }
 }

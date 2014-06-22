@@ -55,7 +55,7 @@ namespace DataAccess
                                                       ,[Price]
                                                       ,[PartNO]
                                                       ,[des],[special]
-                                                  FROM [OBG_].[dbo].[Wheels] where special!=1.0");
+                                                  FROM [OBG_].[dbo].[Wheels] where special <>1.0");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
