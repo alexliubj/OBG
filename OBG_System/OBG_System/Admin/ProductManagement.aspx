@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="Product Management" Language="C#" MasterPageFile="~/Admin/AdminSite.master"
-    AutoEventWireup="true" CodeFile="ProductManagement.aspx.cs" Inherits="Admin_Default" ErrorPage="~/mycustompage.aspx"%>
+    AutoEventWireup="true" CodeFile="ProductManagement.aspx.cs" Inherits="Admin_Default" ErrorPage="~/mycustompage.aspx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
@@ -13,16 +13,16 @@
         </Items>
     </asp:Menu>
     <div id="divWheel" runat="server" visible="true">
-                <asp:Label ID="Label2" runat="server" Text="Per Page:"></asp:Label>
-    <asp:DropDownList ID="dropDownRecordsPerPage" runat="server"
-        AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage_SelectedIndexChanged" AppendDataBoundItems="true"
-        Style="text-align: right;">
-        <asp:ListItem Value="5" Text="5" />
-        <asp:ListItem Value="10" Text="10" Selected="True" />
-        <asp:ListItem Value="25" Text="25" />
-        <asp:ListItem Value="50" Text="50" />
-        <asp:ListItem Value="100" Text="100" />
-    </asp:DropDownList>
+        <asp:Label ID="Label2" runat="server" Text="Per Page:"></asp:Label>
+        <asp:DropDownList ID="dropDownRecordsPerPage" runat="server"
+            AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage_SelectedIndexChanged" AppendDataBoundItems="true"
+            Style="text-align: right;">
+            <asp:ListItem Value="5" Text="5" />
+            <asp:ListItem Value="10" Text="10" Selected="True" />
+            <asp:ListItem Value="25" Text="25" />
+            <asp:ListItem Value="50" Text="50" />
+            <asp:ListItem Value="100" Text="100" />
+        </asp:DropDownList>
         <asp:GridView ID="GridView1" runat="server" GridLines="None" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ProductId" ForeColor="#333333" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
             OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
             OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDataBound="GridView1_RowDataBound" Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">
@@ -141,7 +141,7 @@
                         <asp:Label ID="Label14" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                  <asp:TemplateField HeaderText="Description" SortExpression="Des" Visible="false">
+                <asp:TemplateField HeaderText="Description" SortExpression="Des" Visible="false">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox15" runat="server" Text='<%# Bind("Des") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -149,12 +149,20 @@
                         <asp:Label ID="Label15" runat="server" Text='<%# Bind("Des") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button"  ControlStyle-CssClass="myButton"/>
+                <asp:TemplateField HeaderText="Special" SortExpression="Special">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox16" runat="server" Text='<%# Bind("Special") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label16" runat="server" Text='<%# string.Format("{0:0.###%}", Eval("Special")) %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" ControlStyle-CssClass="myButton" />
                 <%--  <asp:CommandField HeaderText="Edit" ShowEditButton="True" ButtonType="Button" />--%>
                 <asp:TemplateField HeaderText="Delete">
                     <ItemTemplate>
                         <asp:Button ID="deleteButton" runat="server" CommandName="Delete" Text="Delete"
-                            OnClientClick="return confirm('Are you sure you want to delete this wheel?');" CssClass="myButton"/>
+                            OnClientClick="return confirm('Are you sure you want to delete this wheel?');" CssClass="myButton" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
@@ -171,8 +179,8 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-            <br />
-        <asp:Button ID="btnAddWheel" runat="server" OnClick="Button1_Click" Text="Add new Wheel" CssClass="myButton"/>
+        <br />
+        <asp:Button ID="btnAddWheel" runat="server" OnClick="Button1_Click" Text="Add new Wheel" CssClass="myButton" />
 
         <div id="wheelInformation" runat="server" visible="false">
             <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification"
@@ -197,7 +205,7 @@
                             <asp:Button ID="btnPreviewImage" runat="server" Text="Preview" Visible="false" />
                         </td>
                     </tr>
-                     <tr>
+                    <tr>
                         <td>
                             <asp:Label ID="PartNoLabel" runat="server" AssociatedControlID="PartNo">Part NO.:</asp:Label>
                         </td>
@@ -338,6 +346,14 @@
                     </tr>
                     <tr>
                         <td>
+                            <asp:Label ID="SpecialLabel" runat="server" AssociatedControlID="Special">Special:</asp:Label>
+                        </td>
+                        <td>If you want to make this product special, enter a number less then 1, for example: 0.9 means 90% discount
+                            <asp:TextBox ID="Special" runat="server" CssClass="textEntry"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
                             <asp:Label ID="PriceLabel" runat="server" AssociatedControlID="Price">Price:</asp:Label>
                         </td>
                         <td>
@@ -355,7 +371,7 @@
                             </asp:RegularExpressionValidator>
                         </td>
                     </tr>
-                       <tr>
+                    <tr>
                         <td>
                             <asp:Label ID="VehicleLabel" runat="server" AssociatedControlID="CheckBoxListVehicle">Vehicles:</asp:Label>
                         </td>
@@ -366,11 +382,11 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="BtnAdd" runat="server" Text="Add" OnClick="BtnAdd_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton"/>
-                            <asp:Button ID="BtnSave" runat="server" OnClick="BtnSave_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton"/>
+                            <asp:Button ID="BtnAdd" runat="server" Text="Add" OnClick="BtnAdd_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton" />
+                            <asp:Button ID="BtnSave" runat="server" OnClick="BtnSave_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton" />
                         </td>
                         <td>
-                            <asp:Button ID="BtnCancle" runat="server" OnClick="BtnCancle_Click" Text="Cancle" Visible="true" CssClass="myButton"/>
+                            <asp:Button ID="BtnCancle" runat="server" OnClick="BtnCancle_Click" Text="Cancle" Visible="true" CssClass="myButton" />
                         </td>
                     </tr>
                 </table>
@@ -380,15 +396,15 @@
 
     <div id="divTire" runat="server" visible="false">
         <asp:Label ID="Label1" runat="server" Text="Per Page:"></asp:Label>
-    <asp:DropDownList ID="dropDownRecordsPerPage2" runat="server"
-        AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage2_SelectedIndexChanged" AppendDataBoundItems="true"
-        Style="text-align: right;">
-        <asp:ListItem Value="5" Text="5" />
-        <asp:ListItem Value="10" Text="10" Selected="True" />
-        <asp:ListItem Value="25" Text="25" />
-        <asp:ListItem Value="50" Text="50" />
-        <asp:ListItem Value="100" Text="100" />
-    </asp:DropDownList>
+        <asp:DropDownList ID="dropDownRecordsPerPage2" runat="server"
+            AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage2_SelectedIndexChanged" AppendDataBoundItems="true"
+            Style="text-align: right;">
+            <asp:ListItem Value="5" Text="5" />
+            <asp:ListItem Value="10" Text="10" Selected="True" />
+            <asp:ListItem Value="25" Text="25" />
+            <asp:ListItem Value="50" Text="50" />
+            <asp:ListItem Value="100" Text="100" />
+        </asp:DropDownList>
         <asp:GridView ID="GridView2" runat="server" GridLines="None" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="TireId" ForeColor="#333333" OnSelectedIndexChanged="GridView2_SelectedIndexChanged"
             OnRowDeleting="GridView2_RowDeleting" OnRowEditing="GridView2_RowEditing"
             OnRowUpdating="GridView2_RowUpdating" OnRowCancelingEdit="GridView2_RowCancelingEdit" OnRowDataBound="GridView2_RowDataBound" Visible="true" OnPageIndexChanging="GridView2_PageIndexChanging" OnSorting="GridView2_Sorting">
@@ -441,7 +457,7 @@
                         <asp:Label ID="Label6" runat="server" Text='<%# Bind("Brand") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Description" SortExpression="Des">
+                <asp:TemplateField HeaderText="Description" SortExpression="Des" Visible="false">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Des") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -449,13 +465,20 @@
                         <asp:Label ID="Label7" runat="server" Text='<%# Bind("Des") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-
-                <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button"  ControlStyle-CssClass="myButton"/>
+                                <asp:TemplateField HeaderText="Special" SortExpression="Special">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("Special") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label8" runat="server" Text='<%# string.Format("{0:0.###%}", Eval("Special")) %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" ControlStyle-CssClass="myButton" />
                 <%--  <asp:CommandField HeaderText="Edit" ShowEditButton="True" ButtonType="Button" />--%>
                 <asp:TemplateField HeaderText="Delete">
                     <ItemTemplate>
                         <asp:Button ID="deleteButton" runat="server" CommandName="Delete" Text="Delete"
-                            OnClientClick="return confirm('Are you sure you want to delete this tire?');" CssClass="myButton"/>
+                            OnClientClick="return confirm('Are you sure you want to delete this tire?');" CssClass="myButton" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
@@ -472,8 +495,8 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-            <br />
-        <asp:Button ID="BtnAddNewTire" runat="server" OnClick="BtnAddNewTire_Click" Text="Add new Tire" CssClass="myButton"/>
+        <br />
+        <asp:Button ID="BtnAddNewTire" runat="server" OnClick="BtnAddNewTire_Click" Text="Add new Tire" CssClass="myButton" />
         <div id="DivTireInformation" runat="server" visible="false">
             <asp:ValidationSummary ID="ValidationSummary1" runat="server" CssClass="failureNotification"
                 ValidationGroup="RegisterUserValidationGroup" />
@@ -556,9 +579,17 @@
                                 ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
+                     <tr>
+                        <td>
+                            <asp:Label ID="TireSpecialLabel" runat="server" AssociatedControlID="TireSpecial">Special:</asp:Label>
+                        </td>
+                        <td>If you want to make this product special, enter a number less then 1, for example: 0.9 means 90% discount
+                            <asp:TextBox ID="TireSpecial" runat="server" CssClass="textEntry"></asp:TextBox>
+                        </td>
+                    </tr>
                     <tr>
                         <td>
-                            <asp:Label ID="TireDesLabel" runat="server" AssociatedControlID="TireDes">Description:</asp:Label>
+                            <asp:Label ID="TireDesLabel" runat="server" AssociatedControlID="TireDes" >Description:</asp:Label>
                         </td>
                         <td>
                             <asp:TextBox ID="TireDes" runat="server" CssClass="textEntry" ReadOnly="false"></asp:TextBox>
@@ -569,11 +600,11 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="BtnAddTire" runat="server" Text="Add" OnClick="BtnAddTire_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton"/>
-                            <asp:Button ID="BtnSaveTire" runat="server" OnClick="BtnSaveTire_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton"/>
+                            <asp:Button ID="BtnAddTire" runat="server" Text="Add" OnClick="BtnAddTire_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton" />
+                            <asp:Button ID="BtnSaveTire" runat="server" OnClick="BtnSaveTire_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton" />
                         </td>
                         <td>
-                            <asp:Button ID="BtnCancelTire" runat="server" OnClick="BtnCancelTire_Click" Text="Cancle" Visible="true" CssClass="myButton"/>
+                            <asp:Button ID="BtnCancelTire" runat="server" OnClick="BtnCancelTire_Click" Text="Cancle" Visible="true" CssClass="myButton" />
                         </td>
                     </tr>
                 </table>
@@ -584,15 +615,15 @@
 
     <div id="divAcc" runat="server" visible="false">
         <asp:Label ID="Label16" runat="server" Text="Per Page:"></asp:Label>
-    <asp:DropDownList ID="dropDownRecordsPerPage3" runat="server"
-        AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage3_SelectedIndexChanged" AppendDataBoundItems="true"
-        Style="text-align: right;">
-        <asp:ListItem Value="5" Text="5" />
-        <asp:ListItem Value="10" Text="10" Selected="True" />
-        <asp:ListItem Value="25" Text="25" />
-        <asp:ListItem Value="50" Text="50" />
-        <asp:ListItem Value="100" Text="100" />
-    </asp:DropDownList>
+        <asp:DropDownList ID="dropDownRecordsPerPage3" runat="server"
+            AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage3_SelectedIndexChanged" AppendDataBoundItems="true"
+            Style="text-align: right;">
+            <asp:ListItem Value="5" Text="5" />
+            <asp:ListItem Value="10" Text="10" Selected="True" />
+            <asp:ListItem Value="25" Text="25" />
+            <asp:ListItem Value="50" Text="50" />
+            <asp:ListItem Value="100" Text="100" />
+        </asp:DropDownList>
         <asp:GridView ID="GridView3" runat="server" GridLines="None" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" ForeColor="#333333" OnSelectedIndexChanged="GridView3_SelectedIndexChanged"
             OnRowDeleting="GridView3_RowDeleting" OnRowEditing="GridView3_RowEditing"
             OnRowUpdating="GridView3_RowUpdating" OnRowCancelingEdit="GridView3_RowCancelingEdit" OnRowDataBound="GridView3_RowDataBound" Visible="true" OnPageIndexChanging="GridView3_PageIndexChanging" OnSorting="GridView3_Sorting">
@@ -612,7 +643,7 @@
                         <asp:Image ID="Image1" runat="server" ImageUrl='<%# Bind("Image") %>' Width="50" Height="50" />
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Description" SortExpression="Des">
+                <asp:TemplateField HeaderText="Description" SortExpression="Des" Visible="false">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("Des") %>'></asp:TextBox>
                     </EditItemTemplate>
@@ -644,12 +675,20 @@
                         <asp:Label ID="Label7" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button"  ControlStyle-CssClass="myButton"/>
+                          <asp:TemplateField HeaderText="Special" SortExpression="Special">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("Special") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label8" runat="server" Text='<%# string.Format("{0:0.###%}", Eval("Special")) %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" ControlStyle-CssClass="myButton" />
                 <%-- <asp:CommandField HeaderText="Edit" ShowEditButton="True" ButtonType="Button" />--%>
                 <asp:TemplateField HeaderText="Delete">
                     <ItemTemplate>
                         <asp:Button ID="deleteButton" runat="server" CommandName="Delete" Text="Delete"
-                            OnClientClick="return confirm('Are you sure you want to delete this accessory?');" CssClass="myButton"/>
+                            OnClientClick="return confirm('Are you sure you want to delete this accessory?');" CssClass="myButton" />
                     </ItemTemplate>
                 </asp:TemplateField>
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
@@ -666,8 +705,8 @@
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
-            <br />
-        <asp:Button ID="BtnAddNewAcc" runat="server" OnClick="BtnAddNewAcc_Click" Text="Add new Accessory" CssClass="myButton"/>
+        <br />
+        <asp:Button ID="BtnAddNewAcc" runat="server" OnClick="BtnAddNewAcc_Click" Text="Add new Accessory" CssClass="myButton" />
         <div id="DivAccInformation" runat="server" visible="false">
             <asp:ValidationSummary ID="ValidationSummary2" runat="server" CssClass="failureNotification"
                 ValidationGroup="RegisterUserValidationGroup" />
@@ -738,6 +777,14 @@
                                 ValidationGroup="RegisterUserValidationGroup">*</asp:RequiredFieldValidator>
                         </td>
                     </tr>
+                      <tr>
+                        <td>
+                            <asp:Label ID="AccSpecialLabel" runat="server" AssociatedControlID="AccSpecial">Special:</asp:Label>
+                        </td>
+                        <td>If you want to make this product special, enter a number less then 1, for example: 0.9 means 90% discount
+                            <asp:TextBox ID="AccSpecial" runat="server" CssClass="textEntry"></asp:TextBox>
+                        </td>
+                    </tr>
                     <tr>
                         <td>
                             <asp:Label ID="AccDesLabel" runat="server" AssociatedControlID="AccDes">Description:</asp:Label>
@@ -751,11 +798,11 @@
                     </tr>
                     <tr>
                         <td>
-                            <asp:Button ID="BtnAddAcc" runat="server" Text="Add" OnClick="BtnAddAcc_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton"/>
-                            <asp:Button ID="BtnSaveAcc" runat="server" OnClick="BtnSaveAcc_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton"/>
+                            <asp:Button ID="BtnAddAcc" runat="server" Text="Add" OnClick="BtnAddAcc_Click" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton" />
+                            <asp:Button ID="BtnSaveAcc" runat="server" OnClick="BtnSaveAcc_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton" />
                         </td>
                         <td>
-                            <asp:Button ID="BtnCancelAcc" runat="server" OnClick="BtnCancelAcc_Click" Text="Cancle" Visible="true" CssClass="myButton"/>
+                            <asp:Button ID="BtnCancelAcc" runat="server" OnClick="BtnCancelAcc_Click" Text="Cancle" Visible="true" CssClass="myButton" />
                         </td>
                     </tr>
                 </table>
