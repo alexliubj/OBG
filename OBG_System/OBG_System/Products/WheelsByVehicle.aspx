@@ -279,10 +279,18 @@
                     <asp:Label ID="OnhandLabel" runat="server" Text='<%# Bind("Onhand") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-                  <asp:TemplateField HeaderText="Price" ItemStyle-HorizontalAlign="Center" SortExpression="Price">
+                  <asp:TemplateField HeaderText="Price" Visible="false" ItemStyle-HorizontalAlign="Center" SortExpression="Price">
      
                 <ItemTemplate>
                     <asp:Label ID="PriceLabel" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+                <asp:TemplateField HeaderText="Special Price" Visible="true" ItemStyle-HorizontalAlign="Center" SortExpression="Price">
+                <%--<EditItemTemplate>
+                    <asp:TextBox ID="PriceTextBox" runat="server" Text='<%# Bind("Price") %>'></asp:TextBox>
+                </EditItemTemplate>--%>
+                <ItemTemplate>
+                    <asp:Label ID="sPriceLabel" runat="server" Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
              <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">

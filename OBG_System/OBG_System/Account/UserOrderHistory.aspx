@@ -2,9 +2,17 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <style type="text/css">
-        .auto-style1
+        .auto-style2
         {
-            width: 91px;
+            width: 123px;
+        }
+        .auto-style3
+        {
+            width: 102px;
+        }
+        .auto-style4
+        {
+            width: 120px;
         }
     </style>
 </asp:Content>
@@ -157,11 +165,17 @@
         <br/>
         <table border="0" cellpadding="0" cellspacing="0" width="100%">
             <tr>
-                <td class="auto-style1">
-                    Order Total:
+                <td class="auto-style2" >
+                   <asp:Label ID="LabelTotalText" runat="server" Font-Bold="true" Font-Size="Large" align="left" Text="Order Total: "></asp:Label>
                     </td>
                 <td>
-            <asp:Label ID="lblTatil" runat="server" Style="font-weight: bold; color: #cc0033">0</asp:Label></td>
+                    <asp:Label ID="lblTatil" Visible="true" Font-Bold="true" Font-Size="Large" align="left" runat="server" ForeColor="#FF8080"></asp:Label>
+                </td>
+                <td class="auto-style3"><asp:Label ID="lbHST" runat="server" Font-Bold="true" Font-Size="Large" Text="HST: "></asp:Label><asp:Label ID="Label1" runat="server" Font-Bold="true" Font-Size="Large" Text="HST: "></asp:Label>
+                    </td>
+                <td><asp:Label ID="Label2" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label></td>
+                <td class="auto-style4"><asp:Label ID="Totalprice" runat="server" Font-Bold="true" Font-Size="Large" Text="Total Price: "></asp:Label></td>
+                <td><asp:Label ID="Label7" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label></td>
                 <td style="text-align: right">
                 <div id="updatebutton" runat="server" visible="false">   <asp:LinkButton ID="LBUpdate" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="LBUpdate_Click">Update</asp:LinkButton></div>
                 </td>
@@ -170,6 +184,7 @@
                     </td>
             </tr>
         </table>
+        <br/>
     </div>
 </asp:Content>
 

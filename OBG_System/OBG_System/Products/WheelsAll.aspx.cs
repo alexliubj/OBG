@@ -62,6 +62,8 @@ public partial class Products_wheelall : System.Web.UI.Page
 
         GridView1.DataSource = wheelsDataSet;
         GridView1.DataKeyNames = new string[] { "ProductId" };
+        //double special = (float)Convert.ToSingle(((Label)GridView1.Rows[rowindex].FindControl("LBSpecial1")).Text);
+        //double price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text.Substring(1)) * special;
         GridView1.DataBind();
 
 

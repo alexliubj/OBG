@@ -206,30 +206,30 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
 
 
 
-        int pID, qty;
-        double price;
-        string partNo;
-        string image;
-        int rowCount;
-        rowCount = ShoppingCartGridView.Rows.Count;
-        GridViewRow gvr;
-        List<ShopingCart> shoppingcart1 = new List<ShopingCart>();
-        for (int i = 0; i < rowCount; i++)
-        {
-            gvr = ShoppingCartGridView.Rows[i];
-            pID = Convert.ToInt32(((Label)(ShoppingCartGridView.Rows[i].Cells[1].FindControl("idLabel"))).Text.ToString());
-            partNo = ((Label)(ShoppingCartGridView.Rows[i].Cells[3].FindControl("PartNoLabel"))).Text.ToString();
-            image = ((Image)(ShoppingCartGridView.Rows[i].Cells[2].FindControl("imageLabel"))).ImageUrl;
-            qty = Convert.ToInt32(((TextBox)(gvr.FindControl("txtCount"))).Text.ToString());
-            price = Convert.ToDouble(((Label)(ShoppingCartGridView.Rows[i].Cells[4].FindControl("Price"))).Text.Substring(1));
-            sc.ProductId = pID;
-            sc.Qty = qty;
-            sc.Pricing = price;
-            sc.PartNo = partNo;
-            sc.Image = image;
-            shoppingcart1.Add(sc);
-        }
-            Session["Cart"] = shoppingcart1;
+        //int pID, qty;
+        //double price;
+        //string partNo;
+        //string image;
+        //int rowCount;
+        //rowCount = ShoppingCartGridView.Rows.Count;
+        //GridViewRow gvr;
+        //List<ShopingCart> shoppingcart1 = new List<ShopingCart>();
+        //for (int i = 0; i < rowCount; i++)
+        //{
+        //    gvr = ShoppingCartGridView.Rows[i];
+        //    pID = Convert.ToInt32(((Label)(ShoppingCartGridView.Rows[i].Cells[1].FindControl("idLabel"))).Text.ToString());
+        //    partNo = ((Label)(ShoppingCartGridView.Rows[i].Cells[3].FindControl("PartNoLabel"))).Text.ToString();
+        //    image = ((Image)(ShoppingCartGridView.Rows[i].Cells[2].FindControl("imageLabel"))).ImageUrl;
+        //    qty = Convert.ToInt32(((TextBox)(gvr.FindControl("txtCount"))).Text.ToString());
+        //    price = Convert.ToDouble(((Label)(ShoppingCartGridView.Rows[i].Cells[4].FindControl("Price"))).Text.Substring(1)) * special;
+        //    sc.ProductId = pID;
+        //    sc.Qty = qty;
+        //    sc.Pricing = price;
+        //    sc.PartNo = partNo;
+        //    sc.Image = image;
+        //    shoppingcart1.Add(sc);
+        //}
+        //    Session["Cart"] = shoppingcart1;
 
 
 

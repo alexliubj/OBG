@@ -153,11 +153,18 @@ public partial class Default2 : System.Web.UI.Page
         //orderID = int.Parse(OrderGridView.SelectedRow.Cells[0].Text);
         orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
         decimal tatil = 0;
+        decimal HST = 0;
+        decimal totalPrice = 0;
+        decimal hst = (Decimal)(0.13);
         foreach (DataRow row in orderDetailTable.Rows)
         {
             tatil += decimal.Parse(row["DiscountRate"].ToString()) * int.Parse(row["Qty"].ToString());
+            HST += decimal.Parse(row["DiscountRate"].ToString()) * int.Parse(row["Qty"].ToString()) * hst;
+            totalPrice = tatil + HST;
         }
         lblTatil.Text = string.Format("{0:n2}", tatil);
+        Label2.Text = string.Format("{0:n2}", HST);
+        Label7.Text = string.Format("{0:n2}", totalPrice);
         OrderGridView.DataSource = orderDetailTable;
         OrderGridView.DataBind();
     }

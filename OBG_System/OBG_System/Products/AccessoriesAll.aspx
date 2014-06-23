@@ -167,17 +167,12 @@
                     <asp:Label ID="DesLabel" runat="server" Text='<%# Bind("Des") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Pricing" ItemStyle-HorizontalAlign="Center" SortExpression="Pricing">
+            <asp:TemplateField HeaderText="Pricing" Visible="false" ItemStyle-HorizontalAlign="Center" SortExpression="Pricing">
                 <ItemTemplate>
                     <asp:Label ID="PricingLabel" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
-                <ItemTemplate>
-                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
-                </ItemTemplate>
-                
-            </asp:TemplateField>  
+            
              <asp:TemplateField HeaderText="Special" Visible="false" SortExpression="Special">
                     <EditItemTemplate>
                         <asp:TextBox ID="txtSpecial1" runat="server" Text='<%# Bind("Special") %>'></asp:TextBox>
@@ -186,6 +181,16 @@
                         <asp:Label ID="LBSpecial1" runat="server" ForeColor="Red" Font-Bold="true" Text='<%# Bind("Special") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
+            <asp:TemplateField HeaderText="Price" Visible="true" ItemStyle-HorizontalAlign="Center" SortExpression="Price">
+                <ItemTemplate>
+                    <asp:Label ID="sPriceLabel" runat="server" Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
+                <ItemTemplate>
+                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
+                </ItemTemplate>
+            </asp:TemplateField>  
             <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center" SortExpression="ADD">
                 <ItemTemplate>
                     <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg"></asp:ImageButton>

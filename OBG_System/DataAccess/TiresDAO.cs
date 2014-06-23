@@ -53,7 +53,7 @@ namespace DataAccess
                                                       ,[season]
                                                       ,[brand]
                                                       ,[des], [special]
-                                                  ,d.tiresRate,t.pricing*d.tiresRate finalprice
+                                                  ,d.tiresRate,t.pricing*d.tiresRate finalprice, t.pricing*d.tiresRate*t.special specialPrice
                                                   FROM dbo.[Tires] t ,[discount] d where d.userid=@userid");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userId) };
             command.Parameters.AddRange(paras);

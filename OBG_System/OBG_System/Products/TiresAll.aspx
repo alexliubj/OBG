@@ -216,19 +216,24 @@
                     <asp:Label ID="SizeLabel" runat="server" Text='<%# Bind("Size") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-   
-            <asp:TemplateField HeaderText="Pricing" ItemStyle-HorizontalAlign="Center" SortExpression="Pricing">
-         
-                <ItemTemplate>
-                    <asp:Label ID="PricingLabel" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
             <asp:TemplateField HeaderText="Season" ItemStyle-HorizontalAlign="Center" SortExpression="Season">
            
                 <ItemTemplate>
                     <asp:Label ID="SeasonLabel" runat="server" Text='<%# Bind("Season") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
+            <asp:TemplateField HeaderText="Pricing" Visible="false" ItemStyle-HorizontalAlign="Center" SortExpression="Pricing">
+         
+                <ItemTemplate>
+                    <asp:Label ID="PricingLabel" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="Price" Visible="true" ItemStyle-HorizontalAlign="Center" SortExpression="Price">
+                <ItemTemplate>
+                    <asp:Label ID="sPriceLabel" runat="server" Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            
             <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
                 <ItemTemplate>
                     <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
