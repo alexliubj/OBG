@@ -572,7 +572,7 @@
             </asp:TemplateField>--%>
             <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center"  SortExpression="ADD">
                 <ItemTemplate>
-                    <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
+                    <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' OnClientClick="return confirm('Add the wheel to the shoppingcart?')" ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
                 </ItemTemplate>
             </asp:TemplateField>
 

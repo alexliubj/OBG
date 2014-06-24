@@ -80,7 +80,7 @@
                     <%#: String.Format("{0:c}", ((Convert.ToDouble(Item.Quantity)) *  Convert.ToDouble(Item.Product.UnitPrice)))%>
                 </ItemTemplate>        
         </asp:TemplateField> --%>
-            <asp:CommandField HeaderText="Delete" DeleteText="Delete" ShowDeleteButton="true">
+            <asp:CommandField HeaderText="Delete" DeleteText="Delete" ShowDeleteButton="true" >
                         <ItemStyle Width="30px" />
                     </asp:CommandField>
             <%--<asp:TemplateField HeaderText="Delete">

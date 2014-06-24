@@ -85,10 +85,11 @@ public partial class Default2 : System.Web.UI.Page
         MailContent.Append("Dear Customer：<br/>");
         MailContent.Append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ");
         MailContent.Append(DateTime.Now.ToLongTimeString());
-        MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have requested forget password at <a href='#'>OBG Order System</a>.");
+        string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + ResolveUrl("~/");
+        MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have requested forget password at <a href='" + host + "'>OBG Order System</a>.");
         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For security purpose，please click the link below to reset your password：");
 
-        string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + ResolveUrl("~/");
+        
         string url = host + "Account/ResetPassword.aspx?securityKey=" + securityKey + "&email=" + ToEmail;
         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='" + url + "'>" + url + "</a>");
         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If you did not request a password reset you do not need to take any action.</p>");

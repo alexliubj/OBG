@@ -7,6 +7,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using OBGModel;
+using System.Text;
+using System.Net.Mail;
+using System.Net;
 
 public partial class Default2 : System.Web.UI.Page
 {
@@ -185,6 +188,8 @@ public partial class Default2 : System.Web.UI.Page
             int ordersave = OrderBLO.AddNewOrder(order, orderline);
             if (ordersave > 0)
             {
+                User user = UserBLO.GetUserInfoWithUserId(userID);
+                SendMail(user.Email);
                 Session.Remove("Cart");
                 Response.Redirect("~/Default.aspx");
             }
@@ -236,6 +241,52 @@ public partial class Default2 : System.Web.UI.Page
         }
 
         return newSortDirection;
+    }
+
+
+    public bool SendMail(string ToEmail)
+    {
+        string Email = "alexliu0506@126.com";
+        string password = "5631247";
+        Encoding EnCode = Encoding.UTF8;
+        System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
+        Message.From = new MailAddress(Email, "OBG Master", EnCode);
+        Message.To.Add(new MailAddress(ToEmail, "Dear Customer", EnCode));
+        Message.Subject = "Reset Password Request";
+        Message.SubjectEncoding = EnCode;
+
+        StringBuilder MailContent = new StringBuilder();
+        MailContent.Append("Dear Customer：<br/>");
+        MailContent.Append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ");
+        MailContent.Append(DateTime.Now.ToLongTimeString());
+         string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + ResolveUrl("~/");
+        MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have ordered products at <a href='"+host+"'>OBG Order System</a>.");
+        MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For more order details, please see your order history: ");
+
+       
+        string url = host + "Account/UserOrderHistory.aspx";
+        MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='" + url + "'>" + url + "</a>");
+        MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You also can modify your order before shipping.</p>");
+        Message.Body = MailContent.ToString();
+        Message.BodyEncoding = EnCode;
+        Message.IsBodyHtml = true;
+
+        try
+        {
+            SmtpClient smtp = new SmtpClient("smtp.126.com", 25);
+            smtp.Credentials = new NetworkCredential(Email, password);
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Send(Message);
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+        finally
+        {
+            Message.Dispose();
+        }
+        return true;
     }
 
 }

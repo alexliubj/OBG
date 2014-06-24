@@ -58,7 +58,7 @@
                                 <asp:MenuItem NavigateUrl="~/Products/AccessoriesAll.aspx" Text="View All Accessories"></asp:MenuItem>
                             </asp:MenuItem>
                             <asp:MenuItem NavigateUrl="Account/UserCenter.aspx" Text="User Center" Value="usercenter"></asp:MenuItem>
-                            <asp:MenuItem NavigateUrl="Account/Special.aspx" Text="Special" Value="usercenter"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="Account/Special.aspx" Text="Special" Value="Special"></asp:MenuItem>
                         </Items>
                     </asp:Menu>
                 </div>
@@ -76,5 +76,7 @@
                 </div>
         </div>
     </form>
+    <br/>
+
 </body>
 </html>

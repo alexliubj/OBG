@@ -101,17 +101,17 @@
                         <asp:Label ID="LBProductID" runat="server" Text='<%# Bind("ProductId") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="PartNo" SortExpression="Status">
+                <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
                     <ItemTemplate>
                         <asp:Label ID="Label5" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="ProductName" SortExpression="PartNo">
+                <asp:TemplateField HeaderText="ProductName" SortExpression="ProductName">
                     <ItemTemplate>
                         <asp:Label ID="Label8" runat="server" Text='<%# Bind("ProductName") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Quantity" SortExpression="ProductName">
+                <asp:TemplateField HeaderText="Quantity" SortExpression="Quantity">
                     <ItemTemplate>
                         <asp:TextBox ID="TextBox4" runat="server" Width="20" Text='<%# Bind("Qty") %>'></asp:TextBox>
                     </ItemTemplate>
@@ -119,7 +119,7 @@
                             <asp:Label ID="Label4" runat="server" Text='<%# Bind("Qty") %>'></asp:Label>
                         </ItemTemplate>--%>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Price" SortExpression="PO">
+                <asp:TemplateField HeaderText="Price" SortExpression="Price">
                     <ItemTemplate>
                         <asp:Label ID="Label6" runat="server" Text='<%# Bind("DiscountRate","{0:c}") %>'></asp:Label>
                     </ItemTemplate>

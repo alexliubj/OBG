@@ -3,6 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
+    <div id="div1" runat="server" visible="true">
+        <img alt="Special" src="../Pictures/special_offers.jpg" />
+    </div>
     <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" OnMenuItemClick="NavigationMenu_MenuItemClick">
         <Items>
             <asp:MenuItem Text="Wheels"></asp:MenuItem>
@@ -10,6 +13,7 @@
             <asp:MenuItem Text="Accessories"></asp:MenuItem>
         </Items>
     </asp:Menu>
+    <br/>
     <div id="divWheel" runat="server" visible="true">
                 <asp:Label ID="Label2" runat="server" Text="Per Page:"></asp:Label>
     <asp:DropDownList ID="dropDownRecordsPerPage" runat="server"
@@ -21,6 +25,7 @@
         <asp:ListItem Value="50" Text="50" />
         <asp:ListItem Value="100" Text="100" />
     </asp:DropDownList>
+        <br/>
         <asp:GridView ID="GridView1" runat="server" GridLines="Both" AllowPaging="True" Align="center" EmptyDataText="There is no wheels special now." AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ProductId" ForeColor="#333333" 
 Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="GridView1_RowCommand" OnSorting="GridView1_Sorting">
             <AlternatingRowStyle BackColor="White" />
@@ -249,11 +254,7 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                         <asp:Label ID="Label15" runat="server" Text='<%# Bind("Des") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>--%>
-                <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
-                <ItemTemplate>
-                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
-                </ItemTemplate>
-            </asp:TemplateField>
+                
                 <asp:TemplateField HeaderText="Special" Visible="false" SortExpression="Special">
                     <EditItemTemplate>
                         <asp:TextBox ID="txtSpecial" runat="server" Text='<%# Bind("Special") %>'></asp:TextBox>
@@ -268,9 +269,14 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                         <asp:Label ID="Label5" runat="server" ForeColor="Red" Font-Bold="true"  Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
+                <ItemTemplate>
+                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
+                </ItemTemplate>
+            </asp:TemplateField>
                  <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center"  SortExpression="ADD">
                 <ItemTemplate>
-                    <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
+                    <asp:ImageButton ID="AddBt" runat="server"  OnClientClick="return confirm('Add the wheel to the shoppingcart?')" CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
                 </ItemTemplate>
             </asp:TemplateField>
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
@@ -287,8 +293,10 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
         <SortedDescendingCellStyle BackColor="#E9EBEF" />
         <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
+         <br/>
+    <br/>
         </div>
-
+   
 
     <div id="divTire" runat="server" visible="false">
         <asp:Label ID="Label1" runat="server" Text="Per Page:"></asp:Label>
@@ -301,27 +309,13 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
         <asp:ListItem Value="50" Text="50" />
         <asp:ListItem Value="100" Text="100" />
     </asp:DropDownList>
+        <br/>
         <asp:GridView ID="GridView2" runat="server" GridLines="Both" AllowPaging="True" Align="center" EmptyDataText="There is no wheels special now." AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="TireId" ForeColor="#333333" 
  Visible="true" OnPageIndexChanging="GridView2_PageIndexChanging" OnRowCommand="GridView1_RowCommand1" OnSorting="GridView2_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:BoundField DataField="TireId" HeaderText="Tire ID" InsertVisible="False" ReadOnly="True" SortExpression="TireId" />
-                <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Brand" SortExpression="Brand">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Brand") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("Brand") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
+                <asp:BoundField DataField="TireId" Visible="false" HeaderText="Tire ID" InsertVisible="False" ReadOnly="True" SortExpression="TireId" />
+            
                 <asp:TemplateField HeaderText="Image" SortExpression="Image">
                     <ItemTemplate>
                         <asp:ImageButton class="Imagehub" ID="Image1" runat="server" ImageUrl='<%# Eval("Image") %>' OnClientClick = "return LoadDiv(this.src);"></asp:ImageButton>
@@ -430,6 +424,22 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
 </script>
                     </ItemTemplate>
                 </asp:TemplateField>
+                    <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Brand" SortExpression="Brand">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Brand") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label6" runat="server" Text='<%# Bind("Brand") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
                  <asp:TemplateField HeaderText="Size" SortExpression="Size">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox3" runat="server" Text='<%# Bind("Size") %>'></asp:TextBox>
@@ -447,11 +457,7 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                         <asp:Label ID="seasonLabel" runat="server" Text='<%# Bind("Season") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
-                <ItemTemplate>
-                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
-                </ItemTemplate>
-            </asp:TemplateField>
+                
                <asp:TemplateField HeaderText="Reg Price" SortExpression="Pricing">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:TextBox>
@@ -485,9 +491,14 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                         <asp:Label ID="specialprice" runat="server" ForeColor="Red" Font-Bold="true"  Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
+                <ItemTemplate>
+                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
+                </ItemTemplate>
+            </asp:TemplateField>
                  <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center"  SortExpression="ADD">
                 <ItemTemplate>
-                    <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClickt" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
+                    <asp:ImageButton ID="AddBt" runat="server"  OnClientClick="return confirm('Add the tire to the shoppingcart?')" CommandName="MyButtonClickt" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
                 </ItemTemplate>
             </asp:TemplateField>
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
@@ -504,7 +515,9 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
+        <br/><br/>
         </div>
+    
 
      <div id="divAcc" runat="server" visible="false">
         <asp:Label ID="Label16" runat="server" Text="Per Page:"></asp:Label>
@@ -517,19 +530,13 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
         <asp:ListItem Value="50" Text="50" />
         <asp:ListItem Value="100" Text="100" />
     </asp:DropDownList>
+         <br/>
         <asp:GridView ID="GridView3" runat="server" GridLines="Both" AllowPaging="True" Align="center" EmptyDataText="There is no wheels special now." AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" ForeColor="#333333" 
  Visible="true" OnPageIndexChanging="GridView3_PageIndexChanging" OnRowCommand="GridView3_RowCommand" OnSorting="GridView3_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
-                <asp:BoundField DataField="AccId" HeaderText="Acc ID" InsertVisible="False" ReadOnly="True" SortExpression="AccId" />
-                <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
+                <asp:BoundField DataField="AccId" HeaderText="Acc ID" Visible="false" InsertVisible="False" ReadOnly="True" SortExpression="AccId" />
+      
                 <asp:TemplateField HeaderText="Image" SortExpression="Image">
                     <ItemTemplate>
                         <asp:ImageButton class="Imagehub" ID="Image1" runat="server" ImageUrl='<%# Eval("Image") %>' OnClientClick = "return LoadDiv(this.src);"></asp:ImageButton>
@@ -638,6 +645,14 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
 </script>
                     </ItemTemplate>
                 </asp:TemplateField>
+                          <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="TextBox2" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="Label2" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
                  <asp:TemplateField HeaderText="Brand" SortExpression="Brand">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Brand") %>'></asp:TextBox>
@@ -662,11 +677,7 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                         <asp:Label ID="Label4" runat="server" Text='<%# Bind("Des") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
-                <ItemTemplate>
-                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
-                </ItemTemplate>
-            </asp:TemplateField>
+                
                 <asp:TemplateField HeaderText="Reg Price" SortExpression="Pricing">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox5" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:TextBox>
@@ -692,9 +703,14 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                         <asp:Label ID="accl5" runat="server" ForeColor="Red" Font-Bold="true"  Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
+                <ItemTemplate>
+                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
+                </ItemTemplate>
+            </asp:TemplateField>
                  <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center"  SortExpression="ADD">
                 <ItemTemplate>
-                    <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClicka" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
+                    <asp:ImageButton ID="AddBt" runat="server"  OnClientClick="return confirm('Add the accessory to the shoppingcart?')" CommandName="MyButtonClicka" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
                 </ItemTemplate>
             </asp:TemplateField>
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" ButtonType="Button" />--%>
@@ -711,6 +727,8 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
             <SortedDescendingCellStyle BackColor="#E9EBEF" />
             <SortedDescendingHeaderStyle BackColor="#4870BE" />
         </asp:GridView>
+          <br/><br/>
          </div>
+   
 </asp:Content>
 
