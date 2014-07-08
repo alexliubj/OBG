@@ -11,12 +11,12 @@
     </h1>
     <hr />
     <center>
-       <asp:Image ID="Image1" runat="server"  Width="500" Height="400"/>
+       <asp:Image ID="Image1" runat="server"  Width="800" Height="600"/>
      </center>
     <hr />
     <hr />
     <center>
-     <asp:Image ID="Image2" runat="server"   Width="500" Height="400" />
+     <asp:Image ID="Image2" runat="server"   Width="800" Height="600" />
         </center>
 
 </asp:Content>

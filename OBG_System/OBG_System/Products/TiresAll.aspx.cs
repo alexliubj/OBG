@@ -23,8 +23,17 @@ public partial class Products_tireall : System.Web.UI.Page
                 int tirePermission = ((List<int>)(Session["Permissions"]))[1];
                 if (tirePermission == 0)
                 {
-                    Response.Write("<script language='javascript'>alert('Your account does not have permission to access this page');</script>");
-                    Server.Transfer("~/Account/UserCenter.aspx", true);
+                  //  Response.Write("<script language='javascript'>alert('Your account does not have permission to access this page');</script>");
+                   // Server.Transfer("~/Account/UserCenter.aspx", true);
+                    TiresFilter.Visible = false;
+                    divtire.Visible = false;
+                    PermissionDenied.Visible = true;
+                }
+                else
+                {
+                    divtire.Visible = true;
+                    TiresFilter.Visible = true;
+                    
                 }
             }
         }

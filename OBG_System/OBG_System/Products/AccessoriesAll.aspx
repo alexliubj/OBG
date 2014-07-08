@@ -3,7 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" Runat="Server">
-
+     <div id ="PermissionDenied" runat="server" visible="false">
+    This section currently is empty.    
+    </div>
     <div id="TiresFilter" runat="server" visible="true">
 
         <fieldset class="AccInfo">

@@ -9,7 +9,9 @@
     </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-
+    <div id ="PermissionDenied" runat="server" visible="false">
+    This section currently is empty.    
+    </div>
     <div id="TiresFilter" runat="server" visible="true">
 
         <fieldset class="TiresInfo">
