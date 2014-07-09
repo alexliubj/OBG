@@ -43,6 +43,10 @@
 
     </script>
 
+      <div id ="PermissionDenied" runat="server" visible="false">
+    This section currently is empty.    
+    </div>
+
     <div id="wheelFilter" runat="server" visible="true">
 
         <fieldset class="wheelInfo">

@@ -22,8 +22,16 @@ public partial class Products_accAll : System.Web.UI.Page
                 int accPermission = ((List<int>)(Session["Permissions"]))[2];
                 if (accPermission == 0)
                 {
-                    Response.Write("<script language='javascript'>alert('Your account does not have permission to access this page');</script>");
-                    Server.Transfer("~/Account/UserCenter.aspx", true);
+                    //Response.Write("<script language='javascript'>alert('Your account does not have permission to access this page');</script>");
+                    //Server.Transfer("~/Account/UserCenter.aspx", true);
+                    TiresFilter.Visible = false;
+                    divacc.Visible = false;
+                    PermissionDenied.Visible = true;
+                }
+                else
+                {
+                    TiresFilter.Visible = true;
+                    divacc.Visible = true;
                 }
             }
         }
