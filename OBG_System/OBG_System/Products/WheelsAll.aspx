@@ -48,7 +48,7 @@
     </div>
 
     <div id="wheelFilter" runat="server" visible="true">
-
+        <asp:Button ID="Button1" runat="server" Text="Button"  OnClick="Button1_Click"/>
         <fieldset class="wheelInfo">
             <legend>Choose your wheels</legend>
             <table style="width: 852px">

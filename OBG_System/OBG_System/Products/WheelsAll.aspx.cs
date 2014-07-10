@@ -162,7 +162,7 @@ public partial class Products_wheelall : System.Web.UI.Page
             qty = Convert.ToInt32(((TextBox)GridView1.Rows[rowindex].FindControl("QTYTextBox")).Text);
             special = (float)Convert.ToSingle(((Label)GridView1.Rows[rowindex].FindControl("LBSpecial1")).Text);
             price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text.Substring(1)) * special;
-            
+
             sc.ProductId = pID;
             sc.Qty = qty;
             sc.Pricing = price;
@@ -404,6 +404,15 @@ public partial class Products_wheelall : System.Web.UI.Page
 
         GridView1.PageIndex = 0;
         Gridview1_Bind();
+    }
+
+
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        foreach (ListItem chkitem in chkSize.Items)
+        {
+            chkitem.Selected = true;
+        }
     }
 
 }
