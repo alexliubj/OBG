@@ -1,6 +1,8 @@
 ﻿<%@ Page Title="View All Wheels" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="WheelsAll.aspx.cs" Inherits="Products_wheelall" ErrorPage="~/mycustompage.aspx"%>
 
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
     <style type="text/css">
         .style1
         {
@@ -33,15 +35,24 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <script src="Scripts/jquery-1.2.6.js" type="text/javascript"></script>
 
-    <script type="text/javascript">
+   <%-- <script type="text/javascript">
         $(document).ready(function () {
-            $('#chkAll').click(
+            $('#chkSelectAll').click(
              function () {
                  $("INPUT[type='checkbox']").attr('checked', $('#chkAll').is(':checked'));
              });
         });
 
     </script>
+
+    <script src="Scripts/jquery-1.4.1-vsdoc.js" type="text/javascript"></script> --%>
+<script type="text/javascript">
+    $(function () {
+        $("#<%=chkSelectAll.ClientID %>").click(function () {
+        $("#<%=chkSize.ClientID %> input[type=checkbox]").attr("checked", $("#<%=chkSelectAll.ClientID %>").is(":checked"));
+});
+});
+</script> 
 
       <div id ="PermissionDenied" runat="server" visible="false">
     This section currently is empty.    
@@ -55,6 +66,8 @@
                 <tr>
                     <td>
                         <asp:Label ID="sizeLB" class="label" runat="server" Text="Size"></asp:Label></td>
+                    <td><asp:CheckBox ID="chkSelectAll" runat="server" Text="全选" /> 
+                        </td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Size"
                             DataValueField="Size"
