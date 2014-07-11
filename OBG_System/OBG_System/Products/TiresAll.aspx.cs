@@ -278,4 +278,31 @@ public partial class Products_tireall : System.Web.UI.Page
         GridView2.PageIndex = 0;
         GridView2_Bind();
     }
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        foreach (ListItem chkitem in ChkBrand.Items)
+        {
+            chkitem.Selected = true;
+        }
+    }
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        foreach (ListItem chkitem in ChkSize.Items)
+        {
+            chkitem.Selected = true;
+        }
+    }
+    protected void Button4_Click(object sender, EventArgs e)
+    {
+        foreach (ListItem chkitem in ChkSeason.Items)
+        {
+            chkitem.Selected = true;
+        }
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        ChkBrand.ClearSelection();
+        ChkSize.ClearSelection();
+        ChkSeason.ClearSelection();
+    }
 }

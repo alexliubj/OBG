@@ -220,4 +220,15 @@ public partial class Products_accAll : System.Web.UI.Page
         GridView6.PageIndex = 0;
         GridView6_Bind();
     }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        foreach (ListItem chkitem in ChkName.Items)
+        {
+            chkitem.Selected = true;
+        }
+    }
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        ChkName.ClearSelection();
+    }
 }

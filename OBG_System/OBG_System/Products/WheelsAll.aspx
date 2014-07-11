@@ -23,12 +23,16 @@
         .auto-style3
         {
             height: 28px;
-            width: 69px;
+            width: 30px;
         }
 
-        .auto-style5
+        .auto-style6
         {
-            width: 69px;
+            width: 45px;
+        }
+        .auto-style7
+        {
+            width: 30px;
         }
     </style>
 </asp:Content>
@@ -46,28 +50,30 @@
     </script>
 
     <script src="Scripts/jquery-1.4.1-vsdoc.js" type="text/javascript"></script> --%>
-<script type="text/javascript">
+<%--<script type="text/javascript">
     $(function () {
         $("#<%=chkSelectAll.ClientID %>").click(function () {
         $("#<%=chkSize.ClientID %> input[type=checkbox]").attr("checked", $("#<%=chkSelectAll.ClientID %>").is(":checked"));
 });
 });
-</script> 
+</script> --%>
 
       <div id ="PermissionDenied" runat="server" visible="false">
     This section currently is empty.    
     </div>
 
     <div id="wheelFilter" runat="server" visible="true">
-        <asp:Button ID="Button1" runat="server" Text="Button"  OnClick="Button1_Click"/>
+        
         <fieldset class="wheelInfo">
             <legend>Choose your wheels</legend>
             <table style="width: 852px">
                 <tr>
-                    <td>
+                    <td class="auto-style7">
                         <asp:Label ID="sizeLB" class="label" runat="server" Text="Size"></asp:Label></td>
-                    <td><asp:CheckBox ID="chkSelectAll" runat="server" Text="全选" /> 
+                    <td class="auto-style6">
+                        <asp:Button ID="Button2" runat="server" Text="All"  OnClick="Button2_Click" CssClass="myButton"/>
                         </td>
+
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Size"
                             DataValueField="Size"
@@ -97,8 +103,11 @@
 
 
                 <tr>
-                    <td class="auto-style5">PCD:</td>
-                    <td>
+                    <td class="auto-style7">PCD:</td>
+                    <td class="auto-style6">
+                        <asp:Button ID="Button3" runat="server" Text="All"  OnClick="Button3_Click" CssClass="myButton"/>
+                        </td>
+                    <td class="auto-style6">
                         <asp:CheckBoxList DataSourceID="SqlDataSource2" DataTextField="PCD"
                             DataValueField="PCD" CssClass="CBLayout" ID="chkPCD"  runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
@@ -107,8 +116,11 @@
 
                
                 <tr>
-                    <td class="auto-style5">Offset:</td>
-                    <td>
+                    <td class="auto-style7">Offset:</td>
+                    <td class="auto-style6">
+                        <asp:Button ID="Button4" runat="server" Text="All" OnClick="Button4_Click" CssClass="myButton" />
+                        </td>
+                    <td class="auto-style6">
                         <asp:CheckBoxList DataSourceID="SqlDataSource4" DataTextField="Offset"
                             DataValueField="Offset" CssClass="CBLayout" ID="chkOffset" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
@@ -116,8 +128,11 @@
                 </tr>
 
                 <tr>
-                    <td class="auto-style5">Seat:</td>
-                    <td>
+                    <td class="auto-style7">Seat:</td>
+                    <td class="auto-style6">
+                        <asp:Button ID="Button5" runat="server" Text="All" OnClick="Button5_Click" CssClass="myButton" />
+                        </td>
+                    <td class="auto-style6">
                         <asp:CheckBoxList DataSourceID="SqlDataSource5" DataTextField="Seat"
                             DataValueField="Seat" CssClass="CBLayout" ID="chkSeat" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
@@ -125,8 +140,11 @@
                 </tr>
 
                 <tr>
-                    <td class="auto-style5">Bore:</td>
-                    <td>
+                    <td class="auto-style7">Bore:</td>
+                    <td class="auto-style6">
+                        <asp:Button ID="Button6" runat="server" Text="All" OnClick="Button6_Click" CssClass="myButton" />
+                        </td>
+                    <td class="auto-style6">
                         <asp:CheckBoxList DataSourceID="SqlDataSource6" DataTextField="Bore"
                             DataValueField="Bore" CssClass="CBLayout" ID="chkBore" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
@@ -134,12 +152,18 @@
                 </tr>
                 <tr>
                     <td class="auto-style3">Finish:</td>
-                    <td>
+                    <td class="auto-style6">
+                        <asp:Button ID="Button7" runat="server" Text="All" OnClick="Button7_Click" CssClass="myButton" />
+                        </td>
+                    <td class="auto-style6">
                         <asp:CheckBoxList DataSourceID="SqlDataSource3" DataTextField="Finish"
                             DataValueField="Finish"  ID="chkFinish" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
                     </td>
                 </tr>
+                <tr>
+                    <asp:Button ID="Button1" runat="server" Text="Reset" OnClick="Button1_Click"  CssClass="myButton"/>
+                    </tr>
 
             </table>
         </fieldset>
@@ -531,7 +555,7 @@
                     <asp:Label ID="OnhandLabel" runat="server" Text='<%# Bind("Onhand") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Price" Visible="false" ItemStyle-HorizontalAlign="Center" SortExpression="Price">
+            <asp:TemplateField HeaderText="finalPrice" Visible="false" ItemStyle-HorizontalAlign="Center" SortExpression="Price">
                 <%--<EditItemTemplate>
                     <asp:TextBox ID="PriceTextBox" runat="server" Text='<%# Bind("Price") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
@@ -547,7 +571,7 @@
                         <asp:Label ID="LBSpecial1" runat="server"  Visible="false" ForeColor="Red" Font-Bold="true" Text='<%# Bind("Special") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-            <asp:TemplateField HeaderText="Special Price" Visible="true" ItemStyle-HorizontalAlign="Center" SortExpression="Price">
+            <asp:TemplateField HeaderText="Price" Visible="true" ItemStyle-HorizontalAlign="Center" SortExpression="Price">
                 <%--<EditItemTemplate>
                     <asp:TextBox ID="PriceTextBox" runat="server" Text='<%# Bind("Price") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
@@ -557,7 +581,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
                 <ItemTemplate>
-                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
+                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="4"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
 

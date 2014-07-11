@@ -133,10 +133,17 @@ public partial class Products_wheelall : System.Web.UI.Page
 
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        int rowindex = Convert.ToInt32(e.CommandArgument);
+        //double special1 = (float)Convert.ToSingle(((Label)GridView1.Rows[rowindex].FindControl("sPriceLabel")).Text);
+        //double price1 = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text.Substring(1)) * special;
+        //if (special1 != price1)
+        //{
+            //(Label)sPriceLabel.ForeColor = red;
+        //}
         if (e.CommandName == "MyButtonClick")
         {
             //Get rowindex            
-            int rowindex = Convert.ToInt32(e.CommandArgument);
+            
             //Get Row           
             GridViewRow gvr = GridView1.Rows[rowindex];
             List<ShopingCart> shoppingcart;
@@ -175,7 +182,7 @@ public partial class Products_wheelall : System.Web.UI.Page
 
         if (e.CommandName == "DesClick")
         {
-            int rowindex = Convert.ToInt32(e.CommandArgument);
+           // int rowindex = Convert.ToInt32(e.CommandArgument);
             int productID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
             string des = WheelsBLO.GetDesByProductId(productID);
             divDes.Visible = true;
@@ -407,12 +414,63 @@ public partial class Products_wheelall : System.Web.UI.Page
     }
 
 
-    protected void Button1_Click(object sender, EventArgs e)
+    //protected void Button1_Click(object sender, EventArgs e)
+    //{
+    //    foreach (ListItem chkitem in chkSize.Items)
+    //    {
+    //        chkitem.Selected = true;
+    //    }
+    //}
+
+    protected void Button2_Click(object sender, EventArgs e)
     {
         foreach (ListItem chkitem in chkSize.Items)
         {
             chkitem.Selected = true;
         }
     }
-
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        foreach (ListItem chkitem in chkPCD.Items)
+        {
+            chkitem.Selected = true;
+        }
+    }
+    protected void Button4_Click(object sender, EventArgs e)
+    {
+        foreach (ListItem chkitem in chkOffset.Items)
+        {
+            chkitem.Selected = true;
+        }
+    }
+    protected void Button5_Click(object sender, EventArgs e)
+    {
+        foreach (ListItem chkitem in chkSeat.Items)
+        {
+            chkitem.Selected = true;
+        }
+    }
+    protected void Button6_Click(object sender, EventArgs e)
+    {
+        foreach (ListItem chkitem in chkBore.Items)
+        {
+            chkitem.Selected = true;
+        }
+    }
+    protected void Button7_Click(object sender, EventArgs e)
+    {
+        foreach (ListItem chkitem in chkFinish.Items)
+        {
+            chkitem.Selected = true;
+        }
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        chkSize.ClearSelection();
+        chkPCD.ClearSelection();
+        chkOffset.ClearSelection();
+        chkSeat.ClearSelection();
+        chkFinish.ClearSelection();
+        chkBore.ClearSelection();
+    }
 }

@@ -16,6 +16,12 @@
                         <asp:Label ID="NameLabel" runat="server">Product Name:</asp:Label>
                     </td>
                     <td>
+                        <asp:Button ID="Button1" runat="server" Text="All" OnClick="Button1_Click" CssClass="myButton" />
+                        </td>
+                    <td>
+                        <asp:Button ID="Button2" runat="server" Text="Reset" OnClick="Button2_Click" CssClass="myButton" />
+                        </td>
+                    <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Name"
                             DataValueField="Name" CssClass="CBLayout" ID="ChkName" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="7" OnSelectedIndexChanged="chk_SelectedIndexChanged" />
                     </td>
@@ -190,7 +196,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
                 <ItemTemplate>
-                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
+                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="4"></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>  
             <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center" SortExpression="ADD">

@@ -21,6 +21,9 @@
                     <td class="style2">
                         <asp:Label ID="partLabel" runat="server">Brand:</asp:Label>
                     </td>
+                    <td class="auto-style6">
+                        <asp:Button ID="Button2" runat="server" Text="All"  OnClick="Button2_Click" CssClass="myButton"/>
+                        </td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Brand"
                             DataValueField="Brand" CssClass="CBLayout" ID="ChkBrand" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chk_SelectedIndexChanged" />
@@ -41,6 +44,9 @@
                     <td>
                         <asp:Label ID="SizeLabel" runat="server">Size:</asp:Label>
                     </td>
+                    <td class="auto-style6">
+                        <asp:Button ID="Button1" runat="server" Text="All"  OnClick="Button3_Click" CssClass="myButton"/>
+                        </td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource2" DataTextField="Size"
                             DataValueField="Size" CssClass="CBLayout" ID="ChkSize" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chk_SelectedIndexChanged" />
@@ -57,12 +63,18 @@
                     <td>
                         <asp:Label ID="SeasonLabel" runat="server">Season:</asp:Label>
                     </td>
+                    <td class="auto-style6">
+                        <asp:Button ID="Button3" runat="server" Text="All"  OnClick="Button4_Click" CssClass="myButton"/>
+                        </td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource3" DataTextField="Season"
                             DataValueField="Season" CssClass="CBLayout" ID="ChkSeason" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chk_SelectedIndexChanged" />
                     </td>
 
                 </tr>
+                <tr>
+                    <asp:Button ID="Button4" runat="server" Text="Reset" OnClick="Button1_Click"  CssClass="myButton"/>
+                    </tr>
 
             </table>
         </fieldset>
@@ -238,7 +250,7 @@
             
             <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
                 <ItemTemplate>
-                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="1"></asp:TextBox>
+                    <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="4"></asp:TextBox>
                 </ItemTemplate>
 
             </asp:TemplateField>
