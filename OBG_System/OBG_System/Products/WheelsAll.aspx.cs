@@ -134,11 +134,12 @@ public partial class Products_wheelall : System.Web.UI.Page
     protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
     {
         int rowindex = Convert.ToInt32(e.CommandArgument);
-        //double special1 = (float)Convert.ToSingle(((Label)GridView1.Rows[rowindex].FindControl("sPriceLabel")).Text);
-        //double price1 = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text.Substring(1)) * special;
+        //for(int i = 0;)
+        //double special1 = (float)Convert.ToSingle(((Label)GridView1..Cell[].Rows[rowindex].FindControl("sPriceLabel")).Text);
+        //double price1 = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text.Substring(1));
         //if (special1 != price1)
         //{
-            //(Label)sPriceLabel.ForeColor = red;
+        //    ((Label)GridView1.Rows[rowindex].FindControl("sPriceLabel")).ForeColor=System.Drawing.Color.Red;
         //}
         if (e.CommandName == "MyButtonClick")
         {

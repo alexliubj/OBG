@@ -25,8 +25,9 @@
         <div class="page">
             <div class="header">
                 <div class="title">
+                    <br/>
                     <h1>
-                        <img alt="logo" class="stylel" src="<%= Page.ResolveUrl("~")%>Pictures/logo.png" />OBG Orderring System
+                        <img alt="logo" class="stylel" src="<%= Page.ResolveUrl("~")%>Pictures/opti-1.jpg" />Orderring System
                     </h1>
                 </div>
 

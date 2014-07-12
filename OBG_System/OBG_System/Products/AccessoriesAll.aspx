@@ -16,10 +16,10 @@
                         <asp:Label ID="NameLabel" runat="server">Product Name:</asp:Label>
                     </td>
                     <td>
-                        <asp:Button ID="Button1" runat="server" Text="All" OnClick="Button1_Click" CssClass="myButton" />
+                        <asp:LinkButton ID="Button1" runat="server" Text="All" OnClick="Button1_Click"  />
                         </td>
                     <td>
-                        <asp:Button ID="Button2" runat="server" Text="Reset" OnClick="Button2_Click" CssClass="myButton" />
+                        <asp:LinkButton ID="Button2" runat="server" Text="Reset" OnClick="Button2_Click"  />
                         </td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Name"
@@ -191,7 +191,7 @@
                 </asp:TemplateField>
             <asp:TemplateField HeaderText="Price" Visible="true" ItemStyle-HorizontalAlign="Center" SortExpression="Price">
                 <ItemTemplate>
-                    <asp:Label ID="sPriceLabel" runat="server" Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
+                    <asp:Label ID="sPriceLabel" runat="server" ForeColor='<%#  (float)Convert.ToSingle(((Label)((GridViewRow)Container).FindControl("LBSpecial1")).Text)<1?System.Drawing.Color.Red:System.Drawing.Color.Black%>'  Font-Bold='<%# ((Label)((GridViewRow)Container).FindControl("sPriceLabel")).ForeColor==System.Drawing.Color.Red?true:false%>'  Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">

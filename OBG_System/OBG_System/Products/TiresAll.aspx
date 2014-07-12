@@ -19,10 +19,10 @@
             <table>
                 <tr>
                     <td class="style2">
-                        <asp:Label ID="partLabel" runat="server">Brand:</asp:Label>
+                        <asp:Label ID="partLabel" runat="server">Brand:  </asp:Label>
                     </td>
                     <td class="auto-style6">
-                        <asp:Button ID="Button2" runat="server" Text="All"  OnClick="Button2_Click" CssClass="myButton"/>
+                        <asp:LinkButton ID="Button2" runat="server" Text="All"  OnClick="Button2_Click" />
                         </td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Brand"
@@ -42,10 +42,10 @@
                     SelectCommand="SELECT distinct season FROM [Tires]"></asp:SqlDataSource>
                 <tr>
                     <td>
-                        <asp:Label ID="SizeLabel" runat="server">Size:</asp:Label>
+                        <asp:Label ID="SizeLabel" runat="server">Size:  </asp:Label>
                     </td>
                     <td class="auto-style6">
-                        <asp:Button ID="Button1" runat="server" Text="All"  OnClick="Button3_Click" CssClass="myButton"/>
+                        <asp:LinkButton ID="Button1" runat="server" Text="All"  OnClick="Button3_Click" />
                         </td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource2" DataTextField="Size"
@@ -61,10 +61,10 @@
 
                 <tr>
                     <td>
-                        <asp:Label ID="SeasonLabel" runat="server">Season:</asp:Label>
+                        <asp:Label ID="SeasonLabel" runat="server">Season:  </asp:Label>
                     </td>
                     <td class="auto-style6">
-                        <asp:Button ID="Button3" runat="server" Text="All"  OnClick="Button4_Click" CssClass="myButton"/>
+                        <asp:LinkButton ID="Button3" runat="server" Text="All"  OnClick="Button4_Click"/>
                         </td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource3" DataTextField="Season"
@@ -73,7 +73,7 @@
 
                 </tr>
                 <tr>
-                    <asp:Button ID="Button4" runat="server" Text="Reset" OnClick="Button1_Click"  CssClass="myButton"/>
+                    <asp:LinkButton ID="Button4" runat="server" Text="Reset" OnClick="Button1_Click" />
                     </tr>
 
             </table>
@@ -242,9 +242,17 @@
                     <asp:Label ID="PricingLabel" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
+            <asp:TemplateField HeaderText="Special" Visible="false" SortExpression="Special">
+                    <EditItemTemplate>
+                        <asp:TextBox ID="txtSpecial1" runat="server" Text='<%# Bind("Special") %>'></asp:TextBox>
+                    </EditItemTemplate>
+                    <ItemTemplate>
+                        <asp:Label ID="LBSpecial1" runat="server" ForeColor="Red" Font-Bold="true" Text='<%# Bind("Special") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField>
             <asp:TemplateField HeaderText="Price" Visible="true" ItemStyle-HorizontalAlign="Center" SortExpression="Price">
                 <ItemTemplate>
-                    <asp:Label ID="sPriceLabel" runat="server" Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
+                    <asp:Label ID="sPriceLabel" runat="server"  ForeColor='<%#  (float)Convert.ToSingle(((Label)((GridViewRow)Container).FindControl("LBSpecial1")).Text)<1?System.Drawing.Color.Red:System.Drawing.Color.Black%>'  Font-Bold='<%# ((Label)((GridViewRow)Container).FindControl("sPriceLabel")).ForeColor==System.Drawing.Color.Red?true:false%>'  Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             
@@ -254,14 +262,7 @@
                 </ItemTemplate>
 
             </asp:TemplateField>
-             <asp:TemplateField HeaderText="Special" Visible="false" SortExpression="Special">
-                    <EditItemTemplate>
-                        <asp:TextBox ID="txtSpecial1" runat="server" Text='<%# Bind("Special") %>'></asp:TextBox>
-                    </EditItemTemplate>
-                    <ItemTemplate>
-                        <asp:Label ID="LBSpecial1" runat="server" ForeColor="Red" Font-Bold="true" Text='<%# Bind("Special") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
+             
 
             <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center" SortExpression="ADD">
                 <ItemTemplate>
