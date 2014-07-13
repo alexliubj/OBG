@@ -252,7 +252,7 @@ public partial class Default2 : System.Web.UI.Page
         System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
         Message.From = new MailAddress(Email, "OBG Master", EnCode);
         Message.To.Add(new MailAddress(ToEmail, "Dear Customer", EnCode));
-        Message.Subject = "Reset Password Request";
+        Message.Subject = "Order Confirmation";
         Message.SubjectEncoding = EnCode;
 
         StringBuilder MailContent = new StringBuilder();
