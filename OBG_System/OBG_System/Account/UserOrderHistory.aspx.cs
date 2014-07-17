@@ -162,9 +162,9 @@ public partial class Default2 : System.Web.UI.Page
             HST += decimal.Parse(row["DiscountRate"].ToString()) * int.Parse(row["Qty"].ToString()) * hst;
             totalPrice = tatil + HST;
         }
-        lblTatil.Text = string.Format("{0:n2}", tatil);
-        Label2.Text = string.Format("{0:n2}", HST);
-        Label7.Text = string.Format("{0:n2}", totalPrice);
+        lblTatil.Text = string.Format("${0:n2}", tatil);
+        Label2.Text = string.Format("${0:n2}", HST);
+        Label7.Text = string.Format("${0:n2}", totalPrice);
         OrderGridView.DataSource = orderDetailTable;
         OrderGridView.DataBind();
     }

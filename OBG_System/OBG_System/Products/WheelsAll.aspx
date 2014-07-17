@@ -74,9 +74,9 @@
                 <tr>
                     <td class="auto-style9" >
                         <asp:Label ID="sizeLB"  runat="server" Text="Size:"></asp:Label></td>
-                    <td class="auto-style8">
+                   <%-- <td class="auto-style8">
                         <asp:LinkButton ID="Button2" runat="server" Text="All"  OnClick="Button2_Click" />
-                        </td>
+                        </td>--%>
 
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Size"
@@ -108,9 +108,9 @@
 
                 <tr>
                     <td class="auto-style9">PCD:</td>
-                    <td class="auto-style8">
+                    <%--<td class="auto-style8">
                         <asp:LinkButton ID="Button3" runat="server" Text="All"  OnClick="Button3_Click"/>
-                        </td>
+                        </td>--%>
                     <td class="auto-style6">
                         <asp:CheckBoxList DataSourceID="SqlDataSource2" DataTextField="PCD"
                             DataValueField="PCD" CssClass="CBLayout" ID="chkPCD"  runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
@@ -121,9 +121,9 @@
                
                 <tr>
                     <td class="auto-style9">Offset:</td>
-                    <td class="auto-style8">
+                   <%-- <td class="auto-style8">
                         <asp:LinkButton ID="Button4" runat="server" Text="All" OnClick="Button4_Click"/>
-                        </td>
+                        </td>--%>
                     <td class="auto-style6">
                         <asp:CheckBoxList DataSourceID="SqlDataSource4" DataTextField="Offset"
                             DataValueField="Offset" CssClass="CBLayout" ID="chkOffset" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
@@ -133,9 +133,9 @@
 
                 <tr>
                     <td class="auto-style9">Seat:</td>
-                    <td class="auto-style8">
+                    <%--<td class="auto-style8">
                         <asp:LinkButton ID="Button5" runat="server" Text="All" OnClick="Button5_Click"  />
-                        </td>
+                        </td>--%>
                     <td class="auto-style6">
                         <asp:CheckBoxList DataSourceID="SqlDataSource5" DataTextField="Seat"
                             DataValueField="Seat" CssClass="CBLayout" ID="chkSeat" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
@@ -145,9 +145,9 @@
 
                 <tr>
                     <td class="auto-style9">Bore:</td>
-                    <td class="auto-style8">
+                   <%-- <td class="auto-style8">
                         <asp:LinkButton ID="Button6" runat="server" Text="All" OnClick="Button6_Click"  />
-                        </td>
+                        </td>--%>
                     <td class="auto-style6">
                         <asp:CheckBoxList DataSourceID="SqlDataSource6" DataTextField="Bore"
                             DataValueField="Bore" CssClass="CBLayout" ID="chkBore" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
@@ -156,9 +156,9 @@
                 </tr>
                 <tr>
                     <td class="auto-style3">Finish:</td>
-                    <td class="auto-style8">
+                    <%--<td class="auto-style8">
                         <asp:LinkButton ID="Button7" runat="server" Text="All" OnClick="Button7_Click" />
-                        </td>
+                        </td>--%>
                     <td class="auto-style6">
                         <asp:CheckBoxList DataSourceID="SqlDataSource3" DataTextField="Finish"
                             DataValueField="Finish"  ID="chkFinish" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
@@ -551,7 +551,7 @@
                     <asp:Label ID="WeightLabel" runat="server" Text='<%# Bind("Weight") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Onhand" ItemStyle-HorizontalAlign="Center" SortExpression="Onhand">
+            <asp:TemplateField HeaderText="Stock" ItemStyle-HorizontalAlign="Center" SortExpression="Onhand">
                 <%--<EditItemTemplate>
                     <asp:TextBox ID="OnhandTextBox" runat="server" Text='<%# Bind("Onhand") %>'></asp:TextBox>
                 </EditItemTemplate>--%>

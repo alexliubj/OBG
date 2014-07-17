@@ -96,21 +96,26 @@
             <Columns>
                 <asp:BoundField DataField="OrderID" HeaderText="Order ID" InsertVisible="False" ReadOnly="True" SortExpression="OrderID" Visible="true" />
                 <%--<asp:BoundField DataField="ProductId" HeaderText="ProductId" InsertVisible="False" ReadOnly="True" SortExpression="ProductId" Visible="true" />--%>
-                <asp:TemplateField HeaderText="ProductID" SortExpression="ProductID">
+                <%--<asp:TemplateField HeaderText="ProductID" SortExpression="ProductID">
                     <ItemTemplate>
                         <asp:Label ID="LBProductID" runat="server" Text='<%# Bind("ProductId") %>'></asp:Label>
                     </ItemTemplate>
-                </asp:TemplateField>
+                </asp:TemplateField>--%>
+                <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Center" SortExpression="Image">
+                <ItemTemplate>
+                    <asp:Image ID="imageLabel" class="Imagehub" runat="server" ImageUrl='<%# Eval("Image") %>'></asp:Image>
+                </ItemTemplate>
+            </asp:TemplateField>
                 <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
                     <ItemTemplate>
                         <asp:Label ID="Label5" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="ProductName" SortExpression="ProductName">
+                <%--<asp:TemplateField HeaderText="ProductName" SortExpression="ProductName">
                     <ItemTemplate>
                         <asp:Label ID="Label8" runat="server" Text='<%# Bind("ProductName") %>'></asp:Label>
                     </ItemTemplate>
-                </asp:TemplateField>
+                </asp:TemplateField>--%>
                 <asp:TemplateField HeaderText="Quantity" SortExpression="Quantity">
                     <ItemTemplate>
                         <asp:TextBox ID="TextBox4" runat="server" Width="20" Text='<%# Bind("Qty") %>'></asp:TextBox>
@@ -119,9 +124,14 @@
                             <asp:Label ID="Label4" runat="server" Text='<%# Bind("Qty") %>'></asp:Label>
                         </ItemTemplate>--%>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Price" SortExpression="Price">
+                <asp:TemplateField HeaderText="Unit Price" SortExpression="Price">
                     <ItemTemplate>
                         <asp:Label ID="Label6" runat="server" Text='<%# Bind("DiscountRate","{0:c}") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField> 
+                <asp:TemplateField HeaderText="Amount" SortExpression="Price">
+                    <ItemTemplate>
+                        <asp:Label ID="Label7" runat="server" Text='<%# Bind("finalPrice","{0:c}") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField> 
                 <%--<asp:CommandField HeaderText="Delete" ShowDeleteButton="True" Visible="true" ButtonType="Button" DeleteText="Delete" ControlStyle-CssClass="myButton" />--%>
