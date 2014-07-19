@@ -308,10 +308,10 @@
                     <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="4"></asp:TextBox>
                 </ItemTemplate>
                 
-            </asp:TemplateField>
+           <%-- </asp:TemplateField>
                 <asp:TemplateField HeaderText="Description">
                     <ItemTemplate>                
-                        <asp:LinkButton ID="DesBt"  Width="30" runat="server"  CommandName="DesVClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' Text="Description" />         
+                        <asp:LinkButton ID="DesBt"  Width="30" runat="server"  CommandName="DesVClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' Text="Description" />         --%>
                    <%--<div id="desDiv" style="display:none;z-index:2000;position:absolute;left:3px;top:23px;border:1px solid #06c;padding:0px;background:#fff;"><asp:Label ID="OnhandLabel" runat="server" Text='<%# Bind("des") %>'></asp:Label></div>
                         <div style="background:#0184de;text-align:right;padding-right:3px;"><span style="width:12;border-width:0px;color:white;font-family:webdings; cursor:hand; left:-200;" onclick="hidden('desDiv')">r</span></div>
                     <script type="text/javascript" language="javascript">
@@ -324,7 +324,7 @@
                             checkbox_list.style.display = "none";
                         }
 </script>     --%>
-                    </ItemTemplate>   
+                   <%-- </ItemTemplate>  --%> 
                 </asp:TemplateField>
                   <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center" SortExpression="ADD">
             <ItemTemplate>
