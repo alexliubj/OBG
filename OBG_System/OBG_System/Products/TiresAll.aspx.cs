@@ -304,5 +304,6 @@ public partial class Products_tireall : System.Web.UI.Page
         ChkBrand.ClearSelection();
         ChkSize.ClearSelection();
         ChkSeason.ClearSelection();
+        GridView2.DataBind();
     }
 }

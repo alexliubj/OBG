@@ -60,6 +60,14 @@ namespace OBGModel
             set { partNO = value; }
         }
 
+        private string image;
+
+        public string Image
+        {
+            get { return image; }
+            set { image = value; }
+        }
+
 
     }
 }

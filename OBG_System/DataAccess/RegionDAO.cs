@@ -24,6 +24,43 @@ namespace DataAccess
             return dt;
         }
 
+        public static double GetReginIDByUserId(int userId)
+        {
+            //int rName = 0;
+            double price = 0;
+            DbCommand command = db.GetSqlStringCommond(@"SELECT r.regionprice FROM shipping r inner join users u on r.regionid = u.regionid where userid = @userid");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userId) };
+            command.Parameters.AddRange(paras);
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    //rName = reader.GetInt32(0);
+                    price = reader.GetDouble(0);
+
+                }
+            }
+            //return rName;
+            return price;
+        }
+
+        public static double GetReginFeeByReginID(int shipId)
+        {
+            double rp = 0;
+            DbCommand command = db.GetSqlStringCommond(@"SELECT [regionprice] FROM shipping where regionid = @regionid");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@regionid", shipId) };
+            command.Parameters.AddRange(paras);
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    rp = reader.GetDouble(0);
+
+                }
+            }
+            return rp;
+        }
+
         public static int UpdateShipping(Shipping ship)
         {
             DbCommand command = db.GetSqlStringCommond(@"UPDATE [Shipping]

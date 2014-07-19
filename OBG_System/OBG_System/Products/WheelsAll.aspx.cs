@@ -473,5 +473,6 @@ public partial class Products_wheelall : System.Web.UI.Page
         chkSeat.ClearSelection();
         chkFinish.ClearSelection();
         chkBore.ClearSelection();
+        Gridview1_Bind();
     }
 }

@@ -152,19 +152,23 @@ public partial class Default2 : System.Web.UI.Page
     {
         //orderID = int.Parse(OrderGridView.SelectedRow.Cells[0].Text);
         orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
+        double regionid = RegionBLO.GetReginIDByUserId(userId);
+        //double rf = RegionBLO.GetReginFeeByReginID(regionid);
         decimal tatil = 0;
         decimal HST = 0;
         decimal totalPrice = 0;
         decimal hst = (Decimal)(0.13);
+        decimal shipfee = (Decimal)regionid;
         foreach (DataRow row in orderDetailTable.Rows)
         {
             tatil += decimal.Parse(row["DiscountRate"].ToString()) * int.Parse(row["Qty"].ToString());
             HST += decimal.Parse(row["DiscountRate"].ToString()) * int.Parse(row["Qty"].ToString()) * hst;
-            totalPrice = tatil + HST;
+            totalPrice = tatil + HST + shipfee;
         }
-        lblTatil.Text = string.Format("{0:n2}", tatil);
-        Label2.Text = string.Format("{0:n2}", HST);
-        Label7.Text = string.Format("{0:n2}", totalPrice);
+        lblTatil.Text = string.Format("${0:n2}", tatil);
+        Label2.Text = string.Format("${0:n2}", HST);
+        Label7.Text = string.Format("${0:n2}", totalPrice);
+        Label10.Text = string.Format("${0:n2}", regionid);
         OrderGridView.DataSource = orderDetailTable;
         OrderGridView.DataBind();
     }

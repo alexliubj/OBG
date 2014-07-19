@@ -28,5 +28,15 @@ namespace BusinessLogic
         {
             return RegionDAO.AddNewShippping(ship);
         }
+
+        public static double GetReginIDByUserId(int userid)
+        {
+            return RegionDAO.GetReginIDByUserId(userid);
+        }
+
+        //public static double GetReginFeeByReginID(int shipId)
+        //{
+        //    return RegionDAO.GetReginFeeByReginID(shipId);
+        //}
     }
 }

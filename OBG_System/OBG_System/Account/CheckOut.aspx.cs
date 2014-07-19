@@ -107,7 +107,7 @@ public partial class Default2 : System.Web.UI.Page
             HST += decimal.Parse(row["Price"].ToString()) * int.Parse(row["qty"].ToString()) * hst;
             totalPrice = total + HST;
         }
-        LabelTotalPrice.Text = string.Format("{0:n2}", total);
+        LabelTotalPrice.Text = string.Format("${0:n2}", total);
         Label1.Text = string.Format("${0:n2}", HST);
         Label2.Text = string.Format("${0:n2}", totalPrice);
        // CKGridView.DataSource = checkoutTB;
@@ -168,10 +168,12 @@ public partial class Default2 : System.Web.UI.Page
                 //line.OrderId = orderID;
                 //line.OrderId = orderId;
                 //line.DiscountRate = (float)rate;
+                
                 line.DiscountRate = float.Parse(((Label)CKGridView.Rows[i].Cells[7].FindControl("Price")).Text.Substring(1).ToString());
                 line.ProductName = ((Label)CKGridView.Rows[i].Cells[4].FindControl("Label4")).Text.ToString();
                 line.ProductType = int.Parse(((Label)CKGridView.Rows[i].Cells[5].FindControl("Label5")).Text.ToString());
                 line.Qty = int.Parse(((Label)CKGridView.Rows[i].Cells[6].FindControl("Label6")).Text.ToString());
+                line.Image = ((Image)CKGridView.Rows[i].Cells[2].FindControl("imageLabel")).ImageUrl;
                 orderline.Add(line);
             }
 
@@ -189,7 +191,7 @@ public partial class Default2 : System.Web.UI.Page
             if (ordersave > 0)
             {
                 User user = UserBLO.GetUserInfoWithUserId(userID);
-                SendMail(user.Email);
+                //SendMail(user.Email);
                 Session.Remove("Cart");
                 Response.Redirect("~/Default.aspx");
             }
@@ -252,7 +254,7 @@ public partial class Default2 : System.Web.UI.Page
         System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
         Message.From = new MailAddress(Email, "OBG Master", EnCode);
         Message.To.Add(new MailAddress(ToEmail, "Dear Customer", EnCode));
-        Message.Subject = "Order Confirmation";
+        Message.Subject = "Your OPIT Order Is Confirmed‏ ";
         Message.SubjectEncoding = EnCode;
 
         StringBuilder MailContent = new StringBuilder();
@@ -289,4 +291,8 @@ public partial class Default2 : System.Web.UI.Page
         return true;
     }
 
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Account/ShoppingCart.aspx");
+    }
 }

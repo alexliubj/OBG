@@ -41,7 +41,7 @@
                     <asp:Label ID="Label8" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="ProductName" SortExpression="ProductName">
+            <asp:TemplateField HeaderText="ProductName" Visible="false" SortExpression="ProductName">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("ProductName") %>'></asp:TextBox>
                 </EditItemTemplate>
@@ -49,7 +49,7 @@
                     <asp:Label ID="Label4" runat="server" Text='<%# Bind("ProductName") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="ProductType" ItemStyle-HorizontalAlign="Center" SortExpression="ProductType">
+            <asp:TemplateField HeaderText="ProductType" Visible="false" ItemStyle-HorizontalAlign="Center" SortExpression="ProductType">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("ProductType") %>'></asp:TextBox>
                 </EditItemTemplate>
@@ -65,13 +65,13 @@
                     <asp:Label ID="Label6" runat="server" Text='<%# Bind("qty") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Price" ItemStyle-HorizontalAlign="Center" SortExpression="ProductID">
+            <asp:TemplateField HeaderText="Unit Price" ItemStyle-HorizontalAlign="Center" SortExpression="ProductID">
                 <ItemTemplate>
                     <asp:Label ID="Price" runat="server" Text='<%# Convert.ToDouble(Eval("Price")).ToString("c2") %>'></asp:Label>
 
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Item Price" ItemStyle-HorizontalAlign="Center" SortExpression="ProductID">
+            <asp:TemplateField HeaderText="Amount" ItemStyle-HorizontalAlign="Center" SortExpression="ProductID">
                 <ItemTemplate>
                     <asp:Label ID="ItemPrice" runat="server" Text='<%# Convert.ToDouble(Eval("itemTotal")).ToString("c2") %>'></asp:Label>
                 </ItemTemplate>
@@ -109,11 +109,11 @@
     <asp:Label ID="Label2" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>
     <br />
     <br />
-    <asp:Label ID="lbPO" runat="server" AssociatedControlID="txtPO">P.O Box:</asp:Label>
+    <asp:Label ID="lbPO" runat="server" AssociatedControlID="txtPO">P.O (Purchase Order):</asp:Label>
     <asp:TextBox ID="txtPO" runat="server" CssClass="textEntry"></asp:TextBox>
 
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     <asp:linkButton ID="Button1" runat="server" Text="Back to shopping cart" OnClick ="Button1_Click" />  
      <asp:Button ID="confirmBt" runat="server" align="Right" Text="Confirm" ControlStyle-CssClass="myButton" OnClick="BtnConfirm_Click" />
 </asp:Content>
 

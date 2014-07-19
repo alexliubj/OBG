@@ -37,7 +37,7 @@ namespace DataAccess
                                               ,[des]
                                               ,[pricing]
                                               ,[name]
-                                                ,[brand],[special],d.accRate,t.pricing*d.accRate finalprice,t.pricing*d.accRate*t.special specialPrice
+                                                ,[brand],[special],d.accRate,t.pricing*d.accRate finalprice,t.pricing*t.special specialPrice
                                           FROM [Accessories]t ,[discount] d where d.userid=@userid and special!=1.0");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userid) };
             command.Parameters.AddRange(paras);
@@ -54,7 +54,7 @@ namespace DataAccess
                                               ,[pricing]
                                               ,[name]
                                                 ,[brand],[special]
-                                                  ,d.accRate,t.pricing*d.accRate finalprice,t.pricing*d.accRate*t.special specialPrice
+                                                  ,d.accRate,t.pricing*d.accRate finalprice,t.pricing*t.special specialPrice
                                                   FROM dbo.[Accessories] t ,[discount] d where d.userid=@userid;");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userId) };
             command.Parameters.AddRange(paras);
