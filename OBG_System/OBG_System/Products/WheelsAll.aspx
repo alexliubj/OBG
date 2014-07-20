@@ -519,7 +519,7 @@
                     <asp:Label ID="FinishLabel" runat="server" Text='<%# Bind("Finish") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Offset" ItemStyle-HorizontalAlign="Center" SortExpression="Offset" >
+            <asp:TemplateField HeaderText="Offset(mm)" ItemStyle-HorizontalAlign="Center" SortExpression="Offset" >
                 <%-- <EditItemTemplate>
                     <asp:TextBox ID="OffsetTextBox" runat="server" Text='<%# Bind("Offset") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
@@ -535,7 +535,7 @@
                     <asp:Label ID="SeatLabel" runat="server" Text='<%# Bind("Seat") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Bore" ItemStyle-HorizontalAlign="Center" SortExpression="Bore">
+            <asp:TemplateField HeaderText="Bore(mm)" ItemStyle-HorizontalAlign="Center" SortExpression="Bore">
                 <%--<EditItemTemplate>
                     <asp:TextBox ID="BoreTextBox" runat="server" Text='<%# Bind("Bore") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
@@ -543,7 +543,7 @@
                     <asp:Label ID="BoreLabel" runat="server" Text='<%# Bind("Bore") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Weight" ItemStyle-HorizontalAlign="Center" SortExpression="Weight">
+            <asp:TemplateField HeaderText="Weight(LBS)" ItemStyle-HorizontalAlign="Center" SortExpression="Weight">
                 <%--<EditItemTemplate>
                     <asp:TextBox ID="WeightTextBox" runat="server" Text='<%# Bind("Weight") %>'></asp:TextBox>
                 </EditItemTemplate>--%>

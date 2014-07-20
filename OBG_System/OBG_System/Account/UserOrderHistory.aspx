@@ -99,12 +99,12 @@
             <AlternatingRowStyle BackColor="White" />
             <Columns>
                 <asp:BoundField DataField="OrderID" HeaderText="Order ID" ItemStyle-HorizontalAlign="Center" InsertVisible="False" ReadOnly="True" SortExpression="OrderID" Visible="true" />
-                <%--<asp:BoundField DataField="ProductId" HeaderText="ProductId" InsertVisible="False" ReadOnly="True" SortExpression="ProductId" Visible="true" />--%>
-                <%--<asp:TemplateField HeaderText="ProductID" SortExpression="ProductID">
+                <asp:BoundField DataField="ProductId" HeaderText="ProductId"  InsertVisible="False" ReadOnly="True" SortExpression="ProductId" Visible="false" />
+                <asp:TemplateField HeaderText="ProductID" SortExpression="ProductID">
                     <ItemTemplate>
                         <asp:Label ID="LBProductID" runat="server" Text='<%# Bind("ProductId") %>'></asp:Label>
                     </ItemTemplate>
-                </asp:TemplateField>--%>
+                </asp:TemplateField>
                 <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Center" SortExpression="Image">
                 <ItemTemplate>
                     <asp:Image ID="imageLabel" class="Imagehub" runat="server" ImageUrl='<%# Eval("Image") %>'></asp:Image>

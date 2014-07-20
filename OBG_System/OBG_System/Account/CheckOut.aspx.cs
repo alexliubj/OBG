@@ -191,7 +191,7 @@ public partial class Default2 : System.Web.UI.Page
             if (ordersave > 0)
             {
                 User user = UserBLO.GetUserInfoWithUserId(userID);
-                //SendMail(user.Email);
+                SendMail(user.Email);
                 Session.Remove("Cart");
                 Response.Redirect("~/Default.aspx");
             }
@@ -249,6 +249,8 @@ public partial class Default2 : System.Web.UI.Page
     public bool SendMail(string ToEmail)
     {
         string Email = "alexliu0506@126.com";
+        //string Email = "onlineorders@optiwheels.ca";
+       // string password = "orders12345";
         string password = "5631247";
         Encoding EnCode = Encoding.UTF8;
         System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
@@ -264,7 +266,7 @@ public partial class Default2 : System.Web.UI.Page
          string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + ResolveUrl("~/");
         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have ordered products at <a href='"+host+"'>OBG Order System</a>.");
         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For more order details, please see your order history: ");
-
+        MailContent.Append(CKGridView);
        
         string url = host + "Account/UserOrderHistory.aspx";
         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='" + url + "'>" + url + "</a>");
@@ -276,6 +278,7 @@ public partial class Default2 : System.Web.UI.Page
         try
         {
             SmtpClient smtp = new SmtpClient("smtp.126.com", 25);
+            //SmtpClient smtp = new SmtpClient("smtp.optiwheels.ca", 25);
             smtp.Credentials = new NetworkCredential(Email, password);
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.Send(Message);
