@@ -386,7 +386,7 @@
                             <asp:Button ID="BtnSave" runat="server" OnClick="BtnSave_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton" />
                         </td>
                         <td>
-                            <asp:Button ID="BtnCancle" runat="server" OnClick="BtnCancle_Click" Text="Cancle" Visible="true" CssClass="myButton" />
+                            <asp:Button ID="BtnCancle" runat="server" OnClick="BtnCancle_Click" Text="Cancel" Visible="true" CssClass="myButton" />
                         </td>
                     </tr>
                 </table>
@@ -604,7 +604,7 @@
                             <asp:Button ID="BtnSaveTire" runat="server" OnClick="BtnSaveTire_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton" />
                         </td>
                         <td>
-                            <asp:Button ID="BtnCancelTire" runat="server" OnClick="BtnCancelTire_Click" Text="Cancle" Visible="true" CssClass="myButton" />
+                            <asp:Button ID="BtnCancelTire" runat="server" OnClick="BtnCancelTire_Click" Text="Cancel" Visible="true" CssClass="myButton" />
                         </td>
                     </tr>
                 </table>
@@ -802,7 +802,7 @@
                             <asp:Button ID="BtnSaveAcc" runat="server" OnClick="BtnSaveAcc_Click" Text="Save" Visible="true" ValidationGroup="RegisterUserValidationGroup" CssClass="myButton" />
                         </td>
                         <td>
-                            <asp:Button ID="BtnCancelAcc" runat="server" OnClick="BtnCancelAcc_Click" Text="Cancle" Visible="true" CssClass="myButton" />
+                            <asp:Button ID="BtnCancelAcc" runat="server" OnClick="BtnCancelAcc_Click" Text="Cancel" Visible="true" CssClass="myButton" />
                         </td>
                     </tr>
                 </table>

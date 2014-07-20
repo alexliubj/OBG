@@ -24,13 +24,11 @@ public partial class Admin_Default : System.Web.UI.Page
         {
             Response.Redirect("~/Admin/Login.aspx");
         }
-
+        Bind();
         if (!IsPostBack)
         {
             MenuItem ms = NavigationMenu.FindItem("View Current Image");
             ms.Selectable = false;
-
-            Bind();
         }
     }
 
@@ -40,15 +38,7 @@ public partial class Admin_Default : System.Web.UI.Page
         string filename = Path.GetFileName(FileUploadControl.FileName);
         string filenameWithTimeStamp = AppendTimeStamp(filename);
 
-        HomeImage oldHomeImage = new HomeImage();
-        if (HomePageBLO.GetHomePageInformation() != null)
-        {
-            oldHomeImage = HomePageBLO.GetHomePageInformation();
-        }
-
         HomeImage newHomeImage = new HomeImage();
-        newHomeImage.Des2 = oldHomeImage.Des1;
-        newHomeImage.Image2 = oldHomeImage.Image1;
         newHomeImage.Des1 = Des.Text.ToString().Trim();
         
 
@@ -63,9 +53,9 @@ public partial class Admin_Default : System.Web.UI.Page
         }
 
         int update = 0;
-        update = HomePageBLO.UpdateImages(newHomeImage);
+        update = HomePageBLO.InsertImages(newHomeImage);
 
-        if (update > 1)
+        if (update > 0)
         {
             if (FileUploadControl.HasFile)
             {
@@ -97,13 +87,49 @@ public partial class Admin_Default : System.Web.UI.Page
     
     public void Bind()
     {
-        HomeImage homeImage = HomePageBLO.GetHomePageInformation();
-        Image1.ImageUrl = homeImage.Image1;
-        Image2.ImageUrl = homeImage.Image2;
-        Des1.Text = homeImage.Des1;
-        Des2.Text = homeImage.Des2;
+        List<HomeImage> his = HomePageBLO.GetHomePageInformation();
+
+        for (int i = 0; i < his.Count; i++)
+        {
+            ImageButton new_image = new ImageButton();
+            new_image.ID = his[i].ImageID.ToString();
+            new_image.ImageUrl = his[i].Image1;
+            new_image.ToolTip = his[i].Des1;
+            new_image.Width = 800;
+            new_image.Height = 600;
+            new_image.OnClientClick = "return confirm('Are you sure you want to delete this image?')";
+            new_image.CommandArgument = i.ToString();
+            new_image.Click += ImageButton_Click;
+            add_image(new_image);
+        }
     }
 
+    protected void add_image(ImageButton image)
+    {
+
+        pnlMain.Controls.Add(image);
+        pnlMain.Controls.Add(new LiteralControl("<hr>"));
+        pnlMain.Controls.Add(new LiteralControl("<hr>"));
+    }
+
+    protected void ImageButton_Click(object sender, EventArgs e)
+    {
+        ImageButton ib = (ImageButton)sender;
+
+        int imageID = Convert.ToInt32(ib.ID);
+        int update = HomePageBLO.DeleteImages(imageID);
+        if (update > 0)
+        {
+            Response.Redirect(Request.Url.AbsoluteUri);
+        }
+        else
+        {
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
+                                  "err_msg",
+                                  "alert('Sorry, deleting Home Page Image failed.');",
+                                  true);
+        }
+    }
     #endregion
 
     protected void NavigationMenu_MenuItemClick(object sender, MenuEventArgs e)
@@ -211,4 +237,6 @@ public partial class Admin_Default : System.Web.UI.Page
         initialDes2.Text = null;
     }
     #endregion
+
+
 }

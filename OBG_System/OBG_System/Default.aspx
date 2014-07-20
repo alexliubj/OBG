@@ -10,13 +10,22 @@
             </center>
     </h1>
     <hr />
-    <center>
+<%--    <center>
        <asp:Image ID="Image1" runat="server"  Width="800" Height="600"/>
      </center>
     <hr />
     <hr />
     <center>
      <asp:Image ID="Image2" runat="server"   Width="800" Height="600" />
-        </center>
-
+        </center>--%>
+    <div>
+        POLICY DIV, TBA
+    </div>
+    <hr />
+    <hr />
+    <asp:Panel ID="pnlMain" runat="server"  style=" padding-left:60px;
+        padding-right:60px;
+        padding-top:10px;
+        padding-bottom:10px;">
+        </asp:Panel>
 </asp:Content>
