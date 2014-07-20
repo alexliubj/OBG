@@ -7,6 +7,14 @@ namespace OBGModel
 {
     public class HomeImage
     {
+        private int imageID;
+
+        public int ImageID
+        {
+            get { return imageID; }
+            set { imageID = value; }
+        }
+
         private string image1;
 
         public string Image1

@@ -45,7 +45,7 @@ public partial class Default2 : System.Web.UI.Page
     }
     protected void BtnEdit_Click(object sender, EventArgs e)
     {
-        Email.ReadOnly = false;
+        //Email.ReadOnly = false;
         FirstName.ReadOnly = false;
         LastName.ReadOnly = false;
         Company.ReadOnly = false;

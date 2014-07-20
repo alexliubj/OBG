@@ -14,7 +14,7 @@ namespace BusinessLogic
             return HomePageDAO.UpdateImages(hi);
         }
 
-        public static HomeImage GetHomePageInformation()
+        public static List<HomeImage> GetHomePageInformation()
         {
             return HomePageDAO.GetHomePageInformation();
         }
@@ -23,5 +23,11 @@ namespace BusinessLogic
         {
             return HomePageDAO.InsertImages(hi);
         }
+
+        public static int DeleteImages(int imageID)
+        {
+            return HomePageDAO.DeleteImages(imageID);
+        }
+                
     }
 }

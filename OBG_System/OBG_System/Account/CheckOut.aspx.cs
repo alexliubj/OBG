@@ -250,7 +250,7 @@ public partial class Default2 : System.Web.UI.Page
     {
         string Email = "alexliu0506@126.com";
         //string Email = "onlineorders@optiwheels.ca";
-       // string password = "orders12345";
+        //string password = "orders12345";
         string password = "5631247";
         Encoding EnCode = Encoding.UTF8;
         System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
@@ -278,7 +278,7 @@ public partial class Default2 : System.Web.UI.Page
         try
         {
             SmtpClient smtp = new SmtpClient("smtp.126.com", 25);
-            //SmtpClient smtp = new SmtpClient("smtp.optiwheels.ca", 25);
+            //SmtpClient smtp = new SmtpClient("relay-hosting.secureserver.net", 25);
             smtp.Credentials = new NetworkCredential(Email, password);
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.Send(Message);

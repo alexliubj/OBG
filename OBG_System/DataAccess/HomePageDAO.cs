@@ -13,9 +13,6 @@ namespace DataAccess
     {
         private static DbHelper db = new DbHelper();
 
-        //Default set 2 images;
-        //Only can be update;
-        //No delete, no insert methods;
         public static int UpdateImages(HomeImage hi)
         {
             DbCommand command = db.GetSqlStringCommond(@"UPDATE [HomePage]
@@ -37,41 +34,49 @@ namespace DataAccess
         public static int InsertImages(HomeImage hi)
         {
             DbCommand command = db.GetSqlStringCommond(@"INSERT INTO [HomePage]
-                                                           ([Image1]
-                                                           ,[Des1]
-                                                           ,[Image2]
-                                                           ,[Des2])
+                                                           ([ImageUrl]
+                                                           ,[ImageDes])
                                                      VALUES
-                                                           (@image1
-                                                           ,@des1
-                                                           ,@image2
-                                                           ,@des2)");
+                                                           (@image
+                                                           ,@des)");
 
             SqlParameter[] paras = new SqlParameter[] { 
-                new SqlParameter("@image1", hi.Image1),
-                new SqlParameter("@des1",hi.Des1),
-                new SqlParameter("@image2",hi.Image2),
-                new SqlParameter("@des2",hi.Des2)
+                new SqlParameter("@image", hi.Image1),
+                new SqlParameter("@des",hi.Des1)
             };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
 
-        public static HomeImage GetHomePageInformation()
+        public static int DeleteImages(int imageID)
         {
-            HomeImage hi = new HomeImage();
-            DbCommand command = db.GetSqlStringCommond(@"select image1,des1,image2,des2 from homepage;;");
+            DbCommand command = db.GetSqlStringCommond(@"delete HomePage where ImageID = @imageID");
+
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@imageID", imageID),
+            };
+            command.Parameters.AddRange(paras);
+            return db.ExecuteNonQuery(command);
+        }
+
+
+        public static List<HomeImage> GetHomePageInformation()
+        {
+            List<HomeImage> his = new List<HomeImage>();
+
+            DbCommand command = db.GetSqlStringCommond("select * from homepage order by ImageID desc");
             using (DbDataReader reader = db.ExecuteReader(command))
             {
                 while (reader.Read())
                 {
-                    hi.Image1 = reader.GetString(0);
-                    hi.Image2 = reader.GetString(2);
-                    hi.Des1 = reader.GetString(1);
-                    hi.Des2 = reader.GetString(3);
+                    HomeImage hi = new HomeImage();
+                    hi.ImageID = reader.GetInt32(0);
+                    hi.Image1 = reader.GetString(1);
+                    hi.Des1 = reader.GetString(2);
+                    his.Add(hi);
                 }
             }
-            return hi;
+            return his;
         }
     }
 }

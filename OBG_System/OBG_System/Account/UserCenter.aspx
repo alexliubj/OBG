@@ -112,7 +112,7 @@
                                     <asp:Button ID="BtnSave" runat="server" OnClick="BtnSave_Click" Text="Save" Visible="False" ValidationGroup="RegisterUserValidationGroup"  CssClass="myButton"/>
                                 </asp:TableCell>
                                 <asp:TableCell>
-                                    <asp:Button ID="BtnCancle" runat="server" OnClick="BtnCancle_Click" Text="Cancle" Visible="False"  CssClass="myButton"/>
+                                    <asp:Button ID="BtnCancle" runat="server" OnClick="BtnCancle_Click" Text="Cancel" Visible="False"  CssClass="myButton"/>
                                 </asp:TableCell>
                             </asp:TableRow>
                             <asp:TableRow VerticalAlign="Top">
