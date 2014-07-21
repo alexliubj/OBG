@@ -15,7 +15,7 @@ public partial class SiteMaster : System.Web.UI.MasterPage
 {
 
 
-    private List<ShopingCart> shoppingcartlist = new List<ShopingCart>();
+    List<ShopingCart> shoppingcartlist = new List<ShopingCart>();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["userID"] != null)
@@ -32,10 +32,16 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             if (shoppingcartlist != null && shoppingcartlist.Count > 0)
             {
                 shoppingCount.Text = shoppingcartlist.Count.ToString();
+                shoppingCountLeft.Visible = true;
+                shoppingCountRight.Visible = true;
             }
             else
             {
                 shoppingCount.Text = string.Empty;
+                shoppingCountLeft.Text = string.Empty;
+                shoppingCountLeft.Visible = false;
+                shoppingCountRight.Visible = false;
+                shoppingCountRight.Text = string.Empty;
             }
             
         }
