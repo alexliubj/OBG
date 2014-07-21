@@ -283,7 +283,7 @@ public partial class Default2 : System.Web.UI.Page
             //SmtpClient smtp = new SmtpClient("relay-hosting.secureserver.net", 25);
             smtp.EnableSsl = true;
             smtp.Credentials = new NetworkCredential(Email, password);
-            //smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.Send(Message);
 
         }
