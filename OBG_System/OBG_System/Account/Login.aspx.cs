@@ -106,7 +106,7 @@ public partial class Account_Login : System.Web.UI.Page
                         Response.Cookies.Clear();
 
                         // Set the new expiry date - to thirty days from now
-                        DateTime expiryDate = DateTime.Now.AddDays(30);
+                        DateTime expiryDate = DateTime.Now.AddDays(10);
 
                         // Create a new forms auth ticket
                         FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(2, account, DateTime.Now, expiryDate, true, String.Empty);
