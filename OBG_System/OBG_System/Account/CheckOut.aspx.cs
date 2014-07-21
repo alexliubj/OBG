@@ -252,6 +252,8 @@ public partial class Default2 : System.Web.UI.Page
         //string Email = "onlineorders@optiwheels.ca";
         //string password = "orders12345";
         string password = "5631247";
+        //MailMessage objMailMessage;
+        //objMailMessage.To = "scucj@126.com";
         Encoding EnCode = Encoding.UTF8;
         System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
         Message.From = new MailAddress(Email, "OBG Master", EnCode);
@@ -264,13 +266,13 @@ public partial class Default2 : System.Web.UI.Page
         MailContent.Append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ");
         MailContent.Append(DateTime.Now.ToLongTimeString());
          string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + ResolveUrl("~/");
-        //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have ordered products at <a href='"+host+"'>OBG Order System</a>.");
-        //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For more order details, please see your order history: ");
-         MailContent.Append("<br/>Here are your order details: ");
-        MailContent.Append(CKGridView);
-       
-        //string url = host + "Account/UserOrderHistory.aspx";
-        //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='" + url + "'>" + url + "</a>");
+         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have ordered products at <a href='" + host + "'>OBG Order System</a>.");
+         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For more order details, please see your order history: ");
+        // MailContent.Append("<br/>Here are your order details: ");
+        //MailContent.Append(CKGridView);
+
+         string url = host + "Account/UserOrderHistory.aspx";
+         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='" + url + "'>" + url + "</a>");
         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can modify your order before shipping.</p>");
         Message.Body = MailContent.ToString();
         Message.BodyEncoding = EnCode;
