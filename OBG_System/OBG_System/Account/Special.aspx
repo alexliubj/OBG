@@ -82,7 +82,7 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                  src="Pictures/1.png" />
                 <img id="imgFull" alt="" src=""
                  style="display: none;
-                height: 420px;width: 490px" />
+                height: 420px;width: 420px" />
             </td>
         </tr>
         <tr>
@@ -367,7 +367,7 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                  src="Pictures/1.png" />
                 <img id="imgFull" alt="" src=""
                  style="display: none;
-                height: 420px;width: 490px" />
+                height: 420px;width: 420px" />
             </td>
         </tr>
         <tr>
@@ -588,7 +588,7 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                  src="Pictures/1.png" />
                 <img id="imgFull" alt="" src=""
                  style="display: none;
-                height: 420px;width: 490px" />
+                height: 420px;width: 420px" />
             </td>
         </tr>
         <tr>
