@@ -75,6 +75,7 @@
                             </asp:MenuItem>
                             <asp:MenuItem NavigateUrl="Account/UserCenter.aspx" Text="User Center" Value="usercenter"></asp:MenuItem>
                             <asp:MenuItem NavigateUrl="Account/Special.aspx" Text="Special" Value="Special"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Products/ReturnPolicy.aspx" Text="Policy" Value="policy"></asp:MenuItem>
                         </Items>
                     </asp:Menu>
                 </div>

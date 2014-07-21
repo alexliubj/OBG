@@ -59,6 +59,32 @@ namespace DataAccess
             return db.ExecuteNonQuery(command);
         }
 
+        public static int UpdateReturnPolicy(string policyString)
+        {
+            DbCommand command = db.GetSqlStringCommond(@"UPDATE ReturnPolicy
+                                       SET [Policy] = @policy");
+
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@policy", policyString)
+            };
+            command.Parameters.AddRange(paras);
+            return db.ExecuteNonQuery(command);
+        }
+
+        public static string GetReturnPolicy()
+        { 
+            string retSTring = string.Empty;
+            DbCommand command = db.GetSqlStringCommond("select policy from ReturnPolicy");
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    retSTring = reader.GetString(0);
+                }
+            }
+            return retSTring;
+        }
+
 
         public static List<HomeImage> GetHomePageInformation()
         {
