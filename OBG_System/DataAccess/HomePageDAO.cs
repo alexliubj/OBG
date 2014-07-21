@@ -90,7 +90,7 @@ namespace DataAccess
         {
             List<HomeImage> his = new List<HomeImage>();
 
-            DbCommand command = db.GetSqlStringCommond("select [ImageID],[ImageUrl],[ImageDes] from [HomePage] order by [ImageID] DESC");
+            DbCommand command = db.GetSqlStringCommond("select * from [HomePage]");
             using (DbDataReader reader = db.ExecuteReader(command))
             {
                 while (reader.Read())

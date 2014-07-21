@@ -27,25 +27,18 @@ public partial class _Default : System.Web.UI.Page
 
     public void Bind()
     {
-        try
-        {
-            List<HomeImage> his = HomePageBLO.GetHomePageInformation();
-            for (int i = 0; i < his.Count; i++)
-            {
-                Image new_image = new Image();
-                new_image.ID = "Image" + i;
-                new_image.ImageUrl = his[i].Image1;
-                new_image.ToolTip = his[i].Des1;
-                new_image.Width = 800;
-                new_image.Height = 600;
-                add_image(new_image);
-            }
-        }
-        catch(Exception e)
-        {
+        List<HomeImage> his = HomePageBLO.GetHomePageInformation();
 
+        for (int i = 0; i < his.Count; i++)
+        {
+            Image new_image = new Image();
+            new_image.ID = "Image" + i;
+            new_image.ImageUrl = his[i].Image1;
+            new_image.ToolTip = his[i].Des1;
+            new_image.Width = 800;
+            new_image.Height = 600;
+            add_image(new_image);
         }
-        
     }
 
     private void TestSQLQueries()

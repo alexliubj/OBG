@@ -5,7 +5,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
     <div id="ShoppingCartTitle" runat="server" class="ContentHead">
         <h1>Review your order</h1>
-        <asp:Label ID="Label7" runat="server" Text=""></asp:Label>
     </div>
     <br />
     <asp:GridView ID="CKGridView" runat="server" GridLines="Both" align="center" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderID" ForeColor="#333333"

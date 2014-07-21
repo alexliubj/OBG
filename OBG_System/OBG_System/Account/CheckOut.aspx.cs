@@ -249,10 +249,10 @@ public partial class Default2 : System.Web.UI.Page
     public bool SendMail(string ToEmail)
     {
 
-        string Email = "orders@optiwheels.ca";
+        string Email = "holmesli@126.com";
         //string Email = "onlineorders@optiwheels.ca";
         //string password = "orders12345";
-        string password = "orders12345";
+        string password = "holmes615";
         Encoding EnCode = Encoding.UTF8;
         System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
         Message.From = new MailAddress(Email, "OBG Master", EnCode);
@@ -279,11 +279,10 @@ public partial class Default2 : System.Web.UI.Page
 
         try
         {
-            SmtpClient smtp = new SmtpClient("smtp.zoho.com", 465);
+            SmtpClient smtp = new SmtpClient("smtp.126.com", 25);
             //SmtpClient smtp = new SmtpClient("relay-hosting.secureserver.net", 25);
-            smtp.EnableSsl = true;
             smtp.Credentials = new NetworkCredential(Email, password);
-            //smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.Send(Message);
 
         }
@@ -291,7 +290,7 @@ public partial class Default2 : System.Web.UI.Page
         {
             string msg = "Mail cannot be sent because of the server problem:";
             msg += ex.Message;
-            Label7.Text = msg;
+            Response.Write(msg);
             return false;
         }
         return true;
