@@ -207,7 +207,7 @@
                     <asp:TextBox ID="ImageTextBox" runat="server" Text='<%# Bind("Image") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
                 <ItemTemplate>
-                    <asp:ImageButton class="Imagehub" ID="Image1" runat="server" ImageUrl='<%# Eval("Image") %>' OnClientClick = "return LoadDiv(this.src);"></asp:ImageButton>
+                    <asp:ImageButton class="Imagehub" ID="Image1" runat="server" ImageUrl='<%# Eval("Image") %>' OnClientClick = "return LoadDiv(this.src);" Height="100px" Width="100px"></asp:ImageButton>
                     <%--<div id="ladiv" style="position: absolute; visibility: hidden; overflow: hidden;"></div>
                     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript">
                     </script>--%>
@@ -256,7 +256,7 @@
                  src="Pictures/1.png" />
                 <img id="imgFull" alt="" src=""
                  style="display: none;
-                height: 420px;width: 490px" />
+                height: 420px;width: 420px" />
             </td>
         </tr>
         <tr>
@@ -470,6 +470,8 @@
 
 
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="PartNo" ItemStyle-HorizontalAlign="Center" SortExpression="PartNo">
                 <%--<EditItemTemplate>
@@ -478,6 +480,8 @@
                 <ItemTemplate>
                     <asp:Label ID="PNLabel" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Style" ItemStyle-HorizontalAlign="Center" SortExpression="Style">
                 <%--<EditItemTemplate>
@@ -486,6 +490,8 @@
                 <ItemTemplate>
                     <asp:Label ID="StyleLabel" runat="server" Text='<%# Bind("Style") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Brand" ItemStyle-HorizontalAlign="Center" SortExpression="Brand">
                 <%--<EditItemTemplate>
@@ -494,6 +500,8 @@
                 <ItemTemplate>
                     <asp:Label ID="BrandLabel" runat="server" Text='<%# Bind("Brand") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Size" ItemStyle-HorizontalAlign="Center" SortExpression="Size">
                 <%--<EditItemTemplate>
@@ -502,6 +510,8 @@
                 <ItemTemplate>
                     <asp:Label ID="SizeLabel" runat="server" Text='<%# Bind("Size") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Pcd" ItemStyle-HorizontalAlign="Center" SortExpression="Pcd">
                 <%-- <EditItemTemplate>
@@ -510,6 +520,8 @@
                 <ItemTemplate>
                     <asp:Label ID="PCDLabel" runat="server" Text='<%# Bind("Pcd") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Finish" ItemStyle-HorizontalAlign="Center" SortExpression="Finish">
                 <%-- <EditItemTemplate>
@@ -518,6 +530,8 @@
                 <ItemTemplate>
                     <asp:Label ID="FinishLabel" runat="server" Text='<%# Bind("Finish") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Offset(mm)" ItemStyle-HorizontalAlign="Center" SortExpression="Offset" >
                 <%-- <EditItemTemplate>
@@ -526,6 +540,8 @@
                 <ItemTemplate>
                     <asp:Label ID="OffsetLabel" runat="server" Text='<%# Bind("Offset") %>' ></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Seat" ItemStyle-HorizontalAlign="Center" SortExpression="Seat">
                 <%--<EditItemTemplate>
@@ -534,6 +550,8 @@
                 <ItemTemplate>
                     <asp:Label ID="SeatLabel" runat="server" Text='<%# Bind("Seat") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Bore(mm)" ItemStyle-HorizontalAlign="Center" SortExpression="Bore">
                 <%--<EditItemTemplate>
@@ -542,6 +560,8 @@
                 <ItemTemplate>
                     <asp:Label ID="BoreLabel" runat="server" Text='<%# Bind("Bore") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Weight(LBS)" ItemStyle-HorizontalAlign="Center" SortExpression="Weight">
                 <%--<EditItemTemplate>
@@ -550,6 +570,8 @@
                 <ItemTemplate>
                     <asp:Label ID="WeightLabel" runat="server" Text='<%# Bind("Weight") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Stock" ItemStyle-HorizontalAlign="Center" SortExpression="Onhand">
                 <%--<EditItemTemplate>
@@ -558,6 +580,8 @@
                 <ItemTemplate>
                     <asp:Label ID="OnhandLabel" runat="server" Text='<%# Bind("Onhand") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="finalPrice" Visible="false" ItemStyle-HorizontalAlign="Center" SortExpression="Price">
                 <%--<EditItemTemplate>
@@ -566,6 +590,8 @@
                 <ItemTemplate>
                     <asp:Label ID="PriceLabel" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
              <asp:TemplateField HeaderText="Special" Visible="false" SortExpression="Special">
                     <EditItemTemplate>
@@ -587,11 +613,15 @@
                 <%--<ItemTemplate>
                     <asp:Label ID="sPriceLabel2" runat="server" Visible="false" Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
                 </ItemTemplate>--%>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
                 <ItemTemplate>
                     <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="4"></asp:TextBox>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
 
            <%-- <asp:TemplateField HeaderText="Description">
@@ -624,6 +654,8 @@
                 <ItemTemplate>
                     <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' OnClientClick="return confirm('Add the wheel to the shoppingcart?')" ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
 
             <%-- <asp:TemplateField HeaderText="Delete">

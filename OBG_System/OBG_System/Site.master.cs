@@ -56,14 +56,19 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             if (Request.Url.AbsoluteUri.ToLower().Contains(item.Value.ToLower()))
             {
 
-                item.Selectable = false;
-                //  item.Selected
+                    item.Selectable = false;
+                    //  item.Selected
+                    //NavigationMenu.FindItem("wheels").Selectable = true;
+                    //NavigationMenu.FindItem("tires").Selectable = true;
+                    //NavigationMenu.FindItem("accessories").Selectable = true;
+                
             }
             else
             {
                 item.Selectable = true;
 
             }
+
 
           
         }

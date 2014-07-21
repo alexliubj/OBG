@@ -50,7 +50,7 @@ namespace DataAccess
 
         public static int DeleteImages(int imageID)
         {
-            DbCommand command = db.GetSqlStringCommond(@"delete HomePage where ImageID = @imageID");
+            DbCommand command = db.GetSqlStringCommond(@"delete [HomePage] where [ImageID] = @imageID");
 
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@imageID", imageID),
@@ -59,12 +59,38 @@ namespace DataAccess
             return db.ExecuteNonQuery(command);
         }
 
+        public static int UpdateReturnPolicy(string policyString)
+        {
+            DbCommand command = db.GetSqlStringCommond(@"UPDATE ReturnPolicy
+                                       SET [Policy] = @policy");
+
+            SqlParameter[] paras = new SqlParameter[] { 
+                new SqlParameter("@policy", policyString)
+            };
+            command.Parameters.AddRange(paras);
+            return db.ExecuteNonQuery(command);
+        }
+
+        public static string GetReturnPolicy()
+        { 
+            string retSTring = string.Empty;
+            DbCommand command = db.GetSqlStringCommond("select policy from ReturnPolicy");
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    retSTring = reader.GetString(0);
+                }
+            }
+            return retSTring;
+        }
+
 
         public static List<HomeImage> GetHomePageInformation()
         {
             List<HomeImage> his = new List<HomeImage>();
 
-            DbCommand command = db.GetSqlStringCommond("select * from homepage order by ImageID desc");
+            DbCommand command = db.GetSqlStringCommond("select * from [HomePage]");
             using (DbDataReader reader = db.ExecuteReader(command))
             {
                 while (reader.Read())

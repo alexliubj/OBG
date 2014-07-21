@@ -27,7 +27,7 @@
             m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-        ga('create', 'UA-45475063-4', 'auto');
+        ga('create', 'UA-53028243-1', 'auto');
         ga('send', 'pageview');
 
 </script>
@@ -75,6 +75,7 @@
                             </asp:MenuItem>
                             <asp:MenuItem NavigateUrl="Account/UserCenter.aspx" Text="User Center" Value="usercenter"></asp:MenuItem>
                             <asp:MenuItem NavigateUrl="Account/Special.aspx" Text="Special" Value="Special"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Products/ReturnPolicy.aspx" Text="Policy" Value="returnpolicy"></asp:MenuItem>
                         </Items>
                     </asp:Menu>
                 </div>

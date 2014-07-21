@@ -59,15 +59,19 @@
                 <ItemTemplate>
                     <asp:Label ID="PNLabel" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
              <asp:TemplateField HeaderText="Name" ItemStyle-HorizontalAlign="Center" SortExpression="Name">
                 <ItemTemplate>
                     <asp:Label ID="NameLabel" runat="server" Text='<%# Bind("Name") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Center" SortExpression="Image">
                 <ItemTemplate>
-                    <asp:ImageButton class="Imagehub" ID="Image1" runat="server" ImageUrl='<%# Eval("Image") %>'  OnClientClick = "return LoadDiv(this.src);"></asp:ImageButton>
+                    <asp:ImageButton class="Imagehub" ID="Image1" runat="server" ImageUrl='<%# Eval("Image") %>'  OnClientClick = "return LoadDiv(this.src);" Height="100px" Width="100px"></asp:ImageButton>
                 <style type="text/css">
      body
      {
@@ -96,8 +100,8 @@
         top: 0;
         left: 0;
         background-color:White;
-        height: 430px;
-        width: 500px;
+        height: 480px;
+        width: 480px;
         padding: 30px;
         border: solid 1px black;
      }
@@ -113,7 +117,7 @@
                  src="Pictures/1.png" />
                 <img id="imgFull" alt="" src=""
                  style="display: none;
-                height: 400px;width: 490px" />
+                height: 400px;width: 420px" />
             </td>
         </tr>
         <tr>
@@ -169,16 +173,22 @@
                         }
 </script>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Des" ItemStyle-HorizontalAlign="Center" SortExpression="Des">
                 <ItemTemplate>
                     <asp:Label ID="DesLabel" runat="server" Text='<%# Bind("Des") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Pricing" Visible="false" ItemStyle-HorizontalAlign="Center" SortExpression="Pricing">
                 <ItemTemplate>
                     <asp:Label ID="PricingLabel" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             
              <asp:TemplateField HeaderText="Special" Visible="false" SortExpression="Special">
@@ -193,16 +203,22 @@
                 <ItemTemplate>
                     <asp:Label ID="sPriceLabel" runat="server" ForeColor='<%#  (float)Convert.ToSingle(((Label)((GridViewRow)Container).FindControl("LBSpecial1")).Text)<1?System.Drawing.Color.Red:System.Drawing.Color.Black%>'  Font-Bold='<%# ((Label)((GridViewRow)Container).FindControl("sPriceLabel")).ForeColor==System.Drawing.Color.Red?true:false%>'  Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
                 <ItemTemplate>
                     <asp:TextBox ID="QTYTextBox" runat="server" Width="20" Text="4"></asp:TextBox>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>  
             <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center" SortExpression="ADD">
                 <ItemTemplate>
                     <asp:ImageButton ID="AddBt" runat="server" CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>' OnClientClick="return confirm('Add the accessory to the shoppingcart?')" ImageUrl="../Pictures/images.jpg"></asp:ImageButton>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>  
         </Columns>
 

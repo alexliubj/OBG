@@ -18,9 +18,6 @@
     <center>
      <asp:Image ID="Image2" runat="server"   Width="800" Height="600" />
         </center>--%>
-    <div>
-        POLICY DIV, TBA
-    </div>
     <hr />
     <hr />
     <asp:Panel ID="pnlMain" runat="server"  style=" padding-left:60px;

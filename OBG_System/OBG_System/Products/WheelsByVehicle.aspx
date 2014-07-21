@@ -56,7 +56,7 @@
             <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Center" SortExpression="Image">
             
                 <ItemTemplate>
-                   <asp:ImageButton class="Imagehub" ID="ImageLable" runat="server" ImageUrl='<%# Eval("Image") %>' OnClientClick = "return LoadDiv(this.src);" ></asp:ImageButton>
+                   <asp:ImageButton class="Imagehub" ID="ImageLable" runat="server" ImageUrl='<%# Eval("Image") %>' OnClientClick = "return LoadDiv(this.src);" Height="100px" Width="100px" ></asp:ImageButton>
                     <style type="text/css">
      body
      {
@@ -102,7 +102,7 @@
                  src="Pictures/1.png" />
                 <img id="imgFull" alt="" src=""
                  style="display: none;
-                height: 400px;width: 490px" />
+                height: 400px;width: 420px" />
             </td>
         </tr>
         <tr>
@@ -212,6 +212,8 @@
 </script>--%>
                 </ItemTemplate>
                  
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
+                 
             </asp:TemplateField>
                 <asp:TemplateField HeaderText="PartNo" ItemStyle-HorizontalAlign="Center" SortExpression="PartNo">
                 <%--<EditItemTemplate>
@@ -220,72 +222,96 @@
                 <ItemTemplate>
                     <asp:Label ID="PNLabel" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Style" ItemStyle-HorizontalAlign="Center" SortExpression="Style">
 
                 <ItemTemplate>
                     <asp:Label ID="StyleLabel" runat="server" Text='<%# Bind("Style") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Brand" ItemStyle-HorizontalAlign="Center" SortExpression="Brand">
            
                 <ItemTemplate>
                     <asp:Label ID="BrandLabel" runat="server" Text='<%# Bind("Brand") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Size" ItemStyle-HorizontalAlign="Center" SortExpression="Size">
  
                 <ItemTemplate>
                     <asp:Label ID="SizeLabel" runat="server" Text='<%# Bind("Size") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Pcd" ItemStyle-HorizontalAlign="Center" SortExpression="Pcd">
       
                 <ItemTemplate>
                     <asp:Label ID="PcdLabel" runat="server" Text='<%# Bind("Pcd") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
                  <asp:TemplateField HeaderText="Finish" ItemStyle-HorizontalAlign="Center" SortExpression="Finish">
        
                 <ItemTemplate>
                     <asp:Label ID="FinishLabel" runat="server" Text='<%# Bind("Finish") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
                  <asp:TemplateField HeaderText="Offset(mm)" ItemStyle-HorizontalAlign="Center" SortExpression="Offset">
             
                 <ItemTemplate>
                     <asp:Label ID="OffsetLabel" runat="server" Text='<%# Bind("Offset") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
                    <asp:TemplateField HeaderText="Seat" ItemStyle-HorizontalAlign="Center" SortExpression="Seat">
  
                 <ItemTemplate>
                     <asp:Label ID="SeatLabel" runat="server" Text='<%# Bind("Seat") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
                    <asp:TemplateField HeaderText="Bore(mm)" ItemStyle-HorizontalAlign="Center" SortExpression="Bore">
   
                 <ItemTemplate>
                     <asp:Label ID="BoreLabel" runat="server" Text='<%# Bind("Bore") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
                   <asp:TemplateField HeaderText="Weight(LBS)" ItemStyle-HorizontalAlign="Center" SortExpression="Weight">
      
                 <ItemTemplate>
                     <asp:Label ID="WeightLabel" runat="server" Text='<%# Bind("Weight") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
                   <asp:TemplateField HeaderText="Onhand" ItemStyle-HorizontalAlign="Center" SortExpression="Onhand">
      
                 <ItemTemplate>
                     <asp:Label ID="OnhandLabel" runat="server" Text='<%# Bind("Onhand") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
                   <asp:TemplateField HeaderText="Price" Visible="false" ItemStyle-HorizontalAlign="Center" SortExpression="Price">
      
                 <ItemTemplate>
                     <asp:Label ID="PriceLabel" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
                  <asp:TemplateField HeaderText="Special" Visible="false" SortExpression="Special">
                     <EditItemTemplate>
@@ -302,6 +328,8 @@
                 <ItemTemplate>
                     <asp:Label ID="sPriceLabel" runat="server" ForeColor='<%#  (float)Convert.ToSingle(((Label)((GridViewRow)Container).FindControl("LBSpecial1")).Text)<1?System.Drawing.Color.Red:System.Drawing.Color.Black%>'  Font-Bold='<%# ((Label)((GridViewRow)Container).FindControl("sPriceLabel")).ForeColor==System.Drawing.Color.Red?true:false%>'   Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
                 </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
              <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center" SortExpression="QTY">
                 <ItemTemplate>
@@ -325,11 +353,15 @@
                         }
 </script>     --%>
                    <%-- </ItemTemplate>  --%> 
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
                 </asp:TemplateField>
                   <asp:TemplateField HeaderText="ADD" ItemStyle-HorizontalAlign="Center" SortExpression="ADD">
             <ItemTemplate>
             <asp:ImageButton ID="AddBt" runat="server" ImageUrl="../Pictures/images.jpg"  OnClientClick="return confirm('Add the wheel to the shoppingcart?')"  CommandName="MyButtonClick" CommandArgument='<%#((GridViewRow)Container).RowIndex%>'></asp:ImageButton>
             </ItemTemplate>
+
+<ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
 
         </Columns>
