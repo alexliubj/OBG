@@ -72,8 +72,8 @@ public partial class Default2 : System.Web.UI.Page
     ///<returns></returns>
     public bool SendMail(string ToEmail, string securityKey)
     {
-        string Email = "alexliu0506@126.com";
-        string password = "5631247";
+        string Email = "holmesli@126.com";
+        string password = "holmes615";
         Encoding EnCode = Encoding.UTF8;
         System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
         Message.From = new MailAddress(Email, "OBG Master", EnCode);
