@@ -35,6 +35,9 @@
                     <a id="shoppingcart" runat="server" href="~/Account/ShoppingCart.aspx">
                         <img alt="shoppingcart" id="Image1"
                             src="<%= Page.ResolveUrl("~")%>Pictures/shoppingcart.png" height="50px" width="85px" /></a>
+                    <asp:Label ID="shoppingCountLeft" runat="server" Text="("></asp:Label>
+                    <asp:Label ID="shoppingCount" runat="server" Text="" Font-Bold="true" ForeColor="Red" ></asp:Label>
+                    <asp:Label ID="shoppingCountRight" runat="server" Text=")"></asp:Label>
                     <asp:Label ID="lblWelcome" runat="server" Text="Welcome!"></asp:Label>
                     <asp:Button ID="btnLogin" runat="server" Text="Error" OnClick="btnLogin_Click" CssClass="myButton" />
 
