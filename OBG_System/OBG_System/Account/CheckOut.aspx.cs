@@ -248,10 +248,11 @@ public partial class Default2 : System.Web.UI.Page
 
     public bool SendMail(string ToEmail)
     {
-        string Email = "alexliu0506@126.com";
+
+        string Email = "holmesli@126.com";
         //string Email = "onlineorders@optiwheels.ca";
         //string password = "orders12345";
-        string password = "5631247";
+        string password = "holmes615";
         Encoding EnCode = Encoding.UTF8;
         System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
         Message.From = new MailAddress(Email, "OBG Master", EnCode);
@@ -276,22 +277,12 @@ public partial class Default2 : System.Web.UI.Page
         Message.BodyEncoding = EnCode;
         Message.IsBodyHtml = true;
 
-        try
-        {
-            SmtpClient smtp = new SmtpClient("smtp.126.com", 25);
-            //SmtpClient smtp = new SmtpClient("relay-hosting.secureserver.net", 25);
-            smtp.Credentials = new NetworkCredential(Email, password);
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            smtp.Send(Message);
-        }
-        catch (Exception e)
-        {
-            return false;
-        }
-        finally
-        {
-            Message.Dispose();
-        }
+        SmtpClient smtp = new SmtpClient("smtp.126.com", 25);
+        //SmtpClient smtp = new SmtpClient("relay-hosting.secureserver.net", 25);
+        smtp.Credentials = new NetworkCredential(Email, password);
+        smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+        smtp.SendAsync(Message, "testusertoken");
+
         return true;
     }
 

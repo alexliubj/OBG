@@ -143,8 +143,8 @@ namespace BusinessLogic
         protected void Send_Click(object sender, EventArgs e)
         {
             EmailUtilities email = new EmailUtilities();
-            email.mailFrom = "alexliu0506@126.com";
-            email.mailPwd = "5631247";
+            email.mailFrom = "holmesli@126.com";
+            email.mailPwd = "holmes615";
             email.mailSubject = "邮件主题";
             email.mailBody = "邮件内容";
             email.isbodyHtml = true;    //是否是HTML
