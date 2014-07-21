@@ -7,8 +7,6 @@ using System.Web.UI.WebControls;
 using BusinessLogic;
 using OBGModel;
 using DataAccess;
-using BusinessLogic;
-using OBGModel;
 using System.Data;
 
 public partial class SiteMaster : System.Web.UI.MasterPage
@@ -65,6 +63,15 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             {
                 item.Selectable = true;
 
+            }
+
+          
+        }
+        if (Request.Url.AbsoluteUri.ToLower().Contains("shoppingcart"))
+        {
+            foreach (MenuItem item2 in NavigationMenu.Items)
+            {
+                item2.Selectable = true;
             }
         }
     }
