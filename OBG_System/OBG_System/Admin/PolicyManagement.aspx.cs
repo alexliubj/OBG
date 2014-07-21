@@ -17,8 +17,8 @@ public partial class Admin_PolicyManagement : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            string policy = HomePageBLO.GetReturnPolicy();
-            policy.Replace("<br />", Environment.NewLine);
+            string policy = HomePageBLO.GetReturnPolicy().Replace("<br />", Environment.NewLine);
+       
             TextBox1.Text = policy;
         }
     }
