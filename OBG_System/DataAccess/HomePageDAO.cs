@@ -50,7 +50,7 @@ namespace DataAccess
 
         public static int DeleteImages(int imageID)
         {
-            DbCommand command = db.GetSqlStringCommond(@"delete HomePage where ImageID = @imageID");
+            DbCommand command = db.GetSqlStringCommond(@"delete [HomePage] where [ImageID] = @imageID");
 
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@imageID", imageID),
@@ -90,7 +90,7 @@ namespace DataAccess
         {
             List<HomeImage> his = new List<HomeImage>();
 
-            DbCommand command = db.GetSqlStringCommond("select * from homepage order by ImageID desc");
+            DbCommand command = db.GetSqlStringCommond("select * from [HomePage]");
             using (DbDataReader reader = db.ExecuteReader(command))
             {
                 while (reader.Read())

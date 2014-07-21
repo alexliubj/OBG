@@ -60,19 +60,23 @@
                     <p>Phone: 647-361-8553, 647-361-8556.&nbsp;&nbsp; Fax: 647-361-8554</p>
                 </div>
                 <div class="clear hideSkiplink">
-                    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+
+
+                    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu"  staticdisplaylevels="2"   EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
+  
+  <StaticHoverStyle CssClass="hoverstyle"/>
                         <Items>
                             <asp:MenuItem NavigateUrl="Default.aspx" Text="Home" Value="default"></asp:MenuItem>
-                            <asp:MenuItem Text="Wheels" Value="wheels">
-                                <asp:MenuItem NavigateUrl="~/Products/WheelsAll.aspx"       Text="View All Wheels       " Value ="wheels"></asp:MenuItem>
-                                <asp:MenuItem NavigateUrl="~/Products/WheelsByVehicle.aspx" Text="View Wheels By Vehicle" Value="wheels"></asp:MenuItem>
-                            </asp:MenuItem>
-                            <asp:MenuItem Text="Tires" Value="tires">
-                                <asp:MenuItem NavigateUrl="~/Products/TiresAll.aspx" Text="View All Tires" Value="tires"></asp:MenuItem>
-                            </asp:MenuItem>
-                            <asp:MenuItem Text="Accessories" Value="accessories">
-                                <asp:MenuItem NavigateUrl="~/Products/AccessoriesAll.aspx" Text="View All Accessories" Value="accessories"></asp:MenuItem>
-                            </asp:MenuItem>
+                           <%-- <asp:MenuItem Text="Wheels" Value="wheels1" >--%>
+                                <asp:MenuItem NavigateUrl="~/Products/WheelsAll.aspx"       Text="View All Wheels       " Value ="WheelsAll"></asp:MenuItem>
+                                <asp:MenuItem NavigateUrl="~/Products/WheelsByVehicle.aspx" Text="View Wheels By Vehicle" Value="WheelsByVehicle"></asp:MenuItem>
+                           <%-- </asp:MenuItem>--%>
+                         <%--   <asp:MenuItem Text="Tires" Value="tires1" >--%>
+                                <asp:MenuItem NavigateUrl="~/Products/TiresAll.aspx" Text="View All Tires" Value="TiresAll"></asp:MenuItem>
+                           <%-- </asp:MenuItem>--%>
+                           <%-- <asp:MenuItem Text="Accessories" Value="accessories1" >--%>
+                                <asp:MenuItem NavigateUrl="~/Products/AccessoriesAll.aspx" Text="View All Accessories" Value="AccessoriesAll"></asp:MenuItem>
+                            <%--</asp:MenuItem>--%>
                             <asp:MenuItem NavigateUrl="Account/UserCenter.aspx" Text="User Center" Value="usercenter"></asp:MenuItem>
                             <asp:MenuItem NavigateUrl="Account/Special.aspx" Text="Special" Value="Special"></asp:MenuItem>
                             <asp:MenuItem NavigateUrl="~/Products/ReturnPolicy.aspx" Text="Policy" Value="policy"></asp:MenuItem>

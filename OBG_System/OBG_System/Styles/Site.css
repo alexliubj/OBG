@@ -213,9 +213,9 @@ div.menu li a:hover {
                 text-decoration: none;
 }
 div.menu ul li a:visited {
-                background-color: #3070d4;
+               background-color: #3070d4;
                 border: 1px #4e667d solid;
-                color: White;
+                color: white;
                 display: block;
                 line-height: 1.35em;
                 padding: 4px 20px;
