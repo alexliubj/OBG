@@ -35,8 +35,8 @@
                         <asp:MenuItem NavigateUrl="RegionManagement.aspx" Text="Region" Value="region"/>
                         <asp:MenuItem NavigateUrl="RoleManagement.aspx" Text="Role" Value="role"/>
                         <asp:MenuItem NavigateUrl="UserManagement.aspx" Text="User" Value="user"/>
-                        <asp:MenuItem NavigateUrl="~/Admin/PolicyManagement.aspx" Text="Policy" Value="policy" />
-                        <asp:MenuItem NavigateUrl="https://www.google.com/analytics/web/" Text="Statistic" Value="statistic"  Target="_blank"/>
+                        <asp:MenuItem NavigateUrl="PolicyManagement.aspx" Text="Policy" Value="policy" />
+                        <asp:MenuItem NavigateUrl="Statistic.aspx" Text="Statistic" Value="statistic"/>
 
                     </Items>
                 </asp:Menu>
