@@ -30,10 +30,18 @@ public partial class SiteMaster : System.Web.UI.MasterPage
 
         foreach (MenuItem item in NavigationMenu.Items)
         {
-            if (Request.Url.AbsoluteUri.ToLower().Contains(item.Value))
+            string tempString = Request.Url.AbsoluteUri.ToLower();
+            string itemValue = item.Value;
+            if (Request.Url.AbsoluteUri.ToLower().Contains(item.Value.ToLower()))
             {
 
                 item.Selectable = false;
+                //  item.Selected
+            }
+            else
+            {
+                item.Selectable = true;
+
             }
         }
     }
