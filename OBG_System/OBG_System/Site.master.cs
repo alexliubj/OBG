@@ -6,10 +6,16 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using OBGModel;
-
+using DataAccess;
+using BusinessLogic;
+using OBGModel;
+using System.Data;
 
 public partial class SiteMaster : System.Web.UI.MasterPage
 {
+
+
+    private List<ShopingCart> shoppingcartlist = new List<ShopingCart>();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["userID"] != null)
@@ -21,6 +27,17 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             userName = user.UserName;
             btnLogin.Text = "Log Out";
             lblWelcome.Text = "Welcome back, " + userName + "!";
+
+            shoppingcartlist = (List<ShopingCart>)Session["Cart"];
+            if (shoppingcartlist != null && shoppingcartlist.Count > 0)
+            {
+                shoppingCount.Text = shoppingcartlist.Count.ToString();
+            }
+            else
+            {
+                shoppingCount.Text = string.Empty;
+            }
+            
         }
         else
         {
