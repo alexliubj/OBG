@@ -92,7 +92,7 @@ public partial class Default2 : System.Web.UI.Page
     {
         CKGridView.DataSource = checkoutTB;
         CKGridView.DataKeyNames = new string[] { "ProductId" };
-        CKGridView.DataBind(); 
+        CKGridView.DataBind();
     }
 
     protected void totalPrice()
@@ -110,7 +110,7 @@ public partial class Default2 : System.Web.UI.Page
         LabelTotalPrice.Text = string.Format("${0:n2}", total);
         Label1.Text = string.Format("${0:n2}", HST);
         Label2.Text = string.Format("${0:n2}", totalPrice);
-       // CKGridView.DataSource = checkoutTB;
+        // CKGridView.DataSource = checkoutTB;
         //CKGridView.DataBind();
     }
 
@@ -149,7 +149,7 @@ public partial class Default2 : System.Web.UI.Page
         {
             int orderId;
             Order order = new Order();
- 
+
             List<OrderLine> orderline = new List<OrderLine>();
             //double rate = ;
             //orderId = int.Parse(CKGridView.SelectedRow.Cells[0].Text);
@@ -162,13 +162,13 @@ public partial class Default2 : System.Web.UI.Page
             {
                 OrderLine line = new OrderLine();
                 //int orderID = int.Parse(((Label)CKGridView.Rows[i].Cells[0].FindControl("LabelOrder")).Text.ToString());
-                line.ProductId = int.Parse(((Label)CKGridView.Rows[i].Cells[1].FindControl("Label3")).Text.ToString());;
+                line.ProductId = int.Parse(((Label)CKGridView.Rows[i].Cells[1].FindControl("Label3")).Text.ToString()); ;
                 // line.PartNO = ((Label)CKGridView.Rows[i].Cells[3].FindControl("Label8")).Text.ToString();
-                line.PartNO = ((Label)CKGridView.Rows[i].Cells[3].FindControl("Label8")).Text.ToString();;
+                line.PartNO = ((Label)CKGridView.Rows[i].Cells[3].FindControl("Label8")).Text.ToString(); ;
                 //line.OrderId = orderID;
                 //line.OrderId = orderId;
                 //line.DiscountRate = (float)rate;
-                
+
                 line.DiscountRate = float.Parse(((Label)CKGridView.Rows[i].Cells[7].FindControl("Price")).Text.Substring(1).ToString());
                 line.ProductName = ((Label)CKGridView.Rows[i].Cells[4].FindControl("Label4")).Text.ToString();
                 line.ProductType = int.Parse(((Label)CKGridView.Rows[i].Cells[5].FindControl("Label5")).Text.ToString());
@@ -195,12 +195,12 @@ public partial class Default2 : System.Web.UI.Page
                 Session.Remove("Cart");
                 Response.Redirect("~/Default.aspx");
             }
-            else 
+            else
             {
                 //fail
             }
         }
-        
+
     }
 
 
@@ -214,7 +214,7 @@ public partial class Default2 : System.Web.UI.Page
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
     {
         //DataTable dataTable = GridView1.DataSource as DataTable;
-       // DataTable dataTable = TiresBLO.GetAllTires();
+        // DataTable dataTable = TiresBLO.GetAllTires();
 
         if (shoppingcart != null)
         {
@@ -264,12 +264,12 @@ public partial class Default2 : System.Web.UI.Page
         MailContent.Append("Dear Customer：<br/>");
         MailContent.Append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ");
         MailContent.Append(DateTime.Now.ToLongTimeString());
-         string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + ResolveUrl("~/");
+        string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + ResolveUrl("~/");
         //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have ordered products at <a href='"+host+"'>OBG Order System</a>.");
         //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For more order details, please see your order history: ");
-         MailContent.Append("<br/>Here are your order details: ");
+        MailContent.Append("<br/>Here are your order details: ");
         MailContent.Append(CKGridView);
-       
+
         //string url = host + "Account/UserOrderHistory.aspx";
         //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='" + url + "'>" + url + "</a>");
         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can modify your order before shipping.</p>");
@@ -277,12 +277,22 @@ public partial class Default2 : System.Web.UI.Page
         Message.BodyEncoding = EnCode;
         Message.IsBodyHtml = true;
 
-        SmtpClient smtp = new SmtpClient("smtp.126.com", 25);
-        //SmtpClient smtp = new SmtpClient("relay-hosting.secureserver.net", 25);
-        smtp.Credentials = new NetworkCredential(Email, password);
-        smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-        smtp.SendAsync(Message, "testusertoken");
+        try
+        {
+            SmtpClient smtp = new SmtpClient("smtp.126.com", 25);
+            //SmtpClient smtp = new SmtpClient("relay-hosting.secureserver.net", 25);
+            smtp.Credentials = new NetworkCredential(Email, password);
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Send(Message);
 
+        }
+        catch (SmtpException ex)
+        {
+            string msg = "Mail cannot be sent because of the server problem:";
+            msg += ex.Message;
+            Response.Write(msg);
+            return false;
+        }
         return true;
     }
 
