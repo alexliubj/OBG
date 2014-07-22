@@ -2,7 +2,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head runat="server">
+<head id="Head1" runat="server">
     <title></title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
@@ -33,7 +33,7 @@
 </script>
 </head>
 <body>
-    <form runat="server">
+    <form id="Form1" runat="server">
         <div class="page">
             <div class="header">
                 <div class="title">
@@ -60,8 +60,14 @@
                     <p>Phone: 647-361-8553, 647-361-8556.&nbsp;&nbsp; Fax: 647-361-8554</p>
                 </div>
                 <div class="clear hideSkiplink">
-                    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal">
-                        <Items>
+                    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" Orientation="Horizontal">
+                       <staticselectedstyle 
+                           backcolor="White"
+                           ForeColor="#3070d4"
+                              borderstyle="Solid"
+                              bordercolor="Black" 
+                              borderwidth="1"/>
+                         <Items>
                             <asp:MenuItem NavigateUrl="Default.aspx" Text="Home" Value="default"></asp:MenuItem>
                             <asp:MenuItem Text="Wheels" Value="wheels">
                                 <asp:MenuItem NavigateUrl="~/Products/WheelsAll.aspx"       Text="View All Wheels       " Value ="wheels"></asp:MenuItem>
@@ -71,11 +77,11 @@
                                 <asp:MenuItem NavigateUrl="~/Products/TiresAll.aspx" Text="View All Tires" Value="tires"></asp:MenuItem>
                             </asp:MenuItem>
                             <asp:MenuItem Text="Accessories" Value="accessories">
-                                <asp:MenuItem NavigateUrl="~/Products/AccessoriesAll.aspx" Text="View All Accessories" Value="accessories"></asp:MenuItem>
+                                <asp:MenuItem NavigateUrl="~/Products/AccessoriesAll.aspx" Text="View All Accessorie" Value="accessories"></asp:MenuItem>
                             </asp:MenuItem>
                             <asp:MenuItem NavigateUrl="Account/UserCenter.aspx" Text="User Center" Value="usercenter"></asp:MenuItem>
                             <asp:MenuItem NavigateUrl="Account/Special.aspx" Text="Special" Value="Special"></asp:MenuItem>
-                            <asp:MenuItem NavigateUrl="~/Products/ReturnPolicy.aspx" Text="Policy" Value="policy"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="~/Products/ReturnPolicy.aspx" Text="Policy" Value="returnpolicy"></asp:MenuItem>
                         </Items>
                     </asp:Menu>
                 </div>

@@ -100,7 +100,7 @@
             <Columns>
                 <asp:BoundField DataField="OrderID" HeaderText="Order ID" ItemStyle-HorizontalAlign="Center" InsertVisible="False" ReadOnly="True" SortExpression="OrderID" Visible="true" />
                 <asp:BoundField DataField="ProductId" HeaderText="ProductId"  InsertVisible="False" ReadOnly="True" SortExpression="ProductId" Visible="false" />
-                <asp:TemplateField HeaderText="ProductID" SortExpression="ProductID">
+                <asp:TemplateField HeaderText="ProductID" Visible="false" SortExpression="ProductID">
                     <ItemTemplate>
                         <asp:Label ID="LBProductID" runat="server" Text='<%# Bind("ProductId") %>'></asp:Label>
                     </ItemTemplate>

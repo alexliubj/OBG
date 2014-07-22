@@ -724,5 +724,26 @@ namespace DataAccess
             }
             return userID;
         }
+
+
+        public static string GetCompanyByUserId(int userId)
+        {
+            //int rName = 0;
+            string company = ""; 
+            DbCommand command = db.GetSqlStringCommond(@"SELECT companyname FROM users where userid = @userid");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userId) };
+            command.Parameters.AddRange(paras);
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    //rName = reader.GetInt32(0);
+                    company = reader.GetString(0);
+
+                }
+            }
+            //return rName;
+            return company;
+        }
     }
 }

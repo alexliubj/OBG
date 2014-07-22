@@ -14,6 +14,7 @@ public partial class Admin_Default : System.Web.UI.Page
 {
     private DataSet orderDataSet;
     int adminID = 0;
+    int user=0;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -46,6 +47,7 @@ public partial class Admin_Default : System.Web.UI.Page
 
         for (int i = 0; i < GridView1.Rows.Count; i++)
         {
+            
             string status = ((Label)(GridView1.Rows[i].Cells[3].FindControl("Label5"))).Text.ToString().Trim();
             string statusLabel = "";
 
@@ -96,6 +98,7 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void GridView1_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
         int orderID = Convert.ToInt32(GridView1.DataKeys[e.RowIndex].Value.ToString());
+        
         OrderBLO.RemoveOrderByOrderId(orderID);
         GridView1_Bind();
     }
@@ -156,6 +159,20 @@ public partial class Admin_Default : System.Web.UI.Page
 
         orderID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
 
+        int rowCount;
+        rowCount = GridView1.Rows.Count;
+        GridViewRow ViewCart;
+
+        for (int i = 0; i < rowCount; i++)
+        {
+            ViewCart = GridView1.Rows[i];
+            
+            user = int.Parse(((Label)(GridView1.Rows[i].Cells[1].FindControl("Label3"))).Text.ToString());
+            
+        }
+
+
+
         GridView2_Bind(orderID);
 
         divOrderDetail.Visible = true;
@@ -201,8 +218,11 @@ public partial class Admin_Default : System.Web.UI.Page
         GridView2.DataSource = orderDetailTable;
         GridView2.DataKeyNames = new string[] { "OrderId" };
         GridView2.DataBind();
+
+        string userid = UserBLO.GetCompanyByUserId(user);
         for (int i = 0; i < GridView2.Rows.Count; i++)
         {
+            
             string productType = ((Label)(GridView2.Rows[i].Cells[3].FindControl("Label5"))).Text.ToString().Trim();
             string productTypeLabel = "";
 
@@ -222,6 +242,7 @@ public partial class Admin_Default : System.Web.UI.Page
                     break;
             }
             ((Label)(GridView2.Rows[i].Cells[3].FindControl("Label5"))).Text = productTypeLabel;
+            lbCn.Text = userid;
         }
     }
 

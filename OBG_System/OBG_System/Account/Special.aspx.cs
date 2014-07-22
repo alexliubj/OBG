@@ -28,7 +28,7 @@ public partial class Account_Special : System.Web.UI.Page
         if (!IsPostBack)
         {
             ms = NavigationMenu.FindItem("Wheels");
-            ms.Selectable = false;
+            ms.Selected = true;
 
             Gridview1_Bind();
             GridView2_Bind();
@@ -166,11 +166,20 @@ public partial class Account_Special : System.Web.UI.Page
         }
 
         MenuItem ms = NavigationMenu.FindItem(e.Item.Text);
-        if (ms != null)
-        {
-            ms.Selectable = false;
-        }
 
+        foreach (MenuItem item in NavigationMenu.Items)
+        {
+            if (item.Text == e.Item.Text)
+            {
+                item.Selected = true;
+            }
+            else
+            {
+                item.Selected = false;
+            }
+        }
+       
+       
     }
 
     private string ConvertSortDirectionToSql(SortDirection sortDirection)
