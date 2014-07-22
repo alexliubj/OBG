@@ -15,3 +15,4 @@ C:\Users\AlexLiu\Documents\GitHub\OBG\OBG\OBG_System\Model\bin\Debug\Model.pdb
 C:\Users\AlexLiu\Documents\GitHub\OBG\OBG\OBG_System\Model\obj\Debug\OBGModel.csprojResolveAssemblyReference.cache
 C:\Users\AlexLiu\Documents\GitHub\OBG\OBG\OBG_System\Model\obj\Debug\Model.dll
 C:\Users\AlexLiu\Documents\GitHub\OBG\OBG\OBG_System\Model\obj\Debug\Model.pdb
+C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\Model\obj\Debug\OBGModel.csprojResolveAssemblyReference.cache

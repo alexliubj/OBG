@@ -1,0 +1,475 @@
+﻿/* DEFAULTS
+----------------------------------------------------------*/
+
+.HiddenColumn {
+    display: none;
+}
+
+body {
+    background: #b6b7bc;
+    font-size: .80em;
+    font-family: "Helvetica Neue", "Lucida Grande", "Segoe UI", Arial, Helvetica, Verdana, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    color: #696969;
+}
+
+a:link, a:visited {
+    color: #034af3;
+}
+
+/*
+    a:hover {
+    color: #1d60ff;
+    text-decoration: none;
+}
+
+a:active {
+    color: #034af3;
+}
+    */
+
+p {
+    margin-bottom: 10px;
+    line-height: 1.6em;
+}
+
+
+/* HEADINGS   
+----------------------------------------------------------*/
+
+h1, h2, h3, h4, h5, h6 {
+    font-size: 1.5em;
+    color: #666666;
+    font-variant: small-caps;
+    text-transform: none;
+    font-weight: 200;
+    margin-bottom: 0px;
+}
+
+h1 {
+    font-size: 1.6em;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+h5, h6 {
+    font-size: 1em;
+}
+
+/* this rule styles <h1> and <h2> tags that are the 
+first child of the left and right table columns */
+.rightColumn > h1, .rightColumn > h2, .leftColumn > h1, .leftColumn > h2 {
+    margin-top: 0px;
+}
+
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+.page {
+    width: 960px;
+    background-color: #fff;
+    margin: 20px auto 0px auto;
+    border: 1px solid #496077;
+}
+
+.header {
+    position: relative;
+    margin: 0px;
+    padding: 0px;
+    background: White;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+}
+
+    .header h1 {
+        font-weight: 700;
+        margin: 0px;
+        padding: 0px 0px 0px 20px;
+        color: #3a4f63;
+        border: none;
+        line-height: 2em;
+        font-size: 2em;
+    }
+
+.main {
+    padding: 0px 12px;
+    margin: 12px 8px 8px 8px;
+    min-height: 420px;
+}
+
+.leftCol {
+    padding: 6px 0px;
+    margin: 12px 8px 8px 8px;
+    width: 200px;
+    min-height: 200px;
+}
+
+.footer {
+    color: #4e5766;
+    padding: 8px 0px 0px 0px;
+    margin: 0px auto;
+    text-align: center;
+    line-height: normal;
+}
+
+
+/* TAB MENU   
+----------------------------------------------------------*/
+
+div.hideSkiplink {
+    background-color: #0072E3;
+    width: 100%;
+}
+
+/*div.menu {
+    padding: 4px 0px 4px 8px;
+}
+
+    div.menu ul {
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+        width: auto;
+    }
+
+        div.menu ul li a {
+            background-color: white;
+            border: 1px #4e667d solid;
+            color: #3070d4;
+            display: block;
+            line-height: 1.35em;
+            padding: 4px 20px;
+            text-decoration: none;
+            white-space: nowrap;
+            font-weight: 900;
+        }
+
+            div.menu ul li a:visited {
+                background-color: #3070d4;
+                border: 1px #4e667d solid;
+                color: White;
+                display: block;
+                line-height: 1.35em;
+                padding: 4px 20px;
+                text-decoration: none;
+                white-space: nowrap;
+            }
+
+            div.menu ul li a:hover {
+                background-color: #bfcbd6;
+                color: #465c71;
+                text-decoration: none;
+            }
+
+            div.menu ul li a:active {
+                background-color: #465c71;
+                color: #cfdbe6;
+                text-decoration: none;
+            }
+
+    div.menu*/
+/*
+div.menu ul ul {
+	background: #5f6975; border-radius: 0px; padding: 0;
+	position: absolute; top: 100%;
+}
+	div.menu ul ul li {
+		float: none; 
+		border-top: 1px solid #6b727c;
+		border-bottom: 1px solid #575f6a;
+		position: relative;
+	}
+		div.menu ul ul li a {
+			padding: 15px 40px;
+			color: #fff;
+		}	
+			div.menu ul ul li a:hover {
+				background: #4b545f;
+			}
+
+            div.menu ul li {
+	float: left;
+}
+	div.menu ul li:hover {
+		background: #4b545f;
+		background: linear-gradient(top, #4f5964 0%, #5f6975 40%);
+		background: -moz-linear-gradient(top, #4f5964 0%, #5f6975 40%);
+		background: -webkit-linear-gradient(top, #4f5964 0%,#5f6975 40%);
+	}
+		div.menu ul li:hover a {
+			color: #fff;
+		}
+	
+	div.menu ul li a {
+		display: block; padding: 25px 40px;
+		color: #757575; text-decoration: none;
+	}
+
+    div.menu ul {
+	background: #efefef; 
+	background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);  
+	background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
+	background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 
+	box-shadow: 0px 0px 9px rgba(0,0,0,0.15);
+	padding: 0 20px;
+	border-radius: 10px;  
+	list-style: none;
+	position: relative;
+	display: inline-table;
+}
+	div.menu ul:after {
+		content: ""; clear: both; display: block;
+	}
+
+        div.menu ul li visited {
+               background-color: #3070d4;
+                border: 1px #4e667d solid;
+                color: white;
+                display: block;
+                line-height: 1.35em;
+                padding: 4px 20px;
+                text-decoration: none;
+                white-space: nowrap;
+            } */
+  
+div.menu ul {
+
+    list-style: none;
+        margin: 0px;
+        padding: 0px;
+        width: auto;
+}
+div.menu li {
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+}
+div.menu li a {
+      background-color: white;
+            border: 1px #4e667d solid;
+            color: #3070d4;
+            display: block;
+            line-height: 1.35em;
+            padding: 4px 20px;
+            text-decoration: none;
+            white-space: nowrap;
+            font-weight: 900;
+}
+div.menu li a:hover { 
+   background-color: #bfcbd6;
+                color: #465c71;
+                text-decoration: none;
+}
+div.menu ul li a:visited {
+               background-color: #3070d4;
+                border: 1px #4e667d solid;
+                color: white;
+                display: block;
+                line-height: 1.35em;
+                padding: 4px 20px;
+                text-decoration: none;
+                white-space: nowrap;
+            }
+  
+    /* FORM ELEMENTS   
+----------------------------------------------------------*/
+    fieldset {
+        margin: 1em 0px;
+        padding: 1em;
+        border: 1px solid #ccc;
+    }
+
+fieldset p {
+    margin: 2px 12px 10px 10px;
+}
+
+fieldset.login label, fieldset.register label, fieldset.changePassword label {
+    display: block;
+}
+
+fieldset label.inline {
+    display: inline;
+}
+
+legend {
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 2px 4px 8px 4px;
+}
+
+input.textEntry {
+    /*width: 3200px;
+    border: 1px solid #ccc;*/
+     border-top: solid 1px #8e8e8e; 
+    border-right: solid 1px #d1d1d1; 
+    border-left: solid 1px #d1d1d1; 
+    border-bottom: solid 1px #e4e4e4; 
+    height: 25px; 
+    width: 275px; 
+}
+
+input.textEntry:focus {  
+    border-color: #4488cc; 
+    border-style: solid; 
+    border-width: 2px; 
+    outline: 0; 
+	} 
+
+input.passwordEntry {
+    /*width: 320px;
+    border: 1px solid #ccc;*/
+      border-top: solid 1px #8e8e8e; 
+    border-right: solid 1px #d1d1d1; 
+    border-left: solid 1px #d1d1d1; 
+    border-bottom: solid 1px #e4e4e4; 
+    height: 25px; 
+    width: 275px; 
+}
+input.passwordEntry:focus {  
+    border-color: #4488cc; 
+    border-style: solid; 
+    border-width: 2px; 
+    outline: 0; 
+	} 
+
+div.accountInfo {
+    width: 42%;
+}
+
+/* MISC  
+----------------------------------------------------------*/
+
+.clear {
+    clear: both;
+}
+
+.title {
+    display: block;
+    float: left;
+    text-align: left;
+    width: auto;
+}
+
+.loginDisplay {
+    font-size: 1.1em;
+    display: block;
+    text-align: right;
+    padding: 10px;
+    color: #3a4f63;
+}
+
+    .loginDisplay a:link {
+        color: white;
+    }
+
+    .loginDisplay a:visited {
+        color: white;
+    }
+
+    .loginDisplay a:hover {
+        color: white;
+    }
+
+.failureNotification {
+    font-size: 1.2em;
+    color: Red;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.submitButton {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.Imagehub {
+    height: 100px;
+    width: 100px;
+}
+
+.imgdiv {
+    background-color: White;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    border: solid 1px #c6cfe1;
+    height: 500px;
+    width: 450px;
+}
+
+.CBLayout tr {
+    height:20px;
+
+    /*vertical-align: middle;*/
+}
+.CBLayout td {
+    width:60px;
+
+    /*vertical-align: middle;*/
+}
+
+.label {
+    color: blue;
+}
+
+
+.myButton {
+	-moz-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	-webkit-box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	box-shadow:inset 0px 1px 0px 0px #97c4fe;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#3d94f6', endColorstr='#1e62d0');
+	background-color:#3d94f6;
+	/*-webkit-border-top-left-radius:15px;
+	-moz-border-radius-topleft:15px;
+	border-top-left-radius:15px;
+	-webkit-border-top-right-radius:15px;
+	-moz-border-radius-topright:15px;
+	border-top-right-radius:15px;
+	-webkit-border-bottom-right-radius:15px;
+	-moz-border-radius-bottomright:15px;
+	border-bottom-right-radius:15px;
+	-webkit-border-bottom-left-radius:15px;
+	-moz-border-radius-bottomleft:15px;
+	border-bottom-left-radius:15px;*/
+	text-indent:0;
+	border:1px solid #337fed;
+	display:inline-block;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:12px;
+	font-weight:500;
+	font-style:normal;
+	line-height:25px;
+	text-decoration:none;
+	text-align:center;
+	text-shadow:1px 0px 0px #1570cd;
+}
+.myButton:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #1e62d0), color-stop(1, #3d94f6) );
+	background:-moz-linear-gradient( center top, #1e62d0 5%, #3d94f6 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#1e62d0', endColorstr='#3d94f6');
+	background-color:#1e62d0;
+}
+    .myButton:active {
+        position: relative;
+        top: 1px;
+    }

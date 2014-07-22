@@ -58,9 +58,9 @@ public partial class SiteMaster : System.Web.UI.MasterPage
 
                     item.Selectable = false;
                     //  item.Selected
-                    //NavigationMenu.FindItem("wheels").Selectable = true;
-                    //NavigationMenu.FindItem("tires").Selectable = true;
-                    //NavigationMenu.FindItem("accessories").Selectable = true;
+                    NavigationMenu.FindItem("wheels").Selectable = true;
+                    NavigationMenu.FindItem("tires").Selectable = true;
+                    NavigationMenu.FindItem("accessories").Selectable = true;
                 
             }
             else
