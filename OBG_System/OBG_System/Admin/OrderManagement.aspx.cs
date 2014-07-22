@@ -159,21 +159,21 @@ public partial class Admin_Default : System.Web.UI.Page
 
         orderID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
 
-        int rowCount;
-        rowCount = GridView1.Rows.Count;
-        GridViewRow ViewCart;
+        //int rowCount;
+        //rowCount = GridView1.Rows.Count;
+        //GridViewRow ViewCart;
 
-        for (int i = 0; i < rowCount; i++)
-        {
-            ViewCart = GridView1.Rows[i];
+        //for (int i = 0; i < rowCount; i++)
+        //{
+        //    ViewCart = GridView1.Rows[i];
             
-            user = int.Parse(((Label)(GridView1.Rows[i].Cells[1].FindControl("Label3"))).Text.ToString());
+        //    user = int.Parse(((Label)(GridView1.Rows[i].Cells[1].FindControl("Label3"))).Text.ToString());
             
-        }
+        //}
+        int userID = int.Parse(((Label)(GridView1.SelectedRow.Cells[1].FindControl("Label3"))).Text);
 
 
-
-        GridView2_Bind(orderID);
+        GridView2_Bind(orderID,userID);
 
         divOrderDetail.Visible = true;
     }
@@ -210,7 +210,7 @@ public partial class Admin_Default : System.Web.UI.Page
     #endregion
 
     #region OrderDetail
-    public void GridView2_Bind(int orderID)
+    public void GridView2_Bind(int orderID,int userID)
     {
 
         DataTable orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
@@ -219,7 +219,7 @@ public partial class Admin_Default : System.Web.UI.Page
         GridView2.DataKeyNames = new string[] { "OrderId" };
         GridView2.DataBind();
 
-        string userid = UserBLO.GetCompanyByUserId(user);
+        string companyName = UserBLO.GetCompanyByUserId(userID);
         for (int i = 0; i < GridView2.Rows.Count; i++)
         {
             
@@ -242,8 +242,8 @@ public partial class Admin_Default : System.Web.UI.Page
                     break;
             }
             ((Label)(GridView2.Rows[i].Cells[3].FindControl("Label5"))).Text = productTypeLabel;
-            lbCn.Text = userid;
         }
+        lbCn.Text = companyName;
     }
 
     //protected void GridView2_Sorting(object sender, GridViewSortEventArgs e)

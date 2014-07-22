@@ -739,7 +739,6 @@ namespace DataAccess
                 {
                     //rName = reader.GetInt32(0);
                     company = reader.GetString(0);
-
                 }
             }
             //return rName;

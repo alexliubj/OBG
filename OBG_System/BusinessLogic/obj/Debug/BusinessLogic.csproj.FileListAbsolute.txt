@@ -7,15 +7,6 @@ C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Debug\Mode
 C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\BusinessLogic\obj\Debug\BusinessLogic.csprojResolveAssemblyReference.cache
 C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\BusinessLogic\obj\Debug\BusinessLogic.dll
 C:\Users\Jeffrey Li\Documents\GitHub\OBG\OBG_System\BusinessLogic\obj\Debug\BusinessLogic.pdb
-C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Debug\BusinessLogic.dll
-C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Debug\BusinessLogic.pdb
-C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Debug\DataAccess.dll
-C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Debug\Model.dll
-C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Debug\DataAccess.pdb
-C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Debug\Model.pdb
-C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\obj\Debug\BusinessLogic.csprojResolveAssemblyReference.cache
-C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\obj\Debug\BusinessLogic.dll
-C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\obj\Debug\BusinessLogic.pdb
 C:\Users\AlexLiu\Documents\GitHub\OBG\OBG\OBG_System\BusinessLogic\bin\Debug\BusinessLogic.dll
 C:\Users\AlexLiu\Documents\GitHub\OBG\OBG\OBG_System\BusinessLogic\bin\Debug\BusinessLogic.pdb
 C:\Users\AlexLiu\Documents\GitHub\OBG\OBG\OBG_System\BusinessLogic\bin\Debug\DataAccess.dll
@@ -25,3 +16,12 @@ C:\Users\AlexLiu\Documents\GitHub\OBG\OBG\OBG_System\BusinessLogic\bin\Debug\Mod
 C:\Users\AlexLiu\Documents\GitHub\OBG\OBG\OBG_System\BusinessLogic\obj\Debug\BusinessLogic.csprojResolveAssemblyReference.cache
 C:\Users\AlexLiu\Documents\GitHub\OBG\OBG\OBG_System\BusinessLogic\obj\Debug\BusinessLogic.dll
 C:\Users\AlexLiu\Documents\GitHub\OBG\OBG\OBG_System\BusinessLogic\obj\Debug\BusinessLogic.pdb
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Debug\BusinessLogic.dll
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Debug\BusinessLogic.pdb
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Debug\DataAccess.dll
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Debug\Model.dll
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Debug\DataAccess.pdb
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\bin\Debug\Model.pdb
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\obj\Debug\BusinessLogic.csprojResolveAssemblyReference.cache
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\obj\Debug\BusinessLogic.dll
+C:\Users\Neo\Documents\GitHub\OBG\OBG_System\BusinessLogic\obj\Debug\BusinessLogic.pdb
