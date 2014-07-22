@@ -29,7 +29,7 @@ public partial class Admin_Default : System.Web.UI.Page
         if (!IsPostBack)
         {
             MenuItem ms = NavigationMenu.FindItem("Region Management");
-            ms.Selectable = false;
+            ms.Selected = true;
             bind();
             Gridview2_Bind();
         }
@@ -207,7 +207,7 @@ public partial class Admin_Default : System.Web.UI.Page
         //MenuItem ms = NavigationMenu.FindItem(e.Item.Text);
         if (e.Item != null)
         {
-            e.Item.Selectable = false;
+            e.Item.Selected = true;
         }
     }
 

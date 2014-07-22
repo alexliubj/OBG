@@ -19,10 +19,3 @@ C:\Users\AlexLiu\Documents\GitHub\OBG\OBG\OBG_System\DataAccess\bin\Debug\Model.
 C:\Users\AlexLiu\Documents\GitHub\OBG\OBG\OBG_System\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
 C:\Users\AlexLiu\Documents\GitHub\OBG\OBG\OBG_System\DataAccess\obj\Debug\DataAccess.dll
 C:\Users\AlexLiu\Documents\GitHub\OBG\OBG\OBG_System\DataAccess\obj\Debug\DataAccess.pdb
-C:\Users\AlexLiu\Documents\GitHub\OBG\OBG_System\DataAccess\bin\Debug\DataAccess.dll
-C:\Users\AlexLiu\Documents\GitHub\OBG\OBG_System\DataAccess\bin\Debug\DataAccess.pdb
-C:\Users\AlexLiu\Documents\GitHub\OBG\OBG_System\DataAccess\bin\Debug\Model.dll
-C:\Users\AlexLiu\Documents\GitHub\OBG\OBG_System\DataAccess\bin\Debug\Model.pdb
-C:\Users\AlexLiu\Documents\GitHub\OBG\OBG_System\DataAccess\obj\Debug\DataAccess.csprojResolveAssemblyReference.cache
-C:\Users\AlexLiu\Documents\GitHub\OBG\OBG_System\DataAccess\obj\Debug\DataAccess.dll
-C:\Users\AlexLiu\Documents\GitHub\OBG\OBG_System\DataAccess\obj\Debug\DataAccess.pdb

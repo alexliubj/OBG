@@ -28,7 +28,7 @@ public partial class Admin_Default : System.Web.UI.Page
         if (!IsPostBack)
         {
             MenuItem ms = NavigationMenu.FindItem("View Current Image");
-            ms.Selectable = false;
+            ms.Selected = true;
         }
     }
 
@@ -156,7 +156,7 @@ public partial class Admin_Default : System.Web.UI.Page
         MenuItem ms = NavigationMenu.FindItem(e.Item.Text);
         if (ms != null)
         {
-            ms.Selectable = false;
+            ms.Selected = true;
         }
   
     }

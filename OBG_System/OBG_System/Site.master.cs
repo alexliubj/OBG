@@ -61,7 +61,6 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             }
             else
             {
-                //item.Selectable = true;
                 item.Selected = false;
             }
 
@@ -72,7 +71,7 @@ public partial class SiteMaster : System.Web.UI.MasterPage
         {
             foreach (MenuItem item2 in NavigationMenu.Items)
             {
-                item2.Selectable = true;
+                item2.Selected = false;
             }
         }
     }
