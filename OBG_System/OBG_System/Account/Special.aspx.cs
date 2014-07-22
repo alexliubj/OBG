@@ -28,7 +28,7 @@ public partial class Account_Special : System.Web.UI.Page
         if (!IsPostBack)
         {
             ms = NavigationMenu.FindItem("Wheels");
-            ms.Selectable = false;
+            ms.Selected = true;
 
             Gridview1_Bind();
             GridView2_Bind();
