@@ -193,6 +193,20 @@ namespace DataAccess
             return dt;
         }
 
+//        public static DataTable GetAllOrders()
+//        {
+//            DbCommand command = db.GetSqlStringCommond(@"SELECT o.OrderId
+//                                                      ,o.UserId
+//                                                      ,o.OrderDate
+//                                                      ,o.Status
+//                                                      ,o.PO
+//                                                      ,u.companyname
+//                                                  FROM Order o inner join users u on o.userid = u.userid where");
+//            DataTable dt = db.ExecuteDataTable(command);
+//            return dt;
+//        }
+
+
         public static int UpdateOrderStatus(int orderId, int status)
         {
             DbCommand command = db.GetSqlStringCommond(@"update [order] set [Status]=@status where orderId = @orderId");

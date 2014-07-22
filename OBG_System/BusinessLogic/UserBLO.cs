@@ -198,5 +198,10 @@ namespace BusinessLogic
         {
             return UserDAO.GetUserIDByEmail(email);
         }
+
+        public static string GetCompanyByUserId(int userId)
+        {
+            return UserDAO.GetCompanyByUserId(userId);
+        }
     }
 }

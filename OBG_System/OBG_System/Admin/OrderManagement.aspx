@@ -95,6 +95,9 @@
             <br />
             <br />
             <p>Order Detail:</p>
+            <p>Ordered by:</p>
+            <asp:Label ID ="lbCn" runat="server" Font-Bold="true" font-color="Red"/>
+            <p/>
             <asp:GridView ID="GridView2" runat="server" GridLines="None" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderID" ForeColor="#333333"
                 Visible="true" OnPageIndexChanging="GridView2_PageIndexChanging">
                 <AlternatingRowStyle BackColor="White" />
