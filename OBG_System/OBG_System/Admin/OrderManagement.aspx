@@ -111,6 +111,11 @@
                             <asp:Label ID="Label3" runat="server" Text='<%# Bind("ProductID") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Image" ItemStyle-HorizontalAlign="Center" SortExpression="Image">
+                <ItemTemplate>
+                    <asp:Image ID="imageLabel" class="Imagehub" runat="server" ImageUrl='<%# Eval("Image") %>'></asp:Image>
+                </ItemTemplate>
+            </asp:TemplateField>
                       <asp:TemplateField HeaderText="PartNo" SortExpression="PartNo">
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox8" runat="server" Text='<%# Bind("PartNo") %>'></asp:TextBox>
