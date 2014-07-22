@@ -41,7 +41,7 @@ public partial class SiteMaster : System.Web.UI.MasterPage
                 shoppingCountRight.Visible = false;
                 shoppingCountRight.Text = string.Empty;
             }
-            
+
         }
         else
         {
@@ -55,22 +55,18 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             string itemValue = item.Value;
             if (Request.Url.AbsoluteUri.ToLower().Contains(item.Value.ToLower()))
             {
+                item.Selected = true; ;
+  
 
-                    item.Selectable = false;
-                    //  item.Selected
-                    NavigationMenu.FindItem("wheels").Selectable = true;
-                    NavigationMenu.FindItem("tires").Selectable = true;
-                    NavigationMenu.FindItem("accessories").Selectable = true;
-                
             }
             else
             {
-                item.Selectable = true;
-
+                //item.Selectable = true;
+                item.Selected = false;
             }
 
 
-          
+
         }
         if (Request.Url.AbsoluteUri.ToLower().Contains("shoppingcart"))
         {

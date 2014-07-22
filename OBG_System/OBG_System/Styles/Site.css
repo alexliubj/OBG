@@ -14,11 +14,11 @@ body {
     color: #696969;
 }
 
+/*
 a:link, a:visited {
     color: #034af3;
 }
-
-/*
+    
     a:hover {
     color: #1d60ff;
     text-decoration: none;
@@ -27,6 +27,7 @@ a:link, a:visited {
 a:active {
     color: #034af3;
 }
+    
     */
 
 p {
@@ -247,7 +248,7 @@ div.menu ul ul {
                 text-decoration: none;
                 white-space: nowrap;
             } */
-  
+    
 div.menu ul {
 
     list-style: none;
@@ -262,31 +263,23 @@ div.menu li {
   padding: 0;
 }
 div.menu li a {
-      background-color: white;
-            border: 1px #4e667d solid;
-            color: #3070d4;
+    background-color:#3070d4;
+            border: 1px #4e667d solid; 
+            color:white;
             display: block;
             line-height: 1.35em;
             padding: 4px 20px;
             text-decoration: none;
             white-space: nowrap;
             font-weight: 900;
+            font-size:medium;
 }
 div.menu li a:hover { 
    background-color: #bfcbd6;
                 color: #465c71;
                 text-decoration: none;
 }
-div.menu ul li a:visited {
-               background-color: #3070d4;
-                border: 1px #4e667d solid;
-                color: white;
-                display: block;
-                line-height: 1.35em;
-                padding: 4px 20px;
-                text-decoration: none;
-                white-space: nowrap;
-            }
+
   
     /* FORM ELEMENTS   
 ----------------------------------------------------------*/
@@ -373,7 +366,7 @@ div.accountInfo {
     text-align: right;
     padding: 10px;
     color: #3a4f63;
-}
+} 
 
     .loginDisplay a:link {
         color: white;
