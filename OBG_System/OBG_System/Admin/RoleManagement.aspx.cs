@@ -29,7 +29,7 @@ public partial class Admin_Default : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             MenuItem ms = NavigationMenu.FindItem("Role Management");
-            ms.Selectable = false;
+            ms.Selected = true;
 
             Gridview1_Bind();
             Gridview2_Bind();
@@ -326,7 +326,7 @@ public partial class Admin_Default : System.Web.UI.Page
         MenuItem ms = NavigationMenu.FindItem(e.Item.Text);
         if (ms != null)
         {
-            ms.Selectable = false;
+            ms.Selected = true;
         }
     }
 

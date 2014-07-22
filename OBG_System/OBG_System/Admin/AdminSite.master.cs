@@ -32,7 +32,11 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             if (Request.Url.AbsoluteUri.ToLower().Contains(item.Value))
             {
 
-                item.Selectable = false;
+                item.Selected = true;
+            }
+            else
+            {
+                item.Selected = false;
             }
 
         }

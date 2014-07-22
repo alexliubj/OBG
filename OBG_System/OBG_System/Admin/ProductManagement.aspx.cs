@@ -34,7 +34,7 @@ public partial class Admin_Default : System.Web.UI.Page
         if (!IsPostBack)
         {
             ms = NavigationMenu.FindItem("Wheels");
-            ms.Selectable = false;
+            ms.Selected = true;
 
             Gridview1_Bind();
             GridView2_Bind();
@@ -892,7 +892,7 @@ public partial class Admin_Default : System.Web.UI.Page
         MenuItem ms = NavigationMenu.FindItem(e.Item.Text);
         if (ms != null)
         {
-            ms.Selectable = false;
+            ms.Selected = true;
         }
 
     }
