@@ -124,7 +124,7 @@
                             <asp:Label ID="Label8" runat="server" Text='<%# Bind("PartNo") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="ProductName" SortExpression="ProductName">
+                    <asp:TemplateField HeaderText="ProductName" Visible="false" SortExpression="ProductName">
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox4" runat="server" Text='<%# Bind("ProductName") %>'></asp:TextBox>
                         </EditItemTemplate>
@@ -132,7 +132,7 @@
                             <asp:Label ID="Label4" runat="server" Text='<%# Bind("ProductName") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="ProductType" SortExpression="ProductType">
+                    <asp:TemplateField HeaderText="ProductType" Visible="false" SortExpression="ProductType">
                         <EditItemTemplate>
                             <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("ProductType") %>'></asp:TextBox>
                         </EditItemTemplate>
@@ -156,6 +156,11 @@
                             <asp:Label ID="Label7" runat="server" Text='<%# string.Format("{0:0.##}", Eval("DiscountRate")) %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Amount" ItemStyle-HorizontalAlign="Center" SortExpression="Price">
+                    <ItemTemplate>
+                        <asp:Label ID="Label10" runat="server" Text='<%# Bind("finalPrice","{0:c}") %>'></asp:Label>
+                    </ItemTemplate>
+                </asp:TemplateField> 
                     <%-- <asp:CommandField HeaderText="Select" ShowSelectButton="True" ButtonType="Button" />--%>
                 </Columns>
                 <EditRowStyle BackColor="#2461BF" />
