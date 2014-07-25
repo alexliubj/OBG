@@ -1,4 +1,4 @@
-﻿<%@ page title="Special" language="C#" masterpagefile="~/Site.master" autoeventwireup="true" inherits="Account_Special, App_Web_owelj42w" %>
+﻿<%@ page title="Special" language="C#" masterpagefile="~/Site.master" autoeventwireup="true" inherits="Account_Special, App_Web_3mbqj51t" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
@@ -6,7 +6,14 @@
     <div id="div1" runat="server" visible="true">
         <img alt="Special" src="../Pictures/special_offers.jpg" />
     </div>
-    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" OnMenuItemClick="NavigationMenu_MenuItemClick">
+    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" Orientation="Horizontal" OnMenuItemClick="NavigationMenu_MenuItemClick">
+        <staticselectedstyle 
+                           backcolor="White"
+                           ForeColor="#3070d4"
+                              borderstyle="Solid"
+                              bordercolor="Black" 
+                              borderwidth="1"/>
+                    
         <Items>
             <asp:MenuItem Text="Wheels"></asp:MenuItem>
             <asp:MenuItem Text="Tires"></asp:MenuItem>
@@ -260,7 +267,7 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                         <asp:TextBox ID="txtSpecial" runat="server" Text='<%# Bind("Special") %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
-                        <asp:Label ID="LBSpecial" runat="server" ForeColor="Red" Font-Bold="true" Text='<%# Bind("Special") %>'></asp:Label>
+                        <asp:Label ID="LBSpecial" runat="server" ForeColor="Red" Font-Bold="true" Text='<%# Bind("special") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Special Price" SortExpression="Pricing">

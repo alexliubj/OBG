@@ -169,11 +169,16 @@ public partial class Products_wheelall : System.Web.UI.Page
             image = ((Image)GridView1.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView1.Rows[rowindex].FindControl("QTYTextBox")).Text);
             special = (float)Convert.ToSingle(((Label)GridView1.Rows[rowindex].FindControl("LBSpecial1")).Text);
-            price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("PriceLabel")).Text.Substring(1)) * special;
-
+            if((bool)((Label)GridView1.Rows[rowindex].FindControl("sPriceLabel")).Visible==true)
+            { price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("sPriceLabel")).Text.Substring(1)); sc.Pricing = price; }
+            if ((bool)((Label)GridView1.Rows[rowindex].FindControl("lbPrice")).Visible == true)
+            { price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("lbPrice")).Text.Substring(1)); sc.Pricing = price; }
+            
+           
+            
             sc.ProductId = pID;
             sc.Qty = qty;
-            sc.Pricing = price;
+            
             sc.PartNo = partNo;
             sc.Image = image;
             shoppingcart.Add(sc);

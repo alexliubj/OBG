@@ -1,4 +1,4 @@
-﻿<%@ page title="User Center" language="C#" masterpagefile="~/Site.master" autoeventwireup="true" inherits="Default2, App_Web_owelj42w" errorpage="~/mycustompage.aspx" %>
+﻿<%@ page title="User Center" language="C#" masterpagefile="~/Site.master" autoeventwireup="true" inherits="Default2, App_Web_52joc5k5" errorpage="~/mycustompage.aspx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>

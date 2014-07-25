@@ -1,4 +1,4 @@
-﻿<%@ page title="Home Page Management" language="C#" masterpagefile="~/Admin/AdminSite.master" autoeventwireup="true" inherits="Admin_Default, App_Web_nc1o1onr" errorpage="~/mycustompage.aspx" %>
+﻿<%@ page title="Home Page Management" language="C#" masterpagefile="~/Admin/AdminSite.master" autoeventwireup="true" inherits="Admin_Default, App_Web_cr45hahh" errorpage="~/mycustompage.aspx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
@@ -7,7 +7,13 @@
     <div>
      <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification"
             ValidationGroup="RegisterUserValidationGroup" />
-    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" OnMenuItemClick="NavigationMenu_MenuItemClick">
+    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" Orientation="Horizontal" OnMenuItemClick="NavigationMenu_MenuItemClick">
+         <staticselectedstyle 
+                           backcolor="White"
+                           ForeColor="#3070d4"
+                              borderstyle="Solid"
+                              bordercolor="Black" 
+                              borderwidth="1"/>
         <Items>
             <asp:MenuItem Text="View Current Image"></asp:MenuItem>
             <asp:MenuItem Text="Insert New Image"></asp:MenuItem>

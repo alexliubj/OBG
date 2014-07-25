@@ -1,11 +1,17 @@
-﻿<%@ page title="Product Management" language="C#" masterpagefile="~/Admin/AdminSite.master" autoeventwireup="true" inherits="Admin_Default, App_Web_owrxjuqs" errorpage="~/mycustompage.aspx" %>
+﻿<%@ page title="Product Management" language="C#" masterpagefile="~/Admin/AdminSite.master" autoeventwireup="true" inherits="Admin_Default, App_Web_tf2nmc1a" errorpage="~/mycustompage.aspx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" OnMenuItemClick="NavigationMenu_MenuItemClick">
-        <Items>
+    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" Orientation="Horizontal" OnMenuItemClick="NavigationMenu_MenuItemClick">
+        <staticselectedstyle 
+                           backcolor="White"
+                           ForeColor="#3070d4"
+                              borderstyle="Solid"
+                              bordercolor="Black" 
+                              borderwidth="1"/>
+         <Items>
             <asp:MenuItem Text="Wheels"></asp:MenuItem>
             <asp:MenuItem Text="Tires"></asp:MenuItem>
             <asp:MenuItem Text="Accessories"></asp:MenuItem>

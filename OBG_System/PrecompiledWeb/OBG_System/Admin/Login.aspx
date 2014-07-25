@@ -1,4 +1,4 @@
-﻿<%@ page title="Log In" language="C#" masterpagefile="~/Admin/AdminSite.master" autoeventwireup="true" inherits="Admin_Default, App_Web_vdoq4f45" errorpage="~/mycustompage.aspx" %>
+﻿<%@ page title="Log In" language="C#" masterpagefile="~/Admin/AdminSite.master" autoeventwireup="true" inherits="Admin_Default, App_Web_bikc250i" errorpage="~/mycustompage.aspx" %>
 
 <asp:Content ID="HeaderContent" runat="server" ContentPlaceHolderID="HeadContent">
 </asp:Content>

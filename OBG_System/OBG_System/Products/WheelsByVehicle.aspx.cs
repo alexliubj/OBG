@@ -92,10 +92,14 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
             partNo = ((Label)GridView4.Rows[rowindex].FindControl("PNLabel")).Text;
             image = ((Image)GridView4.Rows[rowindex].FindControl("ImageLable")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView4.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView4.Rows[rowindex].FindControl("PriceLabel")).Text.Substring(1));
+            //price = Convert.ToDouble(((Label)GridView4.Rows[rowindex].FindControl("PriceLabel")).Text.Substring(1));
+            if ((bool)((Label)GridView4.Rows[rowindex].FindControl("sPriceLabel")).Visible == true)
+            { price = Convert.ToDouble(((Label)GridView4.Rows[rowindex].FindControl("sPriceLabel")).Text.Substring(1)); sc.Pricing = price; }
+            if ((bool)((Label)GridView4.Rows[rowindex].FindControl("lbPrice")).Visible == true)
+            { price = Convert.ToDouble(((Label)GridView4.Rows[rowindex].FindControl("lbPrice")).Text.Substring(1)); sc.Pricing = price; }
             sc.ProductId = pID;
             sc.Qty = qty;
-            sc.Pricing = price;
+            //sc.Pricing = price;
             sc.PartNo = partNo;
             sc.Image = image;
             shoppingcart.Add(sc);

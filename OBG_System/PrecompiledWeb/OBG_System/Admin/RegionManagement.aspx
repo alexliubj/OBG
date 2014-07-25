@@ -1,9 +1,15 @@
-﻿<%@ page title="Region Management" language="C#" masterpagefile="~/Admin/AdminSite.master" autoeventwireup="true" inherits="Admin_Default, App_Web_nqbe4o2j" errorpage="~/mycustompage.aspx" %>
+﻿<%@ page title="Region Management" language="C#" masterpagefile="~/Admin/AdminSite.master" autoeventwireup="true" inherits="Admin_Default, App_Web_c5s43m3j" errorpage="~/mycustompage.aspx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="Server">
-    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" OnMenuItemClick="NavigationMenu_MenuItemClick">
+    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false"  Orientation="Horizontal" OnMenuItemClick="NavigationMenu_MenuItemClick">
+         <staticselectedstyle 
+                           backcolor="White"
+                           ForeColor="#3070d4"
+                              borderstyle="Solid"
+                              bordercolor="Black" 
+                              borderwidth="1"/>
         <Items>
             <asp:MenuItem Text="Region Management"></asp:MenuItem>
             <asp:MenuItem Text="Assign Region to User"></asp:MenuItem>

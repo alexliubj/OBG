@@ -130,12 +130,18 @@ public partial class Products_tireall : System.Web.UI.Page
             partNo = ((Label)GridView2.Rows[rowindex].FindControl("PNLabel")).Text;
             image = ((Image)GridView2.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView2.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("PricingLabel")).Text.Substring(1)) * special;
+            //price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("PricingLabel")).Text.Substring(1)) * special;
+            if ((bool)((Label)GridView2.Rows[rowindex].FindControl("sPriceLabel")).Visible == true)
+            { price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("sPriceLabel")).Text.Substring(1)); sc.Pricing = price; }
+            if ((bool)((Label)GridView2.Rows[rowindex].FindControl("lbPrice")).Visible == true)
+            { price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("lbPrice")).Text.Substring(1)); sc.Pricing = price; }
+            
+           
             sc.TireId = tID;
             sc.Image = image;
             sc.PartNo = partNo;
             sc.Qty = qty;
-            sc.Pricing = price;
+            //sc.Pricing = price;
             shoppingcart.Add(sc);
             Session["Cart"] = shoppingcart;
         }

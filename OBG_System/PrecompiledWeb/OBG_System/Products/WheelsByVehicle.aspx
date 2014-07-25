@@ -1,4 +1,4 @@
-﻿<%@ page title="View Wheels By Vehicle" language="C#" masterpagefile="~/Site.master" autoeventwireup="true" inherits="Products_viewByVehicle, App_Web_5g453y4q" errorpage="~/mycustompage.aspx" %>
+﻿<%@ page title="View Wheels By Vehicle" language="C#" masterpagefile="~/Site.master" autoeventwireup="true" inherits="Products_viewByVehicle, App_Web_1141p30w" errorpage="~/mycustompage.aspx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
@@ -326,7 +326,8 @@
                     <asp:TextBox ID="PriceTextBox" runat="server" Text='<%# Bind("Price") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
                 <ItemTemplate>
-                    <asp:Label ID="sPriceLabel" runat="server" ForeColor='<%#  (float)Convert.ToSingle(((Label)((GridViewRow)Container).FindControl("LBSpecial1")).Text)<1?System.Drawing.Color.Red:System.Drawing.Color.Black%>'  Font-Bold='<%# ((Label)((GridViewRow)Container).FindControl("sPriceLabel")).ForeColor==System.Drawing.Color.Red?true:false%>'   Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
+                    <asp:Label ID="sPriceLabel" runat="server"  Visible='<%#  (float)Convert.ToSingle(((Label)((GridViewRow)Container).FindControl("LBSpecial1")).Text)<1?true:false%>' ForeColor='<%#  (float)Convert.ToSingle(((Label)((GridViewRow)Container).FindControl("LBSpecial1")).Text)<1?System.Drawing.Color.Red:System.Drawing.Color.Black%>'  Font-Bold='<%# ((Label)((GridViewRow)Container).FindControl("sPriceLabel")).ForeColor==System.Drawing.Color.Red?true:false%>'   Text='<%# Bind("specialPrice","{0:c}") %>'></asp:Label>
+                <asp:Label ID="lbPrice" runat="server" Visible='<%#  (float)Convert.ToSingle(((Label)((GridViewRow)Container).FindControl("LBSpecial1")).Text)<1?false:true%>'  Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
                 </ItemTemplate>
 
 <ItemStyle HorizontalAlign="Center"></ItemStyle>
