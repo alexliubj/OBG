@@ -276,7 +276,7 @@ public partial class Account_Special : System.Web.UI.Page
             string partNo;
             string image;
             float special;
-            special = (float)Convert.ToSingle(((Label)GridView3.Rows[rowindex].FindControl("LBSpecial")).Text);
+            //special = (float)Convert.ToSingle(((Label)GridView3.Rows[rowindex].FindControl("LBSpecial")).Text);
             pID = Convert.ToInt32(GridView1.DataKeys[rowindex].Value.ToString());
             partNo = ((Label)GridView1.Rows[rowindex].FindControl("Label14")).Text;
             image = ((Image)GridView1.Rows[rowindex].FindControl("Image1")).ImageUrl;
