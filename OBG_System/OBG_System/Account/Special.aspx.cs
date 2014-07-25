@@ -281,7 +281,7 @@ public partial class Account_Special : System.Web.UI.Page
             partNo = ((Label)GridView1.Rows[rowindex].FindControl("Label14")).Text;
             image = ((Image)GridView1.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView1.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("Label13")).Text.Substring(1)) * special;
+            price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("Label5")).Text.Substring(1));
             sc.ProductId = pID;
             sc.Qty = qty;
             sc.Pricing = price;
@@ -323,7 +323,7 @@ public partial class Account_Special : System.Web.UI.Page
             partNo = ((Label)GridView2.Rows[rowindex].FindControl("Label2")).Text;
             image = ((Image)GridView2.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView2.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("Label4")).Text.Substring(1)) * (1 - special);
+            price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("specialprice")).Text.Substring(1));
             sc.TireId = tID;
             sc.Image = image;
             sc.PartNo = partNo;
@@ -364,7 +364,7 @@ public partial class Account_Special : System.Web.UI.Page
             partNo = ((Label)GridView3.Rows[rowindex].FindControl("Label2")).Text;
             image = ((Image)GridView3.Rows[rowindex].FindControl("Image1")).ImageUrl;
             qty = Convert.ToInt32(((TextBox)GridView3.Rows[rowindex].FindControl("QTYTextBox")).Text);
-            price = Convert.ToDouble(((Label)GridView3.Rows[rowindex].FindControl("accLabel5")).Text.Substring(1)) * special;
+            price = Convert.ToDouble(((Label)GridView3.Rows[rowindex].FindControl("accl5")).Text.Substring(1));
             name = ((Label)GridView3.Rows[rowindex].FindControl("Label7")).Text;
             sc.AccId = pID;
             sc.Qty = qty;
