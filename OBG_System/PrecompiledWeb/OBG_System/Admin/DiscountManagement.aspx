@@ -1,4 +1,4 @@
-﻿<%@ page title="Discount Management" language="C#" masterpagefile="~/Admin/AdminSite.master" autoeventwireup="true" inherits="Admin_Default, App_Web_sndzkf5j" errorpage="~/mycustompage.aspx" %>
+﻿<%@ page title="Discount Management" language="C#" masterpagefile="~/Admin/AdminSite.master" autoeventwireup="true" inherits="Admin_Default, App_Web_i44lienn" errorpage="~/mycustompage.aspx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>

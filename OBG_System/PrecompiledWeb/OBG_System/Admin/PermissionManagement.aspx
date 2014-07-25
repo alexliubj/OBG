@@ -1,4 +1,4 @@
-﻿<%@ page title="Permission Management" language="C#" masterpagefile="~/Admin/AdminSite.master" autoeventwireup="true" inherits="Admin_Default, App_Web_qp2idbnt" errorpage="~/mycustompage.aspx" %>
+﻿<%@ page title="Permission Management" language="C#" masterpagefile="~/Admin/AdminSite.master" autoeventwireup="true" inherits="Admin_Default, App_Web_bygqpcib" errorpage="~/mycustompage.aspx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>

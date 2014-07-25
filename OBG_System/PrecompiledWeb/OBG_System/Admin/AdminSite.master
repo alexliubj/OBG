@@ -1,15 +1,15 @@
-﻿<%@ master language="C#" autoeventwireup="true" inherits="SiteMaster, App_Web_ixso5mjb" %>
+﻿<%@ master language="C#" autoeventwireup="true" inherits="SiteMaster, App_Web_xfqjyjm4" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-<head runat="server">
+<head id="Head1" runat="server">
     <title></title>
     <link href="~/Styles/Site.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder ID="HeadContent" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <form runat="server">
+    <form id="Form1" runat="server">
     <div class="page">
         <div class="header">
             <div class="title">
@@ -25,8 +25,14 @@
                 </div>
 
             <div class="clear hideSkiplink">
-                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="true" IncludeStyleBlock="false" Orientation="Horizontal">
-                    <Items>
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="true" Orientation="Horizontal">
+                   <staticselectedstyle 
+                           backcolor="White"
+                           ForeColor="#3070d4"
+                              borderstyle="Solid"
+                              bordercolor="Black" 
+                              borderwidth="1"/>
+                     <Items>
                         <asp:MenuItem NavigateUrl="Home.aspx" Text="Home Page" Value="home"/>
                         <asp:MenuItem NavigateUrl="DiscountManagement.aspx" Text="Discount" Value="discount"/>
                         <asp:MenuItem NavigateUrl="OrderManagement.aspx" Text="Order" Value="order"/>

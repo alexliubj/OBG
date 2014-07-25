@@ -1,4 +1,4 @@
-﻿<%@ page title="Shopping Cart" language="C#" masterpagefile="~/Site.master" autoeventwireup="true" inherits="Account_ShoppingCart, App_Web_fczsq1zg" errorpage="~/mycustompage.aspx" %>
+﻿<%@ page title="Shopping Cart" language="C#" masterpagefile="~/Site.master" autoeventwireup="true" inherits="Account_ShoppingCart, App_Web_52joc5k5" errorpage="~/mycustompage.aspx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <style type="text/css">

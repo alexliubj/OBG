@@ -1,4 +1,4 @@
-﻿<%@ page title="Checkout" language="C#" masterpagefile="~/Site.master" autoeventwireup="true" inherits="Default2, App_Web_fczsq1zg" errorpage="~/mycustompage.aspx" %>
+﻿<%@ page title="Checkout" language="C#" masterpagefile="~/Site.master" autoeventwireup="true" inherits="Default2, App_Web_r5izugbe" errorpage="~/mycustompage.aspx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
 </asp:Content>

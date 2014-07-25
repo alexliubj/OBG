@@ -1,4 +1,4 @@
-﻿<%@ page title="Order History" language="C#" masterpagefile="~/Site.master" autoeventwireup="true" inherits="Default2, App_Web_blh2azyb" errorpage="~/mycustompage.aspx" %>
+﻿<%@ page title="Order History" language="C#" masterpagefile="~/Site.master" autoeventwireup="true" inherits="Default2, App_Web_xautd15s" errorpage="~/mycustompage.aspx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="Server">
     <style type="text/css">

@@ -1,4 +1,4 @@
-<%@ page title="" language="C#" masterpagefile="~/Site.master" autoeventwireup="true" inherits="Order_shoppingcart, App_Web_arsculu0" %>
+<%@ page title="" language="C#" masterpagefile="~/Site.master" autoeventwireup="true" inherits="Order_shoppingcart, App_Web_jc3fdeey" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>
