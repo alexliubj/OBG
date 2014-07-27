@@ -245,4 +245,6 @@ public partial class Default2 : System.Web.UI.Page
         //GridView1.DataBind();
         Gridview1_Bind();
     }
+
+    
 }

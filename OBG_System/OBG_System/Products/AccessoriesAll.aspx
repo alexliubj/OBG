@@ -15,9 +15,9 @@
                     <td class="style2">
                         <asp:Label ID="NameLabel" runat="server">Product Name:</asp:Label>
                     </td>
-                    <td>
+                    <%--<td>
                         <asp:LinkButton ID="Button1" runat="server" Text="All" OnClick="Button1_Click"  />
-                        </td>
+                        </td>--%>
                     <td>
                         <asp:LinkButton ID="Button2" runat="server" Text="Reset" OnClick="Button2_Click"  />
                         </td>

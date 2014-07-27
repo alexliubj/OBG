@@ -15,6 +15,7 @@
                     <fieldset class="login">
                         <legend>Enter your email to receive your password.</legend>
                         <p>
+                            <asp:Label ID="Label7" runat="server" Text=""></asp:Label>
                             <asp:Label ID="EmailAddressLabel" runat="server" AssociatedControlID="EmailAddress">Email Address:</asp:Label>
                             <asp:TextBox ID="EmailAddress" runat="server" CssClass="textEntry"></asp:TextBox>
                             <asp:RequiredFieldValidator ID="EmailAddressRequired" runat="server" ControlToValidate="EmailAddress"
