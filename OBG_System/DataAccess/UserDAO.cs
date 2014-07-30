@@ -561,7 +561,7 @@ namespace DataAccess
             new SqlParameter("@username", user.UserName),
             new SqlParameter("@status", user.Status),
             new SqlParameter("@email", user.Email),
-            new SqlParameter("@companyname", user.Email),
+            new SqlParameter("@companyname", user.CompanyName),
             new SqlParameter("@phone", user.Phone),
             new SqlParameter("@BillingHouseNo", user.BillingHouseNo),
             new SqlParameter("@BillingPostCode", user.BillPostCode),
