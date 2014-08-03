@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/AdminSite.master" AutoEventWireup="true" CodeFile="PolicyManagement.aspx.cs" Inherits="Admin_PolicyManagement" %>
+﻿<%@ Page Title="Policy Management" Language="C#" MasterPageFile="~/Admin/AdminSite.master" AutoEventWireup="true" CodeFile="PolicyManagement.aspx.cs" Inherits="Admin_PolicyManagement" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>

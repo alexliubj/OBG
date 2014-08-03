@@ -235,6 +235,6 @@ public partial class Products_accAll : System.Web.UI.Page
     protected void Button2_Click(object sender, EventArgs e)
     {
         ChkName.ClearSelection();
-        GridView6.DataBind();
+        GridView6_Bind();
     }
 }

@@ -249,11 +249,27 @@ public partial class Default2 : System.Web.UI.Page
 
     public bool SendMail(string ToEmail)
     {
+        //MailMessage myMail = new MailMessage();
+        //myMail.From = new MailAddress("317844956@qq.com");
+        //myMail.To.Add(new MailAddress(""));
+        //myMail.Subject = "C#发送Email";
+        //myMail.SubjectEncoding = Encoding.UTF8;
+        //myMail.Body = "this is a test email from QQ!";
+        //myMail.BodyEncoding = Encoding.UTF8;
+        //myMail.IsBodyHtml = true;
+        //SmtpClient smtp = new SmtpClient();
+        //smtp.Host = "smtp.qq.com";
+        //smtp.Credentials = new NetworkCredential("", "123456");
+        //smtp.Send(myMail);
+        //return true;
 
+
+        //string Email = "alexliu0506@126.com";
+        //string Email = "holmeslixu@gmail.com";
         string Email = "orders@optiwheels.ca";
-        //string Email = "onlineorders@optiwheels.ca";
-        //string password = "orders12345";
         string password = "orders12345";
+        //string password = "5631247";
+        //string password = "holmes615";
         Encoding EnCode = Encoding.UTF8;
         System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
         Message.From = new MailAddress(Email, "OBG Master", EnCode);
@@ -267,7 +283,7 @@ public partial class Default2 : System.Web.UI.Page
         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thank you for your order at <a href='" + host + "'>OBG Order System</a>! ");
         MailContent.Append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ");
         MailContent.Append(DateTime.Now.ToLongTimeString());
-        
+
         //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have ordered products at <a href='" + host + "'>OBG Order System</a>.");
         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To check the status of your order, please see your order history: ");
         //MailContent.Append("<br/>Here are your order details: ");
@@ -282,9 +298,11 @@ public partial class Default2 : System.Web.UI.Page
 
         try
         {
-            SmtpClient smtp = new SmtpClient("smtp.zoho.com", 587);
-            //SmtpClient smtp = new SmtpClient("relay-hosting.secureserver.net", 25);
-            smtp.EnableSsl = true;
+            //SmtpClient smtp = new SmtpClient("smtp.zoho.com", 587);
+            //SmtpClient smtp = new SmtpClient("smtp.qq.com", 25);
+            SmtpClient smtp = new SmtpClient("relay-hosting.secureserver.net", 25);
+            //SmtpClient smtp = new SmtpClient("smtp.gmail.com", 25);
+            //smtp.EnableSsl = true;
             smtp.Credentials = new NetworkCredential(Email, password);
             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtp.Send(Message);
