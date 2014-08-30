@@ -8,7 +8,7 @@
         <asp:Label ID="Label7" runat="server" Text=""></asp:Label>
     </div>
     <br />
-    <asp:GridView ID="CKGridView" runat="server" GridLines="Both" align="center" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderID" ForeColor="#333333"
+    <asp:GridView ID="CKGridView" runat="server" GridLines="Both" align="center" AllowPaging="True" AllowSorting="false" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderID" ForeColor="#333333"
         Visible="true"  OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
@@ -102,7 +102,10 @@
     <br />
     <asp:Label ID="LabelTotalText" runat="server" Font-Bold="true" Font-Size="Large" align="left" Text="Order Total: "></asp:Label>
     <asp:Label ID="LabelTotalPrice" Visible="true" Font-Bold="true" Font-Size="Large" align="left" runat="server" ForeColor="#FF8080"></asp:Label>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <td class="auto-style2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="sfLabel" runat="server" Font-Bold="true" Font-Size="Large" Text="Shipping Fee: "></asp:Label>
+                    </td>
+                <td><asp:Label ID="Label10" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp; </td>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Label ID="lbHST" runat="server" Font-Bold="true" Font-Size="Large" Text="HST: "></asp:Label>
     <asp:Label ID="Label1" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -116,5 +119,12 @@
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
      <asp:linkButton ID="Button1" runat="server" Text="Back to shopping cart" OnClick ="Button1_Click" />  
      <asp:Button ID="confirmBt" runat="server" align="Right" Text="Confirm" ControlStyle-CssClass="myButton" OnClick="BtnConfirm_Click" />
+     <asp:Button ID="Button2" runat="server" align="Right" Text="Confirm" ControlStyle-CssClass="myButton" OnClick="BtnConfirm_Click"  style="display:none"/>
+        <script language="javascript" type="text/javascript">
+            function BtnConfirm_Click() {
+                document.getElementById("confirmBt").disabled = true;
+                document.getElementById("Button2").click();
+            }
+    </script>
 </asp:Content>
 

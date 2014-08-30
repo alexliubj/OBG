@@ -7,6 +7,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using BusinessLogic;
 using OBGModel;
+using System.Text;
+using System.Net.Mail;
+using System.Net;
 
 public partial class Default2 : System.Web.UI.Page
 {
@@ -36,9 +39,14 @@ public partial class Default2 : System.Web.UI.Page
                 orderine.Add(line);
             }
 
+                //ViewState["SortOrder"] = "orderid";
+                //ViewState["OrderDire"] = "asc";
+
             Gridview1_Bind();
             
         }
+
+        
 
        
     }
@@ -57,7 +65,7 @@ public partial class Default2 : System.Web.UI.Page
 
         for (int i = 0; i < GridView1.Rows.Count; i++)
         {
-            string status = ((Label)(GridView1.Rows[i].Cells[2].FindControl("Label5"))).Text.ToString().Trim();
+            string status = ((Label)(GridView1.Rows[i].Cells[3].FindControl("Label5"))).Text.ToString().Trim();
             
 
             switch (status)
@@ -94,7 +102,7 @@ public partial class Default2 : System.Web.UI.Page
                     statusLabel = "Unknown";
                     break;
             }
-            ((Label)(GridView1.Rows[i].Cells[2].FindControl("Label5"))).Text = statusLabel;
+            ((Label)(GridView1.Rows[i].Cells[3].FindControl("Label5"))).Text = statusLabel;
         }
     }
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -109,14 +117,13 @@ public partial class Default2 : System.Web.UI.Page
    
     public void GridView2_Bind(int orderID)
     {
-
-        orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
         statusLabel = ((Label)(GridView1.SelectedRow.Cells[3].FindControl("Label5"))).Text;
+        orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
         if (statusLabel == "Pending")
         {
-            updatebutton.Visible = true; 
+            updatebutton.Visible = true;
         }
-
+       
         OrderGridView.DataSource = orderDetailTable;
         OrderGridView.DataKeyNames = new string[] { "OrderId" };
         OrderGridView.DataBind();
@@ -144,7 +151,8 @@ public partial class Default2 : System.Web.UI.Page
 
              //   return;
         }
-
+        statusLabel = ((Label)(GridView1.SelectedRow.Cells[3].FindControl("Label5"))).Text;
+       
         Populacontorl(orderID);
     }
 
@@ -162,7 +170,8 @@ public partial class Default2 : System.Web.UI.Page
         foreach (DataRow row in orderDetailTable.Rows)
         {
             tatil += decimal.Parse(row["DiscountRate"].ToString()) * int.Parse(row["Qty"].ToString());
-            HST += decimal.Parse(row["DiscountRate"].ToString()) * int.Parse(row["Qty"].ToString()) * hst;
+            //HST += (decimal.Parse(row["DiscountRate"].ToString()) * int.Parse(row["Qty"].ToString()) + shipfee) * hst;
+            HST = (tatil + shipfee) * hst;
             totalPrice = tatil + HST + shipfee;
         }
         lblTatil.Text = string.Format("${0:n2}", tatil);
@@ -201,9 +210,22 @@ public partial class Default2 : System.Web.UI.Page
 
     protected void Confirm_Click(object sender, EventArgs e)
     {
-        
 
-        Response.Redirect("~/Default.aspx");
+        //int ordersave = OrderBLO.AddNewOrder(order, orderine);
+        //if (ordersave > 0)
+        //{
+        orderID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
+            User user = UserBLO.GetUserInfoWithUserId(userId);
+            SendMail(user.Email, orderID);
+            Session.Remove("Cart");
+            Response.Redirect("~/Default.aspx");
+
+        //}
+        //else
+        //{
+        //    //Response.Redirect("~/Default.aspx");
+        //}
+        //
     }
 
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
@@ -246,5 +268,81 @@ public partial class Default2 : System.Web.UI.Page
         Gridview1_Bind();
     }
 
+
+    public bool SendMail(string ToEmail, int orderid)
+    {
+        //MailMessage myMail = new MailMessage();
+        //myMail.From = new MailAddress("317844956@qq.com");
+        //myMail.To.Add(new MailAddress(""));
+        //myMail.Subject = "C#发送Email";
+        //myMail.SubjectEncoding = Encoding.UTF8;
+        //myMail.Body = "this is a test email from QQ!";
+        //myMail.BodyEncoding = Encoding.UTF8;
+        //myMail.IsBodyHtml = true;
+        //SmtpClient smtp = new SmtpClient();
+        //smtp.Host = "smtp.qq.com";
+        //smtp.Credentials = new NetworkCredential("", "123456");
+        //smtp.Send(myMail);
+        //return true;
+
+
+        //string Email = "alexliu0506@126.com";
+        //string Email = "holmeslixu@gmail.com";
+        string Email = "orders@optiwheels.ca";
+        string password = "orders12345";
+        string totoEmail = "min@optiwheels.ca";
+        //string password = "5631247";
+        //string password = "holmes615";
+        Encoding EnCode = Encoding.UTF8;
+        System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
+        Message.From = new MailAddress(Email, "OBG Master", EnCode);
+        Message.To.Add(new MailAddress(ToEmail, "Dear Customer", EnCode));
+        Message.To.Add(new MailAddress(totoEmail, "Dear Admin"));
+        Message.Subject = "Your OPIT Order Is Confirmed‏ ";
+        Message.SubjectEncoding = EnCode;
+
+        StringBuilder MailContent = new StringBuilder();
+        string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + ResolveUrl("~/");
+        MailContent.Append("Dear Customer：<br/>");
+        MailContent.Append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your orderid is "+ orderid);
+        MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have updated your order successfully! ");
+        //MailContent.Append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ");
+        //MailContent.Append(DateTime.Now.ToLongTimeString());
+
+        //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have ordered products at <a href='" + host + "'>OBG Order System</a>.");
+        //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To check the status of your order, please see your order history: ");
+        //MailContent.Append("<br/>Here are your order details: ");
+        //MailContent.Append(CKGridView);
+
+        //string url = host + "Account/UserOrderHistory.aspx";
+        //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='" + url + "'>" + url + "</a>");
+        //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can modify your order before shipping.</p>");
+
+
+        Message.Body = MailContent.ToString();
+        Message.BodyEncoding = EnCode;
+        Message.IsBodyHtml = true;
+
+        try
+        {
+            //SmtpClient smtp = new SmtpClient("smtp.zoho.com", 587);
+            //SmtpClient smtp = new SmtpClient("smtp.qq.com", 25);
+            SmtpClient smtp = new SmtpClient("relay-hosting.secureserver.net", 25);
+            //SmtpClient smtp = new SmtpClient("smtp.gmail.com", 25);
+            //smtp.EnableSsl = true;
+            smtp.Credentials = new NetworkCredential(Email, password);
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Send(Message);
+
+        }
+        catch (SmtpException ex)
+        {
+            string msg = "Mail cannot be sent because of the server problem:";
+            msg += ex.Message;
+            Label7.Text = msg;
+            return false;
+        }
+        return true;
+    }
     
 }

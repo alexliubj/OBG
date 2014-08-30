@@ -46,6 +46,7 @@
     <Compile Include="DiscountBLO.cs" />
     <Compile Include="EmailUtilities.cs" />
     <Compile Include="HomePageBLO.cs" />
+    <Compile Include="ipBLO.cs" />
     <Compile Include="IPUtility.cs" />
     <Compile Include="OrderBLO.cs" />
     <Compile Include="PermissionBLO.cs" />

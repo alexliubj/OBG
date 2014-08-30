@@ -25,7 +25,7 @@
     <br />
     <p>Your orders:</p>
     <div runat="server" align ="center">
-    <asp:GridView ID="GridView1" runat="server" GridLines="Both"  AllowPaging="True" AllowSorting="true" Width="80%" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderID" ForeColor="#333333"
+    <asp:GridView ID="GridView1" runat="server" GridLines="Both"  AllowPaging="True" AllowSorting="false" Width="80%" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderID" ForeColor="#333333"
         OnSelectedIndexChanged="GridView1_SelectedIndexChanged" 
            OnPageIndexChanging="GridView1_PageIndexChanging"
          OnSorting="GridView1_Sorting">
@@ -50,7 +50,7 @@
                     <asp:Label ID="Label4" runat="server" Text='<%# Eval("OrderDate","{0:MM/dd/yyyy}") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Status" ItemStyle-HorizontalAlign="Center" SortExpression="Status">
+            <asp:TemplateField HeaderText="Status" ItemStyle-HorizontalAlign="Center" Visible="true"  SortExpression="Status">
                 <EditItemTemplate>
                     <asp:TextBox ID="TextBox5" runat="server" Text='<%# Bind("Status") %>'></asp:TextBox>
                 </EditItemTemplate>
@@ -93,8 +93,9 @@
         <br />
         <br />
         <p>Order Detail:</p>
+        <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
         <div id="Div1" runat="server" align ="center">
-        <asp:GridView ID="OrderGridView" runat="server" GridLines="Both" AllowPaging="True" AllowSorting="true" Width="80%" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderId" ForeColor="#333333"
+        <asp:GridView ID="OrderGridView" runat="server" GridLines="Both" AllowPaging="false" AllowSorting="false" Width="80%" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderId" ForeColor="#333333"
             Visible="true" OnRowDeleting="GridView1_RowDeleting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
@@ -186,12 +187,13 @@
                     <asp:Label ID="lblTatil" Visible="true" Font-Bold="true" Font-Size="Large" align="left" runat="server" ForeColor="#FF8080"></asp:Label>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
-                <td class="auto-style3"><asp:Label ID="lbHST" runat="server" Font-Bold="true" Font-Size="Large" Text="HST: "></asp:Label><asp:Label ID="Label1" runat="server" Font-Bold="true" Font-Size="Large" Text="HST: "></asp:Label>
-                    </td>
-                <td><asp:Label ID="Label2" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp; </td>
                 <td class="auto-style2"><asp:Label ID="sfLabel" runat="server" Font-Bold="true" Font-Size="Large" Text="Shipping Fee: "></asp:Label>
                     </td>
                 <td><asp:Label ID="Label10" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td class="auto-style3"><asp:Label ID="lbHST" runat="server" Font-Bold="true" Font-Size="Large" Text="HST: "></asp:Label>
+                    </td>
+                <td><asp:Label ID="Label2" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                
                 <td class="auto-style4"><asp:Label ID="Totalprice" runat="server" Font-Bold="true" Font-Size="Large" Text="Total Price: "></asp:Label></td>
                 <td><asp:Label ID="Label7" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label></td>
                 </tr>
@@ -199,7 +201,7 @@
                     <td/><td/><td/><td/><td/><td/>
                     <tr/><td/><td/><td/><td/><td/><td/>
                     <td style="text-align: right">
-                <div id="updatebutton" runat="server" visible="false" > <asp:LinkButton ID="LBUpdate" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="LBUpdate_Click">Update</asp:LinkButton></div>
+                <div id="updatebutton" runat="server" visible="false"  > <asp:LinkButton ID="LBUpdate" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="LBUpdate_Click">Update</asp:LinkButton></div>
                 </td>
                 <td style="text-align: right">
                     <asp:LinkButton ID="LBConfirm" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="Confirm_Click" >Confirm</asp:LinkButton>

@@ -33,7 +33,7 @@
         <asp:ListItem Value="100" Text="100" />
     </asp:DropDownList>
         <br/>
-        <asp:GridView ID="GridView1" runat="server" GridLines="Both" AllowPaging="True" Align="center" EmptyDataText="There is no wheels special now." AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ProductId" ForeColor="#333333" 
+        <asp:GridView ID="GridView1" runat="server" GridLines="Both" AllowPaging="True" Align="center" EmptyDataText="There is no wheels special now." AllowSorting="false" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ProductId" ForeColor="#333333" 
 Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="GridView1_RowCommand" OnSorting="GridView1_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>

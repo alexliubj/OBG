@@ -42,7 +42,7 @@
                         <img alt="logo" class="stylel" src="<%= Page.ResolveUrl("~")%>Pictures/opti-1.jpg" />Orderring System
                     </h1>
                 </div>
-
+                <br/>
                 <div class="shoppingcart" align="right">
                     <a id="shoppingcart" runat="server" href="~/Account/ShoppingCart.aspx">
                         <img alt="shoppingcart" id="Image1"
@@ -55,10 +55,7 @@
 
                 </div>
 
-                <div class="companyInfo" >
-                    <p>Address: 245 West Beaver Creek Rd, Richmond Hill, ON, L4B 1L1. </p>
-                    <p>Phone: 647-361-8553, 647-361-8556.&nbsp;&nbsp; Fax: 647-361-8554</p>
-                </div>
+
                 <div class="clear hideSkiplink">
                     <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" Orientation="Horizontal">
                        <staticselectedstyle 
@@ -82,6 +79,7 @@
                             <asp:MenuItem NavigateUrl="Account/UserCenter.aspx" Text="User Center" Value="usercenter"></asp:MenuItem>
                             <asp:MenuItem NavigateUrl="Account/Special.aspx" Text="Special" Value="Special"></asp:MenuItem>
                             <asp:MenuItem NavigateUrl="~/Products/ReturnPolicy.aspx" Text="Policy" Value="returnpolicy"></asp:MenuItem>
+                             <asp:MenuItem NavigateUrl="~/contact.aspx" Text="Contact us" Value="usercenter"></asp:MenuItem>
                         </Items>
                     </asp:Menu>
                 </div>

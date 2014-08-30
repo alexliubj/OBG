@@ -103,23 +103,46 @@ public partial class Account_ShoppingCart : System.Web.UI.Page
            
     }
 
+    //protected void totalPrice()
+    //{
+    //    decimal total = 0;
+    //    decimal HST = 0;
+    //    decimal totalPrice = 0;
+    //    decimal hst = (Decimal)(0.13);
+    //    foreach (DataRow row in shoppingcarttb.Rows)
+    //    {
+    //        total += decimal.Parse(row["Price"].ToString()) * int.Parse(row["Quantity"].ToString());
+    //        HST += decimal.Parse(row["Price"].ToString()) * int.Parse(row["Quantity"].ToString()) * hst;
+    //        totalPrice = total + HST;
+    //    }
+    //    LabelTotalPrice.Text = string.Format("${0:n2}", total);
+    //    Label1.Text = string.Format("${0:n2}", HST);
+    //    Label2.Text = string.Format("${0:n2}", totalPrice);
+    //    ShoppingCartGridView.DataSource = shoppingcarttb;
+    //    ShoppingCartGridView.DataBind();
+    //}
+
     protected void totalPrice()
     {
+        double regionid = RegionBLO.GetReginIDByUserId(userID);
         decimal total = 0;
         decimal HST = 0;
         decimal totalPrice = 0;
         decimal hst = (Decimal)(0.13);
+        decimal shipfee = (Decimal)regionid;
         foreach (DataRow row in shoppingcarttb.Rows)
         {
             total += decimal.Parse(row["Price"].ToString()) * int.Parse(row["Quantity"].ToString());
-            HST += decimal.Parse(row["Price"].ToString()) * int.Parse(row["Quantity"].ToString()) * hst;
-            totalPrice = total + HST;
+            //HST += (decimal.Parse(row["Price"].ToString()) * int.Parse(row["Quantity"].ToString()) + shipfee) * hst;
+            HST = (total + shipfee) * hst;
+            totalPrice = total + HST + shipfee;
         }
         LabelTotalPrice.Text = string.Format("${0:n2}", total);
         Label1.Text = string.Format("${0:n2}", HST);
         Label2.Text = string.Format("${0:n2}", totalPrice);
-        ShoppingCartGridView.DataSource = shoppingcarttb;
-        ShoppingCartGridView.DataBind();
+        Label10.Text = string.Format("${0:n2}", regionid);
+        // CKGridView.DataSource = checkoutTB;
+        //CKGridView.DataBind();
     }
 
     //protected void LBUpdate_Click(object sender, EventArgs e)

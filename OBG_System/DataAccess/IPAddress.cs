@@ -30,6 +30,20 @@ namespace DataAccess
             return lastIPAddress;
         }
 
+        public static DataTable GetAllAddress(int userId)
+        {
+            DbCommand command = db.GetSqlStringCommond(@"select u.ipid, u.userid,i.allip,i.logintimes
+                                    from userip u
+                                    inner join allip i
+                                    on u.userid = i.userid
+                                    where u.userid = @userid");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userId) };
+            command.Parameters.AddRange(paras);
+            DataTable dt = db.ExecuteDataTable(command);
+
+            return dt;
+        }
+
         public static int UpdateIpAddress(string ipAddress, int userId)
         {
             DbCommand command = db.GetSqlStringCommond(@"

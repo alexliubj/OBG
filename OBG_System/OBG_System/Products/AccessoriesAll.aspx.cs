@@ -97,7 +97,8 @@ public partial class Products_accAll : System.Web.UI.Page
     {
         GridView6.PageIndex = e.NewPageIndex;
         //GridView1.DataBind();
-        GridView6_Bind();
+        chk_SelectedIndexChanged(sender, e);
+        //GridView6_Bind();
     }
 
     protected void GridView6_Sorting(object sender, GridViewSortEventArgs e)
@@ -111,7 +112,8 @@ public partial class Products_accAll : System.Web.UI.Page
             dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
 
             GridView6.DataSource = dataView;
-            GridView6.DataBind();
+            chk_SelectedIndexChanged(sender, e);
+            //GridView6.DataBind();
         }
 
     }
@@ -223,7 +225,44 @@ public partial class Products_accAll : System.Web.UI.Page
         GridView6.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
 
         GridView6.PageIndex = 0;
-        GridView6_Bind();
+        //GridView6_Bind();
+        DataTable accAll = AccessoryBLO.GetAllAccessories(userID);
+        if (accAll.DefaultView.RowFilter == null && GridView6.DataSource == null)
+        //GridView1.DataSource = wheelsAll.DefaultView;
+        //GridView1.DataBind();
+        //else
+        {
+            //GridView1.DataBind();
+            GridView6_Bind();
+        }
+        else
+        {
+            String sqlText = string.Empty;
+            String sqlFilterName = string.Empty;
+            foreach (ListItem item in ChkName.Items)
+            {
+                if (item.Selected)
+                {
+                    if (sqlFilterName != string.Empty)
+                    {
+                        sqlFilterName += " or " + "Name = " + "'" + item.Text.ToString().Trim() + "'";
+                    }
+                    else
+                    {
+                        sqlFilterName += "Name = " + "'" + item.Text.ToString().Trim() + "'";
+                    }
+                }
+            }
+
+            if (!String.IsNullOrEmpty(sqlFilterName))
+            {
+                sqlText += sorroundWithbrackets(sqlFilterName);
+            }
+
+            accAll.DefaultView.RowFilter = sqlText;
+            GridView6.DataSource = accAll.DefaultView;
+            GridView6.DataBind();
+        }
     }
     protected void Button1_Click(object sender, EventArgs e)
     {

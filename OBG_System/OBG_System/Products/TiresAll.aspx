@@ -100,7 +100,7 @@
         OnRowCancelingEdit="GridView2_RowCancelingEdit"
         OnRowCommand="GridView1_RowCommand"
         OnRowDataBound="GridView2_RowDataBound"
-        AllowSorting="true" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">
+        AllowSorting="false" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
            
