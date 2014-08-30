@@ -16,7 +16,7 @@
                     <td>
                          <asp:RadioButtonList DataSourceID="SqlDataSource1" DataTextField="VehicleName"
                             DataValueField="Vehicleid"
-                            CssClass="CBLayout" ID="rdVehicle" runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chk_SelectedIndexChanged">
+                             ID="rdVehicle" runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chk_SelectedIndexChanged">
                         </asp:RadioButtonList>
                     </td>
                 <asp:SqlDataSource ID="SqlDataSource1" runat="server"
@@ -47,7 +47,7 @@
         OnRowCancelingEdit="GridView1_RowCancelingEdit" 
         OnRowDataBound="GridView1_RowDataBound"
         OnRowCommand="GridView1_RowCommand"
-        AllowSorting="true"  OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting"
+        AllowSorting="false"  OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting"
         >
         
     <AlternatingRowStyle BackColor="White" />
@@ -265,7 +265,7 @@
 
 <ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
-                 <asp:TemplateField HeaderText="Offset(mm)" ItemStyle-HorizontalAlign="Center" SortExpression="Offset">
+                 <asp:TemplateField HeaderText="Offset<br/>(mm)" ItemStyle-HorizontalAlign="Center" SortExpression="Offset">
             
                 <ItemTemplate>
                     <asp:Label ID="OffsetLabel" runat="server" Text='<%# Bind("Offset") %>'></asp:Label>
@@ -281,7 +281,7 @@
 
 <ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
-                   <asp:TemplateField HeaderText="Bore(mm)" ItemStyle-HorizontalAlign="Center" SortExpression="Bore">
+                   <asp:TemplateField HeaderText="Bore<br/>(mm)" ItemStyle-HorizontalAlign="Center" SortExpression="Bore">
   
                 <ItemTemplate>
                     <asp:Label ID="BoreLabel" runat="server" Text='<%# Bind("Bore") %>'></asp:Label>
@@ -289,7 +289,7 @@
 
 <ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
-                  <asp:TemplateField HeaderText="Weight(LBS)" ItemStyle-HorizontalAlign="Center" SortExpression="Weight">
+                  <asp:TemplateField HeaderText="Weight<br/>(LBS)" ItemStyle-HorizontalAlign="Center" SortExpression="Weight">
      
                 <ItemTemplate>
                     <asp:Label ID="WeightLabel" runat="server" Text='<%# Bind("Weight") %>'></asp:Label>

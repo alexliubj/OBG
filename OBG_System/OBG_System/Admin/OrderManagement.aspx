@@ -175,6 +175,27 @@
                 <SortedDescendingHeaderStyle BackColor="#4870BE" />
             </asp:GridView>
         </div>
+        <br/>
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td class="auto-style2" >
+                   <asp:Label ID="LabelTotalText" runat="server" Font-Bold="true" Font-Size="Large" align="left" Text="Order Total: "></asp:Label>
+                    </td>
+                <td>
+                    <asp:Label ID="lblTatil" Visible="true" Font-Bold="true" Font-Size="Large" align="left" runat="server" ForeColor="#FF8080"></asp:Label>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                </td>
+                <td class="auto-style3"><asp:Label ID="lbHST" runat="server" Font-Bold="true" Font-Size="Large" Text="HST:"></asp:Label>
+                    </td>
+                <td><asp:Label ID="Label9" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td class="auto-style2"><asp:Label ID="sfLabel" runat="server" Font-Bold="true" Font-Size="Large" Text="Shipping Fee: "></asp:Label>
+                    </td>
+                <td><asp:Label ID="Label10" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp; </td>
+                <td class="auto-style4"><asp:Label ID="Totalprice" runat="server" Font-Bold="true" Font-Size="Large" Text="Total Price: "></asp:Label></td>
+                <td><asp:Label ID="Label7" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label></td>
+                </tr>
+                </table>
+        <br/>
     </div>
 </asp:Content>
 

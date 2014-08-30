@@ -14,7 +14,9 @@ public partial class Admin_Default : System.Web.UI.Page
 {
     private DataSet orderDataSet;
     int adminID = 0;
-    int user=0;
+    int userID = 0;
+    int orderID = 0;
+    DataTable orderDetailTable;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -156,7 +158,8 @@ public partial class Admin_Default : System.Web.UI.Page
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
     {
         int orderID;
-
+        //int user;
+        //user = Convert.ToInt32(GridView1.SelectedRow.Cells[1].Text);
         orderID = int.Parse(GridView1.SelectedRow.Cells[0].Text);
 
         //int rowCount;
@@ -170,7 +173,7 @@ public partial class Admin_Default : System.Web.UI.Page
         //    user = int.Parse(((Label)(GridView1.Rows[i].Cells[1].FindControl("Label3"))).Text.ToString());
             
         //}
-        int userID = int.Parse(((Label)(GridView1.SelectedRow.Cells[1].FindControl("Label3"))).Text);
+        userID = int.Parse(((Label)(GridView1.SelectedRow.Cells[1].FindControl("Label3"))).Text);
 
 
         GridView2_Bind(orderID,userID);
@@ -213,7 +216,7 @@ public partial class Admin_Default : System.Web.UI.Page
     public void GridView2_Bind(int orderID,int userID)
     {
 
-        DataTable orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
+        orderDetailTable =  OrderBLO.GetOrderLineByOrderId(orderID);
 
         GridView2.DataSource = orderDetailTable;
         GridView2.DataKeyNames = new string[] { "OrderId" };
@@ -244,8 +247,34 @@ public partial class Admin_Default : System.Web.UI.Page
             ((Label)(GridView2.Rows[i].Cells[3].FindControl("Label5"))).Text = productTypeLabel;
         }
         lbCn.Text = companyName;
+        Populacontorl(orderID);
     }
 
+    protected void Populacontorl(int orderID)
+    {
+        //orderID = int.Parse(OrderGridView.SelectedRow.Cells[0].Text);
+        orderDetailTable = OrderBLO.GetOrderLineByOrderId(orderID);
+        double regionid = RegionBLO.GetReginIDByUserId(userID);
+        //double rf = RegionBLO.GetReginFeeByReginID(regionid);
+        decimal tatil = 0;
+        decimal HST = 0;
+        decimal totalPrice = 0;
+        decimal hst = (Decimal)(0.13);
+        decimal shipfee = (Decimal)regionid;
+        foreach (DataRow row in orderDetailTable.Rows)
+        {
+            tatil += decimal.Parse(row["DiscountRate"].ToString()) * int.Parse(row["Qty"].ToString());
+            //HST += decimal.Parse(row["DiscountRate"].ToString()) * int.Parse(row["Qty"].ToString()) * hst;
+            HST = (tatil + shipfee) * hst;
+            totalPrice = tatil + HST + shipfee;
+        }
+        lblTatil.Text = string.Format("${0:n2}", tatil);
+        Label9.Text = string.Format("${0:n2}", HST);
+        Label7.Text = string.Format("${0:n2}", totalPrice);
+        Label10.Text = string.Format("${0:n2}", regionid);
+        GridView2.DataSource = orderDetailTable;
+        GridView2.DataBind();
+    }
     //protected void GridView2_Sorting(object sender, GridViewSortEventArgs e)
     //{
 

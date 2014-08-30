@@ -15,6 +15,7 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
     string strProductID = "";
     private DataSet wheelsDataSet;
     int userID = 0;
+    int vehicleid = 0;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["UserID"] != null)
@@ -183,7 +184,18 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
     {
         GridView4.PageIndex = e.NewPageIndex;
         //GridView1.DataBind();
+        //chk_SelectedIndexChanged(sender, e);
         Gridview4_Bind();
+        foreach (ListItem intem in rdVehicle.Items)
+        {
+            if (intem.Selected)
+            {
+                chk_SelectedIndexChanged(sender, e);
+                //Gridview4_Bind();
+            }
+
+
+        }
     }
 
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
@@ -197,7 +209,18 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
             dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
 
             GridView4.DataSource = dataView;
+            //chk_SelectedIndexChanged(sender, e);
             GridView4.DataBind();
+            foreach (ListItem intem in rdVehicle.Items)
+            {
+                if (intem.Selected)
+                {
+                    chk_SelectedIndexChanged(sender, e);
+                    //Gridview4_Bind();
+                }
+
+
+            }
         }
 
     }
@@ -222,9 +245,10 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
 
     protected void chk_SelectedIndexChanged(object sender, EventArgs e)
     {
-        int vehicleid = 0;
+        
         vehicleid = int.Parse(rdVehicle.SelectedValue);
-        DataTable wheel = WheelsBLO.GetAllProducts(1);
+        //vehicleid = int.Parse(((RadioButtonList)sender).SelectedValue);
+        DataTable wheel = WheelsBLO.GetAllProducts(userID);
         DataTable wheelsVehicle = WheelsBLO.GetProductIdByVehicle(vehicleid);
         String sqlText = string.Empty;
         List<int> wheelsids = new List<int>();
@@ -257,9 +281,70 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
     }
     protected void dropDownRecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
     {
+        
         GridView4.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
 
         GridView4.PageIndex = 0;
         Gridview4_Bind();
+        foreach (ListItem intem in rdVehicle.Items)
+        {
+            if (intem.Selected)
+            {
+                chk_SelectedIndexChanged(sender, e);
+                //Gridview4_Bind();
+            }
+
+                
+        }
+        
+        //else
+        //{
+        //    chk_SelectedIndexChanged(sender, e);
+        //}
+        //Gridview4_Bind();
+        ////chk_SelectedIndexChanged(sender,e);
+        ////vehicleid = Convert.ToInt32(rdVehicle.SelectedValue);
+        //DataTable wheelsVehicle = WheelsBLO.GetProductIdByVehicle(vehicleid);
+        //DataTable wheel = WheelsBLO.GetAllProducts(userID);
+        //String sqlFilterVehicle = string.Empty;
+        //String sqlText = string.Empty;
+        //List<int> wheelsids = new List<int>();
+        
+        
+        ////wheel.DefaultView.RowFilter = sqlFilterVehicle;
+        ////GridView4.DataSource = wheel.DefaultView;
+        ////GridView4.DataBind();
+        //if (vehicleid == 0)
+        //{
+        //    Gridview4_Bind();
+        //}
+        //if(vehicleid == Convert.ToInt32(rdVehicle.SelectedValue))
+        //{
+        //    //vehicleid = Convert.ToInt32(rdVehicle.SelectedValue);
+        //    for (int i = 0; i < wheelsVehicle.Rows.Count; i++)
+        //    {
+
+        //        wheelsids.Add(Convert.ToInt32(wheelsVehicle.Rows[i]["wheelsid"]));
+
+        //    }
+        //    List<int> distictWheels = (from id in wheelsids select id).Distinct().ToList();
+
+        //    for (int i = 0; i < distictWheels.Count; i++)
+        //    {
+        //        if (sqlFilterVehicle != string.Empty)
+        //        {
+        //            sqlFilterVehicle += " or productid = " + "'" + distictWheels[i] + "'";
+        //        }
+        //        else
+        //        {
+        //            sqlFilterVehicle += "productid = " + "'" + distictWheels[i] + "'";
+        //        }
+
+        //    }
+        //    wheel.DefaultView.RowFilter = sqlFilterVehicle;
+        //    GridView4.DataSource = wheel.DefaultView;
+        //    //Gridview4_Bind();
+        //    GridView4.DataBind();
+        //}
     }
 }

@@ -7,6 +7,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using OBGModel;
 using BusinessLogic;
+using System.Text;
+using System.Net.Mail;
+using System.Net;
 
 
 
@@ -55,6 +58,8 @@ public partial class Account_Register : System.Web.UI.Page
         //
 
         int newId = UserBLO.Registration(newUser);
+        SendMail(newUser.UserName);
+
 
         if (newId > 0)
         {
@@ -121,5 +126,80 @@ public partial class Account_Register : System.Web.UI.Page
             BillingStreet.Text = null;
             billingAddressDiv.Visible = true;
         }
+    }
+
+    public bool SendMail(string name)
+    {
+        //MailMessage myMail = new MailMessage();
+        //myMail.From = new MailAddress("317844956@qq.com");
+        //myMail.To.Add(new MailAddress(""));
+        //myMail.Subject = "C#发送Email";
+        //myMail.SubjectEncoding = Encoding.UTF8;
+        //myMail.Body = "this is a test email from QQ!";
+        //myMail.BodyEncoding = Encoding.UTF8;
+        //myMail.IsBodyHtml = true;
+        //SmtpClient smtp = new SmtpClient();
+        //smtp.Host = "smtp.qq.com";
+        //smtp.Credentials = new NetworkCredential("", "123456");
+        //smtp.Send(myMail);
+        //return true;
+
+
+        //string Email = "alexliu0506@126.com";
+        //string Email = "holmeslixu@gmail.com";
+        string Email = "orders@optiwheels.ca";
+        string password = "orders12345";
+        string totoEmail = "min@optiwheels.ca";
+        //string password = "5631247";
+        //string password = "holmes615";
+        Encoding EnCode = Encoding.UTF8;
+        System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
+        Message.From = new MailAddress(Email, "OBG Master", EnCode);
+        //Message.To.Add(new MailAddress(ToEmail, "Dear Customer", EnCode));
+        Message.To.Add(new MailAddress(totoEmail, "Dear Admin"));
+        Message.Subject = "New customer join ";
+        Message.SubjectEncoding = EnCode;
+
+        StringBuilder MailContent = new StringBuilder();
+        string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + ResolveUrl("~/");
+        MailContent.Append("Dear Customer：<br/>");
+        MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+ name +"is waiting for your activation! ");
+        //MailContent.Append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ");
+        //MailContent.Append(DateTime.Now.ToLongTimeString());
+
+        //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have ordered products at <a href='" + host + "'>OBG Order System</a>.");
+        //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To check the status of your order, please see your order history: ");
+        //MailContent.Append("<br/>Here are your order details: ");
+        //MailContent.Append(CKGridView);
+
+        //string url = host + "Account/UserOrderHistory.aspx";
+        //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='" + url + "'>" + url + "</a>");
+        //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can modify your order before shipping.</p>");
+
+
+        Message.Body = MailContent.ToString();
+        Message.BodyEncoding = EnCode;
+        Message.IsBodyHtml = true;
+
+        try
+        {
+            //SmtpClient smtp = new SmtpClient("smtp.zoho.com", 587);
+            //SmtpClient smtp = new SmtpClient("smtp.qq.com", 25);
+            SmtpClient smtp = new SmtpClient("relay-hosting.secureserver.net", 25);
+            //SmtpClient smtp = new SmtpClient("smtp.gmail.com", 25);
+            //smtp.EnableSsl = true;
+            smtp.Credentials = new NetworkCredential(Email, password);
+            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+            smtp.Send(Message);
+
+        }
+        catch (SmtpException ex)
+        {
+            string msg = "Mail cannot be sent because of the server problem:";
+            msg += ex.Message;
+            Label7.Text = msg;
+            return false;
+        }
+        return true;
     }
 }

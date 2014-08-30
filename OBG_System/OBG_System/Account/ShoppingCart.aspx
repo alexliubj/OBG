@@ -67,7 +67,7 @@
            
             <asp:TemplateField HeaderText="QTY" ItemStyle-HorizontalAlign="Center">
                 <ItemTemplate>
-                    <asp:TextBox ID="txtCount" runat="server" Width="35px" Text='<%# Bind("Quantity") %>'></asp:TextBox>
+                    <asp:Label ID="txtCount" runat="server" Width="35px" Text='<%# Bind("Quantity") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Price" ItemStyle-HorizontalAlign="Center" SortExpression="ProductID">
@@ -107,7 +107,10 @@
 <%--    <asp:LinkButton ID="LBUpdate" runat="server" Font-Bold="True" Font-Size="11pt" OnClick="LBUpdate_Click">Update Quantity</asp:LinkButton>--%>
     <asp:Label ID="LabelTotalText" runat="server" Font-Bold="true" Font-Size="Large" Text="Order Total: "></asp:Label>
     <asp:Label ID="LabelTotalPrice" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <asp:Label ID="sfLabel" runat="server" Font-Bold="true" Font-Size="Large" Text="Shipping Fee: "></asp:Label>
+                    </td>
+                <td><asp:Label ID="Label10" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>&nbsp;&nbsp;&nbsp;&nbsp; </td>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <asp:Label ID="lbHST" runat="server" Font-Bold="true" Font-Size="Large" Text="HST: "></asp:Label>
     <asp:Label ID="Label1" Visible="true" Font-Bold="true" Font-Size="Large" runat="server" ForeColor="#FF8080" ></asp:Label>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

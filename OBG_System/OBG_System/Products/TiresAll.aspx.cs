@@ -13,6 +13,7 @@ public partial class Products_tireall : System.Web.UI.Page
     string strProductID = "";
     private DataSet tiresDataSet;
     public static int userID;
+    DataTable tireAll = TiresBLO.GetAllTires(userID);
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Session["UserID"] != null)
@@ -151,7 +152,8 @@ public partial class Products_tireall : System.Web.UI.Page
     {
         GridView2.PageIndex = e.NewPageIndex;
         //GridView1.DataBind();
-        GridView2_Bind();
+        chk_SelectedIndexChanged(sender, e);
+        //GridView2_Bind();
     }
 
     protected void GridView1_Sorting(object sender, GridViewSortEventArgs e)
@@ -165,7 +167,8 @@ public partial class Products_tireall : System.Web.UI.Page
             dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
 
             GridView2.DataSource = dataView;
-            GridView2.DataBind();
+            chk_SelectedIndexChanged(sender, e);
+            //GridView2.DataBind();
         }
 
     }
@@ -190,7 +193,7 @@ public partial class Products_tireall : System.Web.UI.Page
 
     protected void chk_SelectedIndexChanged(object sender, EventArgs e)
     {
-        DataTable tireAll = TiresBLO.GetAllTires(userID);
+        
         String sqlText = string.Empty;
         String sqlFilterSize = string.Empty, sqlFilterBrand = string.Empty, sqlFilterSeason = string.Empty;
         foreach (ListItem item in ChkBrand.Items)
@@ -282,7 +285,98 @@ public partial class Products_tireall : System.Web.UI.Page
         GridView2.PageSize = int.Parse(((DropDownList)sender).SelectedValue);
 
         GridView2.PageIndex = 0;
-        GridView2_Bind();
+        //GridView2_Bind();
+        if (tireAll.DefaultView.RowFilter == null && GridView2.DataSource == null)
+        //GridView1.DataSource = wheelsAll.DefaultView;
+        //GridView1.DataBind();
+        //else
+        {
+            //GridView1.DataBind();
+            GridView2_Bind();
+        }
+        else
+        {
+            String sqlText = string.Empty;
+            String sqlFilterSize = string.Empty, sqlFilterBrand = string.Empty, sqlFilterSeason = string.Empty;
+            foreach (ListItem item in ChkBrand.Items)
+            {
+                if (item.Selected)
+                {
+                    if (sqlFilterBrand != string.Empty)
+                    {
+                        sqlFilterBrand += " or " + "Brand = " + "'" + item.Text.ToString().Trim() + "'";
+                    }
+                    else
+                    {
+                        sqlFilterBrand += "Brand = " + "'" + item.Text.ToString().Trim() + "'";
+                    }
+                }
+            }
+            foreach (ListItem item in ChkSize.Items)
+            {
+                if (item.Selected)
+                {
+                    if (sqlFilterSize != string.Empty)
+                    {
+                        sqlFilterSize += " or " + "Size = " + "'" + item.Text.ToString().Trim() + "'";
+                    }
+                    else
+                    {
+                        sqlFilterSize += "Size = " + "'" + item.Text.ToString().Trim() + "'";
+                    }
+                }
+            }
+            foreach (ListItem item in ChkSeason.Items)
+            {
+                if (item.Selected)
+                {
+                    if (sqlFilterSeason != string.Empty)
+                    {
+                        sqlFilterSeason += " or " + "Season = " + "'" + item.Text.ToString().Trim() + "'";
+                    }
+                    else
+                    {
+                        sqlFilterSeason += "Season = " + "'" + item.Text.ToString().Trim() + "'";
+                    }
+                }
+            }
+
+
+            if (!String.IsNullOrEmpty(sqlFilterBrand))
+            {
+                sqlText += sorroundWithbrackets(sqlFilterBrand);
+            }
+
+            if (!String.IsNullOrEmpty(sqlFilterSize))
+            {
+                if (String.IsNullOrEmpty(sqlFilterBrand))
+                {
+                    sqlText += sorroundWithbrackets(sqlFilterSize);
+                }
+                else
+                {
+                    sqlText += " and " + sorroundWithbrackets(sqlFilterSize);
+                }
+            }
+            if (!String.IsNullOrEmpty(sqlFilterSeason))
+            {
+                if (String.IsNullOrEmpty(sqlFilterBrand)
+                  && String.IsNullOrEmpty(sqlFilterSize))
+                {
+                    sqlText += sorroundWithbrackets(sqlFilterSeason);
+                }
+                else
+                {
+                    sqlText += " and " + sorroundWithbrackets(sqlFilterSeason);
+                }
+            }
+
+
+
+            tireAll.DefaultView.RowFilter = sqlText;
+            GridView2.DataSource = tireAll.DefaultView;
+            GridView2.DataBind();
+        }
     }
     protected void Button2_Click(object sender, EventArgs e)
     {

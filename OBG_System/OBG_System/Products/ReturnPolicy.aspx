@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ReturnPolicy.aspx.cs" Inherits="Products_ReturnPolicy" %>
+﻿<%@ Page Title="Policy" Language="C#" MasterPageFile="~/Site.master" AutoEventWireup="true" CodeFile="ReturnPolicy.aspx.cs" Inherits="Products_ReturnPolicy" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" Runat="Server">
 </asp:Content>

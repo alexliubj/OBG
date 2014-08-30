@@ -150,21 +150,45 @@
                         <asp:Label ID="lblIPRegion" runat="server" AssociatedControlID="gvLocation">IP Detail Info:</asp:Label>
                     </asp:TableCell>
                     <asp:TableCell>
-                        <asp:GridView ID="gvLocation" runat="server" AutoGenerateColumns="false">
-                            <Columns>
-                                <asp:BoundField DataField="IPAddress" HeaderText="IP Address" />
-                                <asp:BoundField DataField="CountryName" HeaderText="Country" />
-                                <asp:BoundField DataField="CityName" HeaderText="City" />
-                                <asp:BoundField DataField="RegionName" HeaderText="Region" />
-                                <asp:BoundField DataField="CountryCode" HeaderText="Country Code" />
-                                <asp:BoundField DataField="Latitude" HeaderText="Latitude" />
-                                <asp:BoundField DataField="Longitude" HeaderText="Latitude" />
-                                <asp:BoundField DataField="Timezone" HeaderText="Timezone" />
-                            </Columns>
-                        </asp:GridView>
+            <asp:GridView ID="gvLocation" runat="server" AutoGenerateColumns="false">
+                <Columns>
+                    <%--<asp:BoundField DataField="UserId" HeaderText="UserId" InsertVisible="False" ReadOnly="True" SortExpression="UserId" />
+                    <asp:TemplateField HeaderText="UserID" SortExpression="UserID">
+
+                        <ItemTemplate>
+                            <asp:TextBox ID="txtUserID" runat="server" Text='<%# Bind("Userid") %>'></asp:TextBox>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="IPAddress" SortExpression="IPAddress">
+
+                        <ItemTemplate>
+                            <asp:Label ID="Label6" runat="server" Text='<%# Bind("Allip") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Login Times" SortExpression="LoginTimes">
+
+                        <ItemTemplate>
+                            <asp:Label ID="Label7" runat="server" Text='<%# Bind("LoginTimes") %>'></asp:Label>
+                        </ItemTemplate>
+                    </asp:TemplateField>--%>
+
+
+                    <asp:BoundField DataField="IPAddress" HeaderText="IP Address" />
+                    <asp:BoundField DataField="CountryName" HeaderText="Country" />
+                    <asp:BoundField DataField="CityName" HeaderText="City" />
+                    <asp:BoundField DataField="RegionName" HeaderText="Region" />
+                    <asp:BoundField DataField="CountryCode" HeaderText="Country Code" />
+                    <asp:BoundField DataField="Latitude" HeaderText="Latitude" />
+                    <asp:BoundField DataField="Longitude" HeaderText="Latitude" />
+                    <asp:BoundField DataField="Timezone" HeaderText="Timezone" />
+                </Columns>
+            </asp:GridView>
                     </asp:TableCell>
                 </asp:TableRow>
             </asp:Table>
+
+
+
         </fieldset>
     </div>
 

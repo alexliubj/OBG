@@ -188,7 +188,7 @@ namespace DataAccess
                                                       ,[OrderDate]
                                                       ,[Status]
                                                       ,[PO]
-                                                  FROM [Order]");
+                                                  FROM [Order] Order by orderid desc");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }
@@ -246,8 +246,8 @@ namespace DataAccess
                                                       ,[OrderDate]
                                                       ,[Status]
                                                       ,[PO]
-                                                  FROM [Order]
-                                                   where UserId = @UserId");
+                                                  FROM [Order] 
+                                                   where UserId = @UserId ORDER BY OrderId desc");
 
             SqlParameter[] paras = new SqlParameter[] { 
                 new SqlParameter("@UserId", userid),

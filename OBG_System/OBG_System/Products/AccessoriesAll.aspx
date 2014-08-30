@@ -23,7 +23,7 @@
                         </td>
                     <td>
                         <asp:CheckBoxList DataSourceID="SqlDataSource1" DataTextField="Name"
-                            DataValueField="Name" CssClass="CBLayout" ID="ChkName" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="7" OnSelectedIndexChanged="chk_SelectedIndexChanged" />
+                            DataValueField="Name"  ID="ChkName" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="5" OnSelectedIndexChanged="chk_SelectedIndexChanged" />
                     </td>
 
                 </tr>
@@ -50,7 +50,7 @@
     <asp:GridView ID="GridView6" runat="server" GridLines="Both" AllowPaging="True" align="center"
     AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" 
     ForeColor="#333333"
-        AllowSorting="true" OnRowCommand="GridView1_RowCommand"  OnPageIndexChanging="GridView6_PageIndexChanging" OnSorting="GridView6_Sorting">
+        AllowSorting="false" OnRowCommand="GridView1_RowCommand"  OnPageIndexChanging="GridView6_PageIndexChanging" OnSorting="GridView6_Sorting">
         <AlternatingRowStyle BackColor="White" />
         <Columns>
             <asp:BoundField DataField="AccId" HeaderText="Acc ID" InsertVisible="False" ReadOnly="True" SortExpression="AccId" visible="false"/>

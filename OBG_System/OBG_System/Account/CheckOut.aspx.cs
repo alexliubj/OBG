@@ -13,9 +13,13 @@ using System.Net;
 
 public partial class Default2 : System.Web.UI.Page
 {
+    Order order = new Order();
     private DataSet orderDataSet;
-    int userID = 0;
     OrderLine orderLine = new OrderLine();
+    //int addorder = OrderBLO.AddNewOrder(order,orderLine);
+
+    int userID = 0;
+    
     ShopingCart sc = new ShopingCart();
     List<ShopingCart> shoppingcart = new List<ShopingCart>();
     //List<OrderLine> orderline = new List<OrderLine>();
@@ -97,19 +101,23 @@ public partial class Default2 : System.Web.UI.Page
 
     protected void totalPrice()
     {
+        double regionid = RegionBLO.GetReginIDByUserId(userID);
         decimal total = 0;
         decimal HST = 0;
         decimal totalPrice = 0;
         decimal hst = (Decimal)(0.13);
+        decimal shipfee = (Decimal)regionid;
         foreach (DataRow row in checkoutTB.Rows)
         {
             total += decimal.Parse(row["Price"].ToString()) * int.Parse(row["qty"].ToString());
-            HST += decimal.Parse(row["Price"].ToString()) * int.Parse(row["qty"].ToString()) * hst;
-            totalPrice = total + HST;
+            //HST += (decimal.Parse(row["Price"].ToString()) * int.Parse(row["Qty"].ToString()) + shipfee) * hst;
+            HST = (total + shipfee) * hst;
+            totalPrice = total + HST + shipfee;
         }
         LabelTotalPrice.Text = string.Format("${0:n2}", total);
         Label1.Text = string.Format("${0:n2}", HST);
         Label2.Text = string.Format("${0:n2}", totalPrice);
+        Label10.Text = string.Format("${0:n2}", regionid);
         // CKGridView.DataSource = checkoutTB;
         //CKGridView.DataBind();
     }
@@ -147,20 +155,25 @@ public partial class Default2 : System.Web.UI.Page
         }
         else
         {
-            int orderId;
+            int orderId=0;
             Order order = new Order();
 
             List<OrderLine> orderline = new List<OrderLine>();
             //double rate = ;
             //orderId = int.Parse(CKGridView.SelectedRow.Cells[0].Text);
             //order.OrderId = orderId;
+           
             order.UserId = userID;
             order.Status = 1;
             order.OrderDate = DateTime.Today;
             order.PO = txtPO.Text.ToString().Trim();
+            //order.OrderId = orderId;
+            OrderLine line = new OrderLine();
+            line.PartNO = "";
             for (int i = 0; i < CKGridView.Rows.Count; i++)
             {
-                OrderLine line = new OrderLine();
+                orderId = int.Parse(((Label)CKGridView.Rows[i].Cells[0].FindControl("Label3")).Text.ToString()); ;
+                
                 //int orderID = int.Parse(((Label)CKGridView.Rows[i].Cells[0].FindControl("LabelOrder")).Text.ToString());
                 line.ProductId = int.Parse(((Label)CKGridView.Rows[i].Cells[1].FindControl("Label3")).Text.ToString()); ;
                 // line.PartNO = ((Label)CKGridView.Rows[i].Cells[3].FindControl("Label8")).Text.ToString();
@@ -188,12 +201,17 @@ public partial class Default2 : System.Web.UI.Page
 
             //    }
             int ordersave = OrderBLO.AddNewOrder(order, orderline);
+        
             if (ordersave > 0)
             {
+
                 User user = UserBLO.GetUserInfoWithUserId(userID);
-                SendMail(user.Email);
+                SendMail(user.Email, orderId, line.PartNO);
                 Session.Remove("Cart");
                 Response.Redirect("~/Default.aspx");
+
+                Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "", "document.getElementById('confirmBt').disabled = false;", true);
+                 Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "", "document.getElementById('Button2').disabled = false;",false);
                 
             }
             else
@@ -247,7 +265,7 @@ public partial class Default2 : System.Web.UI.Page
     }
 
 
-    public bool SendMail(string ToEmail)
+    public bool SendMail(string ToEmail, int orderid, string PartNO)
     {
         //MailMessage myMail = new MailMessage();
         //myMail.From = new MailAddress("317844956@qq.com");
@@ -268,23 +286,25 @@ public partial class Default2 : System.Web.UI.Page
         //string Email = "holmeslixu@gmail.com";
         string Email = "orders@optiwheels.ca";
         string password = "orders12345";
+        string totoEmail = "min@optiwheels.ca";
         //string password = "5631247";
         //string password = "holmes615";
         Encoding EnCode = Encoding.UTF8;
         System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
         Message.From = new MailAddress(Email, "OBG Master", EnCode);
         Message.To.Add(new MailAddress(ToEmail, "Dear Customer", EnCode));
+        Message.To.Add(new MailAddress(totoEmail, "Dear Admin"));
         Message.Subject = "Your OPIT Order Is Confirmed‏ ";
         Message.SubjectEncoding = EnCode;
-
+        
         StringBuilder MailContent = new StringBuilder();
         string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + ResolveUrl("~/");
         MailContent.Append("Dear Customer：<br/>");
         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thank you for your order at <a href='" + host + "'>OBG Order System</a>! ");
-        MailContent.Append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ");
-        MailContent.Append(DateTime.Now.ToLongTimeString());
+        //MailContent.Append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ");
+        //MailContent.Append(DateTime.Now.ToLongTimeString());
 
-        //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have ordered products at <a href='" + host + "'>OBG Order System</a>.");
+        //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have ordered " + PartNO+" ");
         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;To check the status of your order, please see your order history: ");
         //MailContent.Append("<br/>Here are your order details: ");
         //MailContent.Append(CKGridView);
@@ -292,6 +312,8 @@ public partial class Default2 : System.Web.UI.Page
         //string url = host + "Account/UserOrderHistory.aspx";
         //MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='" + url + "'>" + url + "</a>");
         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You can modify your order before shipping.</p>");
+
+
         Message.Body = MailContent.ToString();
         Message.BodyEncoding = EnCode;
         Message.IsBodyHtml = true;

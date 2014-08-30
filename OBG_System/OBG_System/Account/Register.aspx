@@ -15,6 +15,7 @@
     </span>
     <asp:ValidationSummary ID="RegisterUserValidationSummary" runat="server" CssClass="failureNotification"
         ValidationGroup="RegisterUserValidationGroup" />
+    <asp:Label ID="Label7" runat="server" Text=""></asp:Label>
     <div class="accountInfo">
         <asp:Table runat="server">
             <asp:TableRow VerticalAlign="Top">

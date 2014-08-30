@@ -28,7 +28,7 @@
 
         .auto-style6
         {
-            width: 45px;
+            width: 70px;
         }
         .auto-style8
         {
@@ -36,7 +36,7 @@
         }
         .auto-style9
         {
-            width: 61px;
+            width: 40px;
         }
     </style>
 </asp:Content>
@@ -113,7 +113,7 @@
                         </td>--%>
                     <td class="auto-style6">
                         <asp:CheckBoxList DataSourceID="SqlDataSource2" DataTextField="PCD"
-                            DataValueField="PCD" CssClass="CBLayout" ID="chkPCD"  runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
+                            DataValueField="PCD"  ID="chkPCD"  runat="server" AutoPostBack="true" TextAlign="Right" RepeatLayout="Table" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
                     </td>
                 </tr>
@@ -184,7 +184,7 @@
         <asp:ListItem Value="100" Text="100" />
     </asp:DropDownList>
     <asp:GridView ID="GridView1" runat="server" GridLines="Both" align="center"
-        AllowPaging="True" AutoGenerateColumns="False"  CellPadding="4" AllowSorting="true"
+        AllowPaging="True" AutoGenerateColumns="False"  CellPadding="4" AllowSorting="false"
         DataKeyNames="ProductId" ForeColor="#333333" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
         OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
         OnRowUpdating="GridView1_RowUpdating"
@@ -533,7 +533,7 @@
 
 <ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Offset(mm)" ItemStyle-HorizontalAlign="Center" SortExpression="Offset" >
+            <asp:TemplateField HeaderText="Offset<br/>(mm)" ItemStyle-HorizontalAlign="Center" SortExpression="Offset" >
                 <%-- <EditItemTemplate>
                     <asp:TextBox ID="OffsetTextBox" runat="server" Text='<%# Bind("Offset") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
@@ -553,7 +553,7 @@
 
 <ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Bore(mm)" ItemStyle-HorizontalAlign="Center" SortExpression="Bore">
+            <asp:TemplateField HeaderText="Bore<br/>(mm)" ItemStyle-HorizontalAlign="Center" SortExpression="Bore">
                 <%--<EditItemTemplate>
                     <asp:TextBox ID="BoreTextBox" runat="server" Text='<%# Bind("Bore") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
@@ -563,7 +563,7 @@
 
 <ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Weight(LBS)" ItemStyle-HorizontalAlign="Center" SortExpression="Weight">
+            <asp:TemplateField HeaderText="Weight<br/>(LBS)" ItemStyle-HorizontalAlign="Center" SortExpression="Weight">
                 <%--<EditItemTemplate>
                     <asp:TextBox ID="WeightTextBox" runat="server" Text='<%# Bind("Weight") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
