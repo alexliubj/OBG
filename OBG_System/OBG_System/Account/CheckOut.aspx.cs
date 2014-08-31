@@ -288,7 +288,7 @@ public partial class Default2 : System.Web.UI.Page
         string fn = UserBLO.GetFNByUserID(userID);
         string ln = UserBLO.GetLNByUserID(userID);
         string cn = UserBLO.GetCompanyByUserId(userID);
-        string all = fn + " " + ln + " from " + cn + "order";
+        string all = fn + " " + ln + " from " + cn + "ordered";
         //string Email = "alexliu0506@126.com";
         //string Email = "holmeslixu@gmail.com";
         string Email = "orders@optiwheels.ca";

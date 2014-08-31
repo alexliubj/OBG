@@ -285,7 +285,10 @@ public partial class Default2 : System.Web.UI.Page
         //smtp.Send(myMail);
         //return true;
 
-
+        string fn = UserBLO.GetFNByUserID(userId);
+        string ln = UserBLO.GetLNByUserID(userId);
+        string cn = UserBLO.GetCompanyByUserId(userId);
+        string all = fn + " " + ln + " from " + cn + "updated their order. ";
         //string Email = "alexliu0506@126.com";
         //string Email = "holmeslixu@gmail.com";
         string Email = "orders@optiwheels.ca";
@@ -297,14 +300,14 @@ public partial class Default2 : System.Web.UI.Page
         System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
         Message.From = new MailAddress(Email, "OBG Master", EnCode);
         Message.To.Add(new MailAddress(ToEmail, "Dear Customer", EnCode));
-        Message.To.Add(new MailAddress(totoEmail, "Dear Admin"));
+        Message.To.Add(new MailAddress(totoEmail, "Dear Admin, " + all + "Orderid is" + orderid));
         Message.Subject = "Your OPIT Order Is Confirmed‏ ";
         Message.SubjectEncoding = EnCode;
 
         StringBuilder MailContent = new StringBuilder();
         string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + ResolveUrl("~/");
         MailContent.Append("Dear Customer：<br/>");
-        MailContent.Append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your orderid is "+ orderid);
+        //MailContent.Append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your orderid is "+ orderid);
         MailContent.Append("<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You have updated your order successfully! ");
         //MailContent.Append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;At ");
         //MailContent.Append(DateTime.Now.ToLongTimeString());
