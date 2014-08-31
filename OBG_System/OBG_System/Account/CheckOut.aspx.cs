@@ -86,6 +86,7 @@ public partial class Default2 : System.Web.UI.Page
             }
 
         }
+        confirmBt.Attributes.Add("onclick", "this.disabled=true;" + this.ClientScript.GetPostBackEventReference(confirmBt, ""));
 
         if (!IsPostBack)
         {
@@ -149,12 +150,15 @@ public partial class Default2 : System.Web.UI.Page
 
     protected void BtnConfirm_Click(object sender, EventArgs e)
     {
+
         if (txtPO.Text == string.Empty)
         {
             Response.Write("<script language='javascript'>alert('Your have to write PO');</script>");
         }
         else
         {
+            System.Threading.Thread.Sleep(5000);
+            Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "", "document.getElementById('confirmBt').disabled = false;", true);
             int orderId=0;
             Order order = new Order();
 
@@ -210,8 +214,8 @@ public partial class Default2 : System.Web.UI.Page
                 Session.Remove("Cart");
                 Response.Redirect("~/Default.aspx");
 
-                Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "", "document.getElementById('confirmBt').disabled = false;", true);
-                 Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "", "document.getElementById('Button2').disabled = false;",false);
+                //Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "", "document.getElementById('confirmBt').disabled = false;", true);
+                // Page.ClientScript.RegisterStartupScript(this.Page.GetType(), "", "document.getElementById('Button2').disabled = false;",false);
                 
             }
             else
@@ -281,19 +285,23 @@ public partial class Default2 : System.Web.UI.Page
         //smtp.Send(myMail);
         //return true;
 
-
+        string fn = UserBLO.GetFNByUserID(userID);
+        string ln = UserBLO.GetLNByUserID(userID);
+        string cn = UserBLO.GetCompanyByUserId(userID);
+        string all = fn + " " + ln + " from " + cn + "order";
         //string Email = "alexliu0506@126.com";
         //string Email = "holmeslixu@gmail.com";
         string Email = "orders@optiwheels.ca";
         string password = "orders12345";
         string totoEmail = "min@optiwheels.ca";
+        //string totoEmail = "holmeslixu@gmail.com";
         //string password = "5631247";
         //string password = "holmes615";
         Encoding EnCode = Encoding.UTF8;
         System.Net.Mail.MailMessage Message = new System.Net.Mail.MailMessage();
         Message.From = new MailAddress(Email, "OBG Master", EnCode);
         Message.To.Add(new MailAddress(ToEmail, "Dear Customer", EnCode));
-        Message.To.Add(new MailAddress(totoEmail, "Dear Admin"));
+        Message.To.Add(new MailAddress(totoEmail, "Dear Admin，"+all));
         Message.Subject = "Your OPIT Order Is Confirmed‏ ";
         Message.SubjectEncoding = EnCode;
         

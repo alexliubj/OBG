@@ -518,7 +518,7 @@
                     <asp:TextBox ID="PCDTextBox" runat="server" Text='<%# Bind("Pcd") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
                 <ItemTemplate>
-                    <asp:Label ID="PCDLabel" runat="server" Text='<%# Bind("Pcd") %>'></asp:Label>
+                    <asp:Label ID="PCDLabel" runat="server" Text='<%# Bind("Pcd") %>' Width="80px"></asp:Label>
                 </ItemTemplate>
 
 <ItemStyle HorizontalAlign="Center"></ItemStyle>
@@ -578,7 +578,7 @@
                     <asp:TextBox ID="OnhandTextBox" runat="server" Text='<%# Bind("Onhand") %>'></asp:TextBox>
                 </EditItemTemplate>--%>
                 <ItemTemplate>
-                    <asp:Label ID="OnhandLabel" runat="server" Text='<%# Bind("Onhand") %>'></asp:Label>
+                    <asp:Label ID="OnhandLabel" runat="server" Text='<%# Bind("Onhand") %>' Width="75px"></asp:Label>
                 </ItemTemplate>
 
 <ItemStyle HorizontalAlign="Center"></ItemStyle>

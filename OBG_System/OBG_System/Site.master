@@ -39,7 +39,7 @@
                 <div class="title">
                     <br/>
                     <h1>
-                        <img alt="logo" class="stylel" src="<%= Page.ResolveUrl("~")%>Pictures/opti-1.jpg" />Orderring System
+                        <img alt="logo" class="stylel" src="<%= Page.ResolveUrl("~")%>Pictures/opti-1.jpg" />Ordering System
                     </h1>
                 </div>
                 <br/>

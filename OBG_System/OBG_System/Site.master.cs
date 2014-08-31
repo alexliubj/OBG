@@ -29,9 +29,11 @@ public partial class SiteMaster : System.Web.UI.MasterPage
             shoppingcartlist = (List<ShopingCart>)Session["Cart"];
             if (shoppingcartlist != null && shoppingcartlist.Count > 0)
             {
-                shoppingCount.Text = shoppingcartlist.Count.ToString();
-                shoppingCountLeft.Visible = true;
-                shoppingCountRight.Visible = true;
+                
+                    shoppingCount.Text = shoppingcartlist.Count.ToString();
+                    shoppingCountLeft.Visible = true;
+                    shoppingCountRight.Visible = true;
+
             }
             else
             {

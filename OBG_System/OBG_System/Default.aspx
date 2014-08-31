@@ -6,7 +6,7 @@
 <asp:Content ID="BodyContent" runat="server" ContentPlaceHolderID="MainContent">
     <h1>
         <center>
-        Welcome to OBG System
+        Welcome to OPTI Ordering System
             </center>
     </h1>
     <hr />

@@ -223,6 +223,8 @@ public partial class Admin_Default : System.Web.UI.Page
         GridView2.DataBind();
 
         string companyName = UserBLO.GetCompanyByUserId(userID);
+        string fn = UserBLO.GetFNByUserID(userID);
+        string ln = UserBLO.GetLNByUserID(userID);
         for (int i = 0; i < GridView2.Rows.Count; i++)
         {
             
@@ -247,6 +249,8 @@ public partial class Admin_Default : System.Web.UI.Page
             ((Label)(GridView2.Rows[i].Cells[3].FindControl("Label5"))).Text = productTypeLabel;
         }
         lbCn.Text = companyName;
+        Lbfn.Text = fn;
+        Lbln.Text = ln;
         Populacontorl(orderID);
     }
 

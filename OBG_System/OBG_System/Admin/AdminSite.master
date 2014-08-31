@@ -14,7 +14,7 @@
         <div class="header">
             <div class="title">
                 <h1>
-                    <img class="style1" alt="logo" src="<%= Page.ResolveUrl("~")%>pictures/logo.png" />obg management system
+                    <img class="style1" alt="logo" src="<%= Page.ResolveUrl("~")%>pictures/logo.png" />OPTI Management System
                 </h1>
             </div>
 

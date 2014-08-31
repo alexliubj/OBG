@@ -186,6 +186,8 @@ public partial class Products_wheelall : System.Web.UI.Page
             shoppingcart.Add(sc);
             Session["Cart"] = shoppingcart;
 
+            //string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + ResolveUrl("~/");
+            //ClientScript.RegisterStartupScript(GetType(), "", "<script>window.location.href=host+products/wheelsall.aspx</script>");
         }
 
         //if (e.CommandName == "DesClick")
