@@ -119,12 +119,12 @@
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
      <asp:linkButton ID="Button1" runat="server" Text="Back to shopping cart" OnClick ="Button1_Click" />  
      <asp:Button ID="confirmBt" runat="server" align="Right" Text="Confirm" ControlStyle-CssClass="myButton" OnClick="BtnConfirm_Click" />
-     <asp:Button ID="Button2" runat="server" align="Right" Text="Confirm" ControlStyle-CssClass="myButton" OnClick="BtnConfirm_Click"  style="display:none"/>
+     <%--<asp:Button ID="Button2" runat="server" align="Right" Text="Confirm" ControlStyle-CssClass="myButton" OnClick="BtnConfirm_Click"  style="display:none"/>
         <script language="javascript" type="text/javascript">
             function BtnConfirm_Click() {
                 document.getElementById("confirmBt").disabled = true;
                 document.getElementById("Button2").click();
             }
-    </script>
+    </script>--%>
 </asp:Content>
 

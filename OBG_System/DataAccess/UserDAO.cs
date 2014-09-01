@@ -744,5 +744,42 @@ namespace DataAccess
             //return rName;
             return company;
         }
+
+        public static string GetFNByUserID(int userId)
+        {
+            //int rName = 0;
+            string fn = "";
+            DbCommand command = db.GetSqlStringCommond(@"SELECT Firstname FROM users where userid = @userid");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userId) };
+            command.Parameters.AddRange(paras);
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    //rName = reader.GetInt32(0);
+                    fn = reader.GetString(0);
+                }
+            }
+            //return rName;
+            return fn;
+        }
+        public static string GetLNByUserID(int userId)
+        {
+            //int rName = 0;
+            string ln = "";
+            DbCommand command = db.GetSqlStringCommond(@"SELECT lastname FROM users where userid = @userid");
+            SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userId) };
+            command.Parameters.AddRange(paras);
+            using (DbDataReader reader = db.ExecuteReader(command))
+            {
+                while (reader.Read())
+                {
+                    //rName = reader.GetInt32(0);
+                    ln = reader.GetString(0);
+                }
+            }
+            //return rName;
+            return ln;
+        }
     }
 }

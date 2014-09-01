@@ -96,6 +96,9 @@
             <br />
             <p>Order Detail:</p>
             <p>Ordered by:</p>
+            <asp:Label ID ="Lbfn" runat="server" Font-Bold="true" font-color="Red"/>
+            <asp:Label ID ="Lbln" runat="server" Font-Bold="true" font-color="Red"/>
+            <asp:Label ID ="Label1" runat="server" Text="from"/>
             <asp:Label ID ="lbCn" runat="server" Font-Bold="true" font-color="Red"/>
             <p/>
             <asp:GridView ID="GridView2" runat="server" GridLines="None" AllowPaging="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="OrderID" ForeColor="#333333"

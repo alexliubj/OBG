@@ -203,5 +203,15 @@ namespace BusinessLogic
         {
             return UserDAO.GetCompanyByUserId(userId);
         }
+
+        public static string GetFNByUserID(int userId)
+        {
+            return UserDAO.GetFNByUserID(userId);
+        }
+
+        public static string GetLNByUserID(int userId)
+        {
+            return UserDAO.GetLNByUserID(userId);
+        }
     }
 }

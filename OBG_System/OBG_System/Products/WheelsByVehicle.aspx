@@ -252,7 +252,7 @@
             <asp:TemplateField HeaderText="Pcd" ItemStyle-HorizontalAlign="Center" SortExpression="Pcd">
       
                 <ItemTemplate>
-                    <asp:Label ID="PcdLabel" runat="server" Text='<%# Bind("Pcd") %>'></asp:Label>
+                    <asp:Label ID="PcdLabel" runat="server" Text='<%# Bind("Pcd") %>' Width="80px"></asp:Label>
                 </ItemTemplate>
 
 <ItemStyle HorizontalAlign="Center"></ItemStyle>
@@ -297,10 +297,10 @@
 
 <ItemStyle HorizontalAlign="Center"></ItemStyle>
             </asp:TemplateField>
-                  <asp:TemplateField HeaderText="Onhand" ItemStyle-HorizontalAlign="Center" SortExpression="Onhand">
+                  <asp:TemplateField HeaderText="Stock" ItemStyle-HorizontalAlign="Center" SortExpression="Onhand">
      
                 <ItemTemplate>
-                    <asp:Label ID="OnhandLabel" runat="server" Text='<%# Bind("Onhand") %>'></asp:Label>
+                    <asp:Label ID="OnhandLabel" runat="server" Text='<%# Bind("Onhand") %>' Width="75px"></asp:Label>
                 </ItemTemplate>
 
 <ItemStyle HorizontalAlign="Center"></ItemStyle>

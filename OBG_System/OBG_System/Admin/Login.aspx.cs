@@ -73,7 +73,7 @@ public partial class Admin_Default : System.Web.UI.Page
             {
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(),
                                        "err_msg",
-                                       "alert('Sorry, Your account is not actived yet.');", true);
+                                       "alert('Sorry, This account is currently not active.');", true);
             }
         }
         else
