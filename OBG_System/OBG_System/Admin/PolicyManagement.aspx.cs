@@ -17,14 +17,26 @@ public partial class Admin_PolicyManagement : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            string policy = HomePageBLO.GetReturnPolicy().Replace("<br />", Environment.NewLine);
-       
-            TextBox1.Text = policy;
+            List<string> listReturenPolicy = new List<string>();
+            listReturenPolicy = HomePageBLO.GetReturnPolicy();
+            if (listReturenPolicy.Count > 0)
+            {
+                string policy = HomePageBLO.GetReturnPolicy()[0].Replace("<br />", Environment.NewLine);
+
+                TextBox1.Text = policy;
+            }
+            if (listReturenPolicy.Count > 1)
+            {
+                string otherPolicy = HomePageBLO.GetReturnPolicy()[1].Replace("<br />", Environment.NewLine);
+
+                TextBox2.Text = otherPolicy;
+            }
         }
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
         string policy = TextBox1.Text.Replace(Environment.NewLine, "<br />");
-        HomePageBLO.UpdateReturnPolicy(policy);
+        string policy2 = TextBox2.Text.Replace(Environment.NewLine, "<br />");
+        HomePageBLO.UpdateReturnPolicy(policy,policy2);
     }
 }

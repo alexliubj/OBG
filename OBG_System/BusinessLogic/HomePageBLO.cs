@@ -14,12 +14,12 @@ namespace BusinessLogic
             return HomePageDAO.UpdateImages(hi);
         }
 
-        public static int UpdateReturnPolicy(string policyString)
+        public static int UpdateReturnPolicy(string policyString, string otherpolicy)
         {
-            return HomePageDAO.UpdateReturnPolicy(policyString);
+            return HomePageDAO.UpdateReturnPolicy(policyString,otherpolicy);
         }
 
-        public static string GetReturnPolicy()
+        public static List<string> GetReturnPolicy()
         {
             return HomePageDAO.GetReturnPolicy();
         }
