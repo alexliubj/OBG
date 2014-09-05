@@ -59,30 +59,36 @@ namespace DataAccess
             return db.ExecuteNonQuery(command);
         }
 
-        public static int UpdateReturnPolicy(string policyString)
+        public static int UpdateReturnPolicy(string policyString, string otherpolicy)
         {
             DbCommand command = db.GetSqlStringCommond(@"UPDATE ReturnPolicy
-                                       SET [Policy] = @policy");
+                                       SET [Policy] = @policy, [otherpolicy]=@otherpolicy");
 
             SqlParameter[] paras = new SqlParameter[] { 
-                new SqlParameter("@policy", policyString)
+                new SqlParameter("@policy", policyString),
+                new SqlParameter(@"otherpolicy",otherpolicy)
             };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
 
-        public static string GetReturnPolicy()
-        { 
+        public static List<string> GetReturnPolicy()
+        {
+            List<string> listPolicy = new List<string>();
             string retSTring = string.Empty;
-            DbCommand command = db.GetSqlStringCommond("select policy from ReturnPolicy");
+            string otherPolicy = string.Empty;
+            DbCommand command = db.GetSqlStringCommond("select policy,otherpolicy from ReturnPolicy");
             using (DbDataReader reader = db.ExecuteReader(command))
             {
                 while (reader.Read())
                 {
                     retSTring = reader.GetString(0);
+                    otherPolicy = reader.GetString(1);
                 }
             }
-            return retSTring;
+            listPolicy.Add(retSTring);
+            listPolicy.Add(otherPolicy);
+            return listPolicy ;
         }
 
 

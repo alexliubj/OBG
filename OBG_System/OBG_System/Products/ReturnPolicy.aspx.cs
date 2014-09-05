@@ -12,7 +12,11 @@ public partial class Products_ReturnPolicy : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            policy.Text = HomePageBLO.GetReturnPolicy();
+            List<string> listPolicy = HomePageBLO.GetReturnPolicy();
+            if (listPolicy.Count > 0)
+                policy.Text = listPolicy[0];
+            if (listPolicy.Count > 1)
+                others.Text = listPolicy[1];
         }
     }
 }
