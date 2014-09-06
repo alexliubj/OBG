@@ -24,9 +24,9 @@ public partial class Admin_PolicyManagement : System.Web.UI.Page
                 TextBox1.Text = policy;
                 string otherPolicy = retp.Others.Replace("<br />", Environment.NewLine);
                 TextBox2.Text = otherPolicy;
-                defectsTxt.Text = retp.Defects;
-                shippingTxt.Text = retp.Shipping;
-                matchTxt.Text = retp.Price;
+                defectsTxt.Text = retp.Defects.Replace("<br />", Environment.NewLine);
+                shippingTxt.Text = retp.Shipping.Replace("<br />", Environment.NewLine);
+                matchTxt.Text = retp.Price.Replace("<br />", Environment.NewLine);
         }
     }
     protected void Button1_Click(object sender, EventArgs e)
