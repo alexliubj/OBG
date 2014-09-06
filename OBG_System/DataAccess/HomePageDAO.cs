@@ -59,39 +59,35 @@ namespace DataAccess
             return db.ExecuteNonQuery(command);
         }
 
-        public static int UpdateReturnPolicy(ReturnPolicy retp )
+        public static int UpdateReturnPolicy(string policyString, string otherpolicy)
         {
             DbCommand command = db.GetSqlStringCommond(@"UPDATE ReturnPolicy
-                                       SET [Policy] = @policy, [otherpolicy]=@otherpolicy,
-                            [price] = @price,[defects] = @defects,[shipping] = @shipping");
+                                       SET [Policy] = @policy, [otherpolicy]=@otherpolicy");
 
             SqlParameter[] paras = new SqlParameter[] { 
-                new SqlParameter("@policy", retp.ReturnPolicy1),
-                new SqlParameter(@"otherpolicy",retp.Others),
-                new SqlParameter("@price", retp.Price),
-                new SqlParameter(@"defects",retp.Defects),
-                new SqlParameter("@shipping", retp.Shipping)
+                new SqlParameter("@policy", policyString),
+                new SqlParameter(@"otherpolicy",otherpolicy)
             };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
 
-        public static ReturnPolicy GetReturnPolicy()
+        public static List<string> GetReturnPolicy()
         {
-            ReturnPolicy listPolicy = new ReturnPolicy();
-          
-            DbCommand command = db.GetSqlStringCommond("select policy,otherpolicy,price,defects,shipping from ReturnPolicy");
+            List<string> listPolicy = new List<string>();
+            string retSTring = string.Empty;
+            string otherPolicy = string.Empty;
+            DbCommand command = db.GetSqlStringCommond("select policy,otherpolicy from ReturnPolicy");
             using (DbDataReader reader = db.ExecuteReader(command))
             {
                 while (reader.Read())
                 {
-                    listPolicy.ReturnPolicy1 = reader.GetString(0);
-                    listPolicy.Others = reader.GetString(1);
-                    listPolicy.Price = reader.GetString(2);
-                    listPolicy.Defects = reader.GetString(3);
-                    listPolicy.Shipping = reader.GetString(4);
+                    retSTring = reader.GetString(0);
+                    otherPolicy = reader.GetString(1);
                 }
             }
+            listPolicy.Add(retSTring);
+            listPolicy.Add(otherPolicy);
             return listPolicy ;
         }
 
