@@ -22,9 +22,10 @@
 
         .auto-style3
         {
-            height: 28px;
+            height: 50px;
             width: 61px;
         }
+
 
         .auto-style6
         {
@@ -161,7 +162,8 @@
                         </td>--%>
                     <td class="auto-style6">
                         <asp:CheckBoxList DataSourceID="SqlDataSource3" DataTextField="Finish"
-                            DataValueField="Finish"  ID="chkFinish" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
+                            DataValueField="Finish"   CssClass="FinishLayout2" ID="chkFinish" runat="server" AutoPostBack="true" RepeatDirection="Horizontal" RepeatColumns="10" RepeatLayout="table"  
+  TextAlign="Right" OnSelectedIndexChanged="chkPCD_SelectedIndexChanged">
                         </asp:CheckBoxList>
                     </td>
                 </tr>

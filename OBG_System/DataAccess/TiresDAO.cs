@@ -22,7 +22,7 @@ namespace DataAccess
                                                       ,[season]
                                                       ,[brand]
                                                       ,[des],[special]
-                                                  FROM [Tires]");
+                                                  FROM [Tires] order by tireId DESC");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }

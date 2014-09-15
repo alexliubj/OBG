@@ -79,7 +79,7 @@ namespace DataAccess
                                                       ,[Price]
                                                       ,[PartNO]
                                                       ,[des],[special]
-                                                  FROM [OBG_].[dbo].[Wheels]");
+                                                  FROM [OBG_].[dbo].[Wheels] order by ProductId DESC");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }

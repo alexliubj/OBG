@@ -39,6 +39,12 @@ public partial class Admin_Default : System.Web.UI.Page
             Gridview1_Bind();
             GridView2_Bind();
             GridView3_Bind();
+
+            //if (String.IsNullOrEmpty(GridView1.SortExpression)) GridView1.Sort("ProductId", SortDirection.Descending);
+
+            //if (String.IsNullOrEmpty(GridView2.SortExpression)) GridView2.Sort("TireId", SortDirection.Descending);
+
+            //if (String.IsNullOrEmpty(GridView3.SortExpression)) GridView3.Sort("AccId", SortDirection.Descending);
         }
     }
     #region ViewAllWheels
@@ -122,8 +128,8 @@ public partial class Admin_Default : System.Web.UI.Page
         if (dataTable != null)
         {
             DataView dataView = new DataView(dataTable);
-            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
-
+            //dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+            dataView.Sort = e.SortExpression + " " + "DESC";
             GridView1.DataSource = dataView;
             GridView1.DataBind();
         }
@@ -472,8 +478,8 @@ public partial class Admin_Default : System.Web.UI.Page
         if (dataTable != null)
         {
             DataView dataView = new DataView(dataTable);
-            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
-
+            //dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+            dataView.Sort = e.SortExpression + " " + "DESC";
             GridView2.DataSource = dataView;
             GridView2.DataBind();
         }
@@ -703,8 +709,8 @@ public partial class Admin_Default : System.Web.UI.Page
         if (dataTable != null)
         {
             DataView dataView = new DataView(dataTable);
-            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
-
+           // dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+            dataView.Sort = e.SortExpression + " " + "DESC";
             GridView3.DataSource = dataView;
             GridView3.DataBind();
         }
@@ -992,6 +998,7 @@ public partial class Admin_Default : System.Web.UI.Page
 
         GridView1.PageIndex = 0;
         Gridview1_Bind();
+        //if (String.IsNullOrEmpty(GridView1.SortExpression)) GridView1.Sort("ProductId", SortDirection.Descending);
     }
 
     protected void GridView1_PreRender(object sender, EventArgs e)
@@ -1009,6 +1016,8 @@ public partial class Admin_Default : System.Web.UI.Page
 
         GridView2.PageIndex = 0;
         GridView2_Bind();
+
+        //if (String.IsNullOrEmpty(GridView2.SortExpression)) GridView2.Sort("TireId", SortDirection.Descending);
     }
 
     protected void GridView2_PreRender(object sender, EventArgs e)
@@ -1026,6 +1035,7 @@ public partial class Admin_Default : System.Web.UI.Page
 
         GridView3.PageIndex = 0;
         GridView3_Bind();
+        //if (String.IsNullOrEmpty(GridView3.SortExpression)) GridView3.Sort("AccId", SortDirection.Descending);
     }
 
     protected void GridView3_PreRender(object sender, EventArgs e)

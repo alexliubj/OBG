@@ -420,6 +420,24 @@ div.accountInfo {
     /*vertical-align: middle;*/
 }
 
+.FinishLayout2 tr {
+    height:20px;
+
+
+}
+.FinishLayout2 td {
+    width:70px;
+
+    vertical-align:text-bottom;
+}
+
+.FinishLayout2 input {
+         font: inherit;
+            /*margin-bottom: 13px;*/
+            /*margin-top: 5px;*/
+            margin-right: 35px ;
+}
+
 .label {
     color: blue;
 }

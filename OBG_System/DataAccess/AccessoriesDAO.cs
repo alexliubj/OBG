@@ -23,7 +23,7 @@ namespace DataAccess
                                               ,[pricing]
                                               ,[name]
                                                 ,[brand],[special]
-                                          FROM [Accessories]");
+                                          FROM [Accessories] order by accId DESC");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }

@@ -32,6 +32,7 @@ public partial class Admin_Default : System.Web.UI.Page
         if (!IsPostBack)
         {
             bind();
+            //if (String.IsNullOrEmpty(GridView1.SortExpression)) GridView1.Sort("UserId", SortDirection.Descending);
         }
 
     }
@@ -452,8 +453,8 @@ public partial class Admin_Default : System.Web.UI.Page
         if (dataTable != null)
         {
             DataView dataView = new DataView(dataTable);
-            dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
-
+            //dataView.Sort = e.SortExpression + " " + ConvertSortDirectionToSql(e.SortDirection);
+            dataView.Sort = e.SortExpression + " " + "DESC";
             GridView1.DataSource = dataView;
             GridView1.DataBind();
         }

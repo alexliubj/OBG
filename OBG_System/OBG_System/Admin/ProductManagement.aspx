@@ -24,13 +24,13 @@
             AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage_SelectedIndexChanged" AppendDataBoundItems="true"
             Style="text-align: right;">
             <asp:ListItem Value="5" Text="5" />
-            <asp:ListItem Value="10" Text="10" Selected="True" />
+            <asp:ListItem Value="10" Text="10"  />
             <asp:ListItem Value="25" Text="25" />
             <asp:ListItem Value="50" Text="50" />
-            <asp:ListItem Value="100" Text="100" />
+            <asp:ListItem Value="100" Text="100" Selected="True"/>
         </asp:DropDownList>
         <asp:GridView ID="GridView1" runat="server" GridLines="None" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="ProductId" ForeColor="#333333" OnSelectedIndexChanged="GridView1_SelectedIndexChanged"
-            OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing"
+            OnRowDeleting="GridView1_RowDeleting" OnRowEditing="GridView1_RowEditing" pagesize="100"
             OnRowUpdating="GridView1_RowUpdating" OnRowCancelingEdit="GridView1_RowCancelingEdit" OnRowDataBound="GridView1_RowDataBound" Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging" OnSorting="GridView1_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
@@ -406,13 +406,13 @@
             AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage2_SelectedIndexChanged" AppendDataBoundItems="true"
             Style="text-align: right;">
             <asp:ListItem Value="5" Text="5" />
-            <asp:ListItem Value="10" Text="10" Selected="True" />
+            <asp:ListItem Value="10" Text="10"  />
             <asp:ListItem Value="25" Text="25" />
             <asp:ListItem Value="50" Text="50" />
-            <asp:ListItem Value="100" Text="100" />
+            <asp:ListItem Value="100" Text="100" Selected="True"/>
         </asp:DropDownList>
         <asp:GridView ID="GridView2" runat="server" GridLines="None" AllowPaging="True" AllowSorting="True" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="TireId" ForeColor="#333333" OnSelectedIndexChanged="GridView2_SelectedIndexChanged"
-            OnRowDeleting="GridView2_RowDeleting" OnRowEditing="GridView2_RowEditing"
+            OnRowDeleting="GridView2_RowDeleting" OnRowEditing="GridView2_RowEditing" pagesize="100"
             OnRowUpdating="GridView2_RowUpdating" OnRowCancelingEdit="GridView2_RowCancelingEdit" OnRowDataBound="GridView2_RowDataBound" Visible="true" OnPageIndexChanging="GridView2_PageIndexChanging" OnSorting="GridView2_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
@@ -625,13 +625,13 @@
             AutoPostBack="true" OnSelectedIndexChanged="dropDownRecordsPerPage3_SelectedIndexChanged" AppendDataBoundItems="true"
             Style="text-align: right;">
             <asp:ListItem Value="5" Text="5" />
-            <asp:ListItem Value="10" Text="10" Selected="True" />
+            <asp:ListItem Value="10" Text="10" />
             <asp:ListItem Value="25" Text="25" />
             <asp:ListItem Value="50" Text="50" />
-            <asp:ListItem Value="100" Text="100" />
+            <asp:ListItem Value="100" Text="100" Selected="True" />
         </asp:DropDownList>
         <asp:GridView ID="GridView3" runat="server" GridLines="None" AllowPaging="True" AllowSorting="true" AutoGenerateColumns="False" CellPadding="4" DataKeyNames="AccId" ForeColor="#333333" OnSelectedIndexChanged="GridView3_SelectedIndexChanged"
-            OnRowDeleting="GridView3_RowDeleting" OnRowEditing="GridView3_RowEditing"
+            OnRowDeleting="GridView3_RowDeleting" OnRowEditing="GridView3_RowEditing" pagesize="100"
             OnRowUpdating="GridView3_RowUpdating" OnRowCancelingEdit="GridView3_RowCancelingEdit" OnRowDataBound="GridView3_RowDataBound" Visible="true" OnPageIndexChanging="GridView3_PageIndexChanging" OnSorting="GridView3_Sorting">
             <AlternatingRowStyle BackColor="White" />
             <Columns>
