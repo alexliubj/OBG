@@ -244,14 +244,14 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                         <asp:Label ID="Label12" runat="server" Text='<%# Bind("Onhand") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Reg Price" ItemStyle-HorizontalAlign="Center"  SortExpression="Price">
+                <%--<asp:TemplateField HeaderText="Reg Price" ItemStyle-HorizontalAlign="Center"  SortExpression="Price">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox13" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Price")) %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="Label13" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
                     </ItemTemplate>
-                </asp:TemplateField>
+                </asp:TemplateField>--%>
                 
                   <%--<asp:TemplateField HeaderText="Description" SortExpression="Des" Visible="false">
                     <EditItemTemplate>
@@ -464,7 +464,7 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                         <asp:Label ID="seasonLabel" runat="server" Text='<%# Bind("Season") %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
-                
+        <%--        
                <asp:TemplateField HeaderText="Reg Price" ItemStyle-HorizontalAlign="Center"  SortExpression="Pricing">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:TextBox>
@@ -472,7 +472,7 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                     <ItemTemplate>
                         <asp:Label ID="Label4" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
                     </ItemTemplate>
-                </asp:TemplateField>
+                </asp:TemplateField>--%>
                 <%--<asp:TemplateField HeaderText="Description" SortExpression="Des">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox1" runat="server" Text='<%# Bind("Des") %>'></asp:TextBox>
@@ -685,14 +685,14 @@ Visible="true" OnPageIndexChanging="GridView1_PageIndexChanging"  OnRowCommand="
                     </ItemTemplate>
                 </asp:TemplateField>
                 
-                <asp:TemplateField HeaderText="Reg Price" ItemStyle-HorizontalAlign="Center"  SortExpression="Pricing">
+         <%--       <asp:TemplateField HeaderText="Reg Price" ItemStyle-HorizontalAlign="Center"  SortExpression="Pricing">
                     <EditItemTemplate>
                         <asp:TextBox ID="TextBox5" runat="server" Text='<%# string.Format("{0:0.##}", Eval("Pricing")) %>'></asp:TextBox>
                     </EditItemTemplate>
                     <ItemTemplate>
                         <asp:Label ID="accLabel5" runat="server" Text='<%# Bind("finalprice","{0:c}") %>'></asp:Label>
                     </ItemTemplate>
-                </asp:TemplateField>
+                </asp:TemplateField>--%>
                
                 <asp:TemplateField HeaderText="Special" Visible="false" ItemStyle-HorizontalAlign="Center"  SortExpression="Special">
                     <EditItemTemplate>
