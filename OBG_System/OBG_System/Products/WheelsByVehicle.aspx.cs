@@ -276,7 +276,15 @@ public partial class Products_viewByVehicle : System.Web.UI.Page
             
         }
         wheel.DefaultView.RowFilter = sqlFilterVehicle;
-        GridView4.DataSource = wheel.DefaultView;
+        if (distictWheels.Count == 0)
+        {
+            divWheel.Visible = false;
+        }
+        else
+        {
+            divWheel.Visible = true;
+            GridView4.DataSource = wheel.DefaultView;
+        }
         GridView4.DataBind();
     }
     protected void dropDownRecordsPerPage_SelectedIndexChanged(object sender, EventArgs e)
