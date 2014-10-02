@@ -17,14 +17,26 @@ public partial class Admin_PolicyManagement : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            string policy = HomePageBLO.GetReturnPolicy().Replace("<br />", Environment.NewLine);
-       
-            TextBox1.Text = policy;
+            ReturnPolicy retp = new ReturnPolicy();
+            retp = HomePageBLO.GetReturnPolicy();
+           
+                string policy = retp.ReturnPolicy1.Replace("<br />", Environment.NewLine);
+                TextBox1.Text = policy;
+                string otherPolicy = retp.Others.Replace("<br />", Environment.NewLine);
+                TextBox2.Text = otherPolicy;
+                defectsTxt.Text = retp.Defects.Replace("<br />", Environment.NewLine);
+                shippingTxt.Text = retp.Shipping.Replace("<br />", Environment.NewLine);
+                matchTxt.Text = retp.Price.Replace("<br />", Environment.NewLine);
         }
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
-        string policy = TextBox1.Text.Replace(Environment.NewLine, "<br />");
-        HomePageBLO.UpdateReturnPolicy(policy);
+        ReturnPolicy retp = new ReturnPolicy();
+        retp.ReturnPolicy1 = TextBox1.Text.Replace(Environment.NewLine, "<br />");
+        retp.Others = TextBox2.Text.Replace(Environment.NewLine, "<br />");
+        retp.Defects = defectsTxt.Text.Replace(Environment.NewLine, "<br />");
+        retp.Shipping = shippingTxt.Text.Replace(Environment.NewLine, "<br />");
+        retp.Price = matchTxt.Text.Replace(Environment.NewLine, "<br />");
+        HomePageBLO.UpdateReturnPolicy(retp);
     }
 }

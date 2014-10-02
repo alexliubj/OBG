@@ -617,7 +617,7 @@ namespace DataAccess
         /// <returns></returns>
         public static DataTable GetAllUsers()
         {
-            DbCommand command = db.GetSqlStringCommond("select * from users");
+            DbCommand command = db.GetSqlStringCommond("select * from users order by UserId DESC");
             DataTable dt = db.ExecuteDataTable(command);
             return dt;
         }

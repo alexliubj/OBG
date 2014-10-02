@@ -59,30 +59,40 @@ namespace DataAccess
             return db.ExecuteNonQuery(command);
         }
 
-        public static int UpdateReturnPolicy(string policyString)
+        public static int UpdateReturnPolicy(ReturnPolicy retp )
         {
             DbCommand command = db.GetSqlStringCommond(@"UPDATE ReturnPolicy
-                                       SET [Policy] = @policy");
+                                       SET [Policy] = @policy, [otherpolicy]=@otherpolicy,
+                            [price] = @price,[defects] = @defects,[shipping] = @shipping");
 
             SqlParameter[] paras = new SqlParameter[] { 
-                new SqlParameter("@policy", policyString)
+                new SqlParameter("@policy", retp.ReturnPolicy1),
+                new SqlParameter(@"otherpolicy",retp.Others),
+                new SqlParameter("@price", retp.Price),
+                new SqlParameter(@"defects",retp.Defects),
+                new SqlParameter("@shipping", retp.Shipping)
             };
             command.Parameters.AddRange(paras);
             return db.ExecuteNonQuery(command);
         }
 
-        public static string GetReturnPolicy()
-        { 
-            string retSTring = string.Empty;
-            DbCommand command = db.GetSqlStringCommond("select policy from ReturnPolicy");
+        public static ReturnPolicy GetReturnPolicy()
+        {
+            ReturnPolicy listPolicy = new ReturnPolicy();
+          
+            DbCommand command = db.GetSqlStringCommond("select policy,otherpolicy,price,defects,shipping from ReturnPolicy");
             using (DbDataReader reader = db.ExecuteReader(command))
             {
                 while (reader.Read())
                 {
-                    retSTring = reader.GetString(0);
+                    listPolicy.ReturnPolicy1 = reader.GetString(0);
+                    listPolicy.Others = reader.GetString(1);
+                    listPolicy.Price = reader.GetString(2);
+                    listPolicy.Defects = reader.GetString(3);
+                    listPolicy.Shipping = reader.GetString(4);
                 }
             }
-            return retSTring;
+            return listPolicy ;
         }
 
 
