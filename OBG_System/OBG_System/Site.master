@@ -57,7 +57,9 @@
 
 
                 <div class="clear hideSkiplink">
-                    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" EnableViewState="false" Orientation="Horizontal">
+                    <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" Align="Center" EnableViewState="false" Orientation="Horizontal">
+                        <StaticMenuItemStyle  width="108px" />
+                        <DynamicMenuItemStyle Width="165px"/>
                        <staticselectedstyle 
                            backcolor="White"
                            ForeColor="#3070d4"
@@ -65,7 +67,8 @@
                               bordercolor="Black" 
                               borderwidth="1"/>
                          <Items>
-                            <asp:MenuItem NavigateUrl="Default.aspx" Text="Home" Value="default"></asp:MenuItem>
+                            <asp:MenuItem NavigateUrl="Default.aspx" Text="Home"   Value="default"> </asp:MenuItem>
+                             
                             <asp:MenuItem Text="Wheels" Value="wheels">
                                 <asp:MenuItem NavigateUrl="~/Products/WheelsAll.aspx"       Text="View All Wheels       " Value ="wheels"></asp:MenuItem>
                                 <asp:MenuItem NavigateUrl="~/Products/WheelsByVehicle.aspx" Text="View Wheels By Vehicle" Value="wheels"></asp:MenuItem>

@@ -55,7 +55,7 @@ namespace DataAccess
                                               ,[name]
                                                 ,[brand],[special]
                                                   ,d.accRate,t.pricing*d.accRate finalprice,t.pricing*t.special specialPrice
-                                                  FROM dbo.[Accessories] t ,[discount] d where d.userid=@userid;");
+                                                  FROM dbo.[Accessories] t ,[discount] d where d.userid=@userid order by partNo ASC;");
             SqlParameter[] paras = new SqlParameter[] { new SqlParameter("@userid", userId) };
             command.Parameters.AddRange(paras);
             DataTable dt = db.ExecuteDataTable(command);

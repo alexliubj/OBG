@@ -153,7 +153,7 @@ public partial class Default2 : System.Web.UI.Page
 
         if (txtPO.Text == string.Empty)
         {
-            Response.Write("<script language='javascript'>alert('Your have to write PO');</script>");
+            Response.Write("<script language='javascript'>alert('Your have to enter a PO');</script>");
         }
         else
         {
