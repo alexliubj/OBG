@@ -175,15 +175,27 @@ public partial class Products_wheelall : System.Web.UI.Page
             { price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("sPriceLabel")).Text.Substring(1)); sc.Pricing = price; }
             if ((bool)((Label)GridView1.Rows[rowindex].FindControl("lbPrice")).Visible == true)
             { price = Convert.ToDouble(((Label)GridView1.Rows[rowindex].FindControl("lbPrice")).Text.Substring(1)); sc.Pricing = price; }
-            
-           
-            
-            sc.ProductId = pID;
-            sc.Qty = qty;
-            
-            sc.PartNo = partNo;
-            sc.Image = image;
-            shoppingcart.Add(sc);
+
+            bool flag = false;
+            for (int i = 0; i < shoppingcart.Count(); i++)
+            {
+                if (shoppingcart[i].ProductId == pID)
+                {
+                    shoppingcart[i].Qty += qty;
+                    flag = true;
+                }
+            }
+
+            if (flag == false)
+            {
+                sc.ProductId = pID;
+                sc.Qty = qty;
+
+                sc.PartNo = partNo;
+                sc.Image = image;
+                shoppingcart.Add(sc);
+            }
+
             Session["Cart"] = shoppingcart;
 
             //string host = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + ResolveUrl("~/");

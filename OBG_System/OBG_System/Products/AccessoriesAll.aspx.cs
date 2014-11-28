@@ -209,13 +209,27 @@ public partial class Products_accAll : System.Web.UI.Page
             { price = Convert.ToDouble(((Label)GridView6.Rows[rowindex].FindControl("lbPrice")).Text.Substring(1)); sc.Pricing = price; }
             
             name = ((Label)GridView6.Rows[rowindex].FindControl("NameLabel")).Text;
-            sc.AccId = pID;
-            sc.Qty = qty;
-            //sc.Pricing = price;
-            sc.PartNo = partNo;
-            sc.Image = image;
-            sc.productName = name;
-            shoppingcart.Add(sc);
+
+            bool flag = false;
+            for (int i = 0; i < shoppingcart.Count(); i++)
+            {
+                if (shoppingcart[i].AccId == pID)
+                {
+                    shoppingcart[i].Qty += qty;
+                    flag = true;
+                }
+            }
+
+            if (flag == false)
+            {
+                sc.AccId = pID;
+                sc.Qty = qty;
+                sc.PartNo = partNo;
+                sc.Image = image;
+                sc.productName = name;
+                shoppingcart.Add(sc);
+            }
+
             Session["Cart"] = shoppingcart;
         }
     }

@@ -172,10 +172,10 @@ public partial class Default2 : System.Web.UI.Page
             order.OrderDate = DateTime.Today;
             order.PO = txtPO.Text.ToString().Trim();
             //order.OrderId = orderId;
-            OrderLine line = new OrderLine();
-            line.PartNO = "";
+
             for (int i = 0; i < CKGridView.Rows.Count; i++)
             {
+                OrderLine line = new OrderLine();
                 orderId = int.Parse(((Label)CKGridView.Rows[i].Cells[0].FindControl("Label3")).Text.ToString()); ;
                 
                 //int orderID = int.Parse(((Label)CKGridView.Rows[i].Cells[0].FindControl("LabelOrder")).Text.ToString());
@@ -210,7 +210,7 @@ public partial class Default2 : System.Web.UI.Page
             {
 
                 User user = UserBLO.GetUserInfoWithUserId(userID);
-                SendMail(user.Email, orderId, line.PartNO);
+                SendMail(user.Email, orderId);
                 Session.Remove("Cart");
                 Response.Redirect("~/Default.aspx");
 
@@ -269,7 +269,7 @@ public partial class Default2 : System.Web.UI.Page
     }
 
 
-    public bool SendMail(string ToEmail, int orderid, string PartNO)
+    public bool SendMail(string ToEmail, int orderid)
     {
         //MailMessage myMail = new MailMessage();
         //myMail.From = new MailAddress("317844956@qq.com");

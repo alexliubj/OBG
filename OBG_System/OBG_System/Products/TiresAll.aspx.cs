@@ -136,15 +136,29 @@ public partial class Products_tireall : System.Web.UI.Page
             { price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("sPriceLabel")).Text.Substring(1)); sc.Pricing = price; }
             if ((bool)((Label)GridView2.Rows[rowindex].FindControl("lbPrice")).Visible == true)
             { price = Convert.ToDouble(((Label)GridView2.Rows[rowindex].FindControl("lbPrice")).Text.Substring(1)); sc.Pricing = price; }
-            
-           
-            sc.TireId = tID;
-            sc.Image = image;
-            sc.PartNo = partNo;
-            sc.Qty = qty;
-            //sc.Pricing = price;
-            shoppingcart.Add(sc);
+
+
+            bool flag = false;
+            for (int i = 0; i < shoppingcart.Count(); i++)
+            {
+                if (shoppingcart[i].TireId == tID)
+                {
+                    shoppingcart[i].Qty += qty;
+                    flag = true;
+                }
+            }
+
+            if (flag == false)
+            {
+                sc.TireId = tID;
+                sc.Qty = qty;
+                sc.PartNo = partNo;
+                sc.Image = image;
+                shoppingcart.Add(sc);
+            }
+
             Session["Cart"] = shoppingcart;
+
         }
     }
 
